@@ -1,0 +1,11 @@
+services:
+
+  ApiBundle\PresentationLayer\HttpController\GalleryController:
+    class: ApiBundle\PresentationLayer\HttpController\GalleryController
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@router.default'
+      - '@sonata.media.provider.image'
+      - '@snc_redis.api_cache'
+    calls:
+      - [setContainer, [@service_container]]

@@ -1,0 +1,47 @@
+.edit-property-component {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px lightgray;
+  margin: 2px;
+  border-radius: 5px;
+  min-width: 125px;
+
+  .property-value {
+    line-height: 25px;
+    flex-grow: 1;
+  }
+  .property-form {
+    flex-grow: 1;
+
+
+  }
+  .ng-select.priority .ng-select-container {
+    border: none;
+    min-height: 25px;
+    height: 25px;
+  }
+
+
+  .button-container {
+    border-radius: 0px 5px 5px 0px;
+    background-color: lightgray;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > .locked {
+      color: #969696;
+    }
+
+    fa-icon {
+
+      color: #000000;
+      font-size: 0.7em;
+
+
+    }
+
+  }
+}

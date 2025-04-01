@@ -1,0 +1,15 @@
+<div class="more-news">
+    <div class="more-news__content">
+        {% if news and news is defined %}
+            {% for post in news %}
+                {% if loop.index < 4 %}
+                    {% include 'Subordinate/widgets/top_news_more/_teaser.html.twig' with {'post' : post, 'is_last': loop.last} %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="more-news__title">
+        <a href="{{ path('app_subordinate_%s_press_releases'|format(app.request.get('_subordinate_route'))) }}" class="more-news__title-link">
+        Все новости</a>
+    </div>
+</div>

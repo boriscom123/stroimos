@@ -1,0 +1,91 @@
+{% macro map_view(data_status, data, id) %}
+    {% if data is empty %}
+        {{ '(нет данных)' }}
+    {% else %}
+        <div class="form-group">
+            <input value="{{ data }}" readonly class="form-control" style="width: 320px;"/>
+        </div>
+
+        {% set map_container_id = id ~ '-map-container' ~ data_status %}
+        <div id="{{ map_container_id }}" style="width: 320px; height: 240px"></div>
+
+        {% set init_func_name = id ~ 'InitMap_' ~ data_status %}
+        <script>
+            ymaps.ready({{ init_func_name }});
+
+            function {{ init_func_name }}() {
+                const coords = '{{ data }}'.split(',');
+                const map = new ymaps.Map('{{ map_container_id }}', {
+                    controls: ['fullscreenControl', 'zoomControl'],
+                    center: coords,
+                    zoom: 15
+                });
+
+                const placemark = new ymaps.Placemark(coords, {
+                    balloonContent: '{{ data }}'
+                }, {
+                    draggable: false
+                });
+
+                map.geoObjects.add(placemark);
+                map.setBounds(map.geoObjects.getBounds(), {
+                    checkZoomRange: true,
+                    preciseZoom: true,
+                    zoomMargin: 50
+                }).then(function () {
+                    if (map.getZoom() > 17) map.setZoom(17);
+                });
+            }
+        </script>
+    {% endif %}
+{% endmacro %}
+
+{% block construction_data_geo_point_widget %}
+    {% import _self as macros %}
+
+    <div class="form-group">
+        <table class="table table-bordered">
+            <colgroup>
+                <col width="30%"/>
+                <col/>
+            </colgroup>
+
+            <tr>
+                <td><label>Базовые данные:</label></td>
+                <td>{{ macros.map_view('current', property_data.current, id) }}</td>
+            </tr>
+
+            {% if is_new_data_pending and property_data.pending != property_data.current %}
+                <tr>
+                    <td><label>Новые данные:</label></td>
+                    <td>{{ macros.map_view('pending', property_data.pending, id) }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td><label>Корректированные данные:</label></td>
+                <td>
+                    {{ form_widget(form, {map_width: 320, map_height: 240}) }}
+
+                    {# <div id="{{ id }}-geoPoint-map-container" style="width:{{ map_width }}px; height:{{ map_height }}px"></div>
+
+                    <script src="{{ asset('js/admin/geo-address-editor.js') }}"></script>
+
+                    {% set init_func_name = id ~ 'InitGeoPointMap' %}
+                    <script>
+                        ymaps.ready({{ init_func_name }});
+
+                        function {{ init_func_name }}() {
+                            var $geoPointInput = $('#{{ id }}');
+
+                            var addressEditor_{{ id }} = new AddressEditor('{{ id }}-geoPoint-map-container', $geoPointInput, $());
+
+                            addressEditor_{{ id }}.init();
+                        }
+                    </script> #}
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+

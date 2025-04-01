@@ -1,0 +1,20 @@
+{% if menu and menu is defined %}
+    <nav class="footer-menu {{ (class and class is defined) ? class : '' }}">
+        {% if menu.label %}
+            <h3 class="footer-menu__title">{{ menu.label }}</h3>
+        {% endif %}
+        <ul class="footer-menu__menu">
+            {% for item in menu.children %}
+                {% if loop.index % 2 != 0 %}
+                    <li>
+                        <ul>
+                {% endif %}
+                        <li><a href="{{ item.uri }}">{{ item.label }}</a></li>
+                {% if loop.index % 2 == 0 or loop.last %}
+                        </ul>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}

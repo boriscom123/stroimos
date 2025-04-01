@@ -1,0 +1,13 @@
+<div class="city-news">
+    <header class="city-news__header">
+        <h2 class="city-news__title">Новости города</h2>
+    </header>
+
+    {% for post in news %}
+        {% include '::/widgets/city_news/_teaser.html.twig' with {'post': post} %}
+    {% endfor %}
+</div>
+<a class="related-link" href="{{ path('app_city_news_list') }}">
+    Все новости города
+    <i class="icon icon-16 icon-news"></i>
+</a>

@@ -1,0 +1,71 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block title %}<title>{{ person }}</title>{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'person', 'object': person, 'themes': [{'title': 'Структура'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': null,
+    'subject': person
+    } %}
+    <div class="person-page__profile container__full js-mediator-article">
+        <div class="person-page__profile-menu">
+            <img src={% path person.image, 'profile_title' %} />
+{#             <p class="person-page__profile-menu-name">
+                <span class="person-page__profile-menu-lastName">{{ person.lastName }}</span>
+                {{ person.firstName }}
+                {{ person.patronymic }}
+            </p>
+            <p class="person-page__profile-menu-info">
+                {{ person.teaser }}
+            </p> #}
+            <nav class="person-page__profile-menu-wrap">
+                {% for profileField in person.profileFieldsList %}
+                    <span class="person-page__profile-menu-item" data-href="{{ profileField }}"><i class="person-icon {{ profileField }}"></i> {{ profileField|trans }}</span>
+                {% endfor %}
+            </nav>
+        </div>
+        <article class="person-page__profile-info">
+            <p class="person-page__profile-info-name">
+                <span class="person-page__profile-info-lastName">{{ person.lastName }}</span>
+                {{ person.firstName }}
+                {{ person.patronymic }}
+            </p>
+            <p class="person-page__profile-info-seat">
+                {{ person.teaser }}
+            </p>
+            {% set socialAccountList = '' %}
+            {% for socialnetKey in constant('AppBundle\\Admin\\PersonAdmin::SOCIAL_ACCOUNTS_ORDER') %}
+                {% set accountUrl = person.findSocialAccountUrl(socialnetKey) %}
+                {% if accountUrl %}
+                    {%  set socialAccountList %}
+                        {{ socialAccountList }}
+                        {% include ':Person:social_account_list_row.html.twg' %}
+                    {%  endset %}
+                {% endif%}
+            {% endfor %}
+
+            {% if socialAccountList %}
+                <ul class="socials">
+                    {{ socialAccountList|raw }}
+                </ul>
+            {% endif %}
+            {% for profileField in person.profileFieldsList %}
+                <div class="person-page__profile-info-section {{ profileField }}" {% if loop.first %}style="margin-top: 45px;"{% endif %}>
+                    <h3 class="profile-info-section__title"><i class="person-icon"></i> {{ profileField|trans }}</h3>
+                    {{ attribute(person, profileField)|raw }}
+                </div>
+            {% endfor %}
+
+            <div class="person-page__profile-info-foot">
+                {% if person.notes is not empty %}
+                    {{ person.notes|raw }}
+                {% endif %}
+            </div>
+        </article>
+    </div>
+{% endblock %}

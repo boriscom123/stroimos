@@ -1,0 +1,21 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_compare.html.twig' %}
+
+{% block show_field %}
+    <tr class="sonata-ba-view-container history-audit-compare">
+        {% if elements[field_name] is defined %}
+            {% if field_name == 'id' %}
+                <tr class="sonata-ba-view-container history-audit-compare">
+                    <th>Ревизия</th>
+                    <td id="base_revision_id" data-id="{{ app.request.attributes.get('base_revision')}}">
+                        Текущая
+                    </td>
+                    <td id="compare_revision_id" data-id="{{ app.request.attributes.get('compare_revision')}}">
+                        {{ app.request.attributes.get('compare_revision')}}
+                    </td>
+                </tr>
+            {% else %}
+                {{ elements[field_name]|diff_compare(object, object_compare) }}
+            {% endif %}
+        {% endif %}
+    </tr>
+{% endblock %}

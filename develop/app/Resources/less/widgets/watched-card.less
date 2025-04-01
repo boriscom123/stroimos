@@ -1,0 +1,102 @@
+.watched-card {
+	position: relative;
+	// min-height: 290px;
+	width: 226px;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	transition: background 150ms ease-in-out, border 150ms ease-in-out;
+	background: var(--base-000, #FFF);
+	margin-right: 20px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&__link {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		cursor: pointer;
+	}
+
+	&__image {
+		border-top-right-radius: 4px;
+		border-top-left-radius: 4px;
+		overflow: hidden;
+		position: relative;
+		height: 120px;
+		border: 1px solid var(--base-100, #E3E4E7);
+		border-bottom: none;
+		transition: background 150ms ease-in-out, border 150ms ease-in-out;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			transition: transform 150ms ease-in-out;
+		}
+	}
+
+	&__content {
+		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: 4px;
+
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		height: 100%;
+		min-height: 170px;
+		padding: 10px;
+		padding-bottom: 20px;
+		border: 1px solid var(--base-100, #E3E4E7);
+		border-top: none;
+		box-sizing: border-box;
+		transition: background 150ms ease-in-out, border 150ms ease-in-out;
+	}
+
+	&__type {
+		color: var(--base-800, #1B262C);
+		/* Body/XS */
+		font-family: Onest;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 120%; /* 14.4px */
+		opacity: 0.5;
+	}
+
+	&__title {
+		overflow: hidden;
+		color: var(--base-800, #1B262C);
+		/* Body/M */
+		font-family: Onest;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 130%; /* 20.8px */
+		transition: color 150ms ease-in-out;
+		text-align: left;
+		white-space: normal;
+		display: -webkit-box;
+		-webkit-line-clamp: 7;
+		-webkit-box-orient: vertical;  
+		overflow: hidden;
+	}
+
+	&:hover {
+		.watched-card__image {
+			border-color: @blue;
+		}
+		.watched-card__content {
+			border-color: @blue;
+		}
+		.watched-card__title {
+			color: @blue;
+		}
+		.watched-card__image img {
+			transform: scale(1.2);
+		}
+	}
+}

@@ -1,0 +1,942 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+			/* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+			.ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+			.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+			body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+			table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+			img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+			/* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+			body{margin:0; padding:0;}
+			img{display: block;border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+			table{border-collapse:collapse !important;}
+			body, #bodyTable, #bodyCell{height:100% !important; margin:0; padding:0; width:100% !important;}
+			strong, b{font-weight: bold;}
+
+			/* ========== Page Styles ========== */
+
+			* {font-family:Tahoma,sans-serif;color: #212121;}
+			html,table,p{font-size:14px;font-weight:lighter;}
+			a{text-decoration: none;}
+
+			#bodyCell{padding:0px;}
+			.templateContainer{width:777px;}
+			.templateContainerBlack{background:#000;margin-bottom: 60px;}
+			.templateContainerWide{width:1000px;}
+
+			body, #bodyTable{
+				background-color:#FFFFFF;
+			}
+
+			/* ========== Logo Block ========== */
+
+			#logoBlock{
+        margin-top: 45px;
+				height: 110px;
+				border-top: 1px solid #000000;
+			}
+
+			/* ========== Social Block ========== */
+
+			#socialBlockContainer{
+				height: 95px;
+			}
+
+			.socialBlockButton {
+				width: 50px;
+			}
+
+			/* ========== Date Block ========== */
+
+			#dateBlockContainer{
+				background: #f2f2f2;
+				margin-bottom: 40px;
+			}
+
+			#dateBlock {
+				width: 145px;
+			}
+
+			#dateBlockTitle {
+				height: 42px;
+				padding-bottom: 8px;
+			}
+
+			#dateBlockDate {
+				height: 42px;
+				border-top: 1px solid #797979;
+				padding-top: 5px;
+				font-size: 18px;
+				font-family: Georgia,serif;
+				font-weight: bold;
+				font-style: italic;
+			}
+
+			/* ========== Quote Block ========== */
+
+			#quoteBlock {
+				margin-bottom: 45px;
+			}
+
+			#quoteBlockSeparator {
+				width: 145px;
+				border-right: 1px solid #e4e4e4;
+			}
+
+			#quoteBlockSeparator {
+				width: 145px;
+				border-right: 1px solid #e4e4e4;
+			}
+
+			#quoteBlockQuote {
+				padding: 20px 30px 60px 30px;
+				font-family: Georgia,serif;
+				font-style: italic;
+				font-size: 28px;
+				line-height: 32px;
+			}
+
+			#quoteBlockPersonContainer {
+				padding-left: 30px;
+				padding-bottom: 25px;
+			}
+
+			#quoteBlockPersonPic {
+				width: 70px;
+			}
+
+			#quoteBlockPersonName {
+				font-size: 15px;
+				line-height: 18px;
+				font-family: Georgia,serif;
+				font-style: italic;
+			}
+
+			#quoteBlockPersonPosition {
+				text-transform: uppercase;
+				color: #979797;
+				font-size: 10px;
+				line-height: 120%;
+				font-weight: bold;
+				width: 350px;
+			}
+
+			/* ========== Highlight ========== */
+
+			#highlightBlock {
+				margin-bottom: 60px;
+			}
+
+			#highlightBlockTitle {
+				padding-bottom: 55px;
+			}
+
+			#highlightBlockPicCategory {
+				background: #d0d0d0;
+				width: 33px;
+			}
+
+			#highlightBlockPicContent img {
+				width: 100%;
+			}
+
+			#highlightBlockTextContainer {
+				padding: 45px 0 60px;
+				background: #f2f2f2;
+			}
+
+			#highlightBlockTextTitle {
+				width: 50%;
+				padding: 0 20px 0 35px;
+				text-transform: uppercase;
+				font-size: 25px;
+				line-height: 29px;
+			}
+
+			#highlightBlockTextContent {
+				width: 50%;
+				padding: 0 50px 0 45px;
+				font-size: 15px;
+				line-height: 25px;
+			}
+
+			/* ========== News ========== */
+
+			#newsBlockTitle {
+				padding-bottom: 55px;
+			}
+
+			.newsBlockLeftColumn {
+				width: 50%;
+				padding-right: 20px;
+			}
+
+			.newsBlockRightColumn {
+				width: 50%;
+				padding-left: 20px;
+			}
+
+			.newsBlockTripleContainer {
+				margin-bottom: 60px;
+			}
+
+			.newsBlockTripleItemContainer {
+				height: 172px;
+			}
+
+			.newsBlockTripleItemContainer.last {
+				height: 162px;
+			}
+
+			.newsBlockTripleItem {
+				height: 158px;
+			}
+
+			.newsBlockTripleItemCategory {
+				background: #d0d0d0;
+				width: 33px;
+			}
+
+			.newsBlockTripleItemText {
+				border: 1px solid #e6e6e6;
+				border-left: none;
+			}
+
+			.newsBlockTripleItemText td {
+				font-size: 21px;
+				line-height: 24px;
+				color: #000;
+				background: #f7f7f7;
+				padding: 0 30px;
+				height: 158px;
+			}
+
+			.newsBlockBigItem {
+				margin-bottom: 60px;
+			}
+
+			.newsBlockBigItemText {
+				border: 1px solid #e6e6e6;
+				border-bottom: none;
+			}
+
+			.newsBlockBigItemText td {
+				font-size: 25px;
+				line-height: 29px;
+				height: 225px;
+				padding: 0 30px;
+			}
+
+			.newsBlockBigItemCategory {
+				background: #d0d0d0;
+				width: 33px;
+			}
+
+			.newsBlockBigItemPic img {
+				width: 100%;
+				height: 280px;
+			}
+
+			/* ========== Infographics ========== */
+
+			#infographicsBlock {
+				margin-bottom: 60px;
+			}
+
+			#infographicsBlockTitle {
+				padding-bottom: 55px;
+			}
+
+			.infographicsBlockItemContainer {
+				width: 50%;
+			}
+
+			.infographicsBlockItem {
+				background: #47a1ff;
+			}
+
+			.infographicsBlockItem.black {
+				background: #000000;
+			}
+
+			.infographicsBlockItemPre {
+				height: 105px;
+			}
+
+			.infographicsBlockItemLine {
+				width: 43px;
+				height: 2px;
+				background: #fff;
+				margin: 0 auto;
+			}
+
+			.infographicsBlockItemText {
+				height: 210px;
+				padding: 43px 40px 0 40px;
+				color: #fff;
+				font-weight: bold;
+				text-transform: uppercase;
+				font-size: 21px;
+				line-height: 28px;
+				text-align: center;
+			}
+			/* ========== Photo ========== */
+
+			#photoBlockTitle {
+				padding-bottom: 55px;
+			}
+
+			.photoBlockItem {
+				margin-bottom: 60px;
+			}
+
+			.photoBlockItemPic img {
+				width: 100%;
+			}
+
+			.photoBlockItemText td {
+				padding: 35px;
+				border: 3px solid #e6e6e6;
+			}
+
+			.photoBlockItemTextTitle {
+				width: 500px;
+				margin: 0 auto;
+				font-size: 21px;
+				line-height: 24px;
+			}
+
+			.photoBlockItemTextSubtitle {
+				width: 500px;
+				margin: 0 auto;
+				font-size: 21px;
+				line-height: 24px;
+				font-family: Georgia,serif;
+				font-style: italic;
+			}
+
+			/* ========== Video ========== */
+
+			#videoBlock {
+				margin-bottom: 15px;
+			}
+
+			#videoBlockTitle {
+				padding-top: 75px;
+				padding-bottom: 85px;
+			}
+
+			.videoBlockItem {
+				margin-bottom: 60px;
+			}
+
+			.videoBlockItemPic img {
+				width: 100%;
+			}
+
+			.videoBlockItemText {
+				padding: 35px 35px 0;
+				color: #fff;
+				font-family: Georgia,serif;
+				font-style: italic;
+				font-size: 21px;
+			}
+
+			/* ========== Banners ========== */
+
+			#bannersBlock {
+				margin-bottom: 45px;
+			}
+
+			.bannersBlockItem {
+				width: 50%;
+				padding-bottom: 15px;
+			}
+
+			/* ========== Footer ========== */
+
+			#footerBlock {
+				background: #f2f2f2;
+			}
+
+			#footerBlockTitle {
+				padding-top: 70px;
+				padding-bottom: 45px;
+			}
+
+			#footerBlockInfo {
+				height: 90px;
+			}
+
+			#footerBlockQuestions {
+				height: 22px;
+			}
+
+			#footerBlockContactUs {
+				height: 70px;
+			}
+
+			#footerBlockUnsubscribe {
+				height: 125px;
+			}
+
+		</style>
+	</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+	<center>
+		<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+			<tr>
+				<td align="center" valign="top" id="bodyCell">
+					<table border="0" cellpadding="0" cellspacing="0" class="templateContainer">
+						<tr>
+							<td align="center" valign="top">
+									<!-- BEGIN LOGOBLOCK // -->
+										<table border="0" cellpadding="0" cellspacing="0" width="100%" id="logoBlock">
+												<tr>
+														<td valign="bottom" align="left">
+																<a href="https://stroi.mos.ru" target="_blank">
+																	<img src="http://i.imgur.com/papkqvA.png" alt="Комплекс градостроительной политики и строительства города Москвы" width="275" height="69" />
+																</a>
+														</td>
+												</tr>
+										</table>
+										<!-- // END LOGOBLOCK -->
+								</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN SOCIALBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="socialBlockContainer">
+													<tr>
+														<td valign="middle" align="center">
+															<table border="0" cellpadding="0" cellspacing="0" id="socialBlock">
+																	<tr>
+																		<td valign="middle" align="center" class="socialBlockButton">
+																			<a href="https://www.facebook.com/stroimos">
+																				<img src="http://i.imgur.com/xElxPat.png" alt="Facebook" width="11" height="22" />
+																			</a>
+																		</td>
+																		<td valign="middle" align="center" class="socialBlockButton">
+																			<a href="https://vk.com/public49253163">
+																				<img src="http://i.imgur.com/1osEeF2.png" alt="VK" width="28" height="16" />
+																			</a>
+																		</td>
+																		<td valign="middle" align="center" class="socialBlockButton">
+																			<a href="https://twitter.com/stroimos">
+																				<img src="http://i.imgur.com/xm4AU2e.png" alt="Twitter" width="21" height="17" />
+																			</a>
+																		</td>
+																		<td valign="middle" align="center" class="socialBlockButton">
+																			<a href="https://instagram.com/stroi_mos_ru">
+																				<img src="http://i.imgur.com/oPiKoxI.png" alt="Instagram" width="19" height="19" />
+																			</a>
+																		</td>
+																		<td valign="middle" align="center" class="socialBlockButton">
+																			<a href="https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw">
+																				<img src="http://i.imgur.com/6yyxpV8.png" alt="YouTube" width="24" height="17" />
+																			</a>
+																		</td>
+																	</tr>
+																</table>
+														</td>
+												</tr>
+										</table>
+										<!-- // END SOCIALBLOCK -->
+								</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN DATEBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="dateBlockContainer">
+													<tr>
+															<td valign="middle" align="center">
+																<table border="0" cellpadding="0" cellspacing="0" width="100%" id="dateBlock">
+																		<tr>
+																				<td valign="bottom" align="center" id="dateBlockTitle">
+																					<img src="http://i.imgur.com/5Dt7ERk.png" alt="РАССЫЛКА" width="88" height="13" />
+																				</td>
+																		</tr>
+																		<tr>
+																				<td valign="top" align="center" id="dateBlockDate">
+																					10/07/17
+																				</td>
+																		</tr>
+																</table>
+															</td>
+													</tr>
+											</table>
+											<!-- // END DATEBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN QUOTEBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="quoteBlock">
+													<tr>
+															<td id="quoteBlockSeparator" rowspan="2">
+															</td>
+															<td valign="middle" align="left" id="quoteBlockQuote">
+																"Воскресенье - хороший день для покатушек в полях. Наконец научилась его пилотировать",–
+															</td>
+													</tr>
+													<tr>
+														<td valign="middle" align="center" id="quoteBlockPersonContainer">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" id="quoteBlockPerson">
+																	<tr>
+																		<td valign="middle" align="left" id="quoteBlockPersonPic">
+																			<img src="http://i.imgur.com/2IH18Yp.png" alt=" " width="56" height="56" />
+																		</td>
+																		<td valign="middle" align="left" id="quoteBlockPersonInfo">
+																			<div id="quoteBlockPersonName">Алёна Терновая</div>
+																			<div id="quoteBlockPersonPosition">Главный редактор</div>
+																		</td>
+																	</tr>
+																</table>
+														</td>
+													</tr>
+											</table>
+											<!-- // END QUOTEBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN HIGHLIGHTBLOCK // -->
+											<a href="https://stroi.mos.ru" target="_blank">
+												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="highlightBlock">
+														<tr>
+															<td valign="middle" align="center" id="highlightBlockTitle">
+																<img src="http://i.imgur.com/VAnCI21.png" alt="В центре внимания" width="439" height="38" />
+															</td>
+														</tr>
+														<tr>
+															<td valign="middle" align="center" id="highlightBlockPicContainer">
+																<table border="0" cellpadding="0" cellspacing="0" width="100%" id="highlightBlockPic">
+																		<tr>
+																			<td valign="top" align="left" id="highlightBlockPicCategory">
+																				<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																			</td>
+																			<td valign="top" align="left" id="highlightBlockPicContent">
+																				<img src="http://i.imgur.com/wKj0MZM.png" alt=" " />
+																			</td>
+																		</tr>
+																	</table>
+															</td>
+														</tr>
+														<tr>
+															<td valign="middle" align="center" id="highlightBlockTextContainer">
+																<table border="0" cellpadding="0" cellspacing="0" width="100%" id="highlightBlockText">
+																		<tr>
+																			<td valign="top" align="left" id="highlightBlockTextTitle">
+																				Фади Джабри: Транспортно-пересадочные узлы позволят Москве избежать транспортного коллапса
+																			</td>
+																			<td valign="top" align="left" id="highlightBlockTextContent">
+																				Региональный директор японского проектного института Nikken Sekkei Фади Джабри в блиц-интервью корреспонденту портала Стройкомплекса Москвы рассказал о реновации жилого фонда в Японии и строительстве транспортно-пересадочных узлов (ТПУ) в Токио и Москве.
+																			</td>
+																		</tr>
+																	</table>
+															</td>
+														</tr>
+												</table>
+											</a>
+											<!-- // END HIGHLIGHTBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN NEWSBLOCk // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="newsBlock">
+												<tr>
+													<td valign="middle" align="center" id="newsBlockTitle" colspan="2">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<img src="http://i.imgur.com/Lyx6aAu.png" alt="Новости дня" width="349" height="37" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="left" class="newsBlockLeftColumn">
+														<a href="http://stroi.mos.ru">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItem">
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemTextContainer" colspan="2">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItemText">
+																			<tr>
+																				<td valign="middle" align="left">
+																					Москвичам покажут, как строится Третий пересадочный контур метро
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemCategory">
+																		<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																	</td>
+																	<td valign="middle" align="center" class="newsBlockBigItemPic">
+																		<img src="http://i.imgur.com/L69MivK.png" alt=" " />
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+													<td valign="top" align="left" class="newsBlockRightColumn">
+														<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleContainer">
+															<tr>
+																<td valign="top" align="left" class="newsBlockTripleItemContainer">
+																	<a href="http://stroi.mos.ru">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItem">
+																			<tr>
+																				<td valign="middle" align="center" class="newsBlockTripleItemCategory">
+																					<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																				</td>
+																				<td valign="middle" align="left">
+																					<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItemText">
+																						<tr>
+																							<td valign="middle" align="left">
+																								Шоу-румы квартир для переселения из пятиэтажек могут появиться в районах реновации
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																		</table>
+																	</a>
+																</td>
+															</tr>
+															<tr>
+																<td valign="top" align="left" class="newsBlockTripleItemContainer">
+																	<a href="http://stroi.mos.ru">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItem">
+																			<tr>
+																				<td valign="middle" align="center" class="newsBlockTripleItemCategory">
+																					<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																				</td>
+																				<td valign="middle" align="left">
+																					<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItemText">
+																						<tr>
+																							<td valign="middle" align="left">
+																								Шоу-румы квартир для переселения из пятиэтажек могут появиться в районах реновации
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																		</table>
+																	</a>
+																</td>
+															</tr>
+															<tr>
+																<td valign="bottom" align="left" class="newsBlockTripleItemContainer last">
+																	<a href="http://stroi.mos.ru">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItem">
+																			<tr>
+																				<td valign="middle" align="center" class="newsBlockTripleItemCategory">
+																					<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																				</td>
+																				<td valign="middle" align="left">
+																					<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockTripleItemText">
+																						<tr>
+																							<td valign="middle" align="left">
+																								Шоу-румы квартир для переселения из пятиэтажек могут появиться в районах реновации
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																		</table>
+																	</a>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="left" class="newsBlockLeftColumn">
+														<a href="http://stroi.mos.ru">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItem">
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemTextContainer" colspan="2">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItemText">
+																			<tr>
+																				<td valign="middle" align="left">
+																					Москвичам покажут, как строится Третий пересадочный контур метро
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemCategory">
+																		<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																	</td>
+																	<td valign="middle" align="center" class="newsBlockBigItemPic">
+																		<img src="http://i.imgur.com/L69MivK.png" alt=" " />
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+													<td valign="top" align="left" class="newsBlockRightColumn">
+														<a href="http://stroi.mos.ru">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItem">
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemTextContainer" colspan="2">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="newsBlockBigItemText">
+																			<tr>
+																				<td valign="middle" align="left">
+																					Москвичам покажут, как строится Третий пересадочный контур метро
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="middle" align="center" class="newsBlockBigItemCategory">
+																		<img src="http://i.imgur.com/uDJ9Mh5.png" alt=" " width="33" />
+																	</td>
+																	<td valign="middle" align="center" class="newsBlockBigItemPic">
+																		<img src="http://i.imgur.com/L69MivK.png" alt=" " />
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END NEWSBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN INFOGRAPHICSBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="infographicsBlock">
+												<tr>
+													<td valign="middle" align="center" id="infographicsBlockTitle" colspan="2">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<img src="http://i.imgur.com/8V8q81i.png" alt="Инфографика и статистика" width="689" height="42" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="middle" align="center" class="infographicsBlockItemContainer">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="infographicsBlockItem">
+																<tr>
+																	<td valign="bottom" align="center" class="infographicsBlockItemPre">
+																		<div class="infographicsBlockItemLine"></div>
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="top" align="left" class="infographicsBlockItemText">
+																		Новой Москве <br/>– 5 лет
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+													<td valign="middle" align="center" class="infographicsBlockItemContainer">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="infographicsBlockItem black">
+																<tr>
+																	<td valign="bottom" align="center" class="infographicsBlockItemPre">
+																		<div class="infographicsBlockItemLine"></div>
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="top" align="left" class="infographicsBlockItemText">
+																		Снос пятиэтажек<br/> в Москве
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END INFOGRAPHICSBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN PHOTOSBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="photoBlock">
+												<tr>
+													<td valign="middle" align="center" id="photoBlockTitle">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<img src="http://i.imgur.com/VHnu0nu.png" alt="Фото" width="202" height="31" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="middle" align="center" class="photoBlockItemContainer">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="photoBlockItem">
+																<tr>
+																	<td valign="bottom" align="center" class="photoBlockItemPic">
+																		<img src="http://i.imgur.com/uxy92MB.jpg" alt=" " />
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="top" align="left" class="photoBlockItemTextContainer">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="photoBlockItemText">
+																			<tr>
+																				<td valign="middle" align="center">
+																					<div class="photoBlockItemTextTitle">VII Московский Урбанистический форум.<br/>День второй.</div>
+																					<div class="photoBlockItemTextSubtitle">С.Собянин, М. Хуснуллин</div>
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="middle" align="center" class="photoBlockItemContainer">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="photoBlockItem">
+																<tr>
+																	<td valign="bottom" align="center" class="photoBlockItemPic">
+																		<img src="http://i.imgur.com/uxy92MB.jpg" alt=" " />
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="top" align="left" class="photoBlockItemTextContainer">
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%" class="photoBlockItemText">
+																			<tr>
+																				<td valign="middle" align="center">
+																					<div class="photoBlockItemTextTitle">VII Московский Урбанистический форум.<br/>День второй.</div>
+																					<div class="photoBlockItemTextSubtitle">С.Собянин, М. Хуснуллин</div>
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END PHOTOBLOCK -->
+									</td>
+							</tr>
+						</table><!-- // END TEMPLATE CONTAINER -->
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainerBlack">
+							<tr>
+								<td></td>
+								<td align="center" valign="top" class="templateContainerWide">
+										<!-- BEGIN VIDEOBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="videoBlock">
+												<tr>
+													<td valign="middle" align="center" id="videoBlockTitle">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<img src="http://i.imgur.com/DsET3EE.png" alt="Видео" width="228" height="36" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="middle" align="center" class="videoBlockItemContainer">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<table border="0" cellpadding="0" cellspacing="0" width="100%" class="videoBlockItem">
+																<tr>
+																	<td valign="bottom" align="center" class="videoBlockItemPic">
+																		<img src="http://i.imgur.com/xuROUcu.png" alt=" " />
+																	</td>
+																</tr>
+																<tr>
+																	<td valign="top" align="center" class="videoBlockItemText">
+																		Cеверный вестибюль станции МЦК «Кутузовская»
+																	</td>
+																</tr>
+															</table>
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END VIDEOBLOCK -->
+									</td>
+									<td></td>
+							</tr>
+						</table><!-- // END TEMPLATE CONTAINER -->
+						<table border="0" cellpadding="0" cellspacing="0" class="templateContainer">
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN BANNERSBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="bannersBlock">
+												<tr>
+													<td valign="top" align="left" class="bannersBlockItem">
+														<a href="https://stroi.mos.ru/metro" target="_blank">
+															<img src="http://i.imgur.com/IdZL4Lc.png" alt="Метро – 2020" width="376" height="132" />
+														</a>
+													</td>
+													<td valign="top" align="right" class="bannersBlockItem">
+														<a href="https://stroi.mos.ru/road" target="_blank">
+															<img src="http://i.imgur.com/lyGPfaV.png" alt="Дороги" width="376" height="132" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="left" class="bannersBlockItem">
+														<a href="https://stroi.mos.ru/new-moscow" target="_blank">
+															<img src="http://i.imgur.com/3bU2gEA.png" alt="Новая Москва" width="376" height="132" />
+														</a>
+													</td>
+													<td valign="top" align="right" class="bannersBlockItem">
+														<a href="https://stroi.mos.ru/destruction" target="_blank">
+															<img src="http://i.imgur.com/ivcARjf.png" alt="Снос пятиэтажек" width="376" height="132" />
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END BANNERSBLOCK -->
+									</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top">
+										<!-- BEGIN FOOTERBLOCK // -->
+											<table border="0" cellpadding="0" cellspacing="0" width="100%" id="footerBlock">
+												<tr>
+													<td valign="top" align="center" id="footerBlockTitle">
+														<a href="https://stroi.mos.ru/goriachiie-linii" target="_blank">
+															<img src="http://i.imgur.com/wSs49Hh.png" alt="Контакт-центр Стройкомплекса Москвы" width="168" height="120" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="center" id="footerBlockInfo">
+														<img src="http://i.imgur.com/oenN7eQ.png" alt="Не отвечайте на это письмо – мы не увидим Ваше сообщение" width="439" height="43" />
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="center" id="footerBlockQuestions">
+														<img src="http://i.imgur.com/UOOlCO2.png" alt="Есть вопросы?" width="144" height="19" />
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="center" id="footerBlockContactUs">
+														<a href="mailto:stroimos.ru@yandex.ru" target="_blank">
+															<img src="http://i.imgur.com/RwWwi2u.png" alt="Свяжитесь с нами" width="178" height="16" />
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td valign="top" align="center" id="footerBlockUnsubscribe">
+														<a href="https://stroi.mos.ru" target="_blank">
+															<img src="http://i.imgur.com/qA36Knm.png" alt="Отказаться от подписки" width="238" height="19" />
+														</a>
+													</td>
+												</tr>
+											</table>
+											<!-- // END FOOTERBLOCK -->
+									</td>
+							</tr>
+						</table><!-- // END TEMPLATE CONTAINER -->
+					</td>
+				</tr>
+			</table>
+		</center>
+	</body>
+</html>

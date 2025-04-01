@@ -1,0 +1,15 @@
+<div class="current-construction__block">
+    <a href="{% if all_stations_in_construction_file %}{% path all_stations_in_construction_file, 'reference' %}{% endif %}" class="current-construction__map metro">
+        <div class="current-construction__map-info">
+            <p>{{ all_stations_in_construction }}</p>
+            <i></i>
+                <span class="current-construction__map-link">
+                    <i></i>
+                    Скачать PDF
+                </span>
+        </div>
+    </a>
+    <a href="{{ construction_complete_link }}" class="current-construction__complete metro">
+        {{ construction_complete_title }}
+    </a>
+</div>

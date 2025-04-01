@@ -1,0 +1,4 @@
+{# недавние страницы #}
+{% if items is defined and items is not empty %}
+    {% include '::/widgets/spotlight/_widget.html.twig' with {'items': items, 'class': 'other-materials container__full recent_pages spotlight_recent', 'title': 'Просмотренные материалы'} %}
+{% endif %}

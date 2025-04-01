@@ -1,0 +1,250 @@
+.road-list__wrapper {
+  margin-bottom: 50px;
+
+  &.only-header {
+    margin-bottom: 100px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  &.reconstruction {
+    .road-list__title {
+      max-width: none;
+    }
+
+  }
+}
+
+.road-list__header {
+  margin-bottom: 30px;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  a {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 15px;
+    font-family: Onest, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: @color;
+    .dotted-border(black, left);
+
+    &:hover {
+      color: @hover;
+    }
+  }
+}
+
+.road-list__title {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.1;
+  max-width: 720px;
+  padding-right: 40px;
+  color: @color;
+  display: table-cell;
+}
+
+.road-list[data-columns] {
+  &:before {
+    content: '2 .road-list__raw';
+    color: transparent;
+  }
+}
+
+.road-list__raw {
+  display: table-cell;
+  width: 50%;
+  padding-right: 38px;
+  .dotted-border(black, right);
+  float: left;
+  box-sizing: border-box;
+
+  &:last-child {
+    background: transparent;
+    padding-right: 0;
+    padding-left: 37px;
+  }
+
+  .road-list_no-border & {
+    background: transparent;
+  }
+}
+
+.road-list__item {
+  display: block;
+  font-family: Onest, sans-serif;
+  font-weight: 600;
+  font-size: 22.5px;
+  line-height: 46px;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  .shadowed-teaser(horizontal);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .road-list__item-more {
+    opacity: 0;
+    float: right;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: @hover;
+    font-size: 10px;
+    line-height: 50px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    span {
+      opacity: 1;
+    }
+  }
+
+  &.with-image {
+    width: (@pageWidth - 30px*2)/3;
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    float: left;
+    margin-right: 30px;
+    padding: 0;
+    .shadowed-teaser(vertical);
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    img {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      vertical-align: bottom;
+    }
+
+    .road-list__item-title {
+      padding: 20px;
+      display: block;
+      height: 24px*2;
+      overflow: hidden;
+      padding-bottom: 0;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.road-list__info {
+  border: 1px solid #e6e6e6;
+  padding: 65px 40px;
+
+  h4 {
+    font-family: Onest, sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    color: @color;
+  }
+
+  p {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 28px;
+    color: @color;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.road-list-alt {
+  &__wrapper {
+    p {
+      font-family: Brygada1918, serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      color: @color;
+      margin-bottom: 60px;
+    }
+  }
+  &__title {
+    font-family: Brygada1918, serif;
+    font-weight: 800;
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+  &__items {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    &::after {
+      content: "";
+      flex: auto;
+    }
+  }
+  &__item {
+    display: flex;
+    width: 305px;
+    height: 265px;
+    margin-right: 22px;
+    margin-bottom: 22px;
+    position: relative;
+    &:nth-child(3n+3) {
+      margin-right: 0px;
+    }
+    &-title {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Onest, sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 26px;
+      text-align: center;
+      color: #fff;
+      box-sizing: border-box;
+    }
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 1;
+      background: #1f1f1f;
+      opacity: 0.35;
+    }
+    .shadowed-teaser();
+    &:hover &-title {
+      color: #fff;
+    }
+  }
+}

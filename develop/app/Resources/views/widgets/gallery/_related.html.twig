@@ -1,0 +1,26 @@
+<div class="photogallery-related">
+    <div class="photogallery-related__container">
+        {% for post in posts %}
+            <div class="photogallery-related-item">
+                <a href="{{ entity_path(post) }}" class="photogallery-related-item-link">
+                    <div class="photogallery-related-item-link-image-wrap">
+                        {% if post.image|default %}
+                            {% set src %}{% path post.image, 'thumb300' %}{% endset %}
+                        {% else %}
+                            {% set src = '/images/fallback.jpg'|imagine_filter('web_root_thumb300') %}
+                        {% endif %}
+                        <img src="{{ src }}" height="160">
+                    </div>
+                    <div class="photogallery-related-item-link-content">
+                        <span class="photogallery-related-item-link-content-more">
+                            Подробнее
+                        </span>
+                        <header class="photogallery-related-item-link-content-title">
+                            {{ post.title }}
+                        </header>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>

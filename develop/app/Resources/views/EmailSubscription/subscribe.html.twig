@@ -1,0 +1,15 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    {% if subscribe_form is defined %}
+        {{ form_start(subscribe_form) }}
+        {{ form_errors(subscribe_form) }}
+
+        {{ form_row(subscribe_form.email) }}
+
+        {{ form_end(subscribe_form) }}
+    {% else %}
+        <h2>Спасибо, на указанный вами электронный адрес было отправлено письмо со ссылкой на страницу включения подписки!</h2>
+        <a href="{{ path('app_homepage') }}">Перейти на Главную страницу</a>
+    {% endif %}
+{% endblock %}

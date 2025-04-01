@@ -1,0 +1,30 @@
+<data-map data-source="{{ block_path(block, context) }}" {% if total is defined %}data-total="Всего {{ total }} {{ 'construction_objects_total'|transchoice(total, {}, "messages", locale = "ru") }} в радиусе 5км"{% endif %} id="data-map"></data-map>
+<div id="objects-block-wrapper">
+    <div class="objects-block__list">
+        {% for item in items %}
+            {% include '::/Construction/_teaser.html.twig' with {'item': item} %}
+        {% endfor %}
+    </div>
+
+    <div class="objects-block__more">
+        <a href="{{ path('app_construction') }}" class="object-page__position-backlink">
+            <img src="/images/construction/arrow.svg" alt="">
+            Вернуться на карту
+        </a>
+    {% if next_offset %}
+        {% if construction|default %}
+            {% set source = path('app_construction_show', {id: construction.id, func_type: func_types}) %}
+        {% else %}
+            {% set source = block_path(block, context, {template: 'ajax_list'}) %}
+        {% endif %}
+        {% include '::/Block/loadmore_button.html.twig' with {
+        title: 'Показать больше',
+        target: '.objects-block__list',
+        item: '.objects-block__list-item',
+        source: source,
+        limit: limit,
+        offset: next_offset
+        } %}
+    {% endif %}
+    </div>
+</div>

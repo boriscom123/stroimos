@@ -1,0 +1,28 @@
+<article class="infographics-block">
+    <a href="{{ entity_path(item) }}" class="infographics-block__link">
+        <div class="infographics-block__img-wrap">
+            {% set thumb630x338_image %}
+                {% path item.image, 'thumb630x338'|raw %}
+            {% endset %}
+            {% set infographics_top_large %}
+                {% path item.image, 'infographics_top_large'|raw %}
+            {% endset %}
+            <img class="infographics-block__img" src="{{ thumb630x338_image|trim ?: infographics_top_large|trim }}" />
+            <span class="infographics-block__img-show">просмотреть</span>
+        </div>
+
+        <section class="infographics-block__content">
+            <header class="infographics-block__header">
+                {{ item.title }}
+            </header>
+            <p class="infographics-block__text">
+                {{ item.teaser }}
+            </p>
+            <div class="infographics-block__share">
+                <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                <script src="//yastatic.net/share2/share.js"></script>
+                <div class="ya-share2" data-bare data-url="{{ entity_path(item, {}, true) }}" data-title="{{ item.title }}" data-image="{{ app.request.getSchemeAndHttpHost() }}{% path item.image, 'thumb210' %}" data-services="facebook,vkontakte,twitter,odnoklassniki,moimir,lj"></div>
+            </div>
+        </section>
+    </a>
+</article>

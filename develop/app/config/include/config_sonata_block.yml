@@ -1,0 +1,107 @@
+sonata_cache:
+    caches:
+        memcached:
+            prefix: stroi_block
+            servers:
+                - {host: '%session_memcached_host%', port: '%session_memcached_port%', weight: 0}
+
+sonata_block:
+    default_contexts: [cms]
+    blocks_by_class:
+        #for hardcoded blocks
+        Sonata\BlockBundle\Model\Block:
+          cache: sonata.cache.memcached
+        #for stored blocks
+        AppBundle\Entity\Block:
+          cache: sonata.cache.memcached
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.user.block.menu:
+            contexts:   [admin]
+        sonata.user.block.account:
+            contexts:   [admin]
+        post_list:
+            contexts: [cms]
+        last_posts:
+            contexts: [cms]
+        news_of_the_day:
+            contexts: [cms]
+        animated_banner:
+            contexts: [cms]
+        homepage_news:
+            contexts: [cms]
+        more_like_this:
+            contexts: [cms]
+        gallery_list:
+            contexts: [cms]
+        video_list:
+            contexts: [cms]
+        metro_vitdeo_tour:
+            contexts: [cms]
+        infographics_list:
+            contexts: [cms]
+        gallery_pick:
+            contexts: [cms]
+        video_picks:
+            contexts: [cms]
+        infographics_picks:
+            contexts: [cms]
+        rubrics_list:
+            contexts: [cms]
+        simple_template:
+            contexts: [cms]
+        document_list:
+            contexts: [cms]
+        construction_list:
+            contexts: [cms]
+        organization_list:
+            contexts: [cms]
+        contact_person_list:
+            contexts: [cms]
+        recent_page:
+            contexts: [cms]
+        metro_constructed_stations_block:
+            contexts: [cms, custom]
+        hot_news_block:
+            contexts: [cms, custom]
+        banner_announcements_dk:
+            contexts: [cms, custom]
+        service_banner:
+            contexts: [cms, custom]
+        road_construction_map_banner:
+            contexts: [cms, custom]
+        road_interchange_banner:
+            contexts: [cms, custom]
+        destruction_banner:
+            contexts: [cms, custom]
+        renovation_banner:
+            contexts: [cms, custom]
+        header_search_filters:
+            contexts: [cms]
+        announcement:
+            contexts: [cms]
+        subordinate_homepage_posts:
+            contexts: [cms]
+        subordinate_smi:
+            contexts: [cms]
+        subordinate_media:
+            contexts: [cms]
+        subordinate_publications_list:
+            contexts: [cms]
+        subordinate_header:
+            contexts: [cms]
+        subordinate_direction:
+            contexts: [cms]
+        material_owner_link:
+            contexts: [cms]
+        mobile_block_post_list:
+            contexts: [cms]
+        mobile_block_construction_list:
+            contexts: [cms]
+        email_subscription_form_block:
+            contexts: [cms]
+
+#todo: disabled extra features
+#        sonata.block.service.text:
+#            contexts: [cms]

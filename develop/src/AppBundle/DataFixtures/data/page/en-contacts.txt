@@ -1,0 +1,239 @@
+<h1>Contacts</h1> <Table class = "contacts-table">
+<Tbody>
+<Tr>
+<Th colspan = "3"> <a name="stroi"> </a>
+<H3> The complex urban policy and city building Moscow </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Leader </td>
+<Td> Office, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <a href="/rukovodstvo"> <b> Khusnullin Marat Shakirzyanovich </b> </a>
+<P> Deputy Mayor of&nbsp;Moscow on&nbsp;urban policy and the construction. </P>
+</Td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (495) 956-80-47</nobr> </li>
+<Li> <nobr>+7 (495) 956-64-63</nobr> </li>
+<Li> <nobr>+7 (495) 956-81-89</nobr>&nbsp;&mdash; fax </li>
+<Li> <nobr>+7 (495) 956-81-47</nobr>&nbsp;&mdash; checking fax reception </li>
+</Ul>
+</Td>
+<Td> 125009, Moscow, Nikita lane., D. 5 </td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="stroi"> </a>
+<H3> Management coordination complex urban policy and city building Moscow </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Head </td>
+<Td> Reception </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Evgeny Leonov </b> </td>
+<Td> <nobr>+7 (495) 956-64-56</nobr> </td>
+<Td> 125009, Moscow, Nikita lane., D. 5 </td>
+</Tr>
+<Tr>
+<Td colspan = "3"> <a name="dgp"> </a>
+<H3> The Department of&nbsp;urban planning policy of&nbsp;Moscow </h3>
+</Td>
+</Tr>
+<Tr class = "cell-h">
+<Td> Leader </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Levkin Sergei </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (495) 356-34-08</nobr> </li>
+<Li> <nobr>+7 (495) 356-56-56</nobr>&nbsp;&mdash; fax </li>
+</Ul>
+</Td>
+<Td>
+<P> 125009, Moscow, Nikita lane., D. 5, p. 6 </p>
+<P> <a href="mailto:info@dgp.mos.ru" style="text-decoration: none;"> info@dgp.mos.ru </a> </p>
+<P> <a href="http://dgp.mos.ru"> dgp.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Td class = "cell-spacer" colspan = "3"> </td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="ds"> </a>
+<H3> Department of&nbsp;Construction of&nbsp;Moscow City </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Leader </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Andrew Y. Bochkarev </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (495) 530-60-77</nobr> </li>
+<Li> <nobr>+7 (495) 530-60-75</nobr>&nbsp;&mdash; fax </li>
+</Ul>
+</Td>
+<Td>
+<P> 125009, Moscow, Nikita lane., D. 5, p. 6 </p>
+<P> <a href="mailto:5306077@mail.ru" style="text-decoration: none;"> 5306077@mail.ru </a> </p>
+<P> <a href="http://ds.mos.ru"> ds.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="arch"> </a>
+<H3> Committee for Architecture and Urban Planning of&nbsp;the City of&nbsp;Moscow (Moskomarkhitektura) </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Chairman </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Knyazhevskiy Julian V. </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (499) 250-55-20</nobr> </li>
+<Li> <nobr>+7 (499) 250-20-51</nobr>&nbsp;&mdash; fax </li>
+</Ul>
+</Td>
+<Td>
+<P> 125047, Moscow, Triumphal Square., <br />
+d. 1 </p>
+<P> <a href="mailto:asi@mka.mos.ru" style="text-decoration: none;"> asi@mka.mos.ru </a> </p>
+<P> <a href="http://www.mka.mos.ru"> www.mka.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr class = "cell-h">
+<Td> The chief architect of&nbsp;the city of&nbsp;Moscow </td>
+<Td> Reception </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Sergey O. Kuznetsov </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (499) 250-95-72</nobr> </li>
+</Ul>
+</Td>
+<Td>
+<P> 125047, Moscow, Triumphal Square., <br />
+d. 1 </p>
+<P style = "line-height: 17px;"> <a href="mailto:asi@mka.mos.ru" style="text-decoration: none;"> asi@mka.mos.ru </a> </p>
+<P style = "line-height: 17px;"> <a href="http://www.mka.mos.ru"> www.mka.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Td class = "cell-spacer" colspan = "3"> </td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="ds"> </a>
+<H3> The Department of&nbsp;the development of&nbsp;new areas of&nbsp;the city of&nbsp;Moscow </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Leader </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Zhidkin Vladimir Fedorovich </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (495) 957-93-02</nobr> </li>
+<Li> <nobr>+7 (495) 957-93-01</nobr>&nbsp;&mdash; fax </li>
+</Ul>
+</Td>
+<Td>
+<P> Mr. Ul. Vozdvizhenka, d. 8/1 </p>
+<P> <a href="mailto:drnt@mos.ru" style="text-decoration: none;"> drnt@mos.ru </a> </p>
+<P> <a href="http://drnt.mos.ru/"> drnt.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="invest"> </a>
+<H3> The Moscow City Committee for the implementation of&nbsp;investment projects in&nbsp;construction and supervision of&nbsp;participatory construction (Moskomstroyinvest) </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Chairman </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Timofeev Konstantin Petrovich </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (495) 620-29-70</nobr> </li>
+</Ul>
+</Td>
+<Td>
+<P> 125009, Moscow, Vozdvizhenka Str., <br />
+d. 8/1, p. 1 </p>
+<P> <a href="http://invest.mos.ru/" style="text-decoration: none;"> invest.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Td class = "cell-spacer" colspan = "3"> </td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="nadzor"> </a>
+<H3> State Construction Supervision Committee of&nbsp;the city of&nbsp;Moscow (Mosgosstroynadzor) </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Chairman </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Antosenko Oleg Dmitrievich </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (499) 240-03-12</nobr> </li>
+<Li> <nobr>+7 (499) 240-20-12</nobr>&nbsp;&mdash; fax </li>
+</Ul>
+</Td>
+<Td>
+<P> 121059, Moscow, Bryansk Str., D. 9, <br />
+p. 1 </p>
+<P> <a href="mailto:stroinadzor@mos.ru"> stroinadzor@mos.ru </a> </p>
+<P> <a href="http://www.stroinadzor.mos.ru" style="text-decoration: none;"> www.stroinadzor.mos.ru </a> </p>
+</Td>
+</Tr>
+<Tr>
+<Th colspan = "3"> <a name="expert"> </a>
+<H3> The Moscow City Committee on&nbsp;pricing in&nbsp;the construction and public examination of&nbsp;projects </h3>
+</Th>
+</Tr>
+<Tr class = "cell-h">
+<Td> Chairman </td>
+<Td> The reception, the secretariat </td>
+<Td> Location </td>
+</Tr>
+<Tr class = "cell-c">
+<Td> <b> Leonov Valeriy </b> </td>
+<Td>
+<Ul>
+<Li> <nobr>+7 (499) 250-17-01</nobr> </li>
+</Ul>
+</Td>
+<Td>
+<P> 125047, Moscow, Brest <nobr>2-ya</nobr> ul., D. 8 </p>
+<P> <a href="mailto:mke@mos.ru" style="text-decoration: none;"> mke@mos.ru </a> </p>
+<P> <a href="http://mke.mos.ru"> mke.mos.ru </a> </p>
+</Td>
+</Tr>
+</Tbody>
+</Table>

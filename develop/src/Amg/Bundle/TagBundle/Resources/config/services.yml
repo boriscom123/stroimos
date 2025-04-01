@@ -1,0 +1,25 @@
+services:
+    amg_tag.admin.tag:
+        class: Amg\Bundle\TagBundle\Admin\TagAdmin
+        arguments: [~, Amg\Bundle\TagBundle\Entity\Tag, AmgTagBundle:Admin\Tag]
+        calls:
+            - [ setTemplate, [batch, AmgTagBundle:Admin:list__batch.html.twig]]
+            - [ setTemplate, [list, AmgTagBundle:Admin:list.html.twig]]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Теги, audit: false, autoadmin: true}
+
+    amg_tag.manager:
+        class: Amg\Bundle\TagBundle\Model\TagManager
+        arguments: [ @doctrine.orm.entity_manager ]
+
+    amg_tag.twig.tag:
+        class: Amg\Bundle\TagBundle\Twig\TagTwigExtension
+        calls:
+            - [setContainer, [@service_container]]
+        tags:
+            - { name: twig.extension }
+
+    amg_tag.autoadmin.extension.tags:
+        class: Amg\Bundle\TagBundle\Admin\Extension\TagsExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\Bundle\TagBundle\Model\TagsTrait}

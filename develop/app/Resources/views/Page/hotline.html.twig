@@ -1,0 +1,267 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': '',
+    'subject': null
+    } %}
+
+    <article class="news-wrapper js-mediator-article">
+        <header class="news-header">
+            <h1 class="news-title">В данном разделе Вы можете подать обращение
+                в Комплекс градостроительной политики
+                и строительства города Москвы по вопросам:</h1>
+        </header>
+
+        <section class="news-wrapper__content-wrap">
+
+            <div class="hotline-block container__full">
+                <h3 class="hotline-block__title">По вопросам невыплаты заработной платы строителям</h3>
+                <p class="hotline-block__legend">Обратиться с жалобой по вопросу невыплаты заработной платы строителям.</p>
+                <a class="hotline-block__action open active" href="#">Подать завяление</a>
+                <a class="hotline-block__action close" href="#">Скрыть завяление</a>
+                <span class="hotline-block__phone">8 (495) 650-50-55</span>
+                <form class="hotline-block__form" action="#">
+
+                    <h3 class="hotline-block__form-title">Обращение</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фамилия, имя, отчество
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="ФИО">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            E-mail
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="E-mail">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Классификация
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Классификация">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Контактный телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Контактный телефон">
+                    </fieldset>
+
+                    <h3 class="hotline-block__form-title">Организация</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Наименование организации
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Наименование организации">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Генеральный директор
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Генеральный директор">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Телефон">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фактический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Фактический адрес">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Юридический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Юридический адрес">
+                    </fieldset>
+
+                    <button class="hotline-block__form-btn">подать заявление</button>
+                </form>
+            </div>
+
+            <div class="hotline-block container__full">
+                <h3 class="hotline-block__title">По вопросам невыплаты заработной платы строителям</h3>
+                <p class="hotline-block__legend">Обратиться с жалобой по вопросу невыплаты заработной платы строителям.</p>
+                <a class="hotline-block__action open active" href="#">Подать завяление</a>
+                <a class="hotline-block__action close" href="#">Скрыть завяление</a>
+                <span class="hotline-block__phone">8 (495) 650-50-55</span>
+                <form class="hotline-block__form" action="#">
+
+                    <h3 class="hotline-block__form-title">Обращение</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фамилия, имя, отчество
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="ФИО">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            E-mail
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="E-mail">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Классификация
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Классификация">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Контактный телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Контактный телефон">
+                    </fieldset>
+
+                    <h3 class="hotline-block__form-title">Организация</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Наименование организации
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Наименование организации">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Генеральный директор
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Генеральный директор">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Телефон">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фактический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Фактический адрес">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Юридический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Юридический адрес">
+                    </fieldset>
+
+                    <button class="hotline-block__form-btn">подать заявление</button>
+                </form>
+            </div>
+
+            <div class="hotline-block container__full">
+                <h3 class="hotline-block__title">По вопросам невыплаты заработной платы строителям</h3>
+                <p class="hotline-block__legend">Обратиться с жалобой по вопросу невыплаты заработной платы строителям.</p>
+                <a class="hotline-block__action open active" href="#">Подать завяление</a>
+                <a class="hotline-block__action close" href="#">Скрыть завяление</a>
+                <span class="hotline-block__phone">8 (495) 650-50-55</span>
+                <form class="hotline-block__form" action="#">
+
+                    <h3 class="hotline-block__form-title">Обращение</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фамилия, имя, отчество
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="ФИО">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            E-mail
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="E-mail">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Классификация
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Классификация">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Контактный телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Контактный телефон">
+                    </fieldset>
+
+                    <h3 class="hotline-block__form-title">Организация</h3>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Наименование организации
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Наименование организации">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Генеральный директор
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Генеральный директор">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Телефон
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Телефон">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Фактический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Фактический адрес">
+                    </fieldset>
+                    <fieldset>
+                        <div class="hotline-block__form-field">
+                            Юридический адрес
+                            <span class="">*</span>
+                        </div>
+                        <input type="text" placeholder="Юридический адрес">
+                    </fieldset>
+
+                    <button class="hotline-block__form-btn">подать заявление</button>
+                </form>
+            </div>
+
+        </section>
+    </article>
+
+{% endblock %}

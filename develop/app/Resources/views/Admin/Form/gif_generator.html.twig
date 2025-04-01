@@ -1,0 +1,17 @@
+{% block gif_generator_widget %}
+    <div class="form-group">
+        <label class="control-label">{{ label|trans }}</label>
+        <div class=" sonata-ba-field sonata-ba-field-standard-natural">
+            <div class="field-container">
+                <gif-generator
+                        {{ block('widget_attributes') }}
+                        original-value="{{ originalValue|json_encode }}"
+                        images-selector="{{ imagesSelector }}"
+                        media-ids-selector="{{ mediaIdsSelector }}"
+                        width="150"
+                        height="100"
+                ></gif-generator>
+            </div>
+        </div>
+    </div>
+{% endblock %}

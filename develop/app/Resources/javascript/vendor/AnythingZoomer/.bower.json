@@ -1,0 +1,39 @@
+{
+  "name": "jquery.anythingzoomer",
+  "description": "Zoom in on images or content.",
+  "keywords": [
+    "customizable",
+    "effects",
+    "elements",
+    "zooming"
+  ],
+  "homepage": "https://css-tricks.com/anythingzoomer-jquery-plugin/",
+  "authors": [
+    "Chris Coyier",
+    "Rob Garrison <wowmotty@gmail.com>"
+  ],
+  "dependencies": {
+    "jquery": ">=1.3.2"
+  },
+  "main": [
+    "dist/jquery.anythingzoomer.css",
+    "dist/jquery.anythingzoomer.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "js/.*",
+    "css/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "version": "2.2.7",
+  "_release": "2.2.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.2.7",
+    "commit": "ddef6ecfcaf9e62f165efa8915a11392fd2dd9ad"
+  },
+  "_source": "git://github.com/CSS-Tricks/AnythingZoomer.git",
+  "_target": "~2.2.7",
+  "_originalSource": "git://github.com/CSS-Tricks/AnythingZoomer.git"
+}

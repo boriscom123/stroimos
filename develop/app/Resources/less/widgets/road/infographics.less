@@ -1,0 +1,174 @@
+.roadinfographics-block__list {
+  margin-bottom: 50px;
+}
+
+.roadinfographics-block {
+  margin-bottom: 30px;
+}
+
+.roadinfographics-block__link {
+	display: inline-block;
+	position: relative;
+	height: 275px;
+
+	&:hover {
+
+		.roadinfographics-block__img-wrap {
+			&:before {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+			.roadinfographics-block__img-show {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+		}
+
+		.roadinfographics-block__img, .roadinfographics-block__img-bg {
+			background-color: #fff;
+			transform: translateY(-7px);
+			box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+		}
+
+		.roadinfographics-block__header {
+			color: @hover;
+		}
+
+		.roadinfographics-block__text {
+			color: @color;
+		}
+	}
+}
+
+.roadinfographics-block__img-wrap {
+	width: 500px;
+	box-sizing: border-box;
+	.dotted-border(whitegray, right);
+	float: left;
+	position: relative;
+
+	&:before {
+		content: '';
+		width: calc(~'100% - 31px');
+		height: 100%;
+		background: rgba(0, 0, 0, 0.45) url('/images/icons/eye.png') no-repeat;
+		background-position: center center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+
+	.roadinfographics-block__img-show {
+		width: calc(~'100% - 31px');
+		position: absolute;
+		top: 50%;
+		margin-top: 40px;
+		left: 0;
+		z-index: 2;
+		font-family: Onest, sans-serif;
+		font-weight: 700;
+		font-size: 10px;
+		line-height: 28px;
+		text-transform: uppercase;
+		color: white;
+		text-align: center;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+}
+
+.roadinfographics-block__img, .roadinfographics-block__img-bg {
+	width: 469px;
+	display: block;
+	z-index: 1;
+	box-shadow: 0 0px 1px rgba(0, 0, 0, .25);
+	transition: all 0.2s ease-in-out;
+	box-sizing: border-box;
+}
+
+.roadinfographics-block__img-bg {
+  height: 275px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.roadinfographics-block__content {
+  height: 235px;
+  padding: 15px 25px;
+  margin-left: 500px;
+  position: relative;
+  overflow: hidden ;
+}
+
+.roadinfographics-block__header {
+	.teaser-title();
+	margin-bottom: 20px;
+	color: @color;
+}
+
+.roadinfographics-block__text {
+	font-family: Brygada1918, serif;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	color: @color;
+  height: 6 * 20px;
+  overflow: hidden;
+  padding-bottom: 40px;
+  margin-bottom: 0px;
+}
+
+.roadinfographics-block__more {
+  font-family: Brygada1918,serif;
+  font-size: 20px;
+  font-style: italic;
+  position: absolute;
+  top: 225px;
+  left: 30px;
+}
+
+.property-list {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+
+	&__title {
+		font-family: Onest,sans-serif;
+		font-size: 14px;
+		color: #9f9f9f;
+		text-transform: uppercase;
+		margin-bottom: 20px;
+		letter-spacing: 0.1em;
+	}
+
+	.property-list__item.item {
+		font-family: Onest,sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		margin-bottom: 5px;
+		clear: both;
+
+		.item__title {
+			color: #9f9f9f;
+			float: left;
+			width: 160px;
+		}
+
+		.item__value {
+			color: #222;
+			margin-left: 160px;
+			p {
+				padding: 0px;
+				margin: 0px;
+			}
+			ul {
+				list-style: disc;
+				padding-left: 18px;
+			}
+		}
+	}
+}

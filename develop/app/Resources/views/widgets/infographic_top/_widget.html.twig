@@ -1,0 +1,17 @@
+{# Виджет предназначен для вывода не более 5 тизеров. Самый первый - самый большой, тот, что справа #}
+<div class="infographic-top">
+    <header class="infographic-top__header">
+        <h3 class="infographic-top__title">Инфографика</h3>
+        <span class="infographic-top__archive"><a href="{{ path('app_infographics_list') }}">Архив</a></span>
+
+        {#  <div class="infographic-top__legend">
+            <span class="infographic-top__legend-item infographic-top__legend-infographics">Инфографика</span>
+            <span class="infographic-top__legend-item infographic-top__legend-statistics">Статистика</span>
+        </div> #}
+    </header>
+    <div class="infographic-top__groups-container">
+        {% for group in infographics | batch(5) %}
+            {% include 'widgets/infographic_top/_list.html.twig' with {'teasers': group} %}
+        {% endfor %}
+    </div>
+</div>

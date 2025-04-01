@@ -1,0 +1,32 @@
+{% if posts|length > 0 %}
+    <div class="day-news">
+        <header class="day-news__header">
+            <h1 class="day-news__header-title day-news__header-title_small">{{ title|default('Новости дня') }}</h1>
+            {# это я так понимаю буллиты для слайдера новостей
+                {% if posts|length > 5 %}
+                    <div id="dayNewsPager" class="day-news__header-pager">
+                        <a class="active" data-slide-index="0" href></a>
+                        <a data-slide-index="1" href></a>
+                    </div>
+                {% endif %}
+            #}
+        </header>
+        <div class="day-news__list day-news__list_small">
+            <div class="">
+            {% for post in posts %}
+                {% if loop.index <= 5 %}
+                    <article class="day-news__list-item day-news__list-item_small">
+                        <time class="news-date">{{ post.publishStartDate|format_date }} <span class="news-time">{{ post.publishStartDate|date('H:i') }}</span></time>
+                        <header class="day-news__list-item-title day-news__list-item-title_small">
+                            <a href="{{ entity_path(post) }}">
+                                {{ post.title }}
+                            </a>
+                        </header>
+                    </article>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <a href="{{ path('app_news_list') }}" class="related-link main-feed__related-link days-news__header-link days-news__header-link_small">Все новости</a>
+    </div>
+{% endif %}

@@ -1,0 +1,64 @@
+.subscribe_telegram {
+  padding-top: 15px ;
+  margin: 0 0 80px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  @color: #1B262C;
+  @background: #E8EFF3;
+  @background-hover: #DAEFFF;
+
+   a:not(.pic) {
+    display: flex;
+    width: 100%;
+    background-color: @background;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      border-color: transparent;
+      background-color: @background-hover;
+
+      .subscribe_telegram__content p {
+        color: @blue;
+      } 
+    }
+  }
+
+  &__content{
+    padding: 20px 165px 20px 30px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    p {
+      margin: 0;
+      font-family: Onest, sans-serif;
+      font-weight: 600;
+      line-height: 24px;
+      font-size: 20px;
+      color: @color;
+      transition: color 0.2s ease;
+    }
+    span {
+      text-transform: uppercase;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    width: 165px;
+    height: 65px;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background-image: image-set(
+    	'/images/tg_official.png' 1x,
+    	'/images/tg_official_1.5x.png' 1.5x,
+    	'/images/tg_official_2x.png' 2x
+    );
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right bottom;
+  }
+}

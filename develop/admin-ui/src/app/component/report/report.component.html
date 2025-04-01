@@ -1,0 +1,9 @@
+<div *ngIf="showDetails"  class="report-wrapper">
+  <h3 class="title">
+    {{title}}
+  </h3>
+  <div class="details-body">
+    <ng-container *ngTemplateOutlet="detailsBody;context:ctx" ></ng-container>
+  </div>
+</div>
+

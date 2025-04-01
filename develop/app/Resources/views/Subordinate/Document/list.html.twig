@@ -1,0 +1,9 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include 'Subordinate/widgets/themes_panel.html.twig' with {
+      'title': 'Список документов',
+      'share': true
+    } %}
+    {{ sonata_block_render({'type': 'document_list'}, { category: 'all', template: 'Subordinate/widgets/document/_list.html.twig', owner: app.request.get('_subordinate_route') }) }}
+{% endblock %}

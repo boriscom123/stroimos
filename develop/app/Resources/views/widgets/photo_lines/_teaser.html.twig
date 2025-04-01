@@ -1,0 +1,67 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+
+{#<article class="news-list__teaser">
+    <aside class="news-list__teaser-options">
+        {% if post.rubrics|length %}
+            <div class="news-list__teaser-themes">
+                <i class="icon icon-16 icon-news"></i>
+                {% for rubric in post.rubrics %}
+                    <a href="{{ path('app_post_list', {categoryAlias: post.category.alias, rubric: rubric.title}) }}">{{ rubric.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if post.tags|length %}
+            <div class="news-list__teaser-tags">
+                <i class="icon icon-16 icon-label"></i>
+                {% for children in post.tags %}
+                    <a href="#">{{ children.title }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </aside>
+    <a class="new-list__teaser-slug" href="{{ entity_path(post) }}">
+        <span class="news-list__teaser-meta">
+            <img class="news-list__teaser-img" src="{% path post.image, 'thumb210' %}" width="210px" height="150px"/>
+            <time class="news-list__teaser-date">{{ post.publishStartDate | format_date }}</time>
+        </span>
+
+        <div class="news-list__teaser-new">
+            <header class="news-list__teaser-header">
+                <h3 class="news-list__teaser-title">{{ post.title }}</h3>
+            </header>
+            <p class="news-list__teaser-announce">{{ post.teaser }}</p>
+        </div>
+    </a>
+</article>#}
+<article class="infographics-block">
+    <a href="{{ entity_path(item) }}" class="infographics-block__link">
+        <div class="infographics-block__img-wrap">
+            <img class="infographics-block__img" src="{% path item.image, 'infographics_list' %}" />
+            <span class="infographics-block__img-show">просмотреть</span>
+        </div>
+        <section class="infographics-block__content">
+            <header class="infographics-block__header">
+                {{ item.title }}
+            </header>
+            <p class="infographics-block__text">
+                {{ item.teaser }}
+            </p>
+            <div class="infographics-block__share">
+                {% set socials = (socials is defined and socials) ? socials: [{label: "telegram", uri: "https://t.me/stroi_mos_ru"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "odnoklassniki", uri: "https://ok.ru/group/55613137158162"}, {label: "rutube", uri: "https://rutube.ru/channel/23927452/videos/"}] %}
+                <ul class="socials" style="float: none">
+                    {% for item in socials %}
+                        <li>
+                            <span onclick="window.open('{{ item.uri }}');return false;" href="{{ item.uri }}" class="icon icon-social icon-{{ item.label }}" title="{{ item.label }}" target="_blank"></span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </a>
+</article>

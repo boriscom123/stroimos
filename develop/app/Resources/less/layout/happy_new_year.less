@@ -1,0 +1,128 @@
+body {
+	background-color: #0c083a;
+	background-image: url("/images/ny_pattern_300.png");
+	/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(
+    	url('/images/ny_pattern.png') 1x, 
+    	url('/images/ny_pattern_x15.png') 1.5x, 
+    	url('/images/ny_pattern_x20.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+    	'/images/ny_pattern.png' 1x, 
+    	'/images/ny_pattern_x15.png' 1.5x, 
+    	'/images/ny_pattern_x20.png' 2x
+    );
+	background-position: bottom left;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+
+.page-overlay {
+	background: none;
+	position: relative;
+	height: 1000px;
+	z-index: 2;
+
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#222222+0,222222+100&1+0,0.95+30,0+100 */
+	background: -moz-linear-gradient(top,  rgba(12,8,58,1) 0%, rgba(12,8,58,0.95) 40%, rgba(12,8,58,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(12,8,58,1) 0%,rgba(12,8,58,0.95) 40%,rgba(12,8,58,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(12,8,58,1) 0%,rgba(12,8,58,0.95) 40%,rgba(12,8,58,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c083a', endColorstr='#000c083a',GradientType=0 ); /* IE6-9 */
+}
+
+.homepage-video {
+	background-color: #0c083a;
+	background-image: url("/images/ny_video_right_bg.png"), url("/images/ny_video_left_bg.png");
+
+	/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(
+    	url('/images/ny_video_right_bg.png') 1x, 
+    	url('/images/ny_video_right_bg_x15.png') 1.5x, 
+    	url('/images/ny_video_right_bg_x20.png') 2x
+    ), -webkit-image-set(
+    	url('/images/ny_video_left_bg.png') 1x, 
+    	url('/images/ny_video_left_bg_x15.png') 1.5x, 
+    	url('/images/ny_video_left_bg_x20.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+    	'/images/ny_video_right_bg.png' 1x, 
+    	'/images/ny_video_right_bg_x15.png' 1.5x, 
+    	'/images/ny_video_right_bg_x20.png' 2x
+    ), image-set(
+    	'/images/ny_video_left_bg.png' 1x, 
+    	'/images/ny_video_left_bg_x15.png' 1.5x, 
+    	'/images/ny_video_left_bg_x20.png' 2x
+    );
+	background-position: 
+		center right,
+		center left;
+	background-repeat: 
+		no-repeat,
+		no-repeat;
+}
+
+.page-wrapper {
+	background-image: url("/images/ny_tree_branches_top.png");
+
+	/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(
+    	url('/images/ny_tree_branches_top.png') 1x, 
+    	url('/images/ny_tree_branches_top_x15.png') 1.5x, 
+    	url('/images/ny_tree_branches_top_x20.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+    	'/images/ny_tree_branches_top.png' 1x, 
+    	'/images/ny_tree_branches_top_x15.png' 1.5x, 
+    	'/images/ny_tree_branches_top_x20.png' 2x
+    );
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+.page-footer {
+	background-color: #0c083a;
+	background-image: url("/images/ny_footer.png"), url("/images/ny_tree_branches_footer.png");
+	/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+	background-image: -webkit-image-set(
+    	url('/images/ny_footer.png') 1x, 
+    	url('/images/ny_footer_x15.png') 1.5x, 
+    	url('/images/ny_footer_x20.png') 2x
+    ), -webkit-image-set(
+    	url('/images/ny_tree_branches_footer.png') 1x, 
+    	url('/images/ny_tree_branches_footer_x15.png') 1.5x, 
+    	url('/images/ny_tree_branches_footer_x20.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+    	'/images/ny_footer.png' 1x, 
+    	'/images/ny_footer_x15.png' 1.5x, 
+    	'/images/ny_footer_x20.png' 2x
+    ), image-set(
+    	'/images/ny_tree_branches_footer.png' 1x, 
+    	'/images/ny_tree_branches_footer_x15.png' 1.5x, 
+    	'/images/ny_tree_branches_footer_x20.png' 2x
+    );
+    background-position: 
+    	bottom right,
+    	top right;
+    background-repeat: 
+    	no-repeat,
+    	no-repeat;
+}
+
+.ny_banner2021-link {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 20px;
+	width: 960px;
+	height: 216px;
+	&__img {
+		width: 960px;
+		height: 216px;
+	}
+}

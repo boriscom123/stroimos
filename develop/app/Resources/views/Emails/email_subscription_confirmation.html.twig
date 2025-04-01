@@ -1,0 +1,5 @@
+{% set confirmation_url = url('email_subscription_control', {email: subscribed_user.email, hash: subscribed_user.hash}) %}
+<p>Ваш электронный адрес <em>{{ subscribed_user.email }}</em> был указан при оформлении подписки на e-mail рассылку сайта <em>Комплекса градостроительной политики и строительства города Москвы</em> (<a href="{{url('app_homepage')}}">{{url('app_homepage')}}</a>). Подтвердите намерение получать рассылку, перейдя по <a href="{{ confirmation_url }}">ссылке</a>.</p>
+<p>Если письмо попало к вам по ошибке, проигнорируйте сообщение.</p>
+
+<p><small>P.S. Сообщение отправлено почтовым роботом, пожалуйста, не отвечайте на это письмо.</small></p>

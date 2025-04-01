@@ -1,0 +1,920 @@
+@metro-link-color: #2983e8;
+@metro-link-hover-color: darken(@metro-link-color, 20%);
+
+.metro-intro {
+  &__wrapper {
+    border-bottom: 1px solid #eee;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    a {
+      color: @metro-link-color;
+      transition: color 0.3s ease-out;
+      &:hover {
+        color: @metro-link-hover-color;
+      }
+    }
+  }
+  &__title {
+    font-family: Brygada1918, serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 38px;
+    color: @color;
+    margin-bottom: 40px;
+  }
+  &__text {
+    color: @color;
+    font-family: Onest, sans-serif;
+    font-size: 40px;
+    line-height: 45px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    a {
+      font-family: Brygada1918, serif;
+      font-style: italic;
+    }
+  }
+  &__text-alt {
+    color: #727272;
+    font-style: italic;
+    font-family: Brygada1918, serif;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+}
+
+.metro-container {
+  margin-left: -240px;
+  margin-right: -240px;
+  &_full {
+    padding: 0 160px;
+  }
+  &_left {
+    padding: 0 0 0 160px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .metro-container {
+    &_left {
+      padding: 0 0 0 240px;
+    }
+    &_full {
+      padding: 0 240px;
+    }
+  }
+}
+
+.metro-banner-pdf {
+  position: relative;
+  height: 450px;
+  .clearfix();
+  &__pic {
+    float: left;
+    width: calc(~"100% - 350px");
+    height: 450px;
+    background-image: url("/images/metro/metro-banner-pdf-bg.png");
+    background-repeat: no-repeat;
+    background-position: calc(~"100% + 33px") 100%;
+  }
+  &__download {
+    float: left;
+    height: 450px;
+    width: 350px;
+    background: #2983e8;
+    position: relative;
+    &-content {
+      display: block;
+      position: absolute;
+      bottom: 50px;
+      left: 90px;
+      color: #fff;
+      font-family: Onest, sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      text-transform: uppercase;
+      transform: translate3d(500px, 0px, 0px);
+      transition: transform 0.3s ease-out;
+      &::before {
+        content: '';
+        display: block;
+        height: 115px;
+        width: 115px;
+        background-image: url("/images/icons/metro-banner-pdf.svg");
+        background-size: contain;
+        margin-bottom: 25px;
+      }
+    }
+  }
+  &.in-view &__download-content {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  &.in-view &__download:hover &__download-content {
+    transform: translate3d(0px, -10px, 0px);
+  }
+}
+
+@media screen and (min-width: 1401px) {
+  .metro-banner-pdf {
+    &__title {
+      position: absolute;
+      top: 0px;
+      left: 160px;
+      font-family: Brygada1918, serif;
+      font-weight: 900;
+      font-size: 40px;
+      line-height: 38px;
+      color: @color;
+      padding-bottom: 40px;
+      width: 430px;
+      border-bottom: 1px solid #000;
+      &:hover, &:active {
+        color: @color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .metro-banner-pdf {
+    &__pic {
+      width: calc(~"100% - 450px");
+    }
+    &__title {
+      position: absolute;
+      top: 35px;
+      left: calc(~"100% - 400px");
+      color: #fff;
+      font-family: Brygada1918, serif;
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 27px;
+      width: 250px;
+      pointer-events: none;
+      z-index: 20;
+      &:hover, &:active {
+        color: #fff;
+      }
+    }
+    &__download {
+      width: 450px;
+      overflow: hidden;
+      &-content {
+        left: 50px;
+        font-size: 20px;
+        &::before {
+          height: 75px;
+          width: 75px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .metro-banner-pdf {
+    &__pic {
+      width: calc(~"100% - 550px");
+    }
+    &__title {
+      left: calc(~"100% - 500px");
+    }
+    &__download {
+      width: 550px;
+    }
+  }
+}
+
+.metro-banner-cutout {
+	display: flex;
+	min-height: 160px;
+	background: #222;
+  	color: #fff;
+	max-width: 100%;
+	width: 100%;
+	margin-bottom: 10px;
+  &__title {
+    display: block;
+    width: 57%;
+    min-height: 160px;
+    display: flex;
+    // justify-content: center;
+	align-items: center;
+	margin-left: 30px;
+    &-content {
+      font-family: Brygada1918, serif;
+      font-weight: 900;
+	  font-size: 32px;
+	  line-height: 32px;
+      transition: color 0.5s ease-in-out;
+    }
+  }
+  &__image {
+    display: block;
+    min-height: 160px;
+	width: 43%;
+    background-image: url("/images/metro/metro-banner-cutout-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    transition: background-size 0.5s ease-in-out;
+  }
+}
+
+a.metro-banner-cutout:hover {
+  color: @hover;
+}
+
+a.metro-banner-cutout:hover .metro-banner-cutout__image {
+  background-size: 110% 110%;
+}
+
+// @media screen and (max-width: 1400px) {
+//   .metro-banner-cutout {
+//     &__title {
+//       width: calc(~"100% - 626px");
+//     }
+//     &__image {
+//       width: 626px;
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 1200px) {
+//   .metro-banner-cutout {
+//     &__title {
+//       width: calc(~"100% - 550px");
+//     }
+//     &__image {
+//       width: 550px;
+//     }
+//   }
+// }
+
+.metro-banner-mck {
+  display: block;
+  position: relative;
+  min-height: 310px;
+  box-sizing: border-box;
+  padding-top: 20px;
+  background-image: url("/images/metro/bkl-banner.jpg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-color: #D9D9D9;
+  transition: background-size 0.5s ease-in-out;
+  padding-right: 60px;
+  padding-left: 20px;
+  color: #fff;
+  font-family: Brygada1918, serif;
+
+  &__title {
+    display: block;
+    font-size: 105px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 15px;
+    margin-left: 40px;
+    margin-top: 20px;
+    color: var(--title-color);
+  }
+  &__subtitle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 40px;
+    line-height: 110%;
+    font-weight: 900;
+    color: #fff;
+    transition: color 0.5s ease-in-out;
+    text-align: right;
+  	letter-spacing: 2px;
+    color: var(--subtitle-color);
+  }
+  &:hover {
+    color: #fff;
+    background-size: 110% 110%;
+  }
+  &:hover &__subtitle {
+    color: @hover;
+  }
+}
+
+.metro-banner-22year {
+  display: block;
+  height: 856px;
+  box-sizing: border-box;
+  padding-top: 110px;
+  background-image: url("/images/metro/metro-banner-22year-bg.jpg");
+  background-position: center;
+  background-size: 100% 100%;
+  transition: background-size 0.5s ease-in-out;
+  padding-right: 240px;
+  color: #fff;
+  font-family: Brygada1918, serif;
+  &__title {
+    display: block;
+    font-size: 150px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+  &__subtitle {
+    display: block;
+    font-size: 84px;
+    line-height: 90px;
+    font-weight: 900;
+    padding-top: 80px;
+    color: #fff;
+    transition: color 0.5s ease-in-out;
+    border-top: 1px solid #fff;
+    text-align: right;
+  }
+  &:hover {
+    color: #fff;
+    background-size: 110% 110%;
+  }
+  &:hover &__subtitle {
+    color: @hover;
+  }
+}
+
+.metro-construction__station-list_padding {
+	padding-top: 40px;
+}
+
+.metro-construction {
+  position: relative;
+
+  &-title {
+    font-family: Brygada1918, serif;
+    font-weight: 900;
+    font-size: 84px;
+    line-height: 90px;
+    color: @color;
+    padding-bottom: 30px;
+    margin-top: 80px;
+    margin-bottom: 110px;
+    border-bottom: 1px solid #000;
+  }
+
+  &__list {
+    overflow: hidden;
+    margin-bottom: 100px;
+  }
+
+  &_a {
+    min-height: 500px;
+    margin-left: -240px;
+    margin-right: -240px;
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-image: url("/images/metro/metro-construction-a-bg.jpg");
+    .metro-construction__ribbon {
+      position: absolute;
+      right: 300px;
+      top: 0px;
+    }
+  }
+
+  &_a &__subtitle {
+    position: absolute;
+    top: 40px;
+    left: 160px;
+    display: block;
+    width: 700px;
+    font-family: Brygada1918, serif;
+    font-weight: 900;
+    font-size: 82px;
+    line-height: 73px;
+    color: @color;
+  }
+
+  &_a &__list {
+    padding-top: 450px;
+    margin-left: 505px;
+    margin-right: 100px;
+  }
+
+  &_a &__list &__list-item {
+    width: 33%;
+  }
+
+  &_b {
+    min-height: 565px;
+    margin-left: -240px;
+    margin-right: -240px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    .metro-construction__ribbon {
+      position: absolute;
+      top: 0px;
+      left: 355px;
+    }
+  }
+
+  .b-loop (@i) when (@i >= 0) {
+      &_b@{i} {
+          background-image: url("/images/metro/metro-construction-b@{i}-bg.jpg");
+      }
+      .b-loop(@i - 1);
+  }
+  .b-loop(9);
+
+  &_b &__content {
+    padding-top: 260px;
+    margin-left: 770px;
+    margin-right: 100px;
+  }
+
+  &_b &__subtitle {
+    display: block;
+    width: 500px;
+    font-family: Brygada1918, serif;
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 45px;
+    color: @color;
+  }
+
+  &_b &__list {
+    padding-top: 15px;
+  }
+
+  &_b &__list &__list-item {
+    width: 50%;
+  }
+
+  &_c {
+    min-height: 565px;
+    margin-left: -240px;
+    margin-right: -240px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    .metro-construction__ribbon {
+      position: absolute;
+      top: 0px;
+      left: 355px;
+    }
+  }
+
+  &_c &__content {
+    padding-top: 260px;
+    margin-left: 770px;
+    margin-right: 100px;
+  }
+
+  &_c &__subtitle {
+    display: block;
+    width: 500px;
+    font-family: Brygada1918, serif;
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 45px;
+    color: @color;
+  }
+
+  &_c &__list {
+    padding-top: 15px;
+  }
+
+  &_c &__list &__list-item {
+    width: 50%;
+  }
+
+
+  &__list-item {
+    float: left;
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 22px;
+    color: @color;
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 50px;
+    padding-right: 25px;
+    height: 65px;
+  }
+
+  &__list-item-circle {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      background: rgba(0,0,0, 0.4);
+    }
+  }
+
+  &__list-item-title {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 22px;
+    margin-right: 20px;
+  }
+
+  &__list-item-info {
+    font-family: Onest, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 22px;
+    color: @hover;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  &__list-item-legend {
+    display: block;
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 22px;
+    color: @color;
+  }
+
+  &__list-info {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 19px;
+    color: #636363;
+    padding-top: 15px;
+    .dotted-border(black, top);
+    margin-bottom: 50px;
+  }
+
+  &__list-info-more {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 19px;
+    color: #010101;
+    margin-top: 30px;
+    width: 675px;
+
+    a {
+      color: @hover;
+      text-decoration: none;
+    }
+
+    span {
+      color: #727272;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1400px) {
+  .metro-construction {
+    &_a {
+      background-position: calc(~"100% + 100px") 0;
+    }
+
+    &_a .metro-construction__ribbon {
+      right: 200px;
+    }
+
+    &_a &__subtitle {
+      left: 240px;
+    }
+
+    &_a &__list {
+      margin-left: 605px;
+      margin-right: 220px;
+    }
+
+    &_a &__list &__list-item {
+      width: 50%;
+    }
+
+    &_b &__list &__list-item {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .metro-construction {
+    &_b {
+      background-position: -100px 0;
+    }
+
+    &_b .metro-construction__ribbon {
+      left: 255px;
+    }
+
+    &_b &__content {
+      margin-left: 670px;
+    }
+  }
+}
+
+
+.metro-videotour__title {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 38px;
+  color: @color;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+.metro-videotour__station-block {
+  display: table;
+  .dotted-border(black, bottom);
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.metro-videotour__station-block-item {
+  display: table-cell;
+  box-sizing: border-box;
+  padding-left: 29px;
+  padding-bottom: 60px;
+  vertical-align: top;
+
+  .metro-videotour__station-item {
+    margin-right: 0;
+  }
+
+  &.big {
+    width: 645px;
+    .dotted-border(black, right);
+    padding-left: 0;
+    padding-right: 29px;
+
+    .metro-videotour__station-item {
+      width: 100%;
+    }
+  }
+}
+
+.metro-videotour__station-list {
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.metro-videotour__station-item {
+  display: block;
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: @color;
+  text-decoration: none;
+  width: (@pageWidth - 29px*2)/3;
+  margin-right: 29px;
+  float: left;
+  padding-bottom: 25px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  img {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  &:hover {
+    color: @hover;
+  }
+}
+
+.metro-videotour__station-item-info {
+  display: block;
+  font-family: Onest, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  color: @hover;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.metro-videotour__station-item-legend {
+  font-family: Brygada1918, serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.station-grid {
+	display: grid;
+	grid-template-columns: 805fr 634fr;
+	grid-template-rows: repeat(6, 172px);
+	margin-left: -240px;
+	margin-right: -240px;
+	width: 1440px;
+	margin-bottom: 20px;
+}
+
+.station-grid__item-title {
+	width: 100%;
+	font-family: 'Brygada1918';
+	font-weight: 700;
+	font-size: 25px;
+	line-height: 30px;
+	color: #FFFFFF;
+	transition: color 0.4s ease;
+}
+
+.station-grid__item-more {
+	width: 100%;
+	font-family: Onest, sans-serif;
+	font-weight: 450;
+	font-size: 15px;
+	line-height: 18px;
+	color: #FFFFFF;
+	transition: color 0.4s ease;
+}
+
+.station-grid__item {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+
+	&::before {
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		z-index: -1;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		left: 0;
+		top: 0;
+	}
+
+	&::after {
+		content: "";
+		width: 100%;
+		height: 187px;
+		position: absolute;
+		z-index: -1;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+		left: 0;
+		bottom: 0;
+		transition: opacity 0.4s ease;
+	}
+
+	@media(hover: hover) {
+		&:hover {
+			&::before {
+				opacity: 1;
+			}
+
+			&::after {
+				transition-delay: 0.2s;
+				opacity: 0;
+			}
+
+			& .station-grid__item-title {
+				color: #1186E3;
+			}
+
+			& .station-grid__item-more {
+				color: #1186E3;
+			}
+		}
+	}
+
+	&:first-child {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 1;
+		grid-row-end: 4;
+		padding: 45px 25px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-end;
+		background-image: url("/images/metro/station-1.jpg");
+
+		& .station-grid__item-title {
+			max-width: 550px;
+			margin-bottom: 30px;
+		}
+
+		& .station-grid__item-more {
+			max-width: 550px;
+		}
+	}
+
+	&:nth-child(2) {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 4;
+		grid-row-end: 7;
+		padding: 45px 25px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-end;
+		background-image: url("/images/metro/station-2.jpg");
+
+		& .station-grid__item-title {
+			max-width: 550px;
+			margin-bottom: 30px;
+		}
+
+		& .station-grid__item-more {
+			max-width: 550px;
+		}
+	}
+
+	&:nth-child(3) {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 3;
+		padding: 25px 35px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-start;
+		background-image: url("/images/metro/station-3.jpg");
+
+		& .station-grid__item-title {
+			max-width: 360px;
+			margin-bottom: 20px;
+		}
+
+		& .station-grid__item-more {
+			max-width: 360px;
+		}
+	}
+
+	&:nth-child(4) {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 3;
+		grid-row-end: 5;
+		padding: 25px 35px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-start;
+		background-image: url("/images/metro/station-4.jpg");
+
+		& .station-grid__item-title {
+			max-width: 360px;
+			margin-bottom: 20px;
+		}
+
+		& .station-grid__item-more {
+			max-width: 360px;
+		}
+	}
+
+	&:last-child {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 5;
+		grid-row-end: 7;
+		padding: 25px 35px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-start;
+		background-image: url("/images/metro/station-5.jpg");
+
+		& .station-grid__item-title {
+			max-width: 360px;
+			margin-bottom: 20px;
+		}
+
+		& .station-grid__item-more {
+			max-width: 360px;
+		}
+	}
+}

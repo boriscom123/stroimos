@@ -1,0 +1,208 @@
+{% extends '::/layout/base_iframe.html.twig' %}
+{% block content %}
+    <div id="map" style="width: {{ width }}; height: {{ height }}"></div>
+    <div class="object-types__list" style="display: none">
+        <input type="checkbox" id="type-road" name="type-road" value="1" checked>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        .checkbox-icon {
+        display: inline-block;
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -24px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-road {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px 0;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-garage {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: 0 -24px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-health {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -24px -24px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-hotels {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -48px -24px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-ironroad {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -72px -24px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-sport {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px -24px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-industrial {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: 0 -48px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-metro {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -24px -48px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-playschool {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -48px -48px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-school {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -72px -48px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-trade {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px -48px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-stay {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: 0 -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-educational {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -48px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-religion {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -72px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-entertainment {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-novaia-moskva {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: 0px -96px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-tpu {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -24px -96px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-other {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -48px -96px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-renov-industrial {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -72px -96px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-cinema {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px -96px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-park {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -96px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        .checkbox-icon.checkbox-default {
+        background-image: url('/images/icons/spritesheet.png');
+        background-repeat: no-repeat;
+        background-position: -24px -72px;
+        width: 24px;
+        height: 24px;
+        margin-top: -12px;
+        }
+        #map .checkbox-icon {
+        margin-left: 7px;
+        margin-top: 7px;
+        opacity: .5;
+        }
+    </style>
+{% endblock %}

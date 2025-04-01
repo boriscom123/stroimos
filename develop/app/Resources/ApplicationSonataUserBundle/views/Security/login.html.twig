@@ -1,0 +1,63 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'title_user_authentication'|trans({}, 'SonataUserBundle'),
+    'rubricsContext': null,
+    } %}
+
+    {% if error is defined and error %}
+        <div class="auth-block__error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+    {% endif %}
+
+    <div class="page-login__login-wrap">
+    <form class="page-login__login login-form" action="{{ path("fos_user_security_check") }}" method="post" autocomplete="off">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+        <fieldset class="page-login__login-field">
+            <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="off"/>
+        </fieldset>
+        <fieldset class="page-login__login-field">
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" id="password" name="_password" required="required" autocomplete="off"/>
+        </fieldset>
+        <input type="submit" id="_submit" name="_submit" class="page-login__login-btn login-form__come"
+               value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+        {% include '::widgets/checkbox.html.twig' with {id: 'remember_me', name: '_remember_me', value: 'on', label: 'security.login.remember_me'|trans({}, 'FOSUserBundle') } %}
+        {#<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+        <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+        <br>#}
+
+        <div class="page-login__menu">
+            <a class="page-login__menu-item user-profile__form-link" href="{{ path('sonata_user_registration_register') }}">Регистрация</a><br />
+            <a class="page-login__menu-item user-profile__form-link" href="{{ path('sonata_user_resetting_request') }}">Восстановить пароль</a>
+        </div>
+
+        <div class="page-login__socials">
+            Войти через:
+            <ul class="page-login__socials-list">
+                {% for owner in hwi_oauth_resource_owners() %}
+                    {% if owner | trans({}, 'HWIOAuthBundle') == 'login_mos_ru' %}
+                        <li class="page-login__socials-list-item">
+                            <a href="{{ hwi_oauth_authorization_url(owner) }}" class="icon icon-social icon-{{ owner | trans({}, 'HWIOAuthBundle') }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"></a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% for owner in hwi_oauth_resource_owners() %}
+                    {% if owner | trans({}, 'HWIOAuthBundle') != 'login_mos_ru' %}
+                        <li class="page-login__socials-list-item">
+                            <a href="{{ hwi_oauth_authorization_url(owner) }}" class="icon icon-social icon-{{ owner | trans({}, 'HWIOAuthBundle') }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"></a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
+    </div>
+
+{% endblock content %}

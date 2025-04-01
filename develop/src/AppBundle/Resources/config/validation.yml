@@ -1,0 +1,23 @@
+AppBundle\Entity\Gallery:
+    constraints:
+        - Sonata\AdminBundle\Validator\Constraints\InlineConstraint:
+            service: app.validator.on_main_page
+            method: validateGallery
+
+AppBundle\Entity\Video:
+    constraints:
+        - Sonata\AdminBundle\Validator\Constraints\InlineConstraint:
+            service: app.validator.on_main_page
+            method: validateVideo
+
+AppBundle\Entity\GalleryPicks:
+    constraints:
+        - Sonata\AdminBundle\Validator\Constraints\InlineConstraint:
+            service: app.validator.on_main_page
+            method: validateGalleryPicks
+
+AppBundle\Entity\VideoPicks:
+    constraints:
+        - Sonata\AdminBundle\Validator\Constraints\InlineConstraint:
+            service: app.validator.on_main_page
+            method: validateVideoPicks

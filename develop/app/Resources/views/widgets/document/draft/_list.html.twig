@@ -1,0 +1,30 @@
+{% extends ':widgets/document:_list.html.twig' %}
+
+{% block header_documents %}
+    {#Проекты правовых нормативных актов мэра Москвы, правительства Москвы публикуются на основании постановления#}
+{% endblock %}
+
+{% block tableDocuments %}
+    <div class="documents-page__draft-table">
+        <div class="documents-page__draft-table-row header">
+            <div class="documents-page__draft-table-item title">
+                Вид, название и текст проекта нормативного правового акта (активная ссылка на текст проекта)
+            </div>
+            <div class="documents-page__draft-table-item addingdate">
+                Дата размещения проекта нормативного правового акта на сайте (сервере)
+            </div>
+            <div class="documents-page__draft-table-item enddate">
+                Дата окончания срока проведения независимой антикоррупционной экспертизы
+            </div>
+            <div class="documents-page__draft-table-item text">
+                Текст заключения независимой антикоррупционной экспертизы (активная ссылка на текст) и дата его поступления
+            </div>
+            <div class="documents-page__draft-table-item address">
+                Почтовый адрес и адрес электронной почты для направления заключений по результатам проведения независимой антикоррупционной экспертизы
+            </div>
+        </div>
+        {% for document in documents %}
+            {% include '::widgets/document/' ~ context.setting('category') ~ '/_teaser.html.twig' %}
+        {% endfor %}
+    </div>
+{% endblock %}

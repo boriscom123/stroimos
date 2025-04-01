@@ -1,0 +1,85 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block title %}<title>{{ organization.fullTitle }}</title>{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'organization', 'object': organization, 'themes': [{'title': 'Организация'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Организации',
+    'rubricsContext': '',
+    'subject': organization
+    } %}
+
+    <div class="js-mediator-article">
+        <h1 class="organization-main__title">
+            {{ organization.fullTitle }}
+        </h1>
+        <strong class="organization-main__info">Краткие сведения об организации</strong>
+        {% if organization.fullTitle is defined and organization.fullTitle is not empty %}
+        <div class="container__full organization-main">
+            <p class="organization-main__item-title">Полное наименование</p>
+            <p class="organization-main__item-legend">{{ organization.fullTitle }}</p>
+        </div>
+        {% endif %}
+        {% if organization.title is defined and organization.title is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Наименование</p>
+                <p class="organization-main__item-legend">{{ organization.title }}</p>
+            </div>
+        {% endif %}
+        {% if organization.actualAddress  is defined and organization.actualAddress  is not empty %}
+        <div class="container__full organization-main">
+            <p class="organization-main__item-title">Фактический адрес</p>
+            <p class="organization-main__item-legend">{{ organization.actualAddress }}</p>
+        </div>
+        {% endif %}
+        {% if organization.phone  is defined and organization.phone  is not empty %}
+        <div class="container__full organization-main">
+            <p class="organization-main__item-title">Телефон</p>
+            <p class="organization-main__item-legend">{{ organization.phone }}</p>
+        </div>
+        {% endif %}
+        {% if organization.fax  is defined and organization.fax  is not empty %}
+        <div class="container__full organization-main">
+            <p class="organization-main__item-title">Факс</p>
+            <p class="organization-main__item-legend">{{ organization.fax }}</p>
+        </div>
+        {% endif %}
+        {% if organization.email  is defined and organization.email  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">E-mail</p>
+                <p class="organization-main__item-legend black">
+                    <a href="mailto:{{ organization.email }}">{{ organization.email }}</a>
+                </p>
+            </div>
+        {% endif %}
+        {% if organization.head  is defined and organization.head is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Руководитель</p>
+                <p class="organization-main__item-legend person-name black">
+                    <a class="organization-main__item-legend-contact" href="{{ entity_path(organization.head) }}">
+                        <span class="organization-main__item-lastname">{{ organization.head.appointment }}</span><br>
+                        <span class="organization-main__item-lastname">{{ organization.head.lastName }}</span>
+                        {{ organization.head.firstName }}
+                        {{ organization.head.patronymic }}
+                    </a>
+                </p>
+            </div>
+        {% endif %}
+        {% if organization.website  is defined and organization.website  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Сайт</p>
+                <p class="organization-main__item-legend black">
+                    <a class="organization-main__item-legend-contact" href="{{ organization.website }} " target="_blank">
+                        {{ organization.website }}
+                    </a>
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+    {#{{ dump(_context) }}#}
+{% endblock %}

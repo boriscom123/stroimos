@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:30:"Doctrine\\ORM\\Mapping\\ManyToOne":4:{s:12:"targetEntity";s:43:"Application\\Sonata\\MediaBundle\\Entity\\Media";s:7:"cascade";a:3:{i:0;s:7:"persist";i:1;s:6:"detach";i:2;s:5:"merge";}s:5:"fetch";s:5:"EAGER";s:10:"inversedBy";N;}}');

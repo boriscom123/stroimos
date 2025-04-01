@@ -1,0 +1,91 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'document', 'object': document, 'themes': [{'title': 'Документ'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Документы',
+    'rubricsContext': '',
+    'subject': document
+    } %}
+
+    <div class="js-mediator-article">
+        <h2 class="document-page__title">{{ document.title }} {{ document.number is defined ? '№ ' ~ document.number : '' }}</h2>
+        <strong class="document-page__info-title">Краткие сведения о документе</strong>
+        <div class="document-page__info-wrap container__full">
+            <ul class="document-page__info">
+                <li class="document-page__info-item type">Раздел</li>
+                <li class="document-page__info-item black">{{ document.category }}</li>
+                {% if document.status is defined %}
+                    <li class="document-page__info-item type">Статус документа</li>
+                    <li class="document-page__info-item">{{ document.status ? 'Действующий' : 'Недействующий' }}</li>
+                {% endif %}
+                {% if document.approveDate is defined %}
+                    <li class="document-page__info-item type">Дата утверждения</li>
+                    <li class="document-page__info-item">{{ document.approveDate | format_date }}</li>
+                {% endif %}
+                {% if document.dateOfAdding is defined %}
+                    <li class="document-page__info-item type">Дата размещения</li>
+                    <li class="document-page__info-item">{{ document.dateOfAdding | date('d-m-Y') }}</li>
+                {% endif %}
+                {% if document.expirationDate is defined %}
+                    <li class="document-page__info-item type">Дата окончания срока проведения независимой антикоррупционной экспертизы</li>
+                    <li class="document-page__info-item">{{ document.expirationDate | date('d-m-Y') }}</li>
+                {% endif %}
+                {% if document.dateOfReceipt is defined %}
+                    <li class="document-page__info-item type">Дата поступления текста заключения независимой антикоррупционной экспертизы</li>
+                    <li class="document-page__info-item">{{ document.dateOfReceipt | date('d-m-Y') }}</li>
+                {% endif %}
+                {% if document.rubrics is defined %}
+                <li class="document-page__info-item type">Рубрика</li>
+                <li class="document-page__info-item">
+                    {{ document.rubrics | join('. ') }}.
+                </li>
+                {% endif %}
+                {% if document.outgoingAgency is defined %}
+                    <li class="document-page__info-item type">Исходящий орган</li>
+                    <li class="document-page__info-item black">{{ document.outgoingAgency.title }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="document-page__content">
+            {{ document.content | raw }}
+
+        </div>
+
+        {% block sonata_preview %}{% endblock %}
+
+    </div>
+    <div class="container__full news-wrapper__under-news {% if document.files and document.files is empty %}last{% endif %}">
+        {% include '::/widgets/news/share.html.twig' %}
+        {% embed '::/widgets/tags.html.twig' with {'publication' : document} %}
+            {% block tagBlock %}
+                {% for tag in document.tags %}
+                    <li class="news-tags__list-item">
+                        <a href="{{ path('app_document_list', {'tags[]': tag.id}) }}" class="news-tags__list-item-uri">{{ tag.title }}</a>
+                    </li>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+
+    </div>
+    {% if document.files and document.files is not empty %}
+        <h3 class="news-wrapper__tags-title">Файлы</h3>
+        <ul class="files__list">
+            {% for file in document.files %}
+                <li class="files__list-item">
+                    <a class="files__list-item-link" href="{% path file.file, 'reference' %}" target="_blank" title="{{ file.file.name }}">
+                        {% thumbnail file.file, 'thumb' %}
+                        {{ file.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% include '::/widgets/spotlight/_related.html.twig' with {'item': document} %}
+
+{% endblock %}
+

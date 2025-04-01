@@ -1,0 +1,11 @@
+<footer class="page-footer container__full">
+    {{ sonata_block_render({type: 'simple_template'}, {template: '::menu/footer_menu.html.twig'}) }}
+
+    <div class="footer__container">
+        {% include '::/widgets/socials.html.twig' with {'socials': []} %}
+        {% include '::/widgets/footer/_copyright.html.twig' %}
+         <div class="socials">
+            <img src="https://informer.yandex.ru/informer/20919760/3_0_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:20919760,lang:'ru'});return false}catch(e){}" />
+        </div>
+    </div>
+</footer>

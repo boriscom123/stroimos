@@ -1,0 +1,25 @@
+<div class="metro-videotour">
+    <h3 class="metro-videotour__title">Видеотур по строящимся<br/>станциям метро</h3>
+
+    <div class="metro-videotour__station-block">
+        {% for item in videos|slice(0, 2) %}
+            <div class="metro-videotour__station-block-item {% if loop.first %}big{% endif %}">
+                <a href="{{ entity_path(item.video) }}" {% if loop.first %}class="metro-videotour__station-item"{% endif %}>
+                    <img src="{% path item.video.image, loop.first ? 'thumb596' : 'thumb306' %}"/>
+                    {% if 'operation' == item.metro.constructionStatus %}<span class="metro-videotour__station-item-info">Открыто</span>{% endif %}
+                    Станция <span class="metro-videotour__station-item-legend">{{ item.metro.title }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="metro-videotour__station-list">
+        {% for item in videos|slice(2) %}
+            <a href="{{ entity_path(item.video) }}" class="metro-videotour__station-item">
+                <img src="{% path item.video.image, 'thumb306' %}"/>
+                {% if 'operation' == item.metro.constructionStatus %}<span class="metro-videotour__station-item-info">Открыто</span>{% endif %}
+                Станция <span class="metro-videotour__station-item-legend">{{ item.metro.title }}</span>
+            </a>
+        {% endfor %}
+    </div>
+</div>

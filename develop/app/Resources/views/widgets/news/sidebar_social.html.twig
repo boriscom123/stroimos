@@ -1,0 +1,11 @@
+<h3 class="news-wrapper__social-title">Следите за нами</h3>
+{# set socials = (socials is defined and socials) ? socials: [{label: "facebook", uri: "https://www.facebook.com/stroimos"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "twitter", uri: "https://twitter.com/stroimos"}, {label: "instagram", uri: "https://instagram.com/stroi_mos_ru?ref=badge"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}] #}
+{# set socials = (socials is defined and socials) ? socials: [{label: "facebook", uri: "https://www.facebook.com/stroimos"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "instagram", uri: "https://instagram.com/stroi_mos_ru?ref=badge"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}] #}
+{% set socials = (socials is defined and socials) ? socials: [{label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "rutube", uri: "https://rutube.ru/channel/23927452/videos/"}] %}
+<ul class="news-sidebar__social-list">
+    {% for item in socials %}
+        <li class="news-sidebar__social-item">
+            <a href="{{ item.uri }}" class="icon icon-social icon-{{ item.label }}" title="{{ item.label }}" target="_blank"></a>
+        </li>
+    {% endfor %}
+</ul>

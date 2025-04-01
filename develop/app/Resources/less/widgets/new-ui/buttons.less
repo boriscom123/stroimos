@@ -1,0 +1,159 @@
+@import "./vars-new-ui";
+
+.button-text-icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+    font-weight: 500;
+    text-align: left;
+    color: @textColor;
+    text-decoration: none;
+
+    border: 1px solid @borderColor;
+    border-radius: 4px;
+    background-color: transparent;
+
+    padding: 12px 16px;
+
+    font-size: 15px;
+    line-height: 20px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    &:hover:not(:disabled) {
+		color: @textColor;
+        background-color: @hoverBgColor;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+
+    &:disabled {
+        opacity: 50%;
+        cursor: default;
+    }
+}
+
+.button-text-icon_sizeL {
+	.button-text-icon;
+    padding: 12px 30px;
+
+    font-size: 20px;
+    line-height: 24px;
+
+    svg {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+    }
+    img {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+    }
+}
+
+.button-text-icon_sizeM {
+	.button-text-icon;
+    padding: 12px 16px;
+
+    font-size: 15px;
+    line-height: 20px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+}
+
+.button-icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+
+    width: 36px;
+    height: 36px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: @hoverBgColor;
+        cursor: pointer;
+    }
+
+    &:disabled {
+        opacity: 50%;
+        cursor: default;
+    }
+}
+
+.button-icon_sizeL {
+	.button-icon;
+    width: 48px;
+    height: 48px;
+
+    svg {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+    }
+
+    img {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+    }
+}
+
+.button-icon_sizeM {
+	.button-icon;
+    width: 36px;
+    height: 36px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+}

@@ -1,0 +1,7 @@
+<ul class="top-menu">
+    {% for item in menu %}
+    <li>
+        <a href="{{ item.uri }}" class="top-menu__link">{{ item.label }}</a>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,41 @@
+<div class="organization-block__list-row">
+    <div class="organization-block__list-item name">
+        <a class="organization-main__item-legend-contact" href="{{ entity_path(item) }}">
+            {% if item.title is defined and item.title is not empty %}
+                {{ item.title }}
+            {% else %}
+                {{ item.fullTitle }}
+            {% endif %}
+        </a>
+    </div>
+    <div class="organization-block__list-item person-name">
+        {% if item.head is defined and item.head is not empty %}
+            <a class="organization-main__item-legend-contact" href="{{ entity_path(item.head) }}">
+                <span class="organization-block__list-item-lastname">
+                    {% if item.head.lastName is defined and item.head.lastName is not empty %}
+                        {{ item.head.lastName }}
+                    {% endif %}
+                </span>
+                {% if item.head.firstName is defined and item.head.firstName is not empty %}
+                    {{ item.head.firstName }}
+                {% endif %}
+                {% if item.head.patronymic is defined and item.head.patronymic is not empty %}
+                    {{ item.head.patronymic }}
+                {% endif %}
+            </a>
+        {% endif %}
+    </div>
+    <div class="organization-block__list-item phone">
+        {% if item.phone is defined and item.phone is not empty %}
+            {{ item.phone }}
+        {% endif %}
+    </div>
+    <div class="organization-block__list-item site">
+        {% if item.website is defined and item.website is not empty %}
+            <a href="{{ item.website }}" target="_blank">
+                {{ item.website }}
+            </a>
+        {% endif %}
+    </div>
+    {#{{ dump(item) }}#}
+</div>

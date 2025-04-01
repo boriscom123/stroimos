@@ -1,0 +1,48 @@
+{% if type == 'a' %}
+    <div class="metro-construction__ribbon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="633px" height="400px" viewBox="0 143.517 800 505.483" enable-background="new 0 143.517 800 505.483" xml:space="preserve">
+            <g>
+                <g>
+                    <g>
+                        <polygon fill="#E6E6E6" points="142.755,416.793 285.173,649 476.177,649 333.757,416.793"/>
+                    </g>
+                    <g>
+                        <polygon fill="#E6E6E6" points="333.528,416.793 191.107,649 0.104,649 142.525,416.793"/>
+                    </g>
+                    <polygon fill="#E6E6E6" points="595.265,143.517 285.235,649 476.235,649 786.266,143.517"/>
+                </g>
+                <g>
+                    <g>
+                        <g>
+                            <polygon fill="{{ color | darken_hex }}" points="156.488,416.793 298.908,649 489.911,649 347.491,416.793"/>
+                        </g>
+                    </g>
+                    <g>
+                        <g>
+                            <polygon fill="{{ color }}" points="347.263,416.793 204.841,649 13.838,649 156.26,416.793"/>
+                        </g>
+                    </g>
+                    <polygon fill="{{ color }}" points="608.999,143.517 298.97,649 489.97,649 800,143.517"/>
+                </g>
+            </g>
+        </svg>
+    </div>   
+{% endif %}
+{% if type == 'b' %}
+    <div class="metro-construction__ribbon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1089px" height="462px" viewBox="0 0 432.684 184.004" enable-background="new 0 0 432.684 184.004" xml:space="preserve">
+            <polygon fill="{{ color }}" points="432.684,28.537 432.684,84.537 234.524,84.537 200.034,28.537"/>
+            <g>
+                <g>
+                    <polygon fill="{{ color | darken_hex }}" points="234.359,84.537 182.51,0 112.975,0 164.824,84.537"/>
+                </g>
+            </g>
+            <polygon fill="{{ color }}" points="69.536,184.004 182.404,-0.021 112.868,-0.021 0,184.004"/>
+        </svg>
+    </div>
+{% endif %}
+{% if type == 'c' %}
+    <div class="metro-construction__ribbon">
+        <img src="{{ asset('images/metro/colorless_metro_lines.svg') }}" alt="Colorless metro lines">
+    </div>
+{% endif %}

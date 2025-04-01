@@ -1,0 +1,53 @@
+.header-super {
+	.socials {
+		padding-top: 10px;
+		position: relative;
+		z-index: 100;
+		.icon {
+			background-color: #f7f4f4 !important;
+			&:hover {
+				background-color: @hover !important;
+				background-position-y: -26px !important;
+			}
+		}
+	}
+	&__person {
+		height: 95px;
+		display: block;
+		color: #fff;
+		padding-left: 115px;
+		background-image: url(/images/super.png);
+		background-position: left bottom;
+		background-repeat: no-repeat;
+		transition: all .3s ease-in-out;
+		&-name {
+			display: block;
+			font-family: Onest,sans-serif;
+			font-weight: 800;
+			font-size: 14px;
+			line-height: 1;
+			color: #fff;
+			text-transform: uppercase;
+			padding: 15px 0 8px;
+			transition: all .3s ease-in-out;
+		}
+		&-title {
+			display: block;
+			font-family: Onest,sans-serif;
+			font-weight: normal;
+			font-size: 15px;
+			line-height: 16px;
+			color: #a5a4a4;
+			transition: all .3s ease-in-out;
+		}
+		&:hover {
+			transform: translateY(-2px);
+		}
+		&:hover &-name {
+			color: @hover;
+		}
+		&:hover &-title {
+			color: #fff;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% block main_menu %}
+        {{ knp_menu_render('main') }}
+    {% endblock %}
+
+    {% block content %}
+        Hello, world!
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,34 @@
+services:
+    # Command validators
+    ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandValidator:
+        class: ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandValidator
+        arguments:
+           - '@validator'
+
+    ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandValidator:
+        class: ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandValidator
+        arguments:
+           - '@validator'
+
+
+    # Command handlers
+    ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandHandler:
+        class: ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandHandler
+        arguments:
+            - '@ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandValidator'
+            - '@doctrine.orm.entity_manager'
+
+    ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandHandler:
+        class: ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandHandler
+        arguments:
+            - '@ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandValidator'
+            - '@doctrine.orm.entity_manager'
+
+
+    # API controllers
+    ApiBundle\PresentationLayer\HttpController\EmailSubscriptionController:
+        class: ApiBundle\PresentationLayer\HttpController\EmailSubscriptionController
+        arguments:
+            - '@ApiBundle\ApplicationLayer\EmailSubscriptionCommands\DeleteSubscriptionCommandHandler'
+            - '@ApiBundle\ApplicationLayer\EmailSubscriptionCommands\SaveOptionsCommandHandler'
+            - '@service_container'

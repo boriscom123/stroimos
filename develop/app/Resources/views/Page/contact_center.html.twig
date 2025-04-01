@@ -1,0 +1,267 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}"/>
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+        'title': "",
+        'themes': [],
+        'subject': ""
+    } %}
+
+    <div class="contact-center-page-wrapper">
+        <div class="introduction-container">
+            <h1>Единый контактный центр Комплекса градостроительной политики и строительства города Москвы</h1>
+            <p class="introduction-description">Единый контактный центр (ЕКЦ) Градостроительного комплекса Москвы – это городская справочно-консультационная служба, созданная в 2017 году по поручению Мэра Москвы. Центр предоставляет оперативную и актуальную информацию по всем вопросам, связанным с градостроительной деятельностью в Москве.</p>
+            <a id="introduction-link" href="#info-group" class="button-text-icon_sizeL">
+                Контакты
+            </a>
+        </div>
+
+        <div class="possibility-container flex-col-40 width-full">
+            <h2>Вы можете направить обращение в ЕКЦ и получить:</h2>
+
+            <div class="possibility-group">
+                <div class="possibility flex-row-20">
+                    <img src="/images/renovation.png" width="32" height="32" alt="icon">
+                    <p>Ответы по Программе реновации</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/consultations.png" width="32" height="32" alt="icon">
+                    <p>Информацию о планируемых и строящихся объектах</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/consultations.png" width="32" height="32" alt="icon">
+                    <p>Консультацию по этапам реализации строительного проекта</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/administrative-procedures.png" width="32" height="32" alt="icon">
+                    <p>Разъяснения по административным процедурам в сфере строительства</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/land-measurements.png" width="32" height="32" alt="icon">
+                    <p>Градостроительный анализ земельного участка и прилегающей территории</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/roadmap.png" width="32" height="32" alt="icon">
+                    <p>Дорожную карту для прохождения процедур в сфере строительства</p>
+                </div>
+
+                <div class="possibility flex-row-20">
+                    <img src="/images/documentation-review.png" width="32" height="32" alt="icon">
+                    <p>Проверку документации на соответствие нормам и требованиям</p>
+                </div>
+            </div>
+
+            <a class="signup-link" href="https://www.mos.ru/uslugi/dokumenty/conference/" target="_blank">
+                <p>Записаться на&nbsp;онлайн-консультацию к&nbsp;экспертам Единого контактного центра </br> Градостроительного комплекса Москвы</p>
+                <p class="red-text">Перейти к сервису</p>
+                <img src="/images/mosru-logo.png" class="mosru-logo" width="156" height="48" alt="mos.ru logo">
+            </a>
+        </div>
+
+      <div class="services-group flex-col-40 width-full">
+        <h2>ЕКЦ оказывает услуги по комплексному сопровождению застройщика</h2>
+        <div class="services-slider-container">
+
+          <div class="services-slider js-services-slider">
+
+            <div class="services-slide">
+              <div class="services-card">
+                <div class="services-card-title-group">
+                  <h3 class="services-card-title">Анализ и планирование</h3>
+                  <span class="services-card-number">1</span>
+                </div>
+                <p class="services-card-description">Эксперт внимательно изучит ваш проект, </br> проанализирует документацию, разработает </br> оптимальный план действий и составит дорожную карту </br> для реализации инвестиционно-строительного проекта.</p>
+              </div>
+            </div>
+
+            <div class="services-slide">
+              <div class="services-card">
+                <div class="services-card-title-group">
+                  <h3 class="services-card-title">Устранение замечаний</h3>
+                  <span class="services-card-number">2</span>
+                </div>
+                <p class="services-card-description">Мы поможем устранить замечания, полученные </br> от органов исполнительной власти и послужившие </br> основанием для отказа в предоставлении той или иной </br> услуги.</p>
+              </div>
+            </div>
+
+            <div class="services-slide">
+              <div class="services-card">
+                <div class="services-card-title-group">
+                  <h3 class="services-card-title">Сопровождение</h3>
+                  <span class="services-card-number">3</span>
+                </div>
+                <p class="services-card-description">Эксперт при необходимости будет сопровождать вас на </br> каждом этапе строительного проекта, предоставит </br> рекомендации по подготовке документов в рамках </br> прохождения определенных процедур, а также окажет </br> помощь при наличии вопросов.</p>
+              </div>
+            </div>
+
+            <div class="services-slide">
+              <div class="services-card">
+                <div class="services-card-title-group">
+                  <h3 class="services-card-title">Взаимодействие с органами власти</h3>
+                  <span class="services-card-number">4</span>
+                </div>
+                <p class="services-card-description">ЕКЦ возьмет на себя общение с органами </br> исполнительной власти, чтобы сэкономить ваше время и </br> силы. По результатам взаимодействия с органом власти </br> закрепленный эксперт даст необходимые рекомендации </br> для прохождения процедур.</p>
+              </div>
+            </div>
+
+            <div class="services-slide">
+              <div class="services-card">
+                <div class="services-card-title-group">
+                  <h3 class="services-card-title">Решение проблем</h3>
+                  <span class="services-card-number">5</span>
+                </div>
+                <p class="services-card-description">В случае возникновения трудностей с получением услуг </br> или согласований в строительной сфере эксперт ЕКЦ </br> активно взаимодействует с ответственными органами </br> исполнительной власти и добивается положительного </br> результата.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="services-nav-buttons">
+            <button class="button-icon button-icon_sizeL js-prev-button">
+              <img src="/images/icons/arrow-left-icon.svg" alt="arrow-left">
+            </button>
+            <button class="button-icon button-icon_sizeL js-next-button">
+              <img src="/images/icons/arrow-right-icon.svg" alt="arrow-left">
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+        <ul class="info-group" id="info-group">
+            <h3>Для получения более подробной информации или консультации вы можете обратиться в ЕКЦ Градостроительного комплекса Москвы</h3>
+            <li>по телефону: <a href="tel:+74994010101">+7 (499) 401-01-01</a>  с понедельника по пятницу с 8:00 до 20:00</li>
+            <li>по электронной почте: <a href="mailto:help@str.mos.ru">help@str.mos.ru</a></li>
+            <li>через электронную форму</li>
+            <img src="/images/dialogue-logo.png" width="154" height="130" alt="dialogue-logo">
+        </ul>
+
+        <div class="appeal-container flex-col-40">
+            <h2>Подать обращение</h2>
+            <form class="appeal-form flex-col-40" method="POST" action="{{ path('app_appeal_submit') }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('appeal') }}">
+
+
+                <div class="name-group flex-row-20">
+                    <fieldset class="input-group">
+                        <label for="name" class="input-label">Имя*</label>
+                        <div class="input-container">
+                            <input type="text" id="name" name="name" class="input-line" placeholder="Имя" required >
+                            <span class="input-error">Error</span>
+                            <button class="input-reset-button" type="button" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="input-group">
+                        <label for="surname" class="input-label">Фамилия*</label>
+                        <div class="input-container">
+                            <input type="text" id="surname" name="surname" class="input-line" placeholder="Фамилия" required >
+                            <span class="input-error">Error</span>
+                            <button class="input-reset-button" type="button" />
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="conracts-group flex-row-20">
+                    <fieldset class="input-group">
+                        <label for="phone" class="input-label">Телефон*</label>
+                        <div class="input-container">
+                            <input type="tel" id="phone" name="phone" class="input-line" placeholder="+7___ ___-__-__" required >
+                            <span class="input-error">Error</span>
+                            <button class="input-reset-button" type="button" />
+                        </div>
+                    </fieldset>
+                    <fieldset class="input-group">
+                        <label for="email" class="input-label">Почта*</label>
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" class="input-line" placeholder="mail@mail.ru" required >
+                            <span class="input-error">Error</span>
+                            <button class="input-reset-button" type="button" />
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="person-legal-group flex-row-20">
+                    <div class="black-radio">
+                        <input type="radio" id="person" name="person-legal" />
+                        <label for="person">Физическое лицо</label>
+                    </div>
+
+                    <div class="black-radio">
+                        <input type="radio" id="legal" name="person-legal" checked />
+                        <label for="legal">Юридическое лицо</label>
+                    </div>
+                </div>
+
+                <fieldset class="input-group">
+                    <label for="legal-entity" class="input-label">Организация</label>
+                    <div class="input-container">
+                        <input type="text" id="legal-entity" name="legal-entity" class="input-line" placeholder="Организация" >
+                        <span class="input-error">Error</span>
+                        <button class="input-reset-button" type="button" />
+                    </div>
+                </fieldset>
+
+                <fieldset class="input-group">
+                    <label for="message" class="input-label">Сообщение*</label>
+                    <div class="input-container">
+                        <textarea type="text" id="message" name="message" class="input-area" placeholder="Сообщение" required></textarea>
+                        <span class="input-error">Error</span>
+                    </div>
+                </fieldset>
+
+                <div class="black-checkbox">
+                    <input type="checkbox" id="consent" name="consent" />
+                    <label for="consent">
+                        Выражаю согласие с
+                    </label>
+                    <a href="/policy" target="_blank">
+                        Правилами обработки и использования персональных данных
+                    </a>
+                </div>
+
+                <button type="submit" class="button-text-icon_sizeL width-full">
+                    Отправить
+                </button>
+            </form>
+            <span class="appeal-description">Поля, отмеченные*, обязательны для заполнения</span>
+        </div>
+
+        <div id="success-popup" class="fetch-result-popup">
+            <div class="fetch-result-popup-overlay"></div>
+            <div class="fetch-result-popup-content">
+              <h2>Обращение успешно отправлено</h2>
+              <p>Сотрудники Единого контактного центра отправят вам готовый ответ или свяжутся с вами для уточнения деталей</p>
+              <img src="/images/ok.png" width="64" height="64" alt="check-icon">
+              <button class="button-icon fetch-result-popup-close-button"><img src="/images/icons/close-icon.svg" alt="close-icon"></button>
+            </div>
+        </div>
+
+        <div id="error-popup" class="fetch-result-popup">
+            <div class="fetch-result-popup-overlay"></div>
+            <div class="fetch-result-popup-content">
+              <h2>Ошибка</h2>
+              <p>Обращение не отправлено. </br> Попробуйте повторить отправку позже</p>
+              <img src="/images/error.png" width="64" height="64" alt="error-icon">
+              <button class="button-icon fetch-result-popup-close-button"><img src="/images/icons/close-icon.svg" alt="close-icon"></button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block recent_pages %}
+    {# Блок recent_pages убран для этого шаблона #}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    <div class="subscribe-block">
+        <h1 class="subscribe-block__title">Управление рассылкой</h1>
+        <div class="image-banner"></div>
+        <p >Нам очень жаль, что Вы решили отписаться от e-mail рассылки!</p>
+        <p >Ежедневно более 14 тыс. человек получают подборку материалов о строительстве новых станций метро, реконструкции дорог, возведении домов по реновации и других значимых проектах Москвы. </p>
+        <p><b>Если передумали, просто закройте эту страницу.</b></p>
+        <p><b>Не передумали?</b></p>
+        <p><b>Пожалуйста, расскажите, почему Вы хотите отказаться от рассылки:</b></p>
+        {{ form_start(form, {'attr': {'id': 'unsubscribe-reason-form'}}) }}
+            {% if errors | length > 0 %}
+                <ul class="errors">
+                {% for error in errors %}
+                    {% set params = [] %}
+                    {% if error.messageParameters | length > 0 %}
+                        {% for key, param in error.messageParameters %}
+                            {% set params = params|merge({ (key): param | trans}) %}
+                        {% endfor %}
+                    {% endif  %}
+                    <li>{{ error.messageTemplate|trans(params)|trans }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% for input in form.reason %}
+                <div class="radio">
+                    {% if input.vars.value == 'other' %}
+                        {{ form_widget(input) }}
+                        <label for="{{ input.vars.id }}" >
+                            {{ form_widget(form.comment, { 'attr': {'placeholder': ('form.' ~ input.vars.value) | trans }})  }}
+                        </label>
+                    {% else %}
+                        {{ form_widget(input) }}
+                        {{ form_label(input, 'form.' ~ input.vars.value) }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="form-actions">
+                {{ form_widget(form.children.submit, {'attr': {'class': 'subscribe-block__btn'} }) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

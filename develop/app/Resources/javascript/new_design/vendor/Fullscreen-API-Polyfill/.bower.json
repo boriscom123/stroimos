@@ -1,0 +1,38 @@
+{
+  "name": "Fullscreen-API-Polyfill",
+  "description": "W3C's Fullscreen API Polyfill",
+  "homepage": "https://github.com/neovov/Fullscreen-API-Polyfill",
+  "license": "MIT",
+  "authors": [
+    "Nicolas Le Gall"
+  ],
+  "contributors": [
+    "Nicolas Le Gall",
+    "Stephen Mathieson <me@stephenmathieson.com>",
+    "Norman Paschke <norman.paschke@dmk-ebusiness.de>",
+    "Guillaume Amat <guillaume@amat.io>"
+  ],
+  "main": [
+    "fullscreen-api-polyfill.js"
+  ],
+  "ignore": [
+    "LICENSE.txt",
+    "README.md",
+    "example.html",
+    "grunt.js"
+  ],
+  "keywords": [
+    "fullscreen",
+    "polyfill",
+    "w3c"
+  ],
+  "_release": "2a1afab369",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "2a1afab3691e7d16dc28588ad80b79e71457a05b"
+  },
+  "_source": "git://github.com/neovov/Fullscreen-API-Polyfill.git",
+  "_target": "*",
+  "_originalSource": "Fullscreen-API-Polyfill"
+}

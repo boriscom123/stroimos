@@ -1,0 +1,21 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block title %}<title>Страница не найдена — Комплекс градостроительной политики и строительства города Москвы</title>{% endblock %}
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Страница не найдена',
+    'rubricsContext': null,
+    } %}
+
+    <div class="error-block__title">
+        Попробуйте воспользоваться поиском
+    </div>
+    {% embed '::/widgets/search_form.html.twig' with {'action' : path('app_search')} %}
+        {% block moreBlock %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

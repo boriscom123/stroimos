@@ -1,0 +1,10 @@
+<data-loadmore data-limit="{{ limit }}" data-offset="{{ next_offset }}"></data-loadmore>
+{% for post in initiatives %}
+    <div class="social-initiative__item">
+        <a href="{{ entity_path(post) }}">
+            <time class="social-initiative__item-time">{{ post.createdAt|format_date }}</time>
+            <h3 class="social-initiative__item-title">{{ post.title }}</h3>
+            <p class="social-initiative__item-legend">{{ post.teaser }}</p>
+        </a>
+    </div>
+{% endfor %}

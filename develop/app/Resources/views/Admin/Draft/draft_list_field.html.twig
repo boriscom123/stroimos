@@ -1,0 +1,17 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }} {{ field_description.name }}-field  " objectId="{{ admin.id(object) }}">
+    {% set route = field_description.options.route.name|default(null) %}
+    {% set action = route == 'show' ? 'VIEW' : route|upper %}
+    {% if
+        field_description.options.identifier is defined
+        and route
+        and action
+        and admin.hasRoute(route)
+        and admin.isGranted(action, action in ['VIEW', 'EDIT'] ? object : null)
+    %}
+        <a class="sonata-link-identifier" href="{{ object.editUrl }}">
+            {%- block field %} {{ value }} {% endblock -%}
+        </a>
+    {% else %}
+        {{ block('field') }}
+    {% endif %}
+</td>

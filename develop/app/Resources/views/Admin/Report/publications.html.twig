@@ -1,0 +1,142 @@
+{% extends ':SonataAdmin:standard_layout.html.twig' %}
+
+{% block show %}
+
+    <div class="sonata-ba-view">
+    <h3>Статистика публикаций</h3>
+    <form method="get">
+        <div class="row">
+            <div class="col-md12 col-md-6">
+                <div class="form-group" id="sonata-ba-field-container-s582237084319e_publishStartDate">
+                    <label class="control-label" for="s582237084319e_publishStartDate">
+                        Дата начала отчётного периода
+                    </label>
+                    <div class=" sonata-ba-field sonata-ba-field-standard-natural">
+                        <div class="form-group"><div class="input-group date" id="startDate"><input type="text" name="start" class="sonata-medium-date form-control" data-date-format="YYYY-MM-DD" value="{{ start_widget }}"><span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span></div></div>
+                        <script type="text/javascript">
+                            jQuery(function ($) {
+                                $('#startDate').datetimepicker({"useCurrent":true,"minDate":"1\/1\/1900","maxDate":null,"showToday":true,"defaultDate":"","disabledDates":[],"enabledDates":[],"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":[],"useMinutes":true,"minuteStepping":1,"pickTime":true,"language":"ru","useSeconds":false});
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md12 col-md-6">
+                <div class="form-group" id="sonata-ba-field-container-s582237084319e_publishStartDate">
+                    <label class="control-label" for="s582237084319e_publishStartDate">
+                        Дата завершения отчётного периода
+                    </label>
+                    <div class=" sonata-ba-field sonata-ba-field-standard-natural">
+                        <div class="form-group"><div class="input-group date" id="endDate"><input type="text" name="end" class="sonata-medium-date form-control" data-date-format="YYYY-MM-DD" value="{{ end_widget }}"><span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span></div></div>
+                        <script type="text/javascript">
+                            jQuery(function ($) {
+                                $('#endDate').datetimepicker({"useCurrent":true,"minDate":"1\/1\/1900","maxDate":null,"showToday":true,"defaultDate":"","disabledDates":[],"enabledDates":[],"icons":{"time":"glyphicon glyphicon-time","date":"glyphicon glyphicon-calendar","up":"glyphicon glyphicon-chevron-up","down":"glyphicon glyphicon-chevron-down"},"useStrict":false,"sideBySide":false,"daysOfWeekDisabled":[],"useMinutes":true,"minuteStepping":1,"pickTime":true,"language":"ru","useSeconds":false});
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-info"><i class="fa fa-refresh"></i> Обновить</button>
+        </div>
+    </form>
+
+
+    <table class="table table-bordered" style="margin-top: 15px">
+        <tbody>
+        <tr class="sonata-ba-view-container">
+            <td>
+                Наименование показателя
+            </td>
+            <td>
+                Фактическое значение
+            </td>
+        </tr>
+        {% for report in reports %}
+            <tr>
+                <td>
+                    {{ ('publications_report.' ~ report.name)|trans }}
+                    {% if report.items is defined and report.items|length > 0 %}
+                        <table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">
+                            {% for item in report.items %}
+                                <tr>
+                                    <td>{{ ('publications_report.' ~ item.name)|trans }}</td>
+                                    <td style="padding-left: 15px">{{ item.totalByPeriod(start, end) }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </td>
+                <td>{{ report.totalByPeriod(start, end) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Аналитика публикаций</h3>
+    <table class="table table-bordered" style="margin-top: 15px">
+        <tbody>
+        <tr class="sonata-ba-view-container">
+            <td>
+                Наименование показателя
+            </td>
+            <td>
+                Значение на текущий момент сначала года
+            </td>
+            <td>
+                Значение в госсаздании
+            </td>
+            {#<td>#}
+                {#Текущее среднее значение в день#}
+            {#</td>#}
+            {#<td>#}
+                {#Среднее значение в день по госсазданию#}
+            {#</td>#}
+            {#<td>#}
+                {#Динамика#}
+            {#</td>#}
+            <td>
+                Динамика
+            </td>
+        </tr>
+        {% for report in reports %}
+            {% set currentAvgPerDay = (report.totalThisYear / days_from_year_start) %}
+            {% set plannedAvgPerDay = (report.yearPlanned / 365) %}
+            {% set diff = (currentAvgPerDay - plannedAvgPerDay)|round(2) %}
+            {% set color = '' %}
+            {% set dynamic = '' %}
+            {% if diff >= 0.3 %}
+                {% set color = '#ecef13' %}
+                {% set dynamic = 'Существенное опережение' %}
+            {% elseif diff <= -0.1%}
+                {% set color = '#e83f10' %}
+                {% set dynamic = 'Отставание' %}
+            {% endif %}
+            <tr style="background-color: {{ color }}">
+                <td>
+                    {{ ('publications_report.' ~ report.name)|trans }}
+                </td>
+                <td>
+                    {{ report.totalThisYear }}
+                </td>
+                <td>
+                    {{ report.yearPlanned }}
+                </td>
+                {#<td>#}
+                    {#{{ currentAvgPerDay }}#}
+                {#</td>#}
+                {#<td>#}
+                    {#{{ plannedAvgPerDay }}#}
+                {#</td>#}
+                {#<td>#}
+                    {#{{ diff }}#}
+                {#</td>#}
+                <td>
+                    {{ dynamic }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

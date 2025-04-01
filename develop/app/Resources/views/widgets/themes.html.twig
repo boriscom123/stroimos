@@ -1,0 +1,21 @@
+<div class="news-themes">
+    <div class="news-themes__wrapper">
+        {% block rubricsblock %}
+            {% if publication.rubrics is defined and publication.rubrics is not empty %}
+                <p class="news-themes__title">Темы в материале:</p>
+                {# <ul class="news-themes__list"> #}
+                    {% for item in publication.rubrics %}
+                        <p class="news-themes__list-item">
+                            <a class="" href="{{ entity_path(item, {_context: publication}) }}">{{ item.title }}</a>
+                        </p>
+                    {% endfor %}
+                {# </ul> #}
+            {% endif %}
+        {% endblock %}
+    </div>
+    {% if publication.publishStartDate.date is defined and publication.publishStartDate.date is not empty %}
+        <time class="news-date">{{ publication.publishStartDate.date|format_date }} <span class="news-time">{{ publication.publishStartDate.date|date('H:i') }}</span></time>
+    {% else %}
+        <time class="news-date"><span class="news-time"></span></time>
+    {% endif %}
+</div>

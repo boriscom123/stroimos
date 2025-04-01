@@ -1,0 +1,7 @@
+{% if object.user %}
+    {% set _profile_uri = sonata_user.userAdmin.isGranted('EDIT', app.user) ? sonata_user.userAdmin.generateUrl('edit', {id: sonata_user.userAdmin.id(app.user)}) : sonata_user.userAdmin.generateUrl('show', {id: sonata_user.userAdmin.id(app.user)}) %}
+    <a href="mailto:{{ object.user.email }}">{{ object.user.displayName }}</a>
+    (<a href="{{ _profile_uri }}" target="_blank">{{ object.user.username }}</a>)
+{% else %}
+    <a href="mailto:{{ object.email }}">{{ object.fullName }}</a>
+{% endif %}

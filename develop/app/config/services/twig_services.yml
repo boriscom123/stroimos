@@ -1,0 +1,98 @@
+services:
+  twig.block:
+    class: AppBundle\Twig\BlockTwigExtension
+    calls: [[setContainer, [@service_container]]]
+    tags:
+      - { name: twig.extension }
+
+  twig.diff:
+    class: AppBundle\Twig\DiffTwigExtension
+    arguments: [@sonata.admin.pool, @?logger]
+    tags:
+      - { name: twig.extension }
+
+  twig.entity:
+    class: AppBundle\Twig\EntityTwigExtension
+    arguments: [ @app.entity_url_generator ]
+    tags:
+      - { name: twig.extension }
+
+  twig.breadcrumbs:
+    class: AppBundle\Menu\Twig\BreadcrumbsExtension
+    arguments:
+      - @knp_menu.matcher
+      - @knp_menu.menu_provider
+      - @snc_redis.default
+    calls:
+      - [setRequestStack, [@request_stack]]
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - { name: twig.extension }
+
+  twig.embedder:
+    class: AppBundle\Twig\EmbedderTwigExtension
+    calls: [[setContainer, [@service_container]]]
+    tags:
+      - { name: twig.extension }
+
+  twig.media_helper:
+    class: AppBundle\Twig\MediaHelperExtension
+    calls: [[setContainer, [@service_container]]]
+    tags:
+      - { name: twig.extension }
+
+  twig.construction:
+    class: AppBundle\Twig\ConstructionObjectTwigExtension
+    arguments: [@doctrine.orm.entity_manager]
+    tags:
+      - { name: twig.extension }
+
+  twig.distance:
+    class: AppBundle\Twig\DistanceTwigExtension
+    tags:
+      - { name: twig.extension }
+
+  twig.sonata_admin:
+    class: AppBundle\Twig\AppSonataAdminExtension
+    calls: [[setContainer, [@service_container]]]
+    tags:
+      - { name: twig.extension }
+
+  twig.html:
+    class: AppBundle\Twig\HtmlTwigExtension
+    tags:
+      - { name: twig.extension }
+
+  twig.url_hash_utm_fix:
+    class: AppBundle\Twig\UrlHashUtmFixExtension
+    tags:
+      - { name: twig.extension }
+
+  twig.newsletter_post_text_crop:
+    class: AppBundle\Twig\NewsletterPostTextCropExtension
+    tags:
+      - { name: twig.extension }
+
+  twig.darken_hex:
+    class: AppBundle\Twig\DarkenHexExtension
+    tags:
+      - { name: twig.extension }
+
+  twig.image_generator:
+    class: AppBundle\Twig\ImageGeneratorExtension
+    arguments:
+      - %kernel.root_dir%/../web
+      - %uploaded_media_dir%
+    tags:
+      - { name: twig.extension }
+
+  twig.entity_manager_helper:
+    class: AppBundle\Twig\EntityManagerTwigExtension
+    calls: [[setEntityManager, ['@doctrine.orm.entity_manager']]]
+    tags:
+      - { name: twig.extension }
+
+  twig.extension.sortbyfield:
+    class: Snilius\Twig\SortByFieldExtension
+    tags:
+      - { name: twig.extension }

@@ -1,0 +1,220 @@
+app_mobile:
+    resource: "@StroiMobileBundle/Resources/config/routing/mobile_route.yml"
+    prefix: /mobile
+
+rss:
+    path: /news/{type}
+    defaults:
+        _controller: AppBundle:Rss:show
+    requirements:
+        type: "rss|yarss|googlexml|ramrss|mailru|ya_geo_rss|ya_zen_rss|wifi_rss|world_is_small_rss"
+
+amg_update_lock:
+    path: /admin/update_lock/{code}/{id}/{_sonata_admin}
+    defaults: { _controller: AmgAdminBundle:Locking:updateLock, _sonata_admin: true }
+    requirements:
+        id: \d+
+
+amg_unlock:
+    path: /admin/unlock/{code}/{id}/{_sonata_admin}
+    defaults: { _controller: AmgAdminBundle:Locking:unlock, _sonata_admin: true }
+    requirements:
+        id: \d+
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation
+
+app_api:
+    resource: @ApiBundle/Controller/
+    type:     annotation
+
+app_api_reports:
+    resource: @ApiBundle/PresentationLayer/HttpController/
+    type:     annotation
+
+app_homepage:
+    path: /{date}
+    defaults: { _controller: AppBundle:Page:homePage, date: null }
+    requirements:
+        date: \d{4}-\d{2}-\d{2}
+
+app_developer_cabinet:
+    path: /kabiniet-zastroishchika
+    defaults: { _controller: AppBundle:Page:developerCabinet }
+
+app_procedure_calc:
+    path: /kalkulyator-procedur
+    defaults: { _controller: AppBundle:Page:procedureCalc }
+
+app_posts:
+    resource: .
+    type: post_category_route
+
+app_subordinates:
+    resource: .
+    type: subordinate_route
+
+app_sitemap:
+    path: /sitemap
+    defaults: { _controller: AppBundle:Page:sitemap }
+
+
+api_block_render:
+    path: /api/v1/block/render/{type}
+    defaults: { _controller: AppBundle:Api/Block:blockRender }
+    requirements:
+        type: \w+
+
+api_resource_administrative_areas:
+    path: /api/v1/administrative_areas
+    defaults: { _controller: AppBundle:Api/AdministrativeArea:getCollection}
+
+#sonata_user_security:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
+#
+#sonata_user_resetting:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+#    prefix: /resetting
+#
+#sonata_user_profile:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+#    prefix: /profile
+#
+#
+#sonata_user_register:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+#    prefix: /register
+#
+#sonata_user_change_password:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+#    prefix: /profile
+
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+sonata_user_profile_show:
+    path: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+admin_report:
+    path: /admin/report
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Admin/Report:index
+
+admin_report_by_content:
+    path: /admin/report-by-content
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Admin/Report:reportByContent
+
+admin_animated_media:
+    path: /admin/animated-media
+    methods: [POST]
+    defaults:
+        _controller: AppBundle:Admin/Report:reportByContent
+
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+
+email_subscription_subscribe:
+    path: /newsletters/subscribe
+    defaults:
+        _controller: AppBundle:EmailSubscription:subscribe
+
+email_subscription_subscribe_success:
+    path: /newsletters/subscribe_success
+    defaults:
+        _controller: AppBundle:EmailSubscription:subscribeSuccess
+        action: null
+
+email_subscription_control:
+    path: /newsletters
+    defaults:
+        _controller: AppBundle:EmailSubscription:control
+
+email_subscription_manage_control:
+    path: /newsletters/manage
+    defaults:
+        _controller: AppBundle:EmailSubscription:manage
+
+email_subscription_unsubscribe_success:
+    path: /newsletters/unsubscribe_success
+    defaults:
+        _controller: AppBundle:EmailSubscription:unsubscribeSuccess
+
+#fos_comment_api:
+#    type: rest
+#    resource: include/routing_fos_comment.yml
+#    prefix: /api
+#    defaults: { _format: html }
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#todo: clean stubs
+#app_event_list: {path: /app_event_list}
+#app_initiative_list: {path: /app_initiative_list}
+#todo: disabled extra features
+#extra:
+#    resource: "@ExtraBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+#fos_user_profile_show:
+#    pattern: /profile/
+#    defaults:
+#        _controller: SonataUserBundle:ProfileFOSUser1:editProfile
+#    requirements:
+#        _method: GET
+#sonata_user_profile_show:
+#    pattern: /profile/
+#    defaults:
+#        _controller: SonataUserBundle:ProfileFOSUser1:editProfile
+#    requirements:
+#        _method: GET
+#hwi_oauth_redirect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+#    prefix:   /connect
+#
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /login
+#
+#facebook_login:
+#    path: /login/check-facebook
+#
+#google_login:
+#    path: /login/check-google
+#
+#vkontakte_login:
+#    path: /login/check-vkontakte
+#
+#login_mos_ru_login:
+#    path: /login/login_mos_ru
+
+# This route MUST be ALWAYS IN THE END
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]

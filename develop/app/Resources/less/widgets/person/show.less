@@ -1,0 +1,349 @@
+.person-page__profile {
+  background: #f7f7f7;
+  margin-top: -50px;
+}
+
+.person-page__profile-menu {
+  width: 340px;
+  float: left;
+  padding: 80px 20px 80px 0px;
+  box-sizing: border-box;
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  &-info {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #5b5b5b;
+  }
+}
+
+.person-page__profile-menu-name {
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 24px;
+  color: @color;
+}
+
+.person-page__profile-menu-lastName {
+  font-style: normal;
+  display: block;
+  clear: right;
+}
+
+.person-page__profile-menu-item {
+  display: block;
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 36px;
+  color: #9d9d9d;
+  position: relative;
+  padding-left: 26px;
+  cursor: pointer;
+
+  &:hover {
+    color: #222;
+
+    .person-icon {
+
+      &.biography {
+        background-position: -48px -16px ;
+      }
+
+      &.education{
+        background-position: -32px -16px;
+      }
+
+      &.experience {
+        background-position: -16px -16px;
+      }
+
+      &.awards {
+        background-position: -64px -16px;
+      }
+
+      &.family {
+        background-position: 0 -16px;
+      }
+    }
+  }
+
+  &.active {
+    color: #222;
+
+    .person-icon {
+
+      &.biography {
+        background-position: -48px -16px ;
+      }
+
+      &.education{
+        background-position: -32px -16px;
+      }
+
+      &.experience {
+        background-position: -16px -16px;
+      }
+
+      &.awards {
+        background-position: -64px -16px;
+      }
+
+      &.family {
+        background-position: 0 -16px;
+      }
+    }
+  }
+
+  .person-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 0;
+    background: url('/images/icons/person-icons.png') no-repeat;
+
+    &.biography {
+      background-position: -48px 0;
+    }
+
+    &.education{
+      background-position: -32px 0;
+    }
+
+    &.experience {
+      background-position: -16px 0;
+    }
+
+    &.awards {
+      background-position: -64px 0;
+    }
+
+    &.family {
+      background-position: 0 0;
+    }
+
+  }
+}
+
+.person-page__profile-info {
+  margin-left: 340px;
+  background: white;
+  padding: 70px 0 70px 40px;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 100%;
+    bottom: 0;
+    background: #ffffff;
+  }
+}
+
+.person-page__profile-info-name {
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 45px;
+  color: @color;
+}
+
+.person-page__profile-info-lastName {
+  font-style: normal;
+  display: block;
+  clear: right;
+}
+
+.person-page__profile-info-seat {
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  color: @color;
+  margin: 0;
+  margin-top: 30px;
+  margin-right: 150px;
+  margin-bottom: 45px;
+}
+
+.person-page__profile-info .socials {
+  float: none;
+}
+
+.person-page__profile-info-section {
+  padding: 30px 40px 30px 0;
+  .solid-border(black, bottom);
+
+  &:first-child {
+    margin-top: 90px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+/*    font-family: Onest, serif;
+    font-weight: 400;
+    font-size: 19px;*/
+  }
+
+  p {
+    margin: 0;
+  }
+
+  p {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    line-height: 140%;
+    font-size: 19px;
+    line-height: 28px;
+    color: @color;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      font-family: Onest, sans-serif;
+      font-weight: 400;
+      font-size: 19px;
+      line-height: 28px;
+      color: @color;
+    }
+  }
+
+  ul:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &.biography {
+    .person-icon {
+      background-position: -48px -16px ;
+    }
+  }
+
+  &.education {
+    .person-icon {
+      background-position: -32px -16px;
+    }
+
+    ul {
+      li {
+        &:before {
+          content: '\2014';
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  &.experience {
+    .person-icon {
+      background-position: -16px -16px;
+    }
+
+    ul {
+
+      li {
+        position: relative;
+
+        // &:before {
+        //   content: '';
+        //   display: block;
+        //   width: 8px;
+        //   height: 8px;
+        //   background: #d0d0d0;
+        //   border: 1px solid white;
+        //   box-sizing: border-box;
+        //   border-radius: 50%;
+        //   position: absolute;
+        //   top: 15px;
+        //   left: -44px;
+        //   margin-top: -4px;
+        //   z-index: 2;
+        // }
+
+        // &:after {
+        //   content: '';
+        //   display: block;
+        //   width: 2px;
+        //   position: absolute;
+        //   top: 15px;
+        //   left: -41px;
+        //   height: 100%;
+        //   background: #e7e7e7;
+        // }
+
+        &:last-child {
+          &:after {
+            content: initial;
+          }
+        }
+
+      }
+    }
+  }
+
+  &.awards {
+    .person-icon {
+      background-position: -64px -16px;
+    }
+  }
+
+  &.family {
+    .person-icon {
+      background-position: 0 -16px;
+    }
+  }
+
+  .person-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 0;
+    background: url('/images/icons/person-icons.png') no-repeat;
+  }
+}
+
+.profile-info-section__title {
+  font-family: Onest, sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 19px;
+  color: @color;
+  position: relative;
+  padding-left: 24px;
+}
+
+.person-page__profile-info-foot {
+  margin-top: 30px;
+
+  p {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    color: @color;
+  }
+}

@@ -1,0 +1,59 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Мероприятия',
+    'rubricsContext': '',
+    } %}
+
+    <form class="events-block__filter" action="{{ path('app_event_list') }}" method="GET">
+        Показать все мероприятия за:
+        {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'date', date: date} %}
+    </form>
+
+    <div class="events-block">
+        <ul class="events-block__list">
+            {% for month, events in events_by_month %}
+            <li style="list-style: none">
+                <h3 class="events-block__title">
+                    {{ month }}
+                </h3>
+            </li>
+                {% for event in events %}
+                <li class="events-block__list-item">
+                    <a class="events-block__list-item-link" href="{{ entity_path(event) }}">
+                        <time class="events-block__list-item-time">{{ event.date|format_date }}</time>
+                        <h3 class="events-block__list-item-title">{{ event.title }}</h3>
+                        <p class="events-block__list-item-legend">{{ event.teaser }}</p>
+                        {% if event.address.text %}
+                            <address class="events-block__list-item-address">{{ event.address.text }}</address>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    {#{% include '::/Block/loadmore_button.html.twig' with {
+    title: 'Ещё результаты',
+    target: '.documents-page__'~ context.setting('category') ~'-table',
+    source: block_path(block, context, {
+    template: context.setting('category') ~ '_ajax_list',
+    category: app.request.get('category', context.setting('category')),
+    number: app.request.get('number'),
+    status:   app.request.get('status'),
+    approve_date_start: app.request.get('approve_date_start'),
+    approve_date_end: app.request.get('approve_date_end'),
+    agency: app.request.get('agency'),
+    rubrics: app.request.get('rubrics'),
+    date_of_adding_start: app.request.get('date_of_adding_start'),
+    date_of_adding_end: app.request.get('date_of_adding_end'),
+    tags: app.request.get('tags'),
+    }),
+    limit: limit,
+    item: '.documents-page__'~ context.setting('category') ~'-table-raw',
+    offset: next_offset
+    }%}#}
+{% endblock %}

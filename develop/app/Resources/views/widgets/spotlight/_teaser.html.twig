@@ -1,0 +1,89 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+
+{% set isGallery = entity is gallery %}
+{% set isDocument = entity is document %}
+{% set isConstruction = entity is construction %}
+{% set isVideo = entity is video %}
+
+{% if entity.isRecent is defined %}
+<article class="watched-card">
+    <a href="{{ entity_path(entity) }}" class="watched-card__link">
+        <div class="watched-card__image">
+            {% if entity.image is defined and entity.image is not null %}
+                <img src="{% path entity.image, 'thumb300' %}" />
+            {% elseif entity is gallery %}
+                <img src="/images/spotlight-cover/gallery-cover.jpg" />
+            {% elseif entity is construction %}
+                <img src="/images/spotlight-cover/construction-cover.jpg" />
+            {% elseif entity is video %}
+                <img src="/images/spotlight-cover/video-cover.jpg" />
+            {% elseif entity is metro_station %}
+                <img src="/images/spotlight-cover/metro-cover.jpg" />
+            {% else %}
+                <img src="/images/spotlight-cover/other-cover.jpg" />
+            {% endif %}
+        </div>
+        <div class="watched-card__content">
+            {# <div class="watched-card__type">Статья</div> #}
+            {% if entity.category is defined and entity_alias(entity) != 'post' %}
+                <div class="more-card__type">{{ entity.category }}</div>
+            {% endif %}
+            <div class="watched-card__title" style="-webkit-box-orient: vertical">{{ entity.title }}</div>
+        </div>
+    </a>
+</article>
+{% endif %}
+
+{% if entity.isRecent is not defined %}
+
+<article class="spotlight__teaser {{ isGallery ? "spotlight__teaser-gallery": "" }}"
+        {% if isGallery %}
+            style="background-image:url({% path entity.image, 'full' %})"
+        {% endif %}
+        >
+    <a href="{{ entity_path(entity) }}" class="spotlight__teaser-link">
+        {% if entity.publishStartDate is defined %}
+            <time class="spotlight__teaser-date">{{ entity.publishStartDate | format_date }}</time>
+        {% endif %}
+        <header class="spotlight__teaser-title">
+            {{ entity.title }}
+        </header>
+        {% if entity.category is defined and entity_alias(entity) != 'post' %}
+            <span class="spotlight__teaser-category">
+                {{ entity.category }}
+            </span>
+        {% endif %}
+        {% if isConstruction %}
+            <div class="spotlight__teaser-image-wrap">
+                <div class="geo-point geo-point_related {{ item.dataField('ObjectStatus') }} {{ item.dataField('MainFunctional') }}">
+                    <div class="map-widget"
+                        {% if item.dataField('MainFunctional') == 'renov-industrial' and item.dataField('LandGeometryCoordinates') is not null and item.dataField('LandGeometryCoordinates') is not empty %}
+                            data-polygon="{{ item.dataField('LandGeometryCoordinates') }}"
+                        {% else %}
+                            data-point="{{ item.dataField('PointXyGeometryCoordinates') }}"
+                        {% endif %}
+                    ></div>
+                </div>
+            </div>
+        {% elseif isGallery %}
+            <span class="spotlight__teaser-legend">
+                    <i class="icon icon-40 icon-light icon-photo"></i>
+                {{ entity.medias|length }} фото
+            </span>
+        {% elseif entity.image|default %}
+            <div class="spotlight__teaser-image-wrap">
+                <img class="spotlight__teaser-image" src="{% path entity.image, 'thumb300' %}" alt="{{ entity.title }}"/>
+            </div>
+        {% else %}
+            <div class="spotlight__teaser-image-wrap">
+                <img class="spotlight__teaser-image" src="{{ '/images/fallback.jpg'|imagine_filter('web_root_thumb300') }}" alt="{{ entity.title }}"/>
+            </div>
+        {% endif %}
+    </a>
+</article>
+{% endif %}

@@ -1,0 +1,424 @@
+imports:
+  - { resource: block_services.yml }
+  - { resource: admin_services.yml }
+  - { resource: twig_services.yml }
+  - { resource: form_types.yml }
+  - { resource: reports.yml }
+  - { resource: admin_api_posts.yml }
+  - { resource: admin_api_gif_generator.yml }
+  - { resource: admin_api_gallery.yml }
+  - { resource: admin_api_service_email.yml }
+  - { resource: email_subscription.yml }
+
+parameters:
+  hwi_oauth.user.provider.fosub_bridge.class: AppBundle\Security\OAuthFOSUBUserProvider
+
+services:
+  doctrine_apc_cache:
+    class: %doctrine_cache.apc.class%
+    calls:
+      - [setNamespace, [%cache_namespace%]]
+
+  app.doctrine.orm.naming_strategy:
+    class: Amg\DataCore\ORM\UnderscoreWithNamedJoinTableNamedStrategy
+    public: false
+
+  category_repository:
+    class: Doctrine\ORM\EntityRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments:
+      - AppBundle\Entity\Category
+
+  app.doctrine.filter.admin_configurator:
+    class: AppBundle\DoctrineFilter\AdminConfigurator
+    arguments: [@app.doctrine.filter.manager]
+    tags:
+      - { name: kernel.event_listener, event: console.command, method: onConsoleCommand }
+      - { name: kernel.event_listener, event: kernel.controller, priority: 10 }
+
+  app.doctrine.filter.manager:
+    class: AppBundle\DoctrineFilter\FilterManager
+    arguments: [@doctrine.orm.entity_manager]
+
+  app.request.kernel_listener:
+    class: AppBundle\EventListener\RequestListener
+    arguments:
+      - @router
+      - @app.preview.hash_generator
+      - @doctrine.orm.entity_manager
+      - %mobile_version_redirect%
+      - @twig
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, priority: 11 }
+
+  app.response.kernel_listener.text_block_replace_listerner:
+    class: AppBundle\EventListener\TextBlockReplaceListener
+    arguments:
+      - @AppBundle\Service\TextBlockService
+    tags:
+      - { name: kernel.event_listener, event: kernel.response }
+
+
+  sensio_framework_extra.converter.manager:
+    class: AppBundle\DoctrineFilter\ParamConverterManager
+    arguments: [@app.doctrine.filter.manager]
+
+  app.menu.provider.gsk:
+    class: AppBundle\Menu\Provider\GskMenuProvider
+    arguments: [ @doctrine.orm.entity_manager, @knp_menu.factory ]
+    tags:
+      - { name: knp_menu.provider }
+
+  app.menu.factory_extension.linked_entity:
+    class: AppBundle\Menu\Factory\LinkedEntityExtension
+    arguments: [ @app.entity_url_generator ]
+    tags:
+      - { name: knp_menu.factory_extension, priority: 2 }
+
+  #    app.block_repository:
+  #        class: AppBundle\Block\BlockRepository
+
+  rss_builder:
+    abstract: true
+    arguments: [ '@translator', '@app.entity_url_generator', '@router', '@request_stack', '@sonata.media.provider.image' ]
+
+  rss_builder.rss:
+    class: AppBundle\Rss\RssBuilder
+    parent: rss_builder
+
+  rss_builder.ramrss:
+    alias: rss_builder.rss
+
+  rss_builder.mailru:
+    class: AppBundle\Rss\MailruRssBuilder
+    parent: rss_builder
+
+  rss_builder.yarss:
+    class: AppBundle\Rss\YandexRssBuilder
+    parent: rss_builder
+
+  rss_builder.world_is_small_rss:
+    class: AppBundle\Rss\WorldIsSmallRssBuilder
+    parent: rss_builder
+
+  rss_builder.ya_geo_rss:
+    class: AppBundle\Rss\YandexGeoRssBuilder
+    parent: rss_builder
+
+  rss_builder.ya_zen_rss:
+    class: AppBundle\Rss\YandexZenRssBuilder
+    calls:
+      - [setTemplating, [@templating]]
+    parent: rss_builder
+
+  rss_builder.wifi_rss:
+    class: AppBundle\Rss\WiFiRssBuilder
+    calls:
+      - [setTemplating, [@templating]]
+    parent: rss_builder
+
+  app.kernal.listener.seo:
+    class: AppBundle\Event\SeoListener
+    arguments: [ @service_container ]
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController, priority: -1 }
+
+  app.recent_page_manager:
+    class: AppBundle\RecentPage\RecentPageManager
+    arguments: [@request_stack, @snc_redis.default]
+    tags:
+      - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}
+
+  app.entity_listener.comment:
+    class: AppBundle\Entity\Listener\CommentListener
+    calls:
+      - [setContainer, [@service_container]]
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
+  app.entity_listener.construction:
+    class: AppBundle\Entity\Listener\ConstructionListener
+    calls:
+      - [setContainer, [@service_container]]
+    tags:
+      - { name: doctrine.orm.entity_listener }
+
+  app.email_manager:
+    class: AppBundle\EmailManager\EmailManager
+    arguments: [ @templating, @mailer, %domain_canonical_title%, %mailer_sender_address%, %mailer_sender_name% ]
+
+  embeddable_gallery:
+    class: AppBundle\Content\EmbeddableGallery
+    arguments: [ @doctrine.orm.entity_manager ]
+
+  embeddable_banner:
+    class: AppBundle\Content\BaseEmbeddable
+    arguments: [ @doctrine.orm.entity_manager, 'AppBundle:EmbeddedContent\Banner', ':widgets/embedabble:banner.html.twig' ]
+
+  embeddable_infographics:
+    class: AppBundle\Content\BaseEmbeddable
+    arguments: [ @doctrine.orm.entity_manager, 'AppBundle:Infographics', ':widgets/embedabble:infographics.html.twig' ]
+
+  embeddable_quote:
+    class: AppBundle\Content\BaseEmbeddable
+    arguments: [ @doctrine.orm.entity_manager, 'AppBundle:EmbeddedContent\Quote', ':widgets/embedabble:quote.html.twig' ]
+
+  embeddable_block:
+    class: AppBundle\Content\CityDistrictsEmbeddableBlock
+    arguments: [ @doctrine.orm.entity_manager]
+
+  embeddable_faq_block:
+    class: AppBundle\Content\BaseEmbeddable
+    arguments: [ @doctrine.orm.entity_manager, 'AppBundle:EmbeddedContent\Faq\FaqBlock', ':widgets/embedabble:faq_block.html.twig' ]
+
+  embedder:
+    class: AppBundle\Content\Embedder
+    arguments: [ {gallery: @embeddable_gallery, banner: @embeddable_banner, quote: @embeddable_quote, block: @embeddable_block, "Faq\FaqBlock": @embeddable_faq_block, infographics: @embeddable_infographics } ]
+
+  #    priority_position_subscriber:
+  #        class: AppBundle\Model\PriorityPosition\PriorityPositionSubscriber
+  #        tags:
+  #            - { name: doctrine.event_subscriber }
+
+  app.routing_loader.subordinate:
+    class: AppBundle\Routing\SubordinateRouteLoader
+    tags:
+      - { name: routing.loader }
+
+  app.routing_loader.posts_list:
+    class: AppBundle\Routing\PostCategoryRouteLoader
+    tags:
+      - { name: routing.loader }
+
+  app.entity_url_generator:
+    class: AppBundle\Routing\EntityUrlGenerator
+    arguments: [ @router, @request_stack ]
+
+  app.search.suggester:
+    class: AppBundle\Search\Suggester
+    arguments: [@doctrine.orm.entity_manager]
+    calls:
+      - [setContainer, [@service_container]]
+
+  app.security.authentucation_logger:
+    class: AppBundle\Security\AuthenticationLogger
+    arguments: [@doctrine.orm.entity_manager]
+
+  app.security.failure_handler:
+    class: AppBundle\Security\AuthenticationFailureHandler
+    parent: security.authentication.failure_handler
+    calls:
+      - [setAuthenticationLogger, [@app.security.authentucation_logger]]
+
+  app.security.success_handler:
+    class: AppBundle\Security\AuthenticationSuccessHandler
+    parent: security.authentication.success_handler
+    calls:
+      - [setAuthenticationLogger, [@app.security.authentucation_logger]]
+
+  app.security.logout_success_handler:
+    class: AppBundle\Security\LogoutSuccessHandler
+    parent: security.logout.success_handler
+    calls:
+      - [setSecurityContext, [@security.context]]
+      - [setAuthenticationLogger, [@app.security.authentucation_logger]]
+
+  app.serializer.listener.construction_object:
+    class: AppBundle\Event\Serializer\ConstructionObjectListener
+    arguments: [@app.entity_url_generator]
+    tags:
+      - { name: jms_serializer.event_subscriber }
+
+  app.sitemap_listener:
+    class: AppBundle\Seo\SitemapListener
+    arguments: [ @doctrine.orm.entity_manager, @app.entity_url_generator]
+    tags:
+      - {name: presta.sitemap.listener}
+
+  app.publication_catalogue:
+    class: AppBundle\Model\PublicationCatalogue
+    arguments: [ @doctrine.orm.entity_manager]
+
+  repository.lock:
+    class: Amg\Bundle\AdminBundle\Entity\Repository\EntityLockRepository
+    factory_service: doctrine
+    factory_method: getRepository
+    arguments: [ Amg\Bundle\AdminBundle\Entity\EntityLock ]
+
+  admin.edit_locker:
+    class: Amg\Bundle\AdminBundle\Admin\EditLocker\EditLocker
+    arguments: [@security.context, @repository.lock]
+
+  app.action_logger:
+    class: AppBundle\ActionLogger\ActionLogger
+    calls:
+      - [ setContainer, [ @service_container ] ]
+
+  app.admin.extension.action_logger:
+    class: AppBundle\ActionLogger\ActionLoggerExtension
+    arguments: [ @app.action_logger,  @audit_reader]
+    tags:
+      - {name: sonata.admin.extension, global: true}
+
+  sonata.user.editable_role_builder:
+    class: AppBundle\Role\EditableRolesBuilder
+    arguments: [@security.context, @sonata.admin.pool, @doctrine.orm.entity_manager, @translator, %security.role_hierarchy.roles%]
+
+  sonata.user.form.type.security_roles:
+    class: AppBundle\Form\Type\SecurityRolesType
+    tags:
+      - { name: form.type, alias: sonata_security_roles }
+    arguments: [@sonata.user.editable_role_builder]
+
+  simplethings_entityaudit.manager:
+    class: AppBundle\Admin\Audit\AuditManager
+    arguments: [ @simplethings_entityaudit.config ]
+
+  sonata.admin.audit.orm.reader:
+    class: AppBundle\Admin\Audit\ORM\AuditReader
+    arguments: [ @audit_reader ]
+
+  audit_reader:
+    class: AppBundle\Admin\Audit\AuditReader
+    factory_service: simplethings_entityaudit.manager
+    factory_method: createAuditReader
+    arguments: [ @doctrine.orm.default_entity_manager ]
+
+  app.admin.extension.:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\LeadExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Lead\LeadTrait}
+
+  app.search.construction_object:
+    class: AppBundle\Search\ConstructionObjectSearchService
+    arguments: [ @service_container ]
+
+  app.search.metro_stations:
+    class: AppBundle\Search\MetroStationsSearchService
+    arguments: [ @service_container ]
+
+  app.search.base:
+    class: AppBundle\Search\BaseSearchService
+    arguments: [ @service_container ]
+
+  app.preview.hash_generator:
+    class: AppBundle\Security\PreviewHashGenerator
+    arguments: [ %secret% ]
+
+  app.redirect.kernel_listener:
+    class: AppBundle\Redirect\RedirectKernelListener
+    arguments: [@doctrine.orm.entity_manager]
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  app.post_view.kernel_listener:
+    class: AppBundle\Statistic\PostViewListener
+    arguments: [@router, @doctrine.orm.entity_manager, @crawler_detect]
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate, priority: -1 }
+
+  session.memcached:
+    class: Memcached
+    arguments:
+      persistent_id: %session_memcached_prefix%
+    calls:
+      - [ addServer, [ %session_memcached_host%, %session_memcached_port% ]]
+
+  session.handler.memcached:
+    class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+    arguments: [@session.memcached, { prefix: %session_memcached_prefix%, expiretime: %session_memcached_expire% }]
+
+  app.make_trait_relations_bidirectional_subscriber:
+    class: AppBundle\Model\Doctrine\MakeRelatedTraitAssociationsBidirectionalSubscriber
+    arguments: [@annotations.reader]
+    tags:
+      - { name: doctrine.event_subscriber }
+
+  set_private_response_listener:
+    class: AppBundle\Cache\SetPrivateResponseForLoggedInUserListener
+    arguments: [ @security.token_storage ]
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+  app.validator.on_main_page:
+    class: AppBundle\Validator\OnMainPageValidator
+    arguments: ['@doctrine', '@translator', @request_stack ]
+
+  app.report_builder:
+    class: AppBundle\Report\ReportBuilder
+    arguments: [ @doctrine.orm.entity_manager ]
+
+  app.construction.find_organization:
+    class: AppBundle\Service\FindConstructionOrganizationService
+    arguments: [ @doctrine.orm.entity_manager ]
+
+  app.exception_listener:
+    class: AppBundle\EventListener\ExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, priority: 2 }
+
+  app.admin_locator:
+    class: AppBundle\Service\AdminLocator
+    arguments: [ '@sonata.admin.pool' ]
+
+  app.ConverterKendoGridStateToDoctrineCriteria:
+    class: ApiBundle\InfrastructureLayer\Converter\ConverterKendoGridStateToDoctrineCriteria\ConverterKendoGridStateToDoctrineCriteria
+    arguments:
+      - '@app.FilterConverter'
+      - '@app.SortConverter'
+
+  app.FilterConverter:
+    class: ApiBundle\InfrastructureLayer\Converter\ConverterKendoGridStateToDoctrineCriteria\FilterConverter
+
+  app.SortConverter:
+    class: ApiBundle\InfrastructureLayer\Converter\ConverterKendoGridStateToDoctrineCriteria\SortConverter
+
+  app.InforgaphicsXlsx:
+    class: ApiBundle\PresentationLayer\Xlsx\InforgaphicsXlsx
+    arguments:
+      - '@service_container'
+
+  AppBundle\Service\TextBlockService:
+    class: AppBundle\Service\TextBlockService
+    arguments:
+      - '@doctrine'
+
+  AppBundle\EventSubscriber\TextBlockUsageDoctrineSubscriber:
+    class: AppBundle\EventSubscriber\TextBlockUsageDoctrineSubscriber
+    arguments:
+      - '@AppBundle\Service\TextBlockService'
+      - interfaces:
+          - 'Amg\DataCore\Model\Publishable\PublishableInterface'
+        exclude:
+          - 'AppBundle\Entity\MenuNode'
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  Import\Helper\FileLoader:
+    class: Import\Helper\FileLoader
+    arguments:
+      - '%import.file_cache_path%'
+      - '%router.request_context.scheme%://stroimos.local'
+
+  Import\Helper\MediaBuilder:
+    class: Import\Helper\MediaBuilder
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@sonata.media.manager.media'
+
+  app.validator.newsletter_post_collection:
+    class: AppBundle\Constraints\NewsletterPostsCollectionConstraintValidator
+    arguments: ['@doctrine.orm.entity_manager']
+    tags:
+      - { name: 'validator.constraint_validator', alias: 'validator.newsletter_post_collection' }
+
+  ReCaptcha\ReCaptcha:
+    class: ReCaptcha\ReCaptcha
+    arguments:
+      - '%google_recaptcha_secret_key%'
+
+  AppBundle\Form\Extension\YandexCaptcha:
+      class: AppBundle\Form\Extension\YandexCaptcha
+      arguments:
+          - '%yandex_captcha_secret_key%'

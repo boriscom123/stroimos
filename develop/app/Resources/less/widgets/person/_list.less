@@ -1,0 +1,273 @@
+.structure-page__title {
+  font-family: Onest, serif;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 120%;
+  margin-bottom: 80px;
+  margin-top: 10px;
+  color: #1B262C; 
+}
+
+.structure-page__person-list {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-bottom: 56px;
+}
+
+.structure-page__person {
+  width: 305px;
+  display: inline-block;
+  float: left;
+  height: 540px;
+  overflow: hidden;
+  border-top: 1px solid rgba(27, 38, 44, 0.20);
+  border-bottom: 1px solid rgba(27, 38, 44, 0.20);
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+  transition: border-color .3s ease-in-out;
+
+  &:hover {
+    border-color: #A6A6A6;
+
+    & .structure-page__divide-line {
+      width: 100%;
+      background-color: #1B262C;
+    }
+  }
+
+  img {
+    width: 100%;
+    //margin-bottom: 20px;
+    height: 200px;
+  }
+
+  &:nth-child(3n+4) {
+    margin-right: 0;
+  }
+
+  &.first-person {
+    display: block;
+    width: 100%;
+    height: 400px;
+    margin-right: 0; 
+
+    img {
+      width: 320px;
+      height: auto;
+      margin-bottom: 0;
+      object-fit: cover;
+    }
+
+    .structure-page__person-title {
+      margin: 0 0 20px;
+      padding: 0;
+      font-family: Onest, serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+      color: #1B262C;
+      text-align: left;
+    }
+
+    .structure-page__person-name {
+      color: #1B262C;
+      font-family: Onest, serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+      margin: 20px 0; 
+      text-align: left;
+      padding: 0;
+    }
+
+    .structure-page__person-lastname {
+      color: #1B262C;
+      font-family: Onest, serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+      margin: 0; 
+      text-align: left;
+      padding: 0;
+    }
+
+    .structure-page__person-seat {
+      color: #1B262C;
+      font-family: Onest, serif;
+      font-size: 19px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 140%;
+      text-align: left;
+      margin: 0;
+    }
+
+    .structure-page__person-uri {
+      display: flex;
+    }
+
+    .structure-page__person-info {
+      padding: 85px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .structure-page__divide-line {
+      width: 60px;
+      height: 1px;
+      background-color: #A6A6A6;
+      transition: width .3s ease-in-out, background-color .3s ease-in-out;
+    }
+
+    &:hover {
+      border-color: #A6A6A6;
+      & .structure-page__divide-line {
+        width: 100%;
+        background-color: #1B262C;
+      }
+    }
+  }
+}
+
+.structure-page__person-uri {
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Onest', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 28px;
+  color: @color;
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    color: @hover;
+  }
+}
+
+.structure-page__person-title {
+  font-family: Onest. serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  color: #1B262C;
+  text-align: left;
+  margin-bottom: 20px;
+  }
+
+.structure-page__person-name {
+  font-family: Onest. serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  color: #1B262C;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.structure-page__person-name p {
+  margin-bottom: 10px;
+}
+
+.structure-page__person-lastname {
+  font-family: Onest. serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  color: #1B262C;
+  text-align: left;
+  margin-bottom: 10px; 
+}
+
+.structure-page__person-seat {
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 130%;
+  color: #1B262C;
+  opacity: .8;
+  text-align: left;
+  margin: 10px 0 0;
+}
+
+.structure-page__contacts {
+  .clearfix;
+  margin-bottom: 50px;
+  text-align: center; 
+}
+
+.structure-page__user-profile {
+  text-transform: uppercase;
+} 
+
+.structure-page__contacts-block {
+  height: 48px;
+  background: url('/images/message.png') no-repeat;
+  background-position: center center;
+  position: relative;
+  margin-bottom:30px; 
+ 
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: (@pageWidth - 150px)/2;
+    height: 2px;
+    background-color: #f2f2f2;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+    left: auto;
+  }
+}
+
+.structure-page__contacts-title {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 38px;
+  color: @color;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.structure-page__contacts-link {
+  font-family: Onest, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 28px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.structure-page__body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 40px;
+  column-gap: 20px;
+}
+
+.structure-page__person-info {
+  padding: 30px 20px 20px;
+}
+
+.structure-page__divide-line {
+  width: 40px;
+  height: 1px;
+  min-height: 1px;
+  background-color: #A6A6A6;
+  transition: width .3s ease-in-out, background-color .3s ease-in-out;
+}

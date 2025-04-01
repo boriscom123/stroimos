@@ -1,0 +1,54 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Поиск',
+    } %}
+
+
+    {% embed '::/widgets/search_form.html.twig' with {'action': path('app_search'), 'value': query.q, 'id': 'search_query', suggestURL: path('app_search_query_suggest') } %}
+        {% block moreBlock %}
+            <div class="search-type__header">Ограничения области поиска</div>
+            <div class="search-type">
+                {% for row in types|batch(5) %}
+                    <div class="search-type__row">
+                        {% for type, type_parameters in row %}
+                            <div class="search-type__column">
+                                {% include '::widgets/checkbox.html.twig' with {'id': 'type__'~type,'name':'t[]', 'value': type, 'checked': (type in query.t), label: ('publication.' ~ type)|trans} %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if query.q %}
+                <div class="search-result__header">
+                    <div class="search-result__count" data-count="{{ nbResults }}" id="search__more_results">
+                        Найдено результатов:
+                    </div>
+
+                    <h1 class="search-result__query">Результаты поиска &laquo;<em>{{ query.q | capitalize }}</em>&raquo;
+                    </h1>
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+
+    {% if query.q %}
+        <div class="news-list" id="search-results-list">
+            {% include ':Search:_results.html.twig' %}
+        </div>
+
+        {% if next_offset|default(false) %}
+            {% include '::/Block/loadmore_button.html.twig' with {
+            title: 'Ещё результаты',
+            target: '#search-results-list',
+            item: '.news-list__teaser',
+            source: path('app_search', query),
+            limit: maxPerPage,
+            offset: next_offset
+            } %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

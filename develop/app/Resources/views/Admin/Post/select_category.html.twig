@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:action.html.twig' %}
+
+{% block title %}Создание публикации{% endblock %}
+
+{% block content %}
+    <h2>Выбор типа публикации</h2>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{{ admin.generateUrl('create', {'category_alias': category.alias}) }}">{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

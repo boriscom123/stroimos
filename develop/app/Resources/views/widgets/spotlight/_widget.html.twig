@@ -1,0 +1,32 @@
+{% if items is defined and items is not empty %}
+	<div class="spotlight {% if class is defined and class %} {{ class }} {% endif %}">
+		<header class="spotlight__header">
+			<h2 class="spotlight__title">
+				{% if title is defined and title is not empty %}
+					{{ title|trans }}
+				{% else %}
+					В центре внимания
+				{% endif %}
+			</h2>
+		</header>
+		<div class="js-spotlight-slider spotlight__slider">
+			<div class="spotlight__list js-slider">
+				{% for item in items|sortbyfield('createdAt')|reverse %}
+					{% include '::/widgets/spotlight/_teaser.html.twig' with {'entity': item.entity is defined ? item.entity : item} %}
+				{% endfor %}
+			</div>
+			<div class="spotlight__controls js-controls">
+				<button type="button" class="js-prev-arrow spotlight__control-button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewbox="0 0 25 26" fill="none">
+						<path d="M12.9998 1.68629L1.68606 13M12.9998 24.3137L1.68606 13M1.68606 13L24.3135 13" stroke="#1B262C" stroke-width="2"/>
+					</svg>
+				</button>
+				<button type="button" class="js-next-arrow spotlight__control-button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewbox="0 0 25 26" fill="none">
+						<path d="M12.0002 1.68629L23.3139 13M12.0002 24.3137L23.3139 13M23.3139 13L0.686523 13" stroke="#141824" stroke-width="2"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+{% endif %}

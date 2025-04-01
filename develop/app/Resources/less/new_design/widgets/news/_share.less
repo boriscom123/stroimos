@@ -1,0 +1,80 @@
+.news-wrapper__share {
+  width: @newsShareWidth;
+  float: right;
+  padding: 20px 0 15px;
+  box-sizing: border-box;
+  padding-left: 20px;
+
+  .b-share {
+    margin: 0;
+    padding: 0!important;
+  }
+
+  .b-share__handle {
+    padding: 0 20px!important;
+    display: inline-block;
+    float: left;
+    .dotted-border(black, right);
+    height: auto;
+
+    &:first-child {
+      padding-left: 0!important;
+    }
+
+    &:last-child {
+      background: transparent;
+    }
+
+    &:hover {
+      .b-share-icon {
+        &.b-share-icon_facebook {
+          background-position: 0 0;
+        }
+
+        &.b-share-icon_vkontakte {
+          background-position: -26px 0;
+        }
+
+        &.b-share-icon_twitter {
+          background-position: -52px 0;
+        }
+      }
+    }
+  }
+
+  .b-share-icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    background-image: url('/images/icons/iconset_social.png');
+
+    /* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(url('/images/icons/iconset_social.png') 1x, url('/images/icons/iconset_social_x15.png') 1.5x, url('/images/icons/iconset_social_x20.png') 2x);
+    /* Standard use */
+    background-image: image-set('/images/icons/iconset_social.png' 1x, '/images/icons/iconset_social_x15.png' 1.5x, '/images/icons/iconset_social_x20.png' 2x);
+
+    &.b-share-icon_facebook {
+      background-position: 0 -26px;
+    }
+
+    &.b-share-icon_vkontakte {
+      background-position: -26px -26px;
+    }
+
+    &.b-share-icon_twitter {
+      background-position: -52px -26px;
+    }
+  }
+
+}
+
+.news-wrapper__share-title {
+  font-family: Lava, serif;
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 17px;
+  margin-bottom: 20px;
+  color: #202020;
+}

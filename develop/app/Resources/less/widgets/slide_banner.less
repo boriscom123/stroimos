@@ -1,0 +1,110 @@
+@bannerHeight: 280px; // высота беннера
+@barrerColor: #D0DAF5; // цвет баннера
+//@color: green; // цвет текста вроде как глобальная переменная
+
+.slide-banner {
+  height: @bannerHeight;
+  overflow: hidden;
+  margin-bottom: 60px;
+  background-color: @barrerColor;
+  border-radius: 6px;
+
+  &__title {
+    position: absolute;
+    height: @bannerHeight;
+    width: calc(~"100% - 350px");
+    background-color: @barrerColor;
+    padding: 45px 47px 0px;
+    box-sizing: border-box;
+    z-index: 10;
+    transition: all 0.6s ease-in-out;
+
+    > p {
+      font-family: Brygada1918, serif;
+      font-weight: 900;
+      font-size: 20pt;
+      line-height: 36px;
+      color: @color;
+      max-height: 250px;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    > i {
+      display: block;
+      position: absolute;
+      top: 214px;
+      left: calc(~"100% - 16px");
+      width: 36px;
+      height: 36px;
+      background-color: white;
+      border-radius: 18px;
+      transition: all 0.6s ease-in-out;
+      z-index: 20;
+      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.05); // Тень
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 2px;
+        transform: translate(-50%, -50%);
+        width: 16px;
+        height: 16px;
+        background: url("data:image/svg+xml,%3Csvg fill='%231186e3' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath style='fill:%231186e3;fill-opacity:1' d='M8 0 6.5 1.5 12 7H0v2h12l-5.5 5.5L8 16l8-8Z'/%3E%3C/svg%3E") center/contain no-repeat;
+        filter: brightness(0);
+        transition: all 0.6s ease-in-out;
+      }
+    }
+  }
+
+  &__link {
+    height: @bannerHeight;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-right: 0;
+
+    .slide-banner__image {
+      height: @bannerHeight;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 350px;
+      object-fit: cover;
+      bottom: 0;
+      overflow: hidden;
+      transition: all 0.6s ease-in-out;
+    }
+
+    &-static {
+      &:hover {
+        cursor: default;
+      }
+      .slide-banner__title > i {
+        display: none;
+      }
+    }
+
+    .slide-banner__image {
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: cover;
+    }
+  }
+}
+
+.slide-banner__link:hover .slide-banner__title i {
+  width: 140px;
+
+  &::before {
+    filter: brightness(1); // возвращаем цвет при наведении
+  }
+}
+
+.slide-banner__link:hover .slide-banner__image {
+  transform: scale(1.1); // Зумирование изображения на 10% при наведении на родительский элемент
+}

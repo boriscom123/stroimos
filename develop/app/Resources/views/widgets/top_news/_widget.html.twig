@@ -1,0 +1,41 @@
+{% if news and news is defined %}
+    {% set topPost = news[0] %}
+    {% set posts = news | slice(1) %}
+    <div class="top-news animated">
+        <div class="top-news__bg-in active" style="background-image: url('{% path topPost.image, 'thumb960x470' %}');"></div>
+         <div class="top-news__bg-out" style="background-image: url('{% path posts[0].image, 'thumb960x470' %}');"></div>
+         <div class="top-news__column top-news__column-first">
+            <header class="top-news__header top-news__section">
+                <h2 class="top-news__title">Новости</h2>
+
+                {# <a href="{{ path('app_news_list_popular') }}" class="related-link related-link__light top-news__link-topnews">
+                    ТОП новости
+                    <i class="icon icon-16 icon-star"></i>
+                </a> #}
+                {#<a href="{{ path('app_news_list') }}" class="related-link related-link__light top-news__link-allnews">
+                    все новости
+                    <i class="icon icon-16 icon-news"></i>
+                </a>
+                <a href="#" class="related-link related-link__light top-news__link-calendar">
+                    календарь
+                    <i class="icon icon-16 icon-calendar"></i>
+                </a>#}
+                <a href="{{ path('app_news_list') }}" class="related-link related-link__light top-news__link-calendar">
+                    все новости
+                    <i class="icon icon-16 icon-news"></i>
+                </a>
+            </header>
+
+            <div class="top-news__section top-news__teaser-first active" data-background="{% path topPost.image, 'thumb960x470' %}">
+                {% include '::/widgets/top_news/_teaser.html.twig' with {'post' : topPost} %}
+            </div>
+        </div>
+        <div class="top-news__column top-news__column-second">
+            {% for post in posts %}
+                <div class="top-news__section {{ loop.last ? 'top-news__teaser-last' : '' }} {% if loop.index == 1 %}bordered{% endif %}" data-background="{% path post.image, 'thumb960x470' %}" style="z-index: {{ loop.revindex }}">
+                    {% include '::/widgets/top_news/_teaser.html.twig' with {'post' : post} %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

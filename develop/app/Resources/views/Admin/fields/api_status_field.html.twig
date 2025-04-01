@@ -1,0 +1,26 @@
+<td class="status">
+    {% if value == 'failed' %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="red">
+            <circle cx="8" cy="8" r="8" />
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="10" font-family="Arial, sans-serif">!</text>
+        </svg>
+        Ошибка
+    {% elseif value == 'pending' %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="yellow">
+            <circle cx="8" cy="8" r="8" />
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="black" font-size="10" font-family="Arial, sans-serif">?</text>
+        </svg>
+        Отправка
+    {% elseif value == 'done' %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="green">
+            <circle cx="8" cy="8" r="8" />
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="10" font-family="Arial, sans-serif">&#x2713;</text>
+        </svg>
+        Отправлено
+    {% else %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="gray">
+            <circle cx="8" cy="8" r="8" />
+        </svg>
+        Неизвестный статус
+    {% endif %}
+</td>

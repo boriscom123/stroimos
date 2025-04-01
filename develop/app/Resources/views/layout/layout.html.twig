@@ -1,0 +1,39 @@
+{% extends '::/layout/base.html.twig' %}
+
+{% block body %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {}) }}
+    {% include '::/layout/back_up_buttons.html.twig' %}
+    {# include '::/widgets/video_popup.html.twig' #}
+    <div class="page-overlay">
+{#         <div id="timelapse_toggle" title="Включить фоновое видео">
+            <img src="{{ asset('images/video.png') }}" alt="timelapse" />
+            <input id="timelapse_toggle_cb" type="checkbox" class="tgl tgl-light" {% if app.request.cookies.get('showTimelapse') == 'true' %} checked="checked" {% endif %}/>
+            <label for="timelapse_toggle_cb" class="tgl-btn"></label>
+        </div> #}
+        {% include '::/layout/header.html.twig' %}
+        {% block mainSlider %}
+        {% endblock %}
+
+        <div class="page-limiter" id="page">
+            <div class="page-wrapper">
+                <div class="page-container">
+                    {{ sonata_block_render({'type': 'animated_banner'}, {page: page|default}) }}
+                    <main class="page-main">
+                        {% block content %}
+                        {% endblock %}
+                    </main>
+                    {% block recent_pages %}
+                        {{ sonata_block_render({'type': 'recent_page'}, {}) }}
+                    {% endblock %}
+                    {# block subscribe_form %}
+                        {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+                    {% endblock subscribe_form #}
+                    {% block subscribe_form %}
+                        {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form_new.html.twig'}) }}
+                    {% endblock subscribe_form %}
+                    {% include '::/layout/footer.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

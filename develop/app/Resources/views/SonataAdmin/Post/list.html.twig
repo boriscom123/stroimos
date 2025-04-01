@@ -1,0 +1,42 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block actions %}
+    {% spaceless %}
+        {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+            <li>
+            <a class="sonata-action-element" href="{{ admin.generateUrl('create', {'category_alias': category_alias}) }}">
+                <i class="fa fa-plus-circle"></i>
+                {{ 'link_action_create'|trans({}, 'SonataAdminBundle') }}
+            </a>
+        {% else %}
+            <li class="divider" role="presentation"></li>
+            </li>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block list_table %}
+
+    <div class="box box-primary">
+        <div class="box-body">
+            <ul class="nav nav-pills">
+                <li><a><strong>Категории:</strong></a></li>
+                <li class="{% if not category_alias %} active {% endif %}">
+                    <a href="{{ admin.generateUrl('list', { 'category_alias': null })}}">Все</a>
+                </li>
+                {% for item in topMenuItems %}
+                    <li class="{% if category_alias is not empty and category_alias == item.alias %} active {% endif %}">
+                        <a href="{{ admin.generateUrl('list', { 'category_alias': item.alias }) }}">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% if category_alias == 'news' %}
+        {{ parent() }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

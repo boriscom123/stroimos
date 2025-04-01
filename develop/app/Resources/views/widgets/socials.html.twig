@@ -1,0 +1,10 @@
+{# set socials = (socials is defined and socials) ? socials: [{label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "telegram", uri: "https://t.me/stroi_mos_ru"}, {label: "instagram", uri: "https://instagram.com/stroi_mos_ru?ref=badge"}, {label: "facebook", uri: "https://www.facebook.com/stroimos"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "twitter", uri: "https://twitter.com/stroimosru"}, {label: "odnoklassniki", uri: "https://ok.ru/group/55613137158162"}, {label: "rutube", uri: "https://rutube.ru/channel/23927452/videos/"}] #}
+{# set socials = (socials is defined and socials) ? socials: [{label: "telegram", uri: "https://t.me/stroi_mos_ru"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "odnoklassniki", uri: "https://ok.ru/group/55613137158162"}, {label: "rutube", uri: "https://rutube.ru/channel/23927452/videos/"}] #}
+{% set socials = (socials is defined and socials) ? socials: [{label: "telegram", uri: "https://t.me/stroi_mos_ru"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "rutube", uri: "https://rutube.ru/channel/23927452/videos/"}] %}
+<ul class="socials">
+    {% for item in socials %}
+        <li>
+            <a href="{{ item.uri }}" class="icon icon-social icon-{{ item.label }}" title="{{ item.label }}" target="_blank"></a>
+        </li>
+    {% endfor %}
+</ul>

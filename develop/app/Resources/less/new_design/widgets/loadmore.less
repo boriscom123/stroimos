@@ -1,0 +1,57 @@
+.loadmore-dot() {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	background: @hover;
+	.border-radius(~'10px');
+}
+
+.loadmore-btn__wrap {
+	text-align: center;
+	padding: 60px 20px;
+}
+
+.loadmore-btn {
+	color: @hover;
+	display: inline-block;
+	padding: 0 20px;
+	min-width: 80px;
+	cursor: pointer;
+}
+
+.loadmore-btn__dot-wrap {
+	overflow: hidden;
+	text-align: center;
+}
+
+.loadmore-btn__dot {
+	.loadmore-dot();
+	margin: 0 5px;
+	position: relative;
+
+	&:before {
+		content: '';
+		.loadmore-dot();
+		position: absolute;
+		top: 0;
+		left: -20px;
+	}
+
+	&:after {
+		content: '';
+		.loadmore-dot();
+		position: absolute;
+		top: 0;
+		right: -20px;
+	}
+}
+
+.loadmore-btn__label {
+	font-family: AvenirNext, sans-serif;
+	font-weight: 700;
+	font-size: 10px;
+	line-height: 28px;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+}

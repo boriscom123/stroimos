@@ -1,0 +1,159 @@
+liip_imagine:
+    loaders:
+        default: { filesystem: { data_root: '%kernel.root_dir%/../web%uploaded_media_dir%' } }
+        web_root: { filesystem: { data_root: '%kernel.root_dir%/../web' } }
+
+    resolvers:
+        default:
+            web_path:
+#                web_root: %kernel.root_dir%/../web
+                cache_prefix: uploads/cache
+    controller:
+        filter_action:         liip_imagine.controller:filterAction
+        filter_runtime_action: liip_imagine.controller:filterRuntimeAction
+
+    filter_sets:
+        admin: { filters: { thumbnail: { size: [100, ~] } } }
+
+        thumb:                          &thumb        { filters: { thumbnail: { size: [140, 100] } } }
+        thumb70:                        &thumb70      { filters: { thumbnail: { size: [70, 70] } } }
+        thumb210:                       &thumb210     { filters: { thumbnail: { size: [210, 150] } } }
+        thumb212:                       &thumb212     { filters: { thumbnail: { size: [212, 128] } } }
+        thumb300:                       &thumb300     { filters: { thumbnail: { size: [300, 200], mode: outbound } } }
+        thumb300x230:                   &thumb300x230 { filters: { thumbnail: { size: [300, 230] } } }
+        thumb300x420:                   &thumb300x420 { filters: { thumbnail: { size: [300, 420] } } }
+        thumb306:                       &thumb306     { filters: { thumbnail: { size: [306, 389] } } }
+        thumb323:                       &thumb323     { filters: { thumbnail: { size: [232, 212] } } }
+        thumb336:                       &thumb336     { filters: { thumbnail: { size: [336, 280] } } }
+        thumb385:                       &thumb385     { filters: { thumbnail: { size: [385, 240] } } }
+        thumb451:                       &thumb451     { filters: { thumbnail: { size: [451, 273] } } }
+        thumb469:                       &thumb469     { filters: { thumbnail: { size: [469, ~] } } }
+        thumb465x548:                   &thumb465x548 { filters: { thumbnail: { size: [465, 548] } } }
+        thumb500:                       &thumb500     { filters: { thumbnail: { size: [500, ~] } } }
+        thumb589:                       &thumb589     { filters: { thumbnail: { size: [589, 454] } } }
+        thumb596:                       &thumb596     { filters: { thumbnail: { size: [596, 368] } } }
+        thumb600x400:                   &thumb600x400 { filters: { thumbnail: { size: [600, 400] } } }
+        thumb630x338:                   &thumb630x338 { filters: { thumbnail: { size: [630, 338] } } }
+        thumb715x250:                   &thumb715x250 { filters: { thumbnail: { size: [715, 250] } } }
+        thumb960:                       &thumb960     { filters: { thumbnail: { size: [960, ~] } } }
+        thumb960x470:                   &thumb960x470 { filters: { thumbnail: { size: [960, 470] } } }
+        thumb1440:                      &thumb1440    { filters: { thumbnail: { size: [1440, 454] } } }
+        thumb300x90:                    &thumb300x90    { filters: { thumbnail: { size: [300, 90] } } }
+        thumb340x340:                   &thumb340x340    { filters: { thumbnail: { size: [340, 340] } } }
+        thumb271x125:                   &thumb271x125    { filters: { thumbnail: { size: [271, 125] } } }
+        thumb295x345:                   &thumb295x345    { filters: { thumbnail: { size: [295, 345] } } }
+        full:                           &full         { filters: { thumbnail: { size: [1900, ~] } } }
+        page_header_700:                &page_header_700 { filters: { thumbnail: { size: [700, 400] } } }
+        newsletter_highlight:           &newsletter_highlight { filters: { thumbnail: { size: [600, 400] } } }
+        newsletter_post_l:              &newsletter_post_l { filters: { thumbnail: { size: [405, 245] } } }
+        newsletter_post:                &newsletter_post { filters: { thumbnail: { size: [150, 150] } } }
+        newsletter_media:               &newsletter_media { filters: { thumbnail: { size: [600, 400] } } }
+        newsletter_video_play:          &newsletter_video_play { filters: { thumbnail: { size: [600, 400]}, watermark: {image: Resources/data/overlay/play_btn.png, position: center} }}
+
+
+        web_root_thumb300:
+            data_loader: web_root
+            #*thumb300
+            filters: { thumbnail: { size: [300, 200], mode: outbound } }
+
+        main_image_thumb:                  *thumb
+        main_image_thumb210:               *thumb210
+        main_image_thumb212:               *thumb212
+        main_image_thumb300:               *thumb300
+        main_image_thumb300x230:           *thumb300x230
+        main_image_thumb306:               *thumb306
+        main_image_thumb323:               *thumb323
+        main_image_thumb336:               *thumb336
+        main_image_thumb385:               *thumb385
+        main_image_thumb451:               *thumb451
+        main_image_thumb469:               *thumb469
+        main_image_thumb465x548:           *thumb465x548
+        main_image_thumb500:               *thumb500
+        main_image_thumb589:               *thumb589
+        main_image_thumb596:               *thumb596
+        main_image_thumb715x250:           *thumb715x250
+        main_image_thumb960:               *thumb960
+        main_image_thumb960x470:           *thumb960x470
+        main_image_thumb1440:              *thumb1440
+        main_image_thumb300x90:            *thumb300x90
+        main_image_thumb340x340:           *thumb340x340
+        main_image_thumb271x125:           *thumb271x125
+        main_image_thumb295x345:           *thumb295x345
+        main_image_full:                   *full
+        main_image_page_header_700:        *page_header_700
+        main_image_newsletter_highlight:   *newsletter_highlight
+        main_image_newsletter_post_l:      *newsletter_post_l
+        main_image_newsletter_post:        *newsletter_post
+        main_image_newsletter_media:       *newsletter_media
+        main_image_newsletter_video_play:  *newsletter_video_play
+
+        gallery_media_main_image_thumb1440: *thumb1440
+
+        main_image_infographics_top_large: &infographics_top_large
+            filters:
+                relative_resize: { widen: 630 }
+                crop: { start: [0, 0], size: [630, 338] }
+        main_image_infographics_top: &infographics_top
+            filters:
+                relative_resize: { widen: 298 }
+                crop: { start: [0, 0], size: [298, 162] }
+        main_image_infographics_list: &infographics_list
+            filters:
+                relative_resize: { widen: 469 }
+                crop: { start: [0, 0], size: [469, 275] }
+
+        infographics_thumb:         *thumb
+        infographics_thumb200:      { filters: { thumbnail: { size: [200, ~] } } }
+        infographics_full:          { filters: { thumbnail: { size: [960, ~] } } }
+
+        file_thumb:                 { filters: { thumbnail: { size: [64, ~] } } }
+        video_thumb:                *thumb
+
+        gallery_media_thumb780:     { filters: { thumbnail: { size: [780, 580] } } }
+
+        gallery_media_thumb:                  *thumb
+        gallery_media_thumb210:               *thumb210
+        gallery_media_thumb212:               *thumb212
+        gallery_media_thumb300:               *thumb300
+        gallery_media_thumb300x230:           *thumb300x230
+        gallery_media_thumb300x420:           *thumb300x420
+        gallery_media_thumb306:               *thumb306
+        gallery_media_thumb323:               *thumb323
+        gallery_media_thumb336:               *thumb336
+        gallery_media_thumb385:               *thumb385
+        gallery_media_thumb451:               *thumb451
+        gallery_media_thumb465x548:           *thumb465x548
+        gallery_media_thumb469:               *thumb469
+        gallery_media_thumb500:               *thumb500
+        gallery_media_thumb589:               *thumb589
+        gallery_media_thumb596:               *thumb596
+        gallery_media_thumb715x250:           *thumb715x250
+        gallery_media_thumb960:               *thumb960
+        gallery_media_thumb960x470:           *thumb960x470
+        gallery_media_thumb1440:              *thumb1440
+        gallery_image_thumb300x90:            *thumb300x90
+        gallery_image_thumb340x340:           *thumb340x340
+        gallery_image_thumb271x125:           *thumb271x125
+        gallery_image_thumb295x345:           *thumb295x345
+        gallery_media_full:                   *full
+        gallery_media_newsletter_highlight:   *newsletter_highlight
+        gallery_media_newsletter_post_l:      *newsletter_post_l
+        gallery_media_newsletter_post:        *newsletter_post
+        gallery_media_newsletter_media:       *newsletter_media
+        gallery_media_newsletter_video_play:  *newsletter_video_play
+
+        gallery_media_infographics_top_large:   *infographics_top_large
+        gallery_media_infographics_top:         *infographics_top
+        gallery_media_infographics_list:        *infographics_list
+
+        person_thumb:               *thumb
+        person_thumb70:             *thumb70
+        person_direction:           { filters: { thumbnail: { size: [300, 264] } } }
+        person_direction_main:      { filters: { thumbnail: { size: [314, 375] } } }
+        person_struct_list:         { filters: { relative_resize: {widen: 305}, thumbnail: { size: [305, 202], mode: outbound } } }
+        person_profile_title:       { filters: { relative_resize: {widen: 300}, thumbnail: { size: [300, 210], mode: outbound } } }
+        person_top_thumb:           *thumb
+        person_top_struct_list_top: { filters: { thumbnail: { size: [320, 387]  } } }
+
+        metro_timeline_thumb:            *thumb
+        metro_timeline_thumb960:         *thumb960

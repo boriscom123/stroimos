@@ -1,0 +1,10 @@
+{% set publication = admin.getPublicationByReference(object.id) %}
+{% set publicationClass = admin.getPublicationClassNameByReference(object.id) %}
+{% set publicationAdmin = admin.getConfigurationPool.getAdminByClass(publicationClass) %}
+{% set url = publicationAdmin.generateObjectUrl('edit', publication) %}
+
+<td class="sonata-ba-list-field sonata-ba-list-field-text">
+    <a class="sonata-link-identifier" href="{{ url }}">
+        {{ publication.title }}
+    </a>
+</td>

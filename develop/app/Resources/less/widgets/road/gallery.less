@@ -1,0 +1,81 @@
+@roadgalleryColumns: 2;
+@roadgalleryTeaserWidth: 465px;
+@roadgalleryTeaserHeight: 430px;
+@roadgalleryGap: (@pageWidth - @roadgalleryTeaserWidth * @roadgalleryColumns) / ((@roadgalleryColumns - 1 ) * 2);
+@roadgalleryDescriptionTop: @roadgalleryTeaserHeight - 70;
+.roadgallery-list__wrapper {
+  margin-bottom: 10px;
+}
+
+.roadgallery-list {
+  .clearfix;
+  margin: 0 -@roadgalleryGap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.roadgallery-list__teaser {
+  .gallery-teaser-overlay();
+  .shadowed-teaser();
+  width: @roadgalleryTeaserWidth;
+  float: left;
+  margin: 0 @roadgalleryGap 40px;
+  height: @roadgalleryTeaserHeight;
+
+  &-link {
+    padding: 45px 20px 140px 20px;
+    display: block;
+    height: @roadgalleryTeaserHeight;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  &-dots {
+    background-image: url(/images/dot_white.png);
+    background-position: -2px 100%;
+    background-repeat: repeat-x;
+    height: 1px;
+    width: 85px;
+  }
+
+  &-title {
+    .teaser-title();
+    margin-top: 25px;
+  }
+
+  &-max {
+    width: 100%;
+  }
+
+  &-description {
+    position: absolute;
+    left: 0;
+    top: @roadgalleryDescriptionTop;
+    font-family: Onest, sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 0px 30px 0px 70px;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 10;
+    min-height: 70px;
+    .text-more__wrapper {
+      max-height: 4 * 21px;
+      overflow: hidden;
+    }
+    .text-more__wrapper-link {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: @hover;
+    }
+  }
+
+  &:hover {
+    .roadgallery-list__teaser-title {
+      color: @hover;
+    }
+  }
+}

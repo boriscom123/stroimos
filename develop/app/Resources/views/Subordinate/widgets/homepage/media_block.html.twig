@@ -1,0 +1,37 @@
+<div class="homepage-gallery">
+    <div class="container__full homepage-gallery__color">
+        <div class="homepage-gallery__title">
+            Медиа
+        </div>
+        <div class="homepage-gallery__container">
+            {% if galleries[0] is defined %}
+            {% set mainPick = galleries[0] %}
+            <a href="{{ path('app_gallery_show', { id: mainPick.id }) }}" class="homepage-gallery__main">
+                <span class="homepage-gallery__main-image" class="homepage-gallery__image" style="background-image: url({% path mainPick.image, 'thumb960' %})">
+                    <span class="homepage-gallery__main-subtitle">Фото</span>
+                    <span class="homepage-gallery__main-content">
+                        <span class="homepage-gallery__main-title">{{ mainPick.title }}</span>
+                        <span class="homepage-gallery__main-count">
+                            <i class="homepage-gallery__main-count-icon"></i>
+                            <span class="homepage-gallery__main-count-text">
+                                {{ mainPick.medias | length }}&nbsp;фото
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </a>
+            {% endif %}
+            <div class="homepage-gallery__sidebar">
+                {% for video in videos %}
+                    <figure class="homepage-gallery__thumb homepage-gallery__thumb_video">
+                        <a href="{{ path('app_video_show', { id: video.id }) }}">
+                            <span class="homepage-gallery__thumb-image" style="background-image: url('{% path video.image, 'thumb500' %}');">
+                                <span class="homepage-gallery__thumb-subtitle">видео</span>
+                            </span>
+                        </a>
+                    </figure>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

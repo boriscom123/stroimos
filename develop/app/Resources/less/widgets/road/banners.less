@@ -1,0 +1,109 @@
+.page-banner__wrapper {
+  margin-bottom: 30px;
+  .page-banner__link {
+    display: block;
+    .shadowed-teaser();
+
+    &:hover {
+      .page-banner__content-title {
+        color: @hover;
+      }
+    }
+  }
+  .page-banner__content {
+    height: 430px - 145px - 20px;
+    padding: 145px 20px 20px 20px;
+    text-align: center;
+    &-title {
+      color: #fff;
+      font-family: Onest, sans-serif;
+      font-size: 41px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    &-subtitle {
+      color: #fff;
+      font-family: Brygada1918,serif;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
+}
+
+.page-banner-wide__wrapper {
+  margin: 0px -240px 100px;
+  .page-banner-wide__link {
+    display: block;
+    .shadowed-teaser();
+
+    &:hover {
+      .page-banner-wide__content-title {
+        color: @hover;
+      }
+    }
+  }
+  .page-banner-wide__content {
+    padding: 250px 240px 0px 240px;
+    height: 630px - 250px;
+    text-align: center;
+    &-title {
+      color: @color;
+      font-family: Onest, sans-serif;
+      font-size: 41px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    &-subtitle {
+      color: @color;
+      font-family: Brygada1918,serif;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 25px;
+    }
+  }
+}
+
+.page-banner-wide-alt__wrapper {
+  margin: 0px -240px 100px;
+  .page-banner-wide-alt__link {
+    display: block;
+    &:hover {
+      .page-banner-wide-alt__content-more {
+        color: @hover;
+      }
+    }
+  }
+  .page-banner-wide-alt__content {
+    position: relative;
+    padding: 150px 240px 0px 240px;
+    height: 450px - 150px;
+    &-title {
+      color: #fff;
+      font-family: Onest, sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    &-subtitle {
+      color: #fff;
+      font-family: Onest, sans-serif;
+      font-size: 35px;
+      line-height: 43px;
+      font-weight: normal;
+    }
+    &-more {
+      width: 685px;
+      color: #fff;
+      font-weight: bold;
+      font-family: Onest, sans-serif;
+      font-size: 20px;
+      height: 90px;
+      line-height: 90px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      position: absolute;
+      left: 240px;
+      bottom: 0px;
+    }
+  }
+}

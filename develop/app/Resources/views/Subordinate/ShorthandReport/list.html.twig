@@ -1,0 +1,14 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'Subordinate/widgets/themes_panel.html.twig' %}
+    {{ sonata_block_render({'type': 'post_list'}, {
+        'template': 'Subordinate/widgets/shorthand_report/_list.html.twig',
+        'limit': 10,
+        'category': 'shorthand-reports'
+    }) }}
+{% endblock %}

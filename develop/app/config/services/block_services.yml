@@ -1,0 +1,323 @@
+services:
+  post_list:
+    class: AppBundle\Block\PostListBlock
+    arguments: [post_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  last_posts:
+    class: AppBundle\Block\LastPostsBlock
+    arguments: [last_posts, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - {name: sonata.block}
+
+  news_of_the_day:
+    class: AppBundle\Block\NewsOfTheDayBlock
+    arguments: [news_of_the_day, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  animated_banner:
+    class: AppBundle\Block\AnimatedBannerBlock
+    arguments: [animated_banner, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+    tags:
+      - {name: sonata.block}
+
+  homepage_news:
+    class: AppBundle\Block\HomepageNewsBlock
+    arguments: [homepage_news, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+    tags:
+      - {name: sonata.block}
+
+  more_like_this:
+    class: AppBundle\Block\MoreLikeThisBlock
+    arguments: [more_like_this, @templating]
+    calls:
+      - [setFinder, [@fos_elastica.finder.app]]
+    tags:
+      - {name: sonata.block}
+
+  gallery_list:
+    class: AppBundle\Block\GalleryListBlock
+    arguments: [post_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+      - [setSearchService, [@app.search.base]]
+    tags:
+      - {name: sonata.block}
+
+  video_list:
+    class: AppBundle\Block\VideoListBlock
+    arguments: [video_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  metro_vitdeo_tour:
+    class: AppBundle\Block\MetroVideoTourBlock
+    arguments: [metro_vitdeo_tour, @templating]
+    calls:
+      - [setEntityManager, [ @doctrine.orm.entity_manager ] ]
+      - [setFormFactory, [ @form.factory ] ]
+    tags:
+      - {name: sonata.block}
+
+  infographics_list:
+    class: AppBundle\Block\InfographicsListBlock
+    arguments: [post_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  gallery_pick:
+    class: AppBundle\Block\GalleryPickBlock
+    arguments: [gallery_pick, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setModelManager, [@sonata.media.admin.media.manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  video_picks:
+    class: AppBundle\Block\VideoPicksBlock
+    arguments: [video_picks, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setModelManager, [@sonata.media.admin.media.manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  infographics_picks:
+    class: AppBundle\Block\InfographicsPicksBlock
+    arguments: [infographics_picks, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setModelManager, [@sonata.media.admin.media.manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  rubrics_list:
+    class: AppBundle\Block\RubricsListBlock
+    arguments: [rubrics_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  document_list:
+    class: AppBundle\Block\DocumentListBlock
+    arguments: [document_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+      - [setContainer, [@service_container]]
+    tags:
+      - {name: sonata.block}
+
+  construction_list:
+    class: AppBundle\Block\ConstructionListBlock
+    arguments: [construction_list, @templating]
+    calls:
+      - [setRequestStack, [@request_stack]]
+      - [setSearchService, [@app.search.construction_object]]
+    tags:
+      - {name: sonata.block}
+
+  organization_list:
+    class: AppBundle\Block\OrganizationListBlock
+    arguments: [organization_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  contact_person_list:
+    class: AppBundle\Block\ContactPersonListBlock
+    arguments: [contact_person_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  recent_page:
+    class: AppBundle\Block\RecentPagesBlock
+    arguments: [recent_page, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setRecentPageManager, [@app.recent_page_manager]]
+    tags:
+      - {name: sonata.block}
+
+  metro_constructed_stations_block:
+    class: AppBundle\Block\MetroConstructedStationsBlock
+    arguments: [metro_constructed_stations_block, @templating]
+    calls:
+      - [setContainer, [@service_container]]
+    tags:
+      - {name: sonata.block}
+
+  hot_news_block:
+    class: AppBundle\Block\HotNewsBannerBlock
+    arguments: [hot_news_block, @templating]
+    tags:
+      - {name: sonata.block}
+
+  banner_announcements_dk:
+    class: AppBundle\Block\BannerAnnouncmentsDkBlock
+    arguments:
+      - banner_announcements_dk
+      - @templating
+    calls:
+      - [setContainer, [@service_container]]
+    tags:
+      - {name: sonata.block}
+
+  service_banner:
+    class: AppBundle\Block\ServiceBannerBlock
+    arguments: [service_banner, @templating]
+    tags:
+      - {name: sonata.block}
+
+  road_construction_map_banner:
+    class: AppBundle\Block\RoadConstructionMapBannerBlock
+    arguments: [road_construction_map_banner, @templating]
+    calls:
+      - [setContainer, [@service_container]]
+    tags:
+      - {name: sonata.block}
+
+  road_interchange_banner:
+    class: AppBundle\Block\RoadInterchangeBannerBlock
+    arguments: [road_interchange_banner, @templating]
+    tags:
+      - {name: sonata.block}
+
+  destruction_banner:
+    class: AppBundle\Block\DestructionBannerBlock
+    arguments: [destruction_banner, @templating]
+    tags:
+      - {name: sonata.block}
+
+  renovation_banner:
+    class: AppBundle\Block\RenovationBannerBlock
+    arguments: [renovation_banner, @templating]
+    tags:
+      - {name: sonata.block}
+
+  header_search_filters:
+    class: AppBundle\Block\HeaderSearchFiltersBlock
+    arguments: [header_search_filters, @templating]
+    calls:
+      - [setCatalogue, [@app.publication_catalogue]]
+      - [setRequestStack, [@request_stack]]
+    tags:
+      - {name: sonata.block}
+
+  announcement:
+    class: AppBundle\Block\AnnouncementBlock
+    arguments: [announcement, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+    tags:
+      - {name: sonata.block}
+
+  simple_template:
+    class: AppBundle\Block\SimpleTemplateBlock
+    arguments: [simple_template, @templating]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_homepage_posts:
+    class: AppBundle\Block\SubordinateHomepagePostsBlock
+    arguments: [subordinate_homepage_posts, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+      - [setCache, [%subordinate_cache%]]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_smi:
+    class: AppBundle\Block\SubordinateSmiBlock
+    arguments: [subordiante_smi, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+      - [setCache, [%subordinate_cache%]]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_media:
+    class: AppBundle\Block\SubordinateMediaBlock
+    arguments: [subordiante_media, '@templating']
+    calls:
+      - [setEntityManager, ['@doctrine.orm.entity_manager']]
+      - [setCache, [%subordinate_cache%]]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_publications_list:
+    class: AppBundle\Block\SubordinatePublicationsListBlock
+    arguments: [subordinate_publications_list, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setFinder, [@fos_elastica.finder.app]]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_header:
+    class: AppBundle\Block\SubordinateHeaderBlock
+    arguments: [subordinate_header, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setCache, [%subordinate_cache%]]
+    tags:
+      - {name: sonata.block}
+
+  subordinate_direction:
+    class: AppBundle\Block\SubordinateDirectionBlock
+    arguments: [subordinate_direction, @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+      - [setCache, [%subordinate_cache%]]
+    tags:
+      - {name: sonata.block}
+
+  material_owner_link:
+    class: AppBundle\Block\MaterialOwnerLinkBlock
+    arguments: [material_owner_link, @templating]
+    calls:
+      - [setAdminLocator, ['@app.admin_locator']]
+      - [setTokenStorage, ['@security.token_storage']]
+    tags:
+      - {name: sonata.block}
+
+  email_subscription_form_block:
+    class: AppBundle\Block\EmailSubscriptionFormBlock
+    arguments: ['email_subscription_form_block', @templating]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - {name: sonata.block}
+

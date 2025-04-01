@@ -1,0 +1,50 @@
+.collapsable-table__btn {
+	display: block;
+	font-family: Onest,sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+    font-size: 18px;
+	color: #158ce7 !important;
+	text-decoration: none !important;
+	border-bottom: none !important;
+	text-align: center;
+	width: 200px;
+	margin: 30px auto 30px;
+	cursor: pointer;
+	transition: 0.5s transform ease-out;
+	transform: translateY(0px);
+	&:after {
+		content: '';
+		background: url('/images/icons/collapse-blue.svg') no-repeat;
+		background-size: contain;
+		width: 25px;
+		height: 32px;
+		margin: 10px auto 0px;
+		display: block;
+	}
+	&-expand {
+		display: inline-block;
+	}
+	&-collapse {
+		display: none;
+	}
+	&:hover {
+		transform: translateY(-5px);
+	}
+	&.active {
+		&:after {
+			transform: rotate(180deg);
+		}
+	}
+	&.active &-expand {
+		display: none;
+	}
+	&.active &-collapse {
+		display: inline-block;
+	}
+}
+
+.cke_editable .collapsable-table {
+	outline: 20px solid #ececec;
+	margin: 35px 0;
+}

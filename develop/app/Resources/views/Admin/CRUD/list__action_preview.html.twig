@@ -1,0 +1,6 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('preview') %}
+    <a href="{{ admin.generateObjectUrl('preview', object) }}" class="btn btn-sm btn-default edit_link" target="_blank" title="Предпросмотр">
+        <i class="glyphicon glyphicon-eye-open"></i>
+        Предпросмотр
+    </a>
+{% endif %}

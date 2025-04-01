@@ -1,0 +1,13 @@
+<footer class="page-footer container__full">
+    {{ sonata_block_render({type: 'simple_template'}, {template: 'Subordinate/menu/footer_menu.html.twig'}) }}
+
+    <div class="footer__container">
+        <div class="footer__socials">
+            <div class="socials">
+                <img src="https://informer.yandex.ru/informer/20919760/3_0_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:20919760,lang:'ru'});return false}catch(e){}" />
+            </div>
+            {% include '::/widgets/socials.html.twig' with {'socials': []} %}
+        </div>
+        {% include 'Subordinate/widgets/footer/_copyright.html.twig' %}
+    </div>
+</footer>

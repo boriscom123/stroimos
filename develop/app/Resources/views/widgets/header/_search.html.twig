@@ -1,0 +1,18 @@
+<form class="search-form search-form__trigger" action="{{ path('app_search') }}">
+    <label for="search" class="search-form__icon"></label>
+    <div class="search-form__dummy-input">Поиск по порталу</div>
+</form>
+
+<div id="searchFormOverflow">
+  <a href="#" class="search-form__close">✕</a>
+  <form class="search-form" action="{{ path('app_search') }}">
+    <div class="search-form__container">
+      <label for="search" class="search-form__icon"></label>
+      <input type="search" class="search-form__input" id="searchField"
+      name="q" autocomplete="off" placeholder="Поиск по порталу"
+      value="{{ app.request.get('q')|default('') }}"/>
+      <button type="submit" class="search-form__submit">Найти</button>
+    </div>
+      {{ sonata_block_render({'type': 'header_search_filters'}, {query_t: app.request.get('t')}) }}
+  </form>
+</div>

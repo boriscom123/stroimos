@@ -1,0 +1,4 @@
+<data-loadmore data-limit="{{ limit }}" data-offset="{{ next_offset }}"></data-loadmore>
+{% for item in publications %}
+    {% include 'Subordinate/widgets/publication/_teaser.html.twig' with {'entity': item} %}
+{% endfor %}

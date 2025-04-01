@@ -1,0 +1,17 @@
+<div class="documents-page__draft-table-row">
+    <div class="documents-page__draft-table-item title">
+        <a href="{{ path('app_document_show', { id: document.id}) }}">{{ document.title }}</a>
+    </div>
+    <div class="documents-page__draft-table-item addingdate">
+        {{ document.dateOfAdding|format_date }}
+    </div>
+    <div class="documents-page__draft-table-item enddate">
+        {{ document.expirationDate|format_date }}
+    </div>
+    <div class="documents-page__draft-table-item text">
+
+    </div>
+    <div class="documents-page__draft-table-item address">
+        {{ document.address }}
+    </div>
+</div>

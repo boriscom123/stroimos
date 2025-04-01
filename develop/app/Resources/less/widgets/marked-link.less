@@ -1,0 +1,27 @@
+a.marked-link {
+  font-family: Onest, sans-serif;
+  font-weight: 600;
+  display: inline-block;
+  // margin-left: 39px;
+  position: relative;
+  margin-left: 34px;
+  
+  &:before {
+    content: '';
+    display: block;
+    background: url('/images/icons/marked-link.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: -34px;
+    transition: background-image 0.4s ease;
+  }
+
+  &:hover::before {
+    background-image: url('/images/icons/marked-link-hover.svg');
+  }
+}

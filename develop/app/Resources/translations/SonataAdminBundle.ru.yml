@@ -1,0 +1,8 @@
+message_form_group_empty: Нет доступных полей.
+td_compare: Сравнить
+label_compare_revision: Сравнить ревизии
+btn_send_notification: Отправить уведомление
+link_restore: Восстановить
+link_delete_forever: Удалить навсегда
+flash_restore_success: Элемент успешно восстановлен.
+btn_create_and_create_a_new_one: Сохранить и добавить новый

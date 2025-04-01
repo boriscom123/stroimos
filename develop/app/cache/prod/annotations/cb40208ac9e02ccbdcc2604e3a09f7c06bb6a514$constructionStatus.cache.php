@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:29:"Doctrine\\ORM\\Mapping\\Embedded":2:{s:5:"class";s:46:"AppBundle\\Entity\\Embeddable\\ConstructionStatus";s:12:"columnPrefix";N;}}');

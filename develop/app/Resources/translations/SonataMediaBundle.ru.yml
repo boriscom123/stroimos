@@ -1,0 +1,36 @@
+gallery_has_media: Элемент медиагалереи
+
+main_image: Основное изображение
+infographics: Инфографика
+file: Файл
+video: Видеоклип
+gallery_media: Фото фотогалереи
+person: Фото персоны
+person_top: Фото персоны, первое в списке
+initiative: Соц. инициативы
+metro_timeline: Таймлайн метро
+label.label_created_at: Дата создания
+label.label_updated_at: Дата обновления
+
+
+sonata.media.provider.external_image: Изображение из внешнего источника
+sonata.media.provider.video: Локальное видео
+
+reference: Оригинал
+gallery_media_thumb: Маленье
+
+list:
+    label_description: Описание
+    label_size: Размер
+    label_created_at: Дата создания
+    label_updated_at: Дата обновления
+
+form:
+    label_category: Категория
+    label_created_at: Дата создания
+    label_updated_at: Дата обновления
+
+filter:
+    label_category: Категория
+    label_created_at: Фильтр по дате создания
+    label_copyright: Фильтр по Копирайту

@@ -1,0 +1,100 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': post.category.alias, 'object': post } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': 'post',
+    'subject': post
+    } %}
+
+    <article class="news-wrapper">
+        <section class="news-wrapper__content-wrap">
+            <div class="news-wrapper__sidebar interview">
+                {% include '::/widgets/news/share.html.twig' %}
+
+                {% set _image = post.heroImage|default(post.image) %}
+                {% if _image %}
+                    <div class="interview__custom-img" style="background-image: url('{% path _image, 'thumb465x548' %}')"></div>
+                {% endif %}
+
+                {% include '::/widgets/news/_geo_points.html.twig' %}
+            </div>
+            
+            <div class="news-wrapper__content">
+                <header class="news-header">
+                    <div class="news-title-wrapper">
+                        {% if post.publishStartDate.date is defined and post.publishStartDate.date is not empty %}
+                            <time class="news-date">{{ post.publishStartDate.date|format_date }} <span class="news-time">{{ post.publishStartDate.date|date('H:i') }}</span></time>
+                        {% else %}
+                            <time class="news-date"><span class="news-time"></span></time>
+                        {% endif %}
+
+                        <h1 class="news-title">{{ post.title }}</h1> 
+                    </div>
+
+                    <div class="news-themes">
+                        <div class="news-themes__wrapper">
+                            {% block rubricsblock %}
+                                {% if post.rubrics is defined and post.rubrics is not empty %}
+                                    <p class="news-themes__title">Темы в материале:</p>
+                                        {% for item in post.rubrics %}
+                                            <p class="news-themes__list-item">
+                                                <a class="" href="{{ entity_path(item, {_context: post}) }}">{{ item.title }}</a>
+                                            </p>
+                                        {% endfor %}
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </header>
+
+                <div class="js-mediator-article">
+                    <h2 class="news-wrapper__content-lead">{{ post.lead }}</h2>
+                    {{ embed_content(post.content, post) }}
+                    {% block sonata_preview %}{% endblock %}
+                </div>
+                {% include '::/widgets/news/author.html.twig'  with {'type': 'текста', 'article': post} %}
+            </div>
+
+            <div class="container__full news-wrapper__under-news">
+                {% include '::/widgets/news/share.html.twig' %}
+                {% include '::/widgets/tags.html.twig' with {'publication': post} %}
+            </div>
+
+            {% if post.attachments and post.attachments is not empty %}
+                <h3 class="news-wrapper__tags-title">Прикрепленные материалы</h3>
+                <ul class="files__list">
+                    {% for file in post.attachments %}
+                        <li class="files__list-item">
+                            <a class="files__list-item-link" href="{% path file.file, 'reference' %}" target="_blank" title="{{ file.file.name }}">
+                                {% thumbnail file.file, 'thumb' %}
+                                {{ file.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if post.isCommentsOpen %}
+                {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity_reference(post)} %}
+            {% endif %}
+
+{#             <div id="unit_93856" style="display: none;"><a href="http://mirtesen.ru/" >Новости МирТесен</a></div>
+
+            {% include '::/widgets/spotlight/_related.html.twig' with {'item': post} %} #}
+
+            {{ sonata_block_render({'type': 'more_like_this'}, {subject: post, 'extra_cache_keys': {context: ['post_' ~ post.id]} } ) }}
+
+            {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        </section>
+    </article>
+
+{% endblock %}

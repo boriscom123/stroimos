@@ -1,0 +1,495 @@
+title: Комплекс градостроительной политики и строительства города Москвы
+short_title: Градостроительный комплекс Москвы
+rss_description: Новостная лента
+ya_zen_rss_description: Самые важные новости о строительстве в Москве: метро, дороги, жилье, снос пятиэтажек, Новая Москва. А также эксклюзивные фото и видео!
+destruction_left: "%count% пятиэтажку|%count% пятиэтажки|%count% пятиэтажек"
+construction_objects_total: "объект|объекта|объектов"
+
+email_subscription:
+    subscribe_request:
+        success: Спасибо, на указанный вами электронный адрес было отправлено письмо со ссылкой на страницу управления рассылкой!
+        error:
+            email_not_valid: Введён некорректный адрес электронной почты
+            email_exists: Указанный адрес уже есть в списке рассылки. Благодарим за подписку!
+            email_not_confirmed: На указанный вами электронный адрес ранее было отправлено письмо со ссылкой на страницу управления рассылкой. Пожалуйста, перейдите по этой ссылке и подтвердите получение рассылки
+    unsubscribe_request:
+        success: Ваш адрес был успешно удалён из рассылки!
+
+biography: Дата рождения
+education: Образование
+experience: Трудовая деятельность
+awards: Награды и поощрения
+family: Семейное положение
+date_range_start: Дата создания c
+date_range_end: Дата создания по
+related:
+    news: Новости по теме
+    press_release: Пресс-релизы по теме
+    infographics: Инфографика по теме
+    gallery: Фотогалереи по теме
+    video: Видео по теме
+    construction: Связанные объекты строительства
+    document: Связанные документы
+    metro: Метро
+    road: Дороги
+    common: Связанные материалы
+
+#admin
+
+Biography: Биография
+Education: Образование
+Experience: Трудовая деятельность
+Awards: Награды и поощрения
+Family: Семейное положение
+Notes: Примечание
+
+admin:
+    construction:
+        isnew: Новый
+        updated: Сверить данные
+        accept_new_data: Принять новые данные за базовые
+        new_data_accepted: Новые данные приняты за базовые
+        onlyNew: новые
+        onlyUpdated: обновленные
+soap_data:
+    ObjectName: Наименование объекта строительства
+    ObjectArea: Округ
+    ObjectDistrict: Район
+    ObjectAddress: Строительный адрес
+    ConstructionWorkType: Вид работ (строительство или реконструкция)
+    MainFunctional: Функциональное назначение объекта
+    SourceOfFinance: Источник финансирования
+    Square: Площадь застройки
+    Floor: Этажность
+    ObjectStatus: Статус объекта
+    DeveloperOrgForm: Застройщик, ОПФ
+    DeveloperOrgName: Наименование организации
+    PointXyGeometryCoordinates: Координаты точки Х, У для пиктограммы
+    LandGeometryCoordinates: Cords
+    UpdateDateTime: Дата и время обновления данных об объекте строительства в Реестре строек
+
+
+publication:
+    news: новости
+    city_news: новости города
+    articles: статьи
+    builder_science: строительная наука
+    interviews: интервью
+    photo_lines: фотоленты
+    press_releases: пресс-релизы
+    video: видео
+    gallery: фото
+    infographics: инфографика
+    law_document: законы, постановления, распоряжения, указы
+    draft_document: проекты правовых нормативных актов
+    decision_document: решения об утверждении проектной документации
+    initiative: социальная инициатива
+    event: онлайн конференции
+    page: страницы
+    construction: объекты строительства
+    shorthand-reports: стенограммы
+    road: дорожные объекты
+    metro_station: метро
+    metro: метро
+    administrative_unit: округа и районы
+    administrative_area: округа
+    city_district: районы
+
+publication_group:
+    posts: Публикации
+    media: Медиа
+    documents: Документы
+    buildings: Строительство
+
+#######################################
+############## Admin ##################
+#######################################
+
+editable_format:
+  thumb1440: Заголовочное изображение
+  page_header_700: Заголовочное изображение 700*400
+  thumb210: Маленькая иконка (для списков)
+  thumb300: Средняя иконка
+  thumb300x420: Изображение для фона
+  thumb469: 469x275
+  thumb715x250: Баннер 715 на 250
+  thumb960x470: Изображение слайдера
+  thumb589: Изображение для встраиваемого контента
+  thumb70: Изображение для цитаты
+  thumb630x338: Кроп для инфографики
+  thumb680x495: Изображение для заставки видео
+  thumb300x90: Видео на главной ДК
+  thumb465x548: Кропп для интервью
+  thumb340x340: Блок новостей на главной ДК
+  thumb271x125: Блок новостей на главной ДК маленький
+  thumb295x345: Блок пресс-релизов на пресс-релизах ДК
+  direction: Изображение для страницы "Руководство" ДК
+  direction_main: Изображение руководителя для страницы "Руководство" ДК
+
+breadcrumb:
+    link_import_filter_list: Фильтры импорта
+    link_import_filter_create: Создание фильтра импорта
+    link_action_log_list: Учет пользовательских действий
+    link_administrative_area_list: Административные округа
+    link_article_rubric_list: Рубрики публикаций
+    link_article_source_list: Ведомства
+    link_author_list: Авторы
+    link_draft_list: Черновики
+    link_block_list: Блоки
+    link_city_district_list: Районы
+    link_comment_list: Комментарии
+    link_faq_block_list: Блоки вопросов и ответов
+    link_construction_list: Объекты строительства
+    link_construction_type_list: Разделы объектов строительства
+    link_contact_person_list: Контакты
+    link_decision_document_list: Решения об утверждении проектной документации
+    link_document_rubric_list: Рубрики
+    link_draft_document_list: Проекты правовых нормативных актов
+    link_email_subscription_list: Подписчики
+    link_error_report_list: Отчеты об ошибках
+    link_spotlight_item_list: В центре внимания
+    link_gallery_list: Фотогалереи
+    link_gallery_picks_list: Фото на главной
+    link_gallery_rubric_list: Рубрики фото
+    link_infographics_list: Инфографика
+    link_infographics_rubric_list: Рубрики инфографики
+    link_law_document_list: Законы указы постановления распоряжения
+    link_menu_list: Меню
+    link_menu_node_create: Создание пункта меню
+    link_menu_node_list: Пункты меню
+    link_metro_line_list: Линии метро
+    link_metro_station_list: Станции метро
+    link_newsletter_list: Подписки
+    link_organization_directory_list: Справочники
+    link_organization_list: Организации
+    link_outgoing_agency_list: Исходящий орган
+    link_page_list: Страницы
+    link_person_list: Персоны
+    link_post_list: Публикации
+    link_post_picks_history_list: Топ новостей
+    link_road_list: Дороги
+    link_tag_list: Теги
+    link_thread_list: Комментарии
+    link_user_role_list: Роли
+    link_video_list: Видеоклипы
+    link_video_picks_list: Видео на главной
+    link_video_rubric_list: Рубрики видео
+    link_banner_list: Баннеры
+    link_quote_list: Цитаты
+    link_faq_list: Блоки вопрос-ответ
+    # deletion
+    link_construction_delete: Удаление
+    link_post_delete: Удаление
+    link_page_delete: Удаление
+    link_tag_delete: Удаление
+    link_articlerubric_delete: Удаление
+    link_author_delete: Удаление
+    link_administrative_area_delete: Удаление
+    link_citydistrict_delete: Удаление
+    link_constructiontype_delete: Удаление
+    link_gallery_delete: Удаление
+    link_video_delete: Удаление
+    link_infographics_delete: Удаление
+    link_galleryrubric_delete: Удаление
+    link_videorubric_delete: Удаление
+    link_infographicsrubric_delete: Удаление
+    link_menu_delete: Удаление
+    link_menu_node_delete: Удаление
+    link_desiciondocument_delete: Удаление
+    link_draftdocument_delete: Удаление
+    link_lawdocument_delete: Удаление
+    link_outgoingagency_delete: Удаление
+    link_documentrubric_delete: Удаление
+    link_person_delete: Удаление
+    link_organizationdirecroty_delete: Удаление
+    link_organization_delete: Удаление
+    link_contactperson_delete: Удаление
+    link_newsletter_delete: Удаление
+    link_emailsubsription_delete: Удаление
+    link_errorreport_delete: Удаление
+    link_actionlog_delete: Удаление
+    link_userrole_delete: Удаление
+    link_initiative_delete: Удаление
+    link_event_delete: Удаление
+    link_eventannounce_delete: Удаление
+    link_banner_delete: Удаление
+    link_quoted_delete: Удаление
+    # history
+    link_page_history: История изменений
+    link_post_history: История изменений
+    link_infographics_history: История изменений
+#todo: remove on extra remove
+    link_initiative_list: Социальные инициативы
+    link_event_list: Мероприятия
+    link_event_announce_list: Анонсы мероприятий
+    link_event_feedback_list: Сообщения
+    link_destruction_list: Снос пятиэтажек
+    link_metro_timeline_year_list: Таймлайн метро
+    link_metro_timeline_year_batch_upload: Пакетная загрузка схем метро
+    link_media_batch_upload: Пакетная загрузка медиа
+    link_unsubscribe_reason_list: Причины отказа от рассылки
+    link_text_block_list: Текстовые блоки
+
+# add translations here, then copy to 'list', 'fiter' and 'show' keys
+form: &field_labels
+    label_daily: Ежедневный
+    label_filter: Фильтр импорта
+    label__action: Действия
+    label_abbreviation: Аббревиатура
+    label_action: Действие
+    label_actual_address: Фактический адрес
+    label_address: Адрес
+    label_address_geo_point: Геоточка
+    label_address_geo_polygon: Полигон
+    label_address_text: Адрес
+    label_administrative_unit: Административная единица
+    label_alias: Псевдоним
+    label_appointment: Должность
+    label_area_of_the_territory: Площадь территории
+    label_author: Автор
+    label_awards: Награды и поощрения
+    label_biography: Биография
+    label_body: Сообщение
+    label_capacity_description: Пассажиропоток
+    label_category: Категория
+    label_code: Код
+    label_color: Цвет
+    label_company_type: Организационно правовая форма
+    label_construction: Объект строительства
+    label_construction_end_year: Год окончания строительства
+    label_construction_start_year: Год начала строительства
+    label_construction_status: Состояние объекта
+    label_construction_status_description: Описание состояния объекта
+    label_content: Текст
+    label_created_at: Создано
+    label_custom_data_main_functional: Данные
+    label_custom_data_object_status: Состояние объекта
+    label_custom_data_point_xy_geometry_coordinates: Местоположение
+    label_date: Дата
+    label_description: Расшифровка
+    label_education: Образование
+    label_email: Адрес электронной почты
+    label_end_year: Год окончания строительства
+    label_entity: Заголовок
+    label_entrance_hall_description: Описание вестибюлей
+    label_event: Мероприятие
+    label_event_date: Дата проведения
+    label_event_title: Мероприятие
+    label_experience: Трудовая деятельность
+    label_family: Семейное положение
+    label_fax: Факс
+    label_feature_description: Описание особенностей
+    label_file: Файл
+    label_first_name: Имя
+    label_full_name: ФИО
+    label_full_title: Полное наименование
+    label_gallery: Фотогалерея
+    label_head: Руководитель
+    label_head_organization: Головная организация
+    label_homepage: Размещено на главной
+    label_id: ID
+    label_image: Изображение
+    label_hero_image: Заголовочное изображение
+    label_infographics: Инфографика
+    label_ip: IP
+    label_is_comments_open: Комментирование
+    label_last_comment_at: Последний комментарий
+    label_last_name: Фамилия
+    label_lead: Лид
+    label_legal_address: Юридический адрес
+    label_line: Линия метро
+    label_lower_organizations: Подчинённые организации
+    label_message: Сообщение
+    label_meta_description: Описание
+    label_meta_keywords: Ключевые слова
+    label_metro: Метро
+    label_module: Модуль
+    label_name: Название
+    label_node_name: Имя пункта меню
+    label_notes: Дополнительно
+    label_num_comments: Количество комментариев
+    label_number_of_parking_places: Количество парковочных мест
+    label_open_in_new_tab: Открывать в новой вкладке
+    label_organization_directory: Справочник
+    label_organization_title: Организация
+    label_page: Страница
+    label_patronymic: Отчество
+    label_permalink: Ссылка
+    label_phone: Телефон
+    label_post: Публикация
+    label_priority_position: Приоритет
+    label_project_designer: Автор проекта
+    label_project_series: Серия проекта
+    label_publication_title: Заголовок публикации
+    label_publish_end_date: Дата окончания публикации
+    label_publish_start_date: Дата начала публикации
+    label_publishable: Опубликовано
+    label_publishable_in_rss: В RSS
+    label_related_posts: Публикации
+    label_relevant_news_shown: Показывать релевантные публикации
+    label_road: Дорожный объект
+    label_road_type: Тип транспортного объекта
+    label_roominess: Вместительность
+    label_route: Маршрут
+    label_rubrics: Рубрики
+    label_searchable: В поиске
+    label_slug: Путь
+    label_source: Ведомство, в ведении которого находится информация
+    label_start_year: Год начала строительства
+    label_state: Статус
+    label_status: Статус
+    label_sub_routes: Вложенные маршруты для хлебных крошек
+    label_tags: Теги
+    label_teaser: Описание
+    label_title: Заголовок
+    label_top_image: Изображение для первого в списке
+    label_type: Тип
+    label_updated_at: Обновлено
+    label_uri: Ссылка
+    label_user: Пользователь
+    label_video: Видео
+    label_video_player_code: Код видеоплеера
+    label_website: Вебсайт
+    label_link: Приватная ссылка
+    label_hpsm_id: HPSM ID
+    label_panorama: Аэрофотосъемка
+    label_year: Год
+    label_container: Контейнер
+    label_for_rss: RSS wi-fi в метро
+    label_for_ya_zen_rss: RSS Яндекс.Дзен
+    label_word_is_small_rss: RSS Мир тесен
+    label_hidden_from_gallery: Скрыт из списка галерей
+    label_in_top: В топе новостей
+    label_is_target_blank: Открывать в новом окне?
+    label_pages: Используется на страницах
+    label_template_image: Изображение шаблона
+    label_show_in_structure: Отображать в структуре?
+    label_text: Текст
+    label_person: Персона
+    label_short_title: Короткий заголовок
+    label_short_post: Должность в цитатах
+    label_owner: Материал принадлежит организации
+    label_owners: Материал принадлежит организациям
+    label_weight: Важность/вес (при выводе сортируется от большего к меньшему)
+    label_url: Ссылка
+    label_construction_type: Тип объекта строительства (Раздел)
+    label_parameters: Характеристики
+    label_construction_parameter: Характеристика
+    label_value: Значение
+    label_construction_parameter_values: Значения характеристик
+    label_road_parameter_values: Значения характеристик
+    label_background_image: Картинка на фоне
+    label_publication_type: Тип публикации
+    label_number: Номер
+    label_referrer: Страница, с которой был осуществлён переход
+    label_mobile_content: Текст для мобильной версии
+    label_journalist_writer: Журналист-райтер
+    label_editor: Редактор
+    label_square: Площадь (км. кв.)
+    label_population: Число жителей (чел.)
+    label_polygon: Полигон
+    label_page_title: Заголовок страницы
+    label_extra_information: Дополнительная информация
+    label_questions_and_answers: Вопросы и ответы
+    label_email_subscription_adm_unit_choise: Новости какого округа или района Вам интересны?
+    label_question: Вопрос
+    label_answer: Ответ
+    label_filter_by_import: Фильтр по импорту
+    label_reason: Причина
+    label_are_coordinates_set: Наличие координат
+    label_gallery_wallpaper: Обложка фотогалереи в рассылке
+    label_spotlight_item_wallpaper: Обложка для блока "В центре внимания"
+    label_animated_wallpaper: Анимированные обои
+    manyEmailFromYou: Получаю от вас слишком много писем
+    manyEmail: В целом получаю много писем
+    comeIntoSiteEveryDay: Каждый день захожу на сайт
+    constructionIsNotInteresting: Больше не интересует тема строительства
+    other: Другое
+    are_set: Установлены
+    are_not_set: Не установлены
+    label_social_account_urls: Ссылки на аккаунты в социальных сетях
+    label_is_associated_with_adm_unit: Связь с округом или районом
+    label_carousel_image1: Картинка карусели
+    label_carousel_image2: Картинка карусели
+    label_carousel_image3: Картинка карусели
+    label_carousel_image4: Картинка карусели
+    label_carousel_image5: Картинка карусели
+list:
+    <<: *field_labels
+
+show:
+    <<: *field_labels
+
+filter:
+    <<: *field_labels
+
+block_type:
+    metro_constructed_stations_block: Построенные станции метро
+    hot_news_block: Срочные новости
+    banner_announcements_dk: Баннер анонсов ДК
+    road_construction_map_banner: Карта строительства и реконструкции дорожно-транспортных объектов
+    road_interchange_banner: Реконструкция развязок МКАД
+    destruction_banner: Баннер для сноса пятиэтажек
+    renovation_banner: Баннер для реноваций
+    service_banner: Баннер для сервисов
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~ Admin ~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+publications_report:
+    news: Новости
+    news_city: Новости города
+    news_total: Количество подготовленных и опубликованных новостей
+    article_total: Количество подготовленных и опубликованных статей
+    article: Cтатьи
+    interview: Количество подготовленных и опубликованных интервью
+    press_release: Количество подготовленных и опубликованных пресс-релизов
+    shorthand_report: Количество подготовленных и опубликованных стенограмм по итогам мероприятий
+    announcement: Количество подготовленных и опубликованных анонсов
+    document: Количество опубликованных НПА по вопросам, относящимся к сфере "Градполитика"
+    video: Количество подготовленных и опубликованных видеоматериалов
+    photo: Количество подготовленных и опубликованных фотоматериалов
+    infographic: Инфографика
+    infographic_entity: Количество подготовленных и опубликованных материалов инфографики
+    infographic_from_media: Количество подготовленных и опубликованных фотоматериалов инфографики
+    banner: Количество подготовленных и опубликованных баннеров
+    banner_on_main_page: Баннеров на главной
+    embedded_banner: Встраиваемых баннеров
+    spotlightitem_banner: Баннеров "В центре внимания"
+    collage: Количество подготовленных и опубликованных фотоколлажей и графики
+    page: Страницы
+    page_builder_science: Страницы - Строительная наука
+    page_photo_lines: Статьи - Фотоленты
+    page_person: Страницы - Персоны
+    page_organization: Страницы - Организации
+    page_road: Страницы - Дороги
+    page_metro: Страницы - Метро
+    page_construction: Страницы - Объекты строительства
+    page_faq: Страницы - Вопросы и ответы
+    page_total: Количество подготовленных и опубликованных веб-страниц портала https://stroi.mos.ru в тематических разделах сайта
+    page_newsletters: Страницы - почтовые рассылки
+
+action:
+    clear_top: Убрать из топа
+    restore: Восстановить
+
+flash_batch:
+    clear_top_error: При изменении объектов возникла ошибка
+    clear_top_success: Объекты убраны из топа
+
+dgp: ДГП
+dgi: ДГИ
+dsti: ДСТИ
+ds: ДС
+drnt: ДРНТ
+stroinadzor: Стройнадзор
+mka: Москомархитектура
+invest: Москомстройинвест
+exp: Мосгорэкспертиза
+mke: МКЭ
+stroi_mos: Градостроительный комплекс
+
+field:
+    is_required: Поле "%label%" обязательно для заполнения
+    contains_unknown_value: Поле "%label%" содержит неизвестное значение

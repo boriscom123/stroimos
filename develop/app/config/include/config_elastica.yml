@@ -1,0 +1,489 @@
+parameters:
+    fos_elastica.default_tag_mapping:
+        type: object
+        index: not_analyzed
+        properties:
+            id: ~
+            title: ~
+    fos_elastica.default_owner_mapping:
+        type: object
+        index: not_analyzed
+        properties:
+            id: ~
+            search_name: ~
+
+fos_elastica:
+    clients:
+        default: { host: %elasticsearch_host%, port: %elasticsearch_port% }
+    indexes:
+        app:
+            finder: ~
+            index_name: %elasticsearch_index_name%
+            settings:
+                index:
+                    analysis:
+                        char_filter:
+                          ru:
+                            type: mapping
+                            mappings: ['Ё=>Е', 'ё=>е']
+                        analyzer:
+                            document_number:
+                                type: custom
+                                filter: [lowercase, custom_word_delimiter]
+                                tokenizer: keyword
+                            default_index:
+                                type: custom
+                                tokenizer: standard
+#                                filter: [stopwords_ru, stop, custom_word_delimiter, lowercase, stemmer_ru, stemmer_en]
+                                filter: [stopwords_ru, stopwords_en, custom_word_delimiter, lowercase, russian_morphology, english_morphology]
+                                char_filter: [html_strip, ru]
+                            default_search:
+                                type: custom
+                                tokenizer: standard
+#                                filter: [stopwords_ru, stop, custom_word_delimiter, lowercase, stemmer_ru, stemmer_en]
+                                filter: [stopwords_ru, stopwords_en, custom_word_delimiter, lowercase, russian_morphology, english_morphology]
+                                char_filter: [html_strip, ru]
+                            address_index:
+                                type: custom
+                                tokenizer: standard
+                                filter: [lowercase, custom_word_delimiter, address_synonym, stopwords_ru, stopwords_address, address_ngram]
+                                char_filter: [ru]
+                            address_search:
+                                type: custom
+                                tokenizer: standard
+                                filter: [lowercase, custom_word_delimiter, address_synonym, stopwords_ru, stopwords_address]
+                                char_filter: [ru]
+                            addres_info_index:
+                                type: custom
+                                tokenizer: standard
+                                filter: [lowercase, custom_word_delimiter, english_morphology, russian_morphology, stopwords_ru, stopwords_en, stopwords_address]
+                                char_filter: [html_strip, ru]
+                        filter:
+                            address_ngram:
+                                type: edgeNGram
+                                min_gram: 1
+                                max_gram: 20
+                            stemmer_ru:
+                                type: snowball
+                                language: russian
+                            stemmer_en:
+                                type: snowball
+                                language: english
+                            stopwords_ru:
+                                type: stop
+                                stopwords: [а,без,более,бы,был,была,были,было,быть,в,вам,вас,весь,во,вот,все,всего,всех,вы,где,да,даже,для,до,его,ее,если,есть,еще,же,за,здесь,и,из,или,им,их,к,как,ко,когда,кто,ли,либо,мне,может,мы,на,надо,наш,не,него,нее,нет,ни,них,но,ну,о,об,однако,он,она,они,оно,от,очень,по,под,при,с,со,так,также,такой,там,те,тем,то,того,тоже,той,только,том,ты,у,уже,хотя,чего,чей,чем,что,чтобы,чье,чья,эта,эти,это,я]
+                                ignore_case: true
+                            stopwords_en:
+                                type: stop
+                                stopwords: _english_
+                                ignore_case: true
+                            custom_word_delimiter:
+                                type: word_delimiter
+                                # "PowerShot" ⇒ "Power" "Shot", части одного слова становятся отдельными токенами
+                                generate_word_parts: true
+                                generate_number_parts: true  # "500-42" ⇒ "500" "42"
+                                catenate_words: true  # "wi-fi" ⇒ "wifi"
+                                catenate_numbers: false  # "500-42" ⇒ "50042"
+                                catenate_all: true  # "wi-fi-4000" ⇒ "wifi4000"
+                                split_on_case_change: true  # "PowerShot" ⇒ "Power" "Shot"
+                                preserve_original: true  # "500-42" ⇒ "500-42" "500" "42"
+
+                            stopwords_address:
+                                type: stop
+                                stopwords: [ый, ой] #[город, москва, район, город, поселок, микрорайон, квартал, владение, шоссе, улица, проезд, дом, корпус, строение, станция, метро]
+                                ignore_case: true
+                            address_synonym:
+                                type: synonym
+                                synonyms:
+                                  - г => город
+                                  - пос => поселок
+                                  - мкр => микрорайон
+                                  - кв => квартал
+                                  - вл => владение
+                                  - ул => улица
+                                  - пр => проезд
+                                  - д => дом
+                                  - корп => корпус
+                                  - стр => строение
+            types:
+                post:
+                    mappings:
+                        title: { boost: 5 }
+                        author: { boost: 5 }
+                        teaser: { boost: 3 }
+                        lead: { boost: 3 }
+                        content: { boost: 1 }
+                        addressText: ~
+                        category:
+                            type: object
+                            properties:
+                                alias: { type: string, index: not_analyzed }
+                                title: ~
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Post
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                infographics:
+                    mappings:
+                        title: { boost: 5 }
+                        teaser: { boost: 3 }
+                        lead: { boost: 3 }
+                        content: { boost: 1 }
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Infographics
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                video:
+                    mappings:
+                        title: { boost: 5 }
+#                        teaser: { boost: 3 }
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+                        owners: %fos_elastica.default_owner_mapping%
+
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Video
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+
+                law_document:
+                    mappings:
+                        number:
+                            anlyzer: document_number
+                            boost: 4
+                        title: { boost: 3 }
+                        content: { boost: 2 }
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                        status: { type: boolean }
+                        approve_date: { type: date }
+                        outgoing_agency:
+                            type: object
+                            properties:
+                                id: ~
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+                        owners: %fos_elastica.default_owner_mapping%
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\LawDocument
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+
+                draft_document:
+                    mappings:
+                        title: { boost: 5 }
+                        content: { boost: 3 }
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                        date_of_adding: { type: date }
+                        expiration_date: { type: date }
+                        date_of_receipt: { type: date }
+                        archive: { type: boolean }
+                        tags: %fos_elastica.default_tag_mapping%
+                        owners: %fos_elastica.default_owner_mapping%
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\DraftDocument
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+
+                decision_document:
+                    mappings:
+                        number:
+                            anlyzer: document_number
+                            boost: 4
+                        title: { boost: 3 }
+                        content: { boost: 2 }
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                        status: { type: boolean }
+                        approve_date: { type: date }
+                        tags: %fos_elastica.default_tag_mapping%
+                        owners: %fos_elastica.default_owner_mapping%
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\DecisionDocument
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+#todo: disabled extra features
+#                initiative:
+#                    mappings:
+#                        title: { boost: 5 }
+#                        teaser: { boost: 3 }
+#                        content: { boost: 1 }
+#
+#                        publishable: { type: boolean }
+#                    persistence:
+#                        driver: orm
+#                        model: ExtraBundle\Entity\Initiative
+#                        provider: ~
+#                        listener: ~
+#                        finder: ~
+#                        repository: ~
+#                        elastica_to_model_transformer:
+#                            ignore_missing: true
+#
+#                event:
+#                    mappings:
+#                        title: { boost: 5 }
+#                        teaser: { boost: 3 }
+#                        content: { boost: 1 }
+#
+#                        publish_start_date: { type: date }
+#                        publish_end_date: { type: date }
+#                        publishable: { type: boolean }
+#                    persistence:
+#                        driver: orm
+#                        model: ExtraBundle\Entity\Event
+#                        provider: ~
+#                        listener: ~
+#                        finder: ~
+#                        repository: ~
+#                        elastica_to_model_transformer:
+#                            ignore_missing: true
+
+                gallery:
+                    mappings:
+                        title: { boost: 5 }
+                        teaser: { boost: 3 }
+                        #todo: handle medias publishable
+                        medias:
+                            type: object
+                            properties:
+                                title: ~
+                                teaser: ~
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                        hidden_from_gallery: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Gallery
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        repository: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+
+                page:
+                    mappings:
+                        title: { boost: 5 }
+                        content: { boost: 1 }
+
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Page
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        repository: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                    indexable_callback: isIndexable
+
+                construction:
+                    index_analyzer: addres_info_index
+                    search_analyzer: addres_info_index
+                    mappings:
+                        title: { boost: 5 }
+                        teaser: { boost: 3 }
+                        content: &construction_search_mapping {boost: 1, type: string, analyzer: default_search }
+                        objectName: ~
+                        objectDistrict: ~
+                        constructionWorkType: ~
+                        mainFunctional: ~
+                        sourceOfFinance: ~
+                        objectStatus: ~
+                        developerOrgName: ~
+
+                        publishable: { type: boolean }
+
+                        id: {type: string, index: not_analyzed}
+                        administrativeUnit:
+                            type: object
+                            properties:
+                                id: {type: integer}
+                                parent:
+                                    type: object
+                                    properties:
+                                        id: {type: integer}
+                        addressText: &construction_search_mapping {type: string, analyzer: address_index, include_in_all: false}
+                        searchData: *construction_search_mapping
+                        getGeoPointAsLonLatArray: {type: geo_point, lat_lon: true}
+                        functionalPurpose: {type: string, index: not_analyzed}
+                        constructionStatus: {type: string, index: not_analyzed}
+                        constructionStartYear: {type: integer}
+                        constructionEndYear: {type: integer}
+                        createdAt: { type: date }
+                        constructionParameterValues:
+                            type: object
+                            properties:
+                                constructionParameter:
+                                    type: object
+                                    index: not_analyzed
+                                    properties:
+                                        title: {type: string}
+                                value:
+                                    type: string
+                                    index: analyzed
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Construction
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        repository: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                    indexable_callback: object.isPublishable()
+                metro:
+                    mappings:
+                        line: {type: string}
+                        id: {type: string, index: not_analyzed}
+                        title: { boost: 5 }
+                        administrativeUnit:
+                            type: object
+                            properties:
+                                id: {type: integer}
+                                parent:
+                                    type: object
+                                    properties:
+                                        id: {type: integer}
+                        addressText: *construction_search_mapping
+                        searchData: *construction_search_mapping
+                        getGeoPointAsLonLatArray: {type: geo_point, lat_lon: true}
+                        functionalPurpose: {type: string, index: not_analyzed}
+                        constructionStatus: {type: string, index: not_analyzed}
+                        constructionStartYear: {type: integer}
+                        constructionEndYear: {type: integer}
+                        publishable: { type: boolean }
+                        createdAt: { type: date }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\MetroStation
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        repository: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                    indexable_callback: object.isPublishable()
+                road:
+                    mappings:
+                        roadType: {type: string, index: not_analyzed}
+                        id: {type: string, index: not_analyzed}
+                        title: { boost: 5 }
+                        administrativeUnit:
+                            type: object
+                            properties:
+                                id: {type: integer}
+                                parent:
+                                    type: object
+                                    properties:
+                                        id: {type: integer}
+                        addressText: *construction_search_mapping
+                        searchData: *construction_search_mapping
+                        getGeoPointAsLonLatArray: {type: geo_point, lat_lon: true}
+                        functionalPurpose: {type: string, index: not_analyzed}
+                        constructionStatus: {type: string, index: not_analyzed}
+                        constructionStartYear: {type: integer}
+                        constructionEndYear: {type: integer}
+                        publishable: { type: boolean }
+                        createdAt: { type: date }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Road
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        repository: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                    indexable_callback: object.isPublishable()
+                subordinate_publication:
+                    mappings:
+                        title: { boost: 5 }
+                        teaser: { boost: 3 }
+                        lead: { boost: 3 }
+                        content: { boost: 1 }
+                        addressText: ~
+                        category:
+                            type: object
+                            properties:
+                                alias: { type: string, index: not_analyzed }
+                                title: ~
+                        tags: %fos_elastica.default_tag_mapping%
+                        rubrics: %fos_elastica.default_tag_mapping%
+                        owners: %fos_elastica.default_owner_mapping%
+
+                        publish_start_date: { type: date }
+                        publish_end_date: { type: date }
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Post
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                    indexable_callback: isSubordinatePublication
+                administrative_unit:
+                    mappings:
+                        title: { boost: 5 }
+                        content: { boost: 2 }
+                        description: { boost: 1 }
+                        publishable: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\AdministrativeUnit
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                        elastica_to_model_transformer:
+                            ignore_missing: true

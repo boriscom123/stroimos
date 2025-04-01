@@ -1,0 +1,4 @@
+<data-loadmore data-limit="{{ limit }}" data-offset="{{ next_offset }}"></data-loadmore>
+{% for document in documents %}
+    {% include 'Subordinate/widgets/document/_teaser.html.twig' %}
+{% endfor %}

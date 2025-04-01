@@ -1,0 +1,34 @@
+.images-panel {
+    .button-wrapper {
+        margin: 4px;
+        text-align: right;
+    }
+}
+.sorting-panel {
+  min-width: 250px;
+  min-height: 18px;
+  background: #fefefe;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+  padding: 4px;
+
+  .item {
+    display: inline-block;
+    margin: 4px;
+    cursor: move;
+
+
+    div.image-container {
+      width: 140px;
+      height: 100px;
+      opacity: 0.4;
+    }
+  }
+
+  .item:nth-child(-n+5) {
+
+    div.image-container {
+      opacity: 1;
+    }
+  }
+}

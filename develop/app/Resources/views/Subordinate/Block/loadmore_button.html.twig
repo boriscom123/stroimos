@@ -1,0 +1,15 @@
+<div class="loadmore-btn__wrap">
+    <span id="loadMore" class="loadmore-btn"
+          data-target="{{ target | default('') }}"
+          data-item="{{ item | default('') }}"
+          data-source="{{ source | default('') }}"
+          data-offset="{{ offset | default(0) }}"
+          data-limit="{{ limit | default(0) }}"
+          {% if order is defined and order %} data-order = {{ order }} {% endif %}>
+        <span class="loadmore-btn__icon"></span>
+        <span class="loadmore-btn__label">
+            {{ title | default('Ещё') }}
+        </span>
+    </span>
+</div>
+

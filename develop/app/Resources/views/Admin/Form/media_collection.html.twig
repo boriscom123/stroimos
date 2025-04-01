@@ -1,0 +1,141 @@
+{% extends '@SonataDoctrineORMAdmin/Form/form_admin_fields.html.twig' %}
+
+{% block media_collection_widget %}
+        <div id="field_container_{{ id }}" class="field-container">
+        <span id="field_widget_{{ id }}" >
+            <table class="table table-bordered">
+                <tbody class="sonata-ba-tbody">
+                {% for nested_group_field_name, nested_group_field in form.children %}
+                    <tr>
+                        <td class="sonata-ba-td-{{ id }}-_delete " style="width: 10%">
+                            {% if nested_group_field.children['_delete'] is defined %}
+                                <span class="remove-item" style="cursor: pointer" title="Удалить"><i class="fa fa-trash-o fa-2x"></i>
+                                    {{ form_widget(nested_group_field.children['_delete'], {'label_render': false, 'attr': {'style': 'display: none'}}) }}
+                                </span>
+                            {% endif %}
+                            <div class="sonata-ba-td-{{ id }}-position" style="display: none">
+                                {{ form_widget(nested_group_field.children['position']) }}
+                            </div>
+                            <p>{{ loop.index }}</p>
+                        </td>
+                        <td class="sonata-ba-td-{{ id }}-image" style="width: 45%">
+                            <div style="clear: both">
+                                {{ form_label(nested_group_field.children['publishable']) }}
+                                {{ form_widget(nested_group_field.children['publishable']) }}
+                            </div>
+                            <div role="image-container" style="clear: both">
+                                {{ form_widget(nested_group_field.children['image'], {'attr':{'class':'image'}}) }}
+                            </div>
+                            <div style="clear: both">
+                                {{ form_label(nested_group_field.children['title']) }}
+                                {{ form_widget(nested_group_field.children['title']) }}
+                            </div>
+                            <div>
+                                {{ form_label(nested_group_field.children['tags']) }}
+                                {{ form_widget(nested_group_field.children['tags']) }}
+                            </div>
+                        </td>
+                        <td style="width: 45%">
+                            <div>
+                                {{ form_label(nested_group_field.children['teaser']) }}
+                                {{ form_widget(nested_group_field.children['teaser']) }}
+                            </div>
+                            <div>
+                            {{ form_label(nested_group_field.children['metaDescription']) }}
+                            {{ form_widget(nested_group_field.children['metaDescription']) }}
+                            </div>
+                            <div>
+                            {{ form_label(nested_group_field.children['metaKeywords']) }}
+                            {{ form_widget(nested_group_field.children['metaKeywords']) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </span>
+
+        {% if sonata_admin.field_description.associationadmin.hasroute('create') and sonata_admin.field_description.associationadmin.isGranted('CREATE') and btn_add %}
+            <span id="field_actions_{{ id }}" >
+                <a
+                        href="{{ sonata_admin.field_description.associationadmin.generateUrl('create', sonata_admin.field_description.getOption('link_parameters', {})) }}"
+                        onclick="return start_field_retrieve_{{ id }}(this);"
+                        class="btn btn-success btn-sm btn-outline sonata-ba-action"
+                        title="{{ btn_add|trans({}, btn_catalogue) }}"
+                        >
+                    <i class="fa fa-plus-circle"></i>
+                    {{ btn_add|trans({}, btn_catalogue) }}
+                </a>
+            </span>
+        {% endif %}
+
+            {# add code for the sortable options #}
+        {% if sonata_admin.field_description.options.sortable is defined %}
+            <style>
+                .sonata-ba-tbody tr {
+                    cursor: move;
+                }
+            </style>
+            <script type="text/javascript">
+                /*Browser detection patch*/
+                jQuery.browser = {};
+                jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+                jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+                jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+                jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+
+                var wscrolltop = 0;
+
+                jQuery('div#field_container_{{ id }} tbody.sonata-ba-tbody').sortable({
+                    axis: 'y',
+                    opacity: 0.6,
+                    items: '> tr',
+                    placeholder: "ui-state-highlight",
+                    stop: apply_position_value_{{ id }},
+                    start: function(event, ui){
+                        if ($.browser.webkit) {
+                            wscrolltop = $(window).scrollTop();
+                        }
+                        $(".ui-state-highlight").height(ui.item.height() - 2);
+                    },
+                    sort: function (event, ui) {
+                        if ($.browser.webkit) {
+                            ui.helper.css({ 'top': ui.position.top + wscrolltop + 'px' });
+                        }
+                    }
+                });
+
+                function apply_position_value_{{ id }}() {
+                    // update the input value position
+                    jQuery('div#field_container_{{ id }} tbody.sonata-ba-tbody .sonata-ba-td-{{ id }}-position').each(function(index, element) {
+                        // remove the sortable handler and put it back
+                        jQuery('span.sonata-ba-sortable-handler', element).remove();
+                        jQuery(element).append('<span class="sonata-ba-sortable-handler ui-icon ui-icon-grip-solid-horizontal"></span>');
+                        jQuery('input', element).hide();
+                    });
+
+                    jQuery('div#field_container_{{ id }} tbody.sonata-ba-tbody .sonata-ba-td-{{ id }}-position input').each(function(index, value) {
+                        jQuery(value).val(index + 1);
+                    });
+                }
+
+                // refresh the sortable option when a new element is added
+                jQuery('#sonata-ba-field-container-{{ id }}').bind('sonata.add_element', function() {
+                    apply_position_value_{{ id }}();
+                    jQuery('div#field_container_{{ id }} tbody.sonata-ba-tbody').sortable('refresh');
+                });
+
+                apply_position_value_{{ id }}();
+
+                jQuery('.remove-item').click(function(){
+                    var $parentTr = $(this).parents('tr');
+                    $parentTr.find('span input').prop('checked', true).attr('value', 1);
+                    $parentTr.hide(200);
+                });
+
+            </script>
+        {% endif %}
+        {# include association code #}
+        {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_one_association_script.html.twig' %}
+        </div>
+{% endblock %}

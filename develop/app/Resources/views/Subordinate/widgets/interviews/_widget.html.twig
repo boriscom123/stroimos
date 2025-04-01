@@ -1,0 +1,20 @@
+<a href="{{ entity_path(interview) }}" class="smi-block__interview">
+  <span class="smi-block__interview-image" style="background-image: url({% path interview.image, 'thumb960x470' %});">
+    <span class="smi-block__interview-subtitle">
+      Интервью
+    </span>
+    <span class="smi-block__interview-content">
+        <time class="smi-block__interview-date">
+            {{ interview.publishStartDate | format_date }}
+        </time>
+        <div class="oasis-container smi-block__interview-title-container">
+            <span class="smi-block__interview-title oasis-container__text">
+                {{ interview.title }}
+            </span>
+        </div>
+        <span class="smi-block__interview-author">
+            {{ interview.source }}
+        </span>
+    </span>
+  </span>
+</a>

@@ -1,0 +1,8 @@
+{% set _image = post.heroImage|default(post.image) %}
+{% if _image %}
+<figure><img src="{% path _image, 'thumb960x470' %}" width="960" height="470"/>
+    <figcaption>
+        {{ post.title }}
+    </figcaption>
+</figure>
+{% endif %}

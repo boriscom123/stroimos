@@ -1,0 +1,25 @@
+{% extends '@SonataFormatter/Ckeditor/browser.html.twig' %}
+
+{% block table_body %}
+    <tbody>
+    {% for object in admin.datagrid.results %}
+        <tr>
+            <td colspan="{{ (admin.list.elements|length) - 1}}">
+                <div>
+                    <a href="{% path object, 'thumb780' %}" class="select" style="float: left; margin-right: 6px;">{% thumbnail object, 'admin' with {'width': 75, 'height': 60} %}</a>
+
+                    <strong><a href="{% path object, 'thumb780' %}" class="select">{{ object.name }}</a></strong> <br />
+
+{#                    {% if formats[object.id]|length > 0 %}
+                        - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
+                        {% for name, format in formats[object.id] %}
+                            <a href="{% path object, name %}" class="select">{{ name }}</a> {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
+                        {% endfor %}
+                    {% endif %}#}
+                    <br />
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}

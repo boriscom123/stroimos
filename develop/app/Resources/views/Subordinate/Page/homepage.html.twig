@@ -1,0 +1,23 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block bodyClass %}subordinate-page homepage{% endblock %}
+
+{% block recent_pages %}{% endblock %}
+
+{% block content %}
+
+    {{ sonata_block_render({'type': 'subordinate_homepage_posts'}, {subordinate: app.request.get('_subordinate_route'), template: ':Subordinate/widgets/homepage:news_block.html.twig'}) }}
+
+    {% set banners = page.blocks(null, 'banner_announcements_dk') %}
+
+     {% if banners|length > 0 %}
+        {% include 'Subordinate/widgets/banner/_widget.html.twig' with {banners: banners} %}
+    {% endif %}
+    {{ sonata_block_render({'type': 'subordinate_smi'}, {subordinate: app.request.get('_subordinate_route'), template: ':Subordinate/widgets/homepage:smi_block.html.twig'}) }}
+
+    {{ sonata_block_render({'type': 'subordinate_media'}, {subordinate: app.request.get('_subordinate_route'), template: ':Subordinate/widgets/homepage:media_block.html.twig'}) }}
+{% endblock %}

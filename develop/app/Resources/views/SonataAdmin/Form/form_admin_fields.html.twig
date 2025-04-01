@@ -1,0 +1,44 @@
+{# see https://github.com/sonata-project/SonataAdminBundle/commit/475279fe1a6736f785c3cff7f04d3d04a82c898c #}
+{# remove when released by Sonata Admin #}
+
+{% extends 'SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig' %}
+
+{% block sonata_type_choice_field_mask_widget %}
+    {{ block('choice_widget') }}
+    {% set main_form_name = id|slice(0, id|length - name|length) %}
+    <script>
+        jQuery(document).ready(function() {
+            var allFields = {{ all_fields|json_encode|raw }};
+            var map = {{ map|json_encode|raw }};
+
+            showMaskChoiceEl = jQuery('#{{ main_form_name }}{{ name }}');
+
+            showMaskChoiceEl.on('change', function () {
+                choice_field_mask_show(jQuery(this).val());
+            });
+
+            function choice_field_mask_show(val)
+            {
+                var controlGroupIdFunc = function (field) {
+                    return '#sonata-ba-field-container-{{ main_form_name }}' + field;
+
+                };
+                if (map[val] == undefined) {
+                    jQuery.each(allFields, function (i, field) {
+                        jQuery(controlGroupIdFunc(field)).hide();
+                    });
+                    return;
+                }
+
+                jQuery.each(allFields, function (i, field) {
+                    jQuery(controlGroupIdFunc(field)).hide();
+                });
+                jQuery.each(map[val], function (i, field) {
+                    jQuery(controlGroupIdFunc(field)).show();
+                });
+            }
+            choice_field_mask_show(showMaskChoiceEl.val());
+        });
+
+    </script>
+{% endblock %}

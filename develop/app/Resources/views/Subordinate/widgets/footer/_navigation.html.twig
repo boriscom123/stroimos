@@ -1,0 +1,16 @@
+{% if menu and menu is defined %}
+    <nav class="footer-nav" id="footer_nav" data-columns>
+        {% for section in menu.children %}
+            <div class="footer-nav__section">
+                {% if section.label %}
+                    <h3 class="footer-nav__section-title">{{ section.label }}</h3>
+                {% endif %}
+                <ul class="footer-nav__section-menu">
+                    {% for item in section.children %}
+                        <li><a href="{{ item.uri }}">{{ item.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </nav>
+{% endif %}

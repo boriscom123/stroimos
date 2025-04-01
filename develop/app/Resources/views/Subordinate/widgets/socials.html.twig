@@ -1,0 +1,9 @@
+{% set subordinate = app.request.get('_subordinate_route') %}
+{% set socials = subordinate_socials(app.request.get('_subordinate_route'))|default([]) %}
+<ul class="socials">
+    {% for item in socials %}
+        <li>
+            <a href="{{ item.url }}" class="icon icon-social icon-{{ item.type }}" title="{{ item.type }}" target="_blank"></a>
+        </li>
+    {% endfor %}
+</ul>

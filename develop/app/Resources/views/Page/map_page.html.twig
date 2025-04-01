@@ -1,0 +1,39 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': publication, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': publication.title,
+    'themes': [],
+    'subject': publication
+    } %}
+
+{#     {% if publication.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: publication.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+        <div class="static-page static-page-with-gallery">
+            {{ embed_content(publication.content, publication) }}
+            {% block sonata_preview %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% set map_type_atlas = 'atlas' == app.request.query.get('mapType') %}{# or 'stroi.mos.ru' == app.request.host#}
+    {% if map_type_atlas %}
+        {% set atlas_version = ('1.5.2' == app.request.query.get('version')) ? '1.5.2' : '1.5.1' %}
+
+        <script>atlas_version = {{ atlas_version|json_encode|raw }};</script>
+        <script type="text/javascript" src="//apieatlas.mos.ru/js/?key=42c8980410f61bf1bcec2bec9cfd8e24&version={{ atlas_version }}"></script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'id': 'metro-index', 'object': page, 'themes': [{'title': 'Страница метро'}] } %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#{% for i in data|length %}
+        <link rel="prefetch" href="{{ data[i].src }}">
+    {% endfor %}#}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel_metro.html.twig' with {
+    'title': 'Метро',
+    'rubricsContext': '',
+    'subject': page
+    } %}
+
+    {% include "::/Metro/top_page.html.twig" with {
+        'title': "Метро",
+        'description': page.description|default,
+        'subject': page,
+        'page': page,
+        'firstBannerLink': '/stantsii-otkrytyie-s-2011-ghoda-tiest',
+        'firstBannerImage': '/images/metro/metro-banner-cutout-bg.jpg',
+        'firstBannerText': 'Станции, <br/> открытые <br/> с 2011 года',
+        'secondBannerLink': '/specprojects/bkl-open/',
+        'secondBannerImage': '/images/metro/bkl-banner.jpg',
+        'secondBannerTitle': 'БКЛ',
+        'secondBannerSubtitle': 'Спецпроект<br/>Градостроительного комплекса Москвы'
+    } %}
+
+    {# {% if page.currently %}
+            {% include ":widgets:current_info.html.twig" with {currently: page.currently} %}
+        {% endif %}
+    #}
+    {#  {% if page.currently %}
+        <div class="container__full metro-intro__wrapper">
+            <h3 class="metro-intro__title">На данный момент</h3>
+            {{ page.currently|raw }}
+            <!--
+            <div class="metro-intro__text">
+                Строители приступили к возведению <a href="https://stroi.mos.ru/metro/station/50">северного вестибюля станции метро «Технопарк».</a>
+            </div>
+            <div class="metro-intro__text-alt">
+                С 2011 по 2020 год в столице планируется построить более 160 км линий метро и 78 новых станций, <a href="https://stroi.mos.ru/stantsii-otkrytyie-s-2011-ghoda-tiest">14 из них уже открыты</a>. Это позволит снизить нагрузку на действующую сеть метро, а также обеспечит «шаговую доступность» к станциям для 93% жителей Москвы.
+            </div>
+            -->
+        </div>
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+        {# include '::/Post/description.html.twig' with {description: page.description|default} #}
+
+        {% if timeline|length %}
+            {# set bigYear = (timeline|first).year % 5 #}
+            {% set bigYear = 0 %}
+            <div class="timeline-metro__wrapper">
+                <h3 class="timeline-metro__title">Схема линий московского<br />метро и МЦД с {{ (timeline|last).year }} по {{ (timeline|first).year }}* годы</h3>
+                <p class="timeline-metro__legend">
+                    Таймлайн
+                </p>
+                <div class="timeline-metro">
+                    <div class="timeline-metro__segment-list">
+                        {% for item in timeline %}
+                            <div class="timeline-metro__segment {% if (item.year % 5 == bigYear) %}big{% endif %}">
+                                <span class="timeline-metro__segment-title">
+                                    {% if (item.year % 5 == bigYear) %}
+                                        {{ item.year }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="timeline-metro__map-wrap">
+                    <div class="timeline-metro__map">
+                        <span class="timeline-metro__map-year">{{ (timeline|first).year }}</span>
+                        <div id="zoom">
+                            <div class="small">
+                                <img class="timeline-metro__img" src="{{ (timeline|first).src['small'] }}" />
+                            </div>
+                            <div class="large">
+                                <img class="timeline-metro__img big" src="{{ (timeline|first).src['large'] }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {#  <div class="metro-container metro-container_left metro-banner-pdf" data-viewport-monitor data-viewport-monitor-offset="420" id="metro-banner-pdf">
+            <div class="metro-banner-pdf__pic"></div>
+            <a href="/metro_map" class="metro-banner-pdf__title">
+                Строящиеся <br/>
+                станции метро <br/>
+                на карте города
+            </a>
+            <a href="/metro_map" class="metro-banner-pdf__download" target="_blank" download>
+                <span class="metro-banner-pdf__download-content">
+                    Скачать PDF [29Мб]
+                </span>
+            </a>
+        </div> #}
+
+        {# <a href="https://stroi.mos.ru/specprojects/metro/" class="metro-container metro-container_left metro-banner-22year" target="_blank">
+            <span class="metro-banner-22year__title">
+                Метро 2022
+            </span>
+            <span class="metro-banner-22year__subtitle">
+                Спецпроект<br/>
+                Стройкомплекса
+            </span>
+        </a> #}
+
+        {#
+            <div class="metro-construction__list-wrapper">
+                {% include '::Metro/under_construction.html.twig' %}
+            </div>
+        #}
+
+        <div class="metro-construction__station-list">
+            {% include '::Metro/station_list.html.twig' %}
+        </div>
+
+        {% set video_tour_block = page.getBlocks(null, 'metro_vitdeo_tour')|first %}
+        {% if video_tour_block %}
+            {% include ":widgets:block_edit.html.twig" with {block: video_tour_block} %}
+            {{ sonata_block_render(video_tour_block) }}
+        {% endif %}
+
+        {% for block in page.blocks('content') %}
+            {% include ":widgets:block_edit.html.twig" with {block: block} %}
+            {{ sonata_block_render(block) }}
+        {% endfor %}
+
+        {# секция с листом станций
+            {{ embed_content(page.content, page) }}
+        #}
+        <div class="station-grid">
+            <a class="station-grid__item" href="/metro/tretii-peresadochnyi-kontur">
+                <h2 class="station-grid__item-title">Большая кольцевая линия метро</h2>
+            </a>
+             <a class="station-grid__item" href="/metro/proiekt-rublievo-arkhanghiel-skoi-linii-mietro">
+                <h2 class="station-grid__item-title">Рублево-Архангельская линия метро</h2>
+            </a>
+             <a class="station-grid__item" href="/metro/novaia-liniia-mietro-ot-ulitsy-novatorov-tpk-do-ghoroda-troitsk">
+                <h2 class="station-grid__item-title">Троицкая линия метро</h2>
+            </a>
+             <a class="station-grid__item" href="/photo_lines/otkryto-piervoie-v-rossii-mietro-v-aeroportu-zarabotali-stantsii-mietro-pykhtino-i-aeroport-vnukovo">
+                <h2 class="station-grid__item-title">Солнцевская линия метро пришла в аэропорт Внуково</h2>
+            </a>
+             <a class="station-grid__item" href="/metro/liublinsko-dmitrovskaia-liniia-mietro-stroi_mos">
+                <h2 class="station-grid__item-title">Люблинско-Дмитровская линия метро</h2>
+            </a>
+        </div>
+
+        <div class="metro-construction__list-info">
+        * Сроки сдачи, посадка, технические характеристики, название и оформление станций могут быть изменены.
+            <div class="metro-construction__list-info-more">
+                Программа развития метрополитена реализуется в столице согласно постановлению правительства Москвы от 4 мая 2012 г. N 194-ПП
+                <a href="">
+                    "Об утверждении Перечня объектов перспективного строительства московского метрополитена в 2012 - 2020 гг."
+                </a>
+                <span>
+                    (в ходе работ в документ могут быть внесены изменения).
+                </span>
+            </div>
+        </div>
+        {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'метро'}) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% if timeline|length %}
+        <script type="text/javascript">
+            metroTimeline = {{ timeline|json_encode|raw }};
+        </script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

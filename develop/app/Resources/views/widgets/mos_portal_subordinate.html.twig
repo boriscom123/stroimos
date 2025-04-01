@@ -1,0 +1,13 @@
+<div class="container__full mos-portal__wrapper">
+    <h3 class="mos-portal__list-title">Департаменты и комитеты <br/>Градостроительного комплекса Москвы</h3>
+    <ul class="mos-portal__list">
+        {% for item in knp_menu_get('teasers_menu') %}
+            <li class="mos-portal">
+                <header class="mos-portal__title">
+                    {{ item.label }}
+                </header>
+                <a href="{{ item.uri }}" class="mos-portal__link" target="_blank">Перейти на сайт</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

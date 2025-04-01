@@ -1,0 +1,27 @@
+{% set title = title|default %}
+{% set link = link|default %}
+{% set image_src = image_src|default %}
+{% set description = description|default %}
+
+<a target="_blank" href="{{ link }}" class="download-banner">
+	<div class="download-banner__content">
+		<h3 class="download-banner__title">{{ title }}</h3>
+		<h3 class="download-banner__description">{{ description }}</h3>
+	</div>
+	<div class="download-banner__image">
+		<img src="{{ image_src }}" alt="{{ title }}"/>
+		<div class="download-banner__mark">
+			<div class="type-mark type-mark_light type-mark_with-hidden-part">
+				<i class="type-mark__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewbox="0 0 16 20" fill="none">
+						<path d="M8 1.24951V16.2495" stroke="#1B262C" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M1.25 9.49951L8 16.2495L14.75 9.49951" stroke="#1B262C" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M0.5 19.2495H15.5" stroke="#1B262C" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</i>
+                <div class="type-mark__bcg"><div class="type-mark__count"><span>Скачать</span></div>
+                </div>
+			</div>
+		</div>
+	</div>
+</a>

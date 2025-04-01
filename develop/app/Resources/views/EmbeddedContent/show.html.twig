@@ -1,0 +1,25 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Превью',
+    'themes': [],
+    'subject': null
+    } %}
+
+    <div class="static-page">
+        <h2>Широкая страница</h2>
+        {% include embeddable_template %}
+        <div class="news-wrapper__content-wrap">
+            <div class="news-wrapper__content">
+                <h2>Узкая страница</h2>
+                {% include embeddable_template %}
+            </div>
+        </div>
+        {% block sonata_preview %}{% endblock %}
+    </div>
+{% endblock %}

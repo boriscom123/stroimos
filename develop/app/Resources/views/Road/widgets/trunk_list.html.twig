@@ -1,0 +1,46 @@
+<div class="road-list__wrapper">
+    <header class="road-list__header">
+        <h3 class="road-list__title">
+            Строительство и реконструкция<br/> вылетных магистралей
+            {% include '::/widgets/help.html.twig' with {headClass: true, title : '', content: ''} %}
+        </h3>
+        <a href="{{ path('app_road_trunk_list') }}">архив</a>
+    </header>
+    <div class="road-list" data-columns>
+        {#
+        {% for item in trunks %}
+            <a href="{{ entity_path(item) }}" class="road-list__item">
+                {{ item.title }}
+                <span class="road-list__item-more">Подробнее</span>
+            </a>
+        {% endfor %}
+        #}
+        <a href="/road/trunk/33" class="road-list__item">
+           Калужское шоссе
+           <span class="road-list__item-more">Подробнее</span>
+        </a>
+        <a href="/road/trunk/24" class="road-list__item">
+           Щелковское шоссе
+           <span class="road-list__item-more">Подробнее</span>
+        </a>
+        <a href="/road/trunk/34" class="road-list__item">
+          Солнцево - Бутово - Варшавское шоссе
+          <span class="road-list__item-more">Подробнее</span>
+        </a>
+        <a href="/road/trunk/37" class="road-list__item">
+           Северный дублер Кутузовского проспекта
+           <span class="road-list__item-more">Подробнее</span>
+        </a>
+        <a href="/road/trunk/38" class="road-list__item">
+           Проспект Генерала Дорохова
+        </a>
+        <a href="/road/trunk/99" class="road-list__item">
+           Киевское шоссе
+        <span class="road-list__item-more">Подробнее</span>
+        </a>
+        <a href="/road/trunk/103" class="road-list__item">
+           Дублер Люблинской улицы
+        <span class="road-list__item-more">Подробнее</span>
+        </a>
+    </div>
+</div>

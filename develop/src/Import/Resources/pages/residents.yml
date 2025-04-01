@@ -1,0 +1,56 @@
+/:
+    stroitelstvo-v-okrugah-raionah: +
+
+    programma-stroitelstva-novyh-poliklinik-do-2017-goda:
+        is_section: true
+        exclude:
+            - doklad
+
+    detskie-sady-1: +
+    stroitelstvo-shkol-i-bnk: +
+
+    stadiony-moskvy: +
+    renovaciya-promzon: +
+    uchastnikam-dolevogo-stroitelstva-2: +
+
+    doma-kotorye-snesut-v-2015-godu: -
+
+    unikalnaya-arhitektura:
+        is_section: true
+        children: false
+
+        import_children:
+            moskva:
+                import_children:
+                    hram-hrista-spasitelya:
+                    v-moskovskom-disneilende-razmestyatsya-kompleks-dreamworks-park-kinostudii-souzmultfilm-i-detskaya-yahtshkola:
+                    vysotka-mgu-na-vorobevyh-gorah-byla-postroena-v-rekordnye-dlya-teh-vremen-sroki-za-pyat-let:
+                    lezhachii-neboskreb-na-varshavskom-shosse:
+                    bubliki-kotorye-nelzya-sest-unikalnye-kruglye-doma-v-moskve:
+                    moskva-v-moskve-kak-izmenilas-gostinica-za-80-let-1:
+            mir:
+                import_children:
+                    unikalnaya-arhitektura:
+                        self: false
+                        exclude:
+                            - moskva
+                            - mir
+                            - hram-hrista-spasitelya
+                            - v-moskovskom-disneilende-razmestyatsya-kompleks-dreamworks-park-kinostudii-souzmultfilm-i-detskaya-yahtshkola
+                            - vysotka-mgu-na-vorobevyh-gorah-byla-postroena-v-rekordnye-dlya-teh-vremen-sroki-za-pyat-let
+                            - lezhachii-neboskreb-na-varshavskom-shosse
+                            - bubliki-kotorye-nelzya-sest-unikalnye-kruglye-doma-v-moskve
+                            - moskva-v-moskve-kak-izmenilas-gostinica-za-80-let-1
+
+    tipovye-varianty-pereplanirovki-kvartir: +
+    centralnyi-detskii-magazin-na-lubyanke:
+
+    razvitie-uds:
+        is_section: true
+
+        import_children:
+            karta-razvitiya-uds:
+                self: false
+                exclude: [razvitie-uds]
+
+    adresnaya-investicionnaya-programma: +

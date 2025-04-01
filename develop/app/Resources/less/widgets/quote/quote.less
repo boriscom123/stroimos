@@ -1,0 +1,80 @@
+.quote-block {
+  margin-bottom: 40px;
+  padding: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__title {
+    width: 90px;
+    float: left;
+    font-family: Onest, sans-serif;
+    color: #9d9d9d;
+    font-size: 16px;
+    position: relative;
+    top: -8px;
+  }
+  &__content {
+    border-top: 1px solid #A6A6A6;
+    border-bottom: 1px solid #A6A6A6;
+  }
+  &__text {
+    font-family: Brygada1918,serif;
+    font-size: 24px;
+    line-height: 28.8px;
+    color: #323232;
+    padding: 40px 20px 30px;
+  }
+  &__author {
+    // height: 80px;
+    padding-left: 20px;
+    padding-bottom: 30px;
+    line-height: 15px;
+    display: flex;
+  }
+  &__author-pic {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    //-webkit-filter: grayscale(100%);
+    //-moz-filter: grayscale(100%);
+    //-ms-filter: grayscale(100%);
+    //-o-filter: grayscale(100%);
+    //filter: grayscale(100%);
+    //filter: gray;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 70px;
+  }
+  &__author-text {
+    // height: 80px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+  }
+  &__author-name {
+    font-family: Brygada1918,serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 22px;
+    font-style: normal;
+    color: #1B262C;
+    margin-bottom: 4px;
+  }
+  &__author-title {
+    font-family: Onest, sans-serif;
+    font-size: 15px;
+    line-height: 19.5px;
+    color: #1B262C;
+    opacity: 0.6;
+    font-weight: normal;
+  }
+  &_no-image {
+    background-color: #E8EFF3;
+    padding: 20px;
+
+    .quote-block__text {
+      padding: 30px 20px 20px;
+    }
+  }
+}

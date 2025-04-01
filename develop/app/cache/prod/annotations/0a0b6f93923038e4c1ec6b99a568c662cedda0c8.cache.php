@@ -1,0 +1,1 @@
+<?php return unserialize('a:3:{i:0;O:27:"Doctrine\\ORM\\Mapping\\Entity":2:{s:15:"repositoryClass";s:52:"\\AppBundle\\Entity\\Repository\\SpotlightItemRepository";s:8:"readOnly";b:0;}i:1;O:33:"Gedmo\\Mapping\\Annotation\\Loggable":2:{s:13:"logEntryClass";N;s:5:"value";N;}i:2;O:42:"Doctrine\\ORM\\Mapping\\HasLifecycleCallbacks":0:{}}');

@@ -1,0 +1,131 @@
+.datepick-wrap {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  vertical-align: bottom;
+
+  .datepick {
+    opacity: 0;
+    z-index: 5;
+    position: relative;
+  }
+
+  .altField {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+  }
+}
+
+.ui-datepicker {
+  margin-top: 10px;
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0 0 15px rgba(0,0,0, 0.3);
+  width: 300px;
+
+  th {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #202020;
+  }
+
+  tr {
+    border-bottom: 1px solid #e6e6e6;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .ui-state-default {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 34px;
+    text-align: center;
+    color: #808080;
+    border: 0;
+    background: transparent;
+  }
+
+  .ui-state-active {
+    color: @hover;
+  }
+
+  .ui-state-hover {
+    color: @hover;
+  }
+
+  .ui-datepicker-prev {
+    cursor: pointer;
+
+    .ui-icon {
+      background: transparent;
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      top: 50%;
+      margin-top: -3px;
+      left: 50%;
+      margin-left: -3px;
+      border-left: 4px solid black;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      box-sizing: border-box;
+      transform: rotate3d(0,0,1,180deg);
+    }
+  }
+
+  .ui-datepicker-next {
+    cursor: pointer;
+
+    .ui-icon {
+      background: transparent;
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      top: 50%;
+      margin-top: -3px;
+      left: 50%;
+      margin-left: -1px;
+      border-left: 4px solid black;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      box-sizing: border-box;
+    }
+  }
+
+  .ui-datepicker-next-hover,
+  .ui-datepicker-prev-hover {
+    border: 0;
+    background: #ffffff;
+    top: 2px;
+  }
+}
+
+.ui-datepicker-header {
+  border: 0;
+  background: white;
+}
+
+.ui-datepicker-title {
+  font-family: Brygada1918, serif;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 15px;
+  color: #222222;
+}
+
+.ui-datepicker-month {
+  text-transform: capitalize;
+}
+
+.ui-datepicker-year {
+  color: @hover;
+}

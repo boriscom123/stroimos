@@ -1,0 +1,170 @@
+{% set not_is_gallery = is_news|default %}
+{% set is_gallery = not_is_gallery == false %}
+{% if not_is_gallery %}
+    <div class="container__pull-left">
+{% endif %}
+        <div class="gallery__wrapper">
+            <div class="gallery__close"></div>
+            <div class="gallery-with-custom-arrows" data-id="{{ gallery.id }}" data-count="{{ gallery.medias|length }}">
+                {#{% set pager = true %}#}
+                {% if pager is defined and pager %}
+                    <div class="gallery__pager">
+                        {% for media in gallery.medias %}
+                            <div class="gallery__thumb">
+                                <img src="{% path media.image, 'thumb210' %}" title="{{ media.title }}"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="gallery__slider popup-gallery">
+                    {% if gallery.medias|length > 1 %}
+                        {% for media in gallery.medias %}
+                            <div class="gallery__slide">
+                                <a class="gallery__slide-link" href="{% path media.image, 'full' %}">
+                                    <img data-lazy="{% path media.image, 'full' %}" title="{{ media.title }}" data-teaser="{{ media.teaser }}" data-tags='
+                                        {% if is_gallery %}
+                                            {% autoescape true %}
+                                                {% embed '::/widgets/tags.html.twig' with {'publication': media.tags|length ? media : gallery} %}
+                                                    {% block tagsTitle '' %}
+                                                {% endembed %}
+                                            {% endautoescape %}
+                                        {% endif %} 
+                                    '/>
+                                </a>
+                            </div> 
+                        {% endfor %}
+                    {% else %}
+                        <div class="gallery__slide">
+                            <img src="{% path gallery.medias[0].image, 'full' %}" style="width: 100%; height: auto; max-width: 100%; max-height: none;" title="{{ gallery.medias[0].title }}" data-teaser="{{ gallery.medias[0].teaser }}" data-tags='
+                                {% if is_gallery %} 
+                                    {% autoescape true %}
+                                        {% embed '::/widgets/tags.html.twig' with {'publication': gallery.medias[0].tags|length ? gallery.medias[0] : gallery} %}
+                                            {% block tagsTitle '' %}
+                                        {% endembed %}
+                                    {% endautoescape %}
+                                {% endif %}
+                            '/>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="gallery__footer">
+                    {% if is_gallery %}
+                        {% if gallery.teaser is defined and gallery.teaser is not empty %}
+                            <div class="gallery__description">{{ gallery.teaser }}</div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if not_is_gallery %}
+                        {% if gallery.title is defined and gallery.title is not empty %}
+                            <a class="gallery__caption" href="{{ path('app_gallery_show', { id: gallery.id }) }}"></a>
+                            <div class="gallery__header">
+                                <div class="gallery-header__wrapper">
+                                    <div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12Z" fill="#E8EFF3"/>
+                                            <path d="M11.9998 4.92893L19.0708 12M11.9998 19.0711L19.0708 12M19.0708 12L4.92871 12" stroke="#1B262C" stroke-width="2"/>
+                                        </svg> 
+                                    </div>
+                                    <div>
+                                        <p class="gallery__header-link">{{ gallery.title }}</p>
+                                            <span class="gallery__header-date">{{ gallery.publishStartDate | date('d.m.y') }}</span>
+                                    </div>
+                                </div>                 
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {# <div class="gallery__title">{{ gallery.medias[0].title }}</div>
+                    {% if gallery.medias[0].teaser is defined and gallery.medias[0].teaser is not empty %}
+                        <div class="gallery__teaser">{{ gallery.medias[0].teaser}}</div>
+                    {% endif %} #}
+
+                    <div class="gallery__footer-right">
+                        {% if gallery.medias|length > 1 %}
+                            <div class="gallery__count">
+                                <div class="gallery__index"><i>1</i>/{{ gallery.medias|length }}</div>
+                                
+                            </div>
+                        {% endif %}
+
+                        {% if pager is defined and pager %}
+                            <div class="gallery__buttons">
+                                <a href="{% path gallery.medias[0].image, 'full' %}" class="gallery__download" target="_blank"
+                                    download title="Сохранить изображение"></a>
+                                {# <button class="gallery__fullscreen" type="button"></button>
+                                <button class="fullscreen-button" type="button"></button> #}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if is_gallery %}
+                    <p class="gallery__tags-title">Теги</p>
+                    <div class="gallery__tags">
+                        {% embed '::/widgets/tags.html.twig' with {'publication': gallery.medias[0].tags|length ? gallery.medias[0] : gallery} %}
+                            {% block tagsTitle '' %}
+                        {% endembed %}
+                    </div>
+                {% endif %}
+                {% if pager is defined and pager %}
+                    <div class="gallery__share"> 
+                        <div class="gallery__share-buttons">
+                            {# <div class="gallery__share-button gallery__share-fb">
+                                <div id="fb-root"></div>
+                                <script>(function(d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) return;
+                                        js = d.createElement(s); js.id = id;
+                                        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.3";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));</script>
+                                <div class="fb-share-button" data-layout="button_count"></div>
+                            </div> #}
+
+                            <div class="gallery__share-button gallery__share-vk">
+                                <!-- Put this script tag to the <head> of your page -->
+                                <script type="text/javascript" src="//vk.com/js/api/share.js?95" charset="UTF-8"></script>
+
+                                <!-- Put this script tag to the place, where the Share button will be -->
+                                <script type="text/javascript"><!--
+                                    document.write(VK.Share.button(false,{type: "round", eng: 1}));
+                                    --></script>
+                            </div>
+
+                            {# <div class="gallery__share-button gallery__share-tw">
+                                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                            </div>
+
+                            <div class="gallery__share-button gallery__share-gp">
+                                <!-- Вставьте этот тег в заголовке страницы или непосредственно перед закрывающим тегом основной части. -->
+                                <script src="https://apis.google.com/js/platform.js" async defer>
+                                    {lang: 'ru'}
+                                </script>
+
+                                <!-- Поместите этот тег туда, где должна отображаться кнопка "Поделиться". -->
+                                <div class="g-plus" data-action="share" data-annotation="bubble"></div>
+                            </div> #}
+                        </div>
+                        <button type="button" data-base-url="{{ app.request.getSchemeAndHttpHost() }}" class="gallery__get-btn" title="Показать ссылку на изображение">
+                            Копировать ссылку
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9.00001 14.9999L15 8.99994M11 5.99994L11.463 5.46394C12.4008 4.52627 13.6727 3.99954 14.9989 3.99963C16.325 3.99973 17.5968 4.52663 18.5345 5.46444C19.4722 6.40224 19.9989 7.67413 19.9988 9.00029C19.9987 10.3265 19.4718 11.5983 18.534 12.5359L18 12.9999M13 17.9999L12.603 18.5339C11.654 19.4716 10.3736 19.9975 9.03951 19.9975C7.70538 19.9975 6.42502 19.4716 5.47601 18.5339C5.00813 18.0717 4.63665 17.5211 4.38311 16.9142C4.12958 16.3074 3.99902 15.6562 3.99902 14.9984C3.99902 14.3407 4.12958 13.6895 4.38311 13.0826C4.63665 12.4757 5.00813 11.9252 5.47601 11.4629L6.00001 10.9999" stroke="#1B262C" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="gallery__copy-link hidden">
+                            <button type="button" class="gallery__hide-btn active" title="Скрыть ссылку на изображение">
+                                Скрыть ссылку
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M9.00001 14.9999L15 8.99994M11 5.99994L11.463 5.46394C12.4008 4.52627 13.6727 3.99954 14.9989 3.99963C16.325 3.99973 17.5968 4.52663 18.5345 5.46444C19.4722 6.40224 19.9989 7.67413 19.9988 9.00029C19.9987 10.3265 19.4718 11.5983 18.534 12.5359L18 12.9999M13 17.9999L12.603 18.5339C11.654 19.4716 10.3736 19.9975 9.03951 19.9975C7.70538 19.9975 6.42502 19.4716 5.47601 18.5339C5.00813 18.0717 4.63665 17.5211 4.38311 16.9142C4.12958 16.3074 3.99902 15.6562 3.99902 14.9984C3.99902 14.3407 4.12958 13.6895 4.38311 13.0826C4.63665 12.4757 5.00813 11.9252 5.47601 11.4629L6.00001 10.9999" stroke="#1B262C" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="gallery__select-link" value=""/>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+{% if not_is_gallery %}
+    </div>
+{% endif %}

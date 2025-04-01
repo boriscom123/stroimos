@@ -1,0 +1,1 @@
+<?php return unserialize('a:2:{i:0;O:27:"Doctrine\\ORM\\Mapping\\Entity":2:{s:15:"repositoryClass";s:61:"Amg\\Bundle\\AdminBundle\\Entity\\Repository\\EntityLockRepository";s:8:"readOnly";b:0;}i:1;O:36:"Doctrine\\ORM\\Mapping\\EntityListeners":1:{s:5:"value";a:1:{i:0;s:57:"Amg\\Bundle\\AdminBundle\\Entity\\Listener\\EntityLockListener";}}}');

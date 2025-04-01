@@ -1,0 +1,272 @@
+@img_url: "/images/renovation_industrial/cards/";
+@card-count: 31;
+@card-name: card;
+
+.set_cards_image(@img) {
+  width: 288px; height: 190px;
+  background-image: url('@{img_url}@{img}_b.jpg') ;
+  background-position-y: 0px;
+  &:hover {
+    width: 288px; height: 190px;
+    background-image: url('@{img_url}@{img}_b.jpg') ;
+    background-position-y: -190px;
+  }
+}
+
+.generate_cards(@i: 1) when (@i =< @card-count) {
+  &__@{card-name}-@{i} {
+    .set_cards_image(@i);
+  }
+  .generate_cards(@i + 1);
+}
+
+.redev-industrial-zones-page {
+  padding-top: 50px;
+  &__filter-district {
+    margin: 32px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    &-heading {
+      color: #a29287;
+      display: inline-block;
+    }
+    &-filter {
+      display: inline-block;
+      position: relative;
+
+      input {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+      }
+      input:checked + label {
+        border-bottom-color: #333;
+      }
+      label {
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+        transition: border 0.4s;
+      }
+    }
+  }
+	&__title {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  &__link {
+    display: inline-block;
+    color: @color;
+    transition: transform 0.5s ease-out;
+    transform: translateY(0px);
+    &:hover {
+      color: @color;
+      transform: translateY(-7px);
+    }
+    &_alt {
+      &, &:hover {
+        color: #fff;
+      }
+    }
+  }
+  &-block {
+    margin-bottom: 75px;
+    height: 900px;
+    background-size: cover;
+    background-position: center center;
+    &_zil{
+      background-image: url('/images/renovation_industrial/zil.jpg');
+    }
+    &_zaton {
+      background-image: url('/images/renovation_industrial/zaton.jpg');
+    }
+    &_serp-molot {
+      background-image: url('/images/renovation_industrial/serp_molot.jpg');
+    }
+    &__content{
+      padding-top: 60px;
+    }
+    &__year {
+      font-family: Onest,sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: 3px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    &__title{
+      color: #fff;
+      font-family: Brygada1918,serif;
+      font-size: 110px;
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+      letter-spacing: 5px;
+      padding-bottom: 50px;
+    }
+    &__extrainfo{
+      color: #fff;
+      font-family: Brygada1918,serif;
+      font-size: 60px;
+      font-weight: 800;
+    }
+    &__subinfo{
+      color: #fff;
+      font-family: Onest,sans-serif;
+      font-size: 22px;
+    }
+    &__biginfo{
+      color: #fff;
+      font-family: Brygada1918,serif;
+      font-size: 140px;
+      margin-right: 16px;
+      margin-bottom: 16px;
+      margin-bottom: -33px;
+    }
+    &__dots{
+      flex-grow: 1;
+      border-bottom: 2px solid white;
+      margin-left: 20px;
+      margin-right: 40px;
+    }
+    &__text-columns{
+      display: flex;
+      flex-direction: column;
+    }
+    &__text-rows{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &__text-line{
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+    &__text-infoblock{
+      display: flex;
+      align-items: flex-end;
+      width: 460px;
+      height: 160px;
+    }
+    &__endcolumn{
+      flex-basis: 320px;
+    }
+    &__icon-block{
+      display: flex;
+      justify-content: space-evenly;
+      text-align: center;
+      align-items: center;
+      margin-top: 70px;
+      &-wide{
+        margin-left: -150px;
+        margin-right: -150px;
+      }
+      &-narrow{
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+    &__icon-element{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__icon{
+      background-repeat: no-repeat;
+      width: 100px;
+      height: 100px;
+      &_kindergarten{
+        background-image: url(/images/renovation_industrial/kindergarten_sm.svg);
+      }
+      &_school{
+        background-image: url(/images/renovation_industrial/school_sm.svg);
+      }
+      &_museum{
+        background-image: url(/images/renovation_industrial/museum_sm.svg);
+      }
+      &_tree{
+        background-image: url(/images/renovation_industrial/tree_sm.svg);
+      }
+    }
+    &__icon-sig{
+      font-family: Onest,sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      color: #fff;
+      margin: 0;
+    }
+    &__infoblock{
+      width: 400px;
+    }
+  }
+  &__hline{
+    background-color: #fff;
+    border-style: none;
+    height: 2px;
+  }
+  &__vline{
+    background-color: #fff;
+    border-style: none;
+    width: 2px;
+  }
+  &__cc {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &-item {
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 50px;
+      .shadowed-teaser();
+      &-img {
+        display: block;
+        background-size: cover;
+        background-position: center center;
+        margin-bottom: 25px;
+        transition: 0.5s;
+        .generate_cards();
+      }
+      &-title {
+        display: block;
+        font-family: Onest,sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 24px;
+        color: @color;
+        margin-bottom: 15px;
+        padding: 0 10px 0 15px;
+        height: 50px;
+      }
+      &-text {
+        display: block;
+        font-family: Brygada1918,serif;
+        color: #515151;
+        font-size: 15px;
+        line-height: 20px;
+        padding: 0 15px 25px;
+      }
+      &:hover &-title {
+        color: @hover;
+      }
+    }
+    &-item:last-child {
+      padding-right: 0px;
+    }
+    &-item:first-child {
+      padding-left: 0px;
+    }
+    &_c &-item {
+      width: 30%;
+    }
+    &_c &-item-img {
+      height: 190px;
+    }
+  }
+}

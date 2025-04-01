@@ -1,0 +1,24 @@
+{% if not new_design %}
+<div class="dropdown-menu__overlay" id="dd_menu_focus">
+{% endif %}
+    <nav class="dropdown-menu__wrapper">
+        {% for item in menu %}
+            {% if item.children %}
+                <div class="dropdown-menu__section" id="menu-section_{{ loop.index0 }}">
+                    {% set third= (item.children | length / 3) | round(0, 'ceil') %}
+                    {% for column in item.children | batch(third) %}
+                        <ul class="dropdown-menu__menu">
+                            {% for children in column %}
+                                <li>
+                                    <a href="{{ children.uri }}">{{ children.label }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </nav>
+{% if not new_design %}
+</div>
+{% endif %}

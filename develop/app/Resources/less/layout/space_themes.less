@@ -1,0 +1,32 @@
+body {
+  background-color: #0c083a;
+  background-image: url("/images/space_pattern.png");
+  /* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(
+      url('/images/space_pattern.png') 1x, 
+      url('/images/space_pattern_x15.png') 1.5x, 
+      url('/images/space_pattern_x20.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+      '/images/ny_pattern.png' 1x, 
+      '/images/ny_pattern_x15.png' 1.5x, 
+      '/images/ny_pattern_x20.png' 2x
+    );
+  background-position: bottom left;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+.page-overlay {
+  background: none;
+  position: relative;
+  height: 1000px;
+  z-index: 2;
+
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#222222+0,222222+100&1+0,0.95+30,0+100 */
+  background: -moz-linear-gradient(top,  rgba(12,8,58,1) 0%, rgba(12,8,58,0.95) 40%, rgba(12,8,58,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(12,8,58,1) 0%,rgba(12,8,58,0.95) 40%,rgba(12,8,58,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(12,8,58,1) 0%,rgba(12,8,58,0.95) 40%,rgba(12,8,58,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c083a', endColorstr='#000c083a',GradientType=0 ); /* IE6-9 */
+}

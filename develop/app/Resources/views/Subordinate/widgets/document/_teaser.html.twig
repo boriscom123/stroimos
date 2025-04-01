@@ -1,0 +1,18 @@
+<div class="documents-alt__teaser">
+  <div class="documents-alt__teaser-type">{{ document.typeName }}</div>
+  <a href="{{ path('app_document_show', { id: document.id}) }}" class="documents-alt__teaser-title">
+    {{ document.title }}
+    {% if document.number is defined %}
+        {{ document.number }}
+    {% else %}
+        {{ document.id }}
+    {% endif %}
+  </a>
+  <div class="documents-alt__teaser-date">
+    {% if document.ApproveDate is defined  %}
+        Дата утверждения {{ document.ApproveDate|format_date }}
+    {% else %}
+        Дата публикации {{ document.publishStartDate|format_date }}
+    {% endif %}
+  </div>
+</div>

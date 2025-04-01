@@ -1,0 +1,39 @@
+<div class="gdp-smi-page">
+<div class="documents-alt">
+    {% for document in documents %}
+        {% include 'Subordinate/widgets/document/_teaser.html.twig' %}
+    {% endfor %}
+</div>
+
+{% if next_offset %}
+    {% include 'Subordinate/Block/loadmore_button.html.twig' with {
+    title: 'Ещё результаты',
+    target: '.documents-alt',
+    source: block_path(block, context, {
+        template: 'subordinate_ajax_list',
+        category: app.request.get('category', context.setting('category')),
+        number: app.request.get('number'),
+        status: app.request.get('status', ''),
+        archive: app.request.get('archive', 0),
+        approve_date_start: app.request.get('approve_date_start'),
+        approve_date_end: app.request.get('approve_date_end'),
+        agency: app.request.get('agency'),
+        rubrics: app.request.get('rubrics'),
+        date_of_adding_start: app.request.get('date_of_adding_start'),
+        date_of_adding_end: app.request.get('date_of_adding_end'),
+        tags: app.request.get('tags'),
+        owner: app.request.get('_subordinate_route')
+    }),
+    limit: limit,
+    item: '.documents-alt__teaser',
+    offset: next_offset
+    }%}
+{% else %}
+    {#<div class="loadmore-btn__wrap">&nbsp;</div>#}
+{% endif %}
+
+{% include ':Subordinate/Block:go_to_all_button.html.twig' with {
+    title: 'Все документы',
+    url: path('app_document_list')
+} %}
+</div>

@@ -1,0 +1,25 @@
+.footer-nav{
+	overflow: hidden;
+	.dotted-border(white, bottom);
+	.column{
+		width: 50%;
+		float: left;
+	}
+}
+.footer-nav__section{
+	margin-bottom: 25px;
+}
+.footer-nav__section-title{
+	font-family: Lava, serif;
+	font-size: 17px;
+	font-weight: bold;
+	margin: 0;
+}
+.footer-nav__section-menu{
+	.reset-list-style;
+}
+.footer-nav[data-columns]{
+	&:before {
+		content: '2 .column';
+	}
+}

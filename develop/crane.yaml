@@ -1,0 +1,5 @@
+containers:
+    mailcatcher:
+        image: zolweb/docker-mailcatcher
+        run:
+            publish: ["1080:1080", "25:1025"]

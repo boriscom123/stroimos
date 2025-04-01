@@ -1,0 +1,23 @@
+{# image {% media post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }}#}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }}#}
+
+<article class="city-news__teaser {{ loop.index % 2 == 0 ? 'city-news__teaser-even' : 'city-news__teaser-odd' }}">
+    <a href="{{ entity_path(post) }}" class="city-news__teaser-link">
+        <aside class="city-news__teaser-meta">
+            {% if post.image is defined and post.image is not empty %}
+                <div class="city-news__teaser-image-wrap">
+                    <img class="city-news__teaser-image" src="{% path post.image, 'thumb' %}"
+                         alt="{{ post.title }}"/>
+                </div>
+            {% endif %}
+            <time class="city-news__teaser-date">{{ post.publishStartDate | format_date }}</time>
+        </aside>
+        <header class="city-news__teaser-header">
+            <h4 class="city-news__teaser-title">{{ post.title }}</h4>
+        </header>
+    </a>
+</article>

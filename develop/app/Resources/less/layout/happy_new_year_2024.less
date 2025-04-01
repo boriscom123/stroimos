@@ -1,0 +1,182 @@
+body {
+	background-color: #222222;
+	background-image: url('/images/new-year-2024/body.svg');
+
+	background-position: bottom left;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+
+.page-overlay {
+	background: none;
+	position: relative;
+	height: 1100px;
+	z-index: 2;
+
+    /* ff 3.6+ */
+    background:-moz-linear-gradient(180deg, #222 20%, rgba(34, 34, 34, 0.00) 100%);
+
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-linear-gradient(180deg, #222 20%, rgba(34, 34, 34, 0.00) 100%);
+
+    /* opera 11.10+ */
+    background:-o-linear-gradient(180deg, #222 20%, rgba(34, 34, 34, 0.00) 100%);
+
+    /* ie 6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222', GradientType=1 );
+
+    /* ie 10+ */
+    background:-ms-linear-gradient(180deg, #222 20%, rgba(34, 34, 34, 0.00) 100%);
+
+    /* global 94%+ browsers support */
+    background:linear-gradient(180deg, #222 20%, rgba(34, 34, 34, 0.00) 100%);
+
+}
+
+.homepage-video {
+	background-image: url("/images/new-year-2024/video_x1.png");
+
+	background-image: -webkit-image-set(
+    	url('/images/new-year-2024/video_x1.png') 1x,
+    	url('/images/new-year-2024/video-x1.5.png') 1.5x,
+    	url('/images/new-year-2024/video_x2.png') 2x
+    );
+    /* Standard use */
+    background-image: image-set(
+    	'/images/new-year-2024/video_x1.png' 1x,
+    	'/images/new-year-2024/video_x1.5.png' 1.5x,
+    	'/images/new-year-2024/video_x2.png' 2x
+    );
+
+	background-position:
+		center 37%;
+
+	background-repeat:
+		no-repeat;
+
+	background-size: auto 490px;
+}
+
+.homepage .page-wrapper {
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 240px;
+		height: 270px;
+		z-index: 10;
+		background-image: url("/images/new-year-2024/main_x1.png");
+		/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+		background-image: -webkit-image-set(
+			url('/images/new-year-2024/main_x1.png') 1x,
+			url('/images/new-year-2024/main-x1.5.png') 1.5x,
+			url('/images/new-year-2024/main_x2.png') 2x
+		);
+		/* Standard use */
+		background-image: image-set(
+			'/images/new-year-2024/main_x1.png' 1x,
+			'/images/new-year-2024/main_x1.5.png' 1.5x,
+			'/images/new-year-2024/main_x2.png' 2x
+		);
+		background-position: top left;
+		background-repeat: no-repeat;
+		background-size: 240px 270px;
+	}
+}
+
+@media(max-width: 1360px) {
+	.homepage .page-wrapper::before {
+		display: none;
+	}
+}
+
+.page-wrapper {
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 240px;
+		height: 270px;
+		z-index: 10;
+		background-image: url("/images/new-year-2024/news_x1.png");
+		/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+		background-image: -webkit-image-set(
+			url('/images/new-year-2024/news_x1.png') 1x,
+			url('/images/new-year-2024/news-x1.5.png') 1.5x,
+			url('/images/new-year-2024/news_x2.png') 2x
+		);
+		/* Standard use */
+		background-image: image-set(
+			'/images/new-year-2024/news_x1.png' 1x,
+			'/images/new-year-2024/news_x1.5.png' 1.5x,
+			'/images/new-year-2024/news_x2.png' 2x
+		);
+		background-position: top left;
+		background-repeat: no-repeat;
+		background-size: 240px 270px;
+	}
+}
+
+@media(max-width: 1360px) {
+	.page-wrapper::before {
+		display: none;
+	}
+}
+
+.page-footer {
+	background-image:
+		url("/images/new-year-2024/footer-bottom_x1.png"),
+		url("/images/new-year-2024/footer-top_x1.png"),;
+
+		background-image: -webkit-image-set(
+    	url('/images/new-year-2024/footer-bottom_x1.png') 1x,
+    	url('/images/new-year-2024/footer-bottom_x1.5.png') 1.5x,
+    	url('/images/new-year-2024/footer-bottom_x2.png') 2x
+    ), -webkit-image-set(
+    	url('/images/new-year-2024/footer-top_x1.png') 1x,
+    	url('/images/new-year-2024/footer-top_x1.5.png') 1.5x,
+    	url('/images/new-year-2024/footer-top_x2.png') 2x
+    );
+
+    /* Standard use */
+    background-image: image-set(
+    	'/images/new-year-2024/footer-bottom_x1.png' 1x,
+    	'/images/new-year-2024/footer-bottom_x1.5.png' 1.5x,
+    	'/images/new-year-2024/footer-bottom_x2.png' 2x
+    ), image-set(
+    	'/images/new-year-2024/footer-top_x1.png' 1x,
+    	'/images/new-year-2024/footer-top_x1.5.png' 1.5x,
+    	'/images/new-year-2024/footer-top_x2.png' 2x
+    );
+
+    background-position:
+		bottom left,
+    	top right;
+
+    background-repeat:
+		no-repeat,
+    	no-repeat;
+	background-size:
+		100% auto,
+		270px 460px;
+}
+
+// .ny_banner2021-link {
+// 	display: block;
+// 	margin-left: auto;
+// 	margin-right: auto;
+// 	margin-top: 0;
+// 	margin-bottom: 20px;
+// 	width: 960px;
+// 	height: 216px;
+// 	&__img {
+// 		width: 960px;
+// 		height: 216px;
+// 	}
+// }

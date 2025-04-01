@@ -1,0 +1,177 @@
+.infographics-block {
+	margin-bottom: 40px;
+}
+
+.infographics-block__link {
+	display: inline-block;
+	position: relative;
+
+	&:hover {
+
+		.infographics-block__share {
+			opacity: 1;
+		}
+
+		.infographics-block__img-wrap {
+			&:before {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+			.infographics-block__img-show {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+		}
+
+		.infographics-block__img {
+			background-color: #fff;
+			transform: translateY(-7px);
+			box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+		}
+
+		.infographics-block__header {
+			color: @hover;
+		}
+
+		.infographics-block__text {
+			color: black;
+		}
+	}
+}
+
+.infographics-block__img-wrap {
+	width: 500px;
+	box-sizing: border-box;
+	.dotted-border(whitegray, right);
+	float: left;
+	position: relative;
+
+	&:before {
+		content: '';
+		width: calc(~'100% - 31px');
+		height: 100%;
+		background: rgba(0, 0, 0, 0.45) url('/images/icons/eye.png') no-repeat;
+		background-position: center center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+
+	.infographics-block__img-show {
+		width: calc(~'100% - 31px');
+		position: absolute;
+		top: 50%;
+		margin-top: 40px;
+		left: 0;
+		z-index: 2;
+		font-family: AvenirNext, sans-serif;
+		font-weight: 700;
+		font-size: 10px;
+		line-height: 28px;
+		text-transform: uppercase;
+		color: white;
+		text-align: center;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+}
+
+.infographics-block__img {
+	width: 469px;
+	display: block;
+	z-index: 1;
+	box-shadow: 0 0px 1px rgba(0, 0, 0, .25);
+	transition: all 0.2s ease-in-out;
+	box-sizing: border-box;
+}
+
+.infographics-block__content {
+	padding: 30px;
+	margin-left: 500px;
+}
+
+.infographics-block__header {
+	.teaser-title();
+	margin-bottom: 16px;
+	color: #000;
+}
+
+.infographics-block__text {
+	font-family: Lava, serif;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	color: black;
+    height: 7 * 20px;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+
+.infographics-block__share {
+	//width: @newsShareWidth;
+	float: right;
+	padding: 20px 0 15px;
+	box-sizing: border-box;
+	padding-left: 20px;
+	position: absolute;
+	right: 0;
+	bottom: 30px;
+	opacity: 0;
+	transition: all 0.2s ease-in-out;
+
+	.b-share {
+		margin: 0;
+		padding: 0 !important;
+	}
+
+	.b-share__handle {
+		padding: 0 10px !important;
+		display: inline-block;
+		float: left;
+		.dotted-border(whitegray, left);
+		height: auto;
+
+		&:last-child {
+			background: transparent;
+			padding-right: 0 !important;
+		}
+
+		&:hover {
+			.b-share-icon {
+				&.b-share-icon_facebook {
+					background-position: 0 0;
+				}
+
+				&.b-share-icon_vkontakte {
+					background-position: -26px 0;
+				}
+			}
+		}
+	}
+
+	.b-share-icon {
+		display: inline-block;
+		background-repeat: no-repeat;
+		vertical-align: middle;
+		width: 26px;
+		height: 26px;
+		background-image: url('/images/icons/iconset_social.png');
+
+		/* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+	    background-image: -webkit-image-set(url('/images/icons/iconset_social.png') 1x, url('/images/icons/iconset_social_x15.png') 1.5x, url('/images/icons/iconset_social_x20.png') 2x);
+	    /* Standard use */
+	    background-image: image-set('/images/icons/iconset_social.png' 1x, '/images/icons/iconset_social_x15.png' 1.5x, '/images/icons/iconset_social_x20.png' 2x);
+
+		&.b-share-icon_facebook {
+			background-position: 0 0;
+		}
+
+		&.b-share-icon_vkontakte {
+			background-position: -26px 0;
+		}
+	}
+
+}

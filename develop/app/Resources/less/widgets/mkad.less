@@ -1,0 +1,166 @@
+.mkad-page {
+  &__map {
+    margin-bottom: 122px;
+    &-title {
+      font-family: Brygada1918,serif;
+      font-size: 29px;
+      font-weight: bold;
+      margin: 0 0 30px;
+    }
+    &-help {
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: row;
+      &-item {
+        width: 50%;
+        font-family: Onest,sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 38px;
+          height: 38px;
+          margin-right: 15px;
+        }
+        &_ready:before {
+          background-image: url('/images/mkad/main/map-help-done.png');
+        }
+        &_wip:before {
+          background-image: url('/images/mkad/main/map-help-wip.png');
+        }
+      }
+    }
+    &-map {
+      width: 983px;
+      height: 1196px;
+      background-image: url('/images/mkad/main/map.jpg');
+    }
+  }
+  &__container {
+    margin-left: -240px;
+    margin-right: -240px;
+    padding-left: 240px;
+    padding-right: 240px;
+  }
+  &__clever {
+    display: block;
+    height: 518px;
+    background-image: url('/images/mkad/main/clever.jpg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 586px;
+    position: relative;
+    margin-bottom: 30px;
+    &:after {
+      content: '';
+      display: block;
+      width: 345px;
+      height: 1px;
+      background: #111;
+      position: absolute;
+      top: 80px;
+      right: 586px;
+    }
+    &-num {
+      display: block;
+      font-family: Brygada1918,serif;
+      font-size: 240px;
+      line-height: 200px;
+      font-weight: bold;
+      color: #2895ea;
+      margin-bottom: 50px;
+    }
+    &-title {
+      display: block;
+      font-family: Brygada1918,serif;
+      font-size: 62px;
+      line-height: 64px;
+      letter-spacing: -1px;
+      font-weight: bold;
+    }
+  }
+  &__interchange {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 568px;
+    background-image: url('/images/mkad/main/interchange.jpg');
+    background-repeat: no-repeat;
+    font-family: Brygada1918,serif;
+    font-size: 62px;
+    line-height: 68px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+    margin-bottom: 30px;
+    .shadowed-teaser();
+    &:after {
+      content: '';
+      display: block;
+      width: 200px;
+      height: 1px;
+      background: #fff;
+      position: absolute;
+      top: 260px;
+      left: 0px;
+    }
+  }
+  &__parts {
+    height: 617px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-image: url('/images/mkad/main/parts.jpg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    .shadowed-teaser();
+    box-shadow: 0 0 1px rgba(0,0,0,0); // kostyl
+    margin-bottom: 30px;
+    &-title {
+      display: block;
+      width: 485px;
+      font-family: Brygada1918,serif;
+      font-size: 62px;
+      line-height: 68px;
+      letter-spacing: -1px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    &-text {
+      display: block;
+      width: 485px;
+      font-size: 23px;
+      line-height: 31px;
+    }
+  }
+  &__problems {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 568px;
+    background-image: url('/images/mkad/main/problems.jpg');
+    background-repeat: no-repeat;
+    font-family: Brygada1918,serif;
+    font-size: 62px;
+    line-height: 68px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+    margin-bottom: 60px;
+    .shadowed-teaser();
+    &:after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 230px;
+      background: #fff;
+      position: absolute;
+      top: 0px;
+      left: 263px;
+    }
+  }
+}

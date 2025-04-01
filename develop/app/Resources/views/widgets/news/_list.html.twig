@@ -1,0 +1,16 @@
+<section class="news-list">
+    {% for post in posts %}
+        {% include '::/widgets/news/_teaser.html.twig' with {'post' : post} %}
+    {% endfor %}
+</section>
+
+{% if next_offset %}
+    {% include '::/Block/loadmore_button.html.twig' with {
+        title: 'Ещё ' ~ category.title,
+        target: '.news-list',
+        item: '.news-list__teaser',
+        source: block_path(block, context, {template: 'ajax_list'}),
+        limit: limit,
+        offset: next_offset
+    } %}
+{% endif %}

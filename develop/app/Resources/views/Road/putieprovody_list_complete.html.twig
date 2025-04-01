@@ -1,0 +1,67 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      {% if overpass_groups.operation|default %}
+        <div class="roadinfographics-block__list">
+            {% for item in overpass_groups.operation %}
+            <article class="roadinfographics-block">
+                <a href="{{ entity_path(item) }}" class="roadinfographics-block__link">
+                    <div class="roadinfographics-block__img-wrap">
+                        {% set image %}{% path item.image, 'thumb596' %}{% endset %}
+                        {% if image is empty %}
+                            {% set image %}'/images/road-themes__img.png'{% endset %}
+                        {% endif %}
+                        <div class="roadinfographics-block__img-bg" style="background-image: url({{ image }})"></div>
+                        <span class="roadinfographics-block__img-show">Начать просмотр</span>
+                    </div>
+                    <section class="roadinfographics-block__content">
+                        <header class="roadinfographics-block__header">
+                            {{ item.title }}
+                        </header>
+                        <div class="property-list__title">
+                            Характеристики:
+                        </div>
+                        <ul class="property-list">
+                            {% for parameter in item.roadParameterValues %}
+                                <li class="property-list__item item">
+                                    <div class="item__title">
+                                        {{ parameter.constructionParameter.title }}
+                                    </div>
+                                    <div class="item__value">
+                                        {{ parameter.value|raw }}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мкад'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

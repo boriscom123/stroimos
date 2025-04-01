@@ -1,0 +1,30 @@
+{% extends ':widgets/document:_list.html.twig' %}
+
+{% block header_documents %}
+    {#Законы, указы, постановления, распоряжения#}
+{% endblock %}
+
+{% block tableDocuments %}
+    <div class="documents-page__law-table">
+        <div class="documents-page__law-table-row header">
+            <div class="documents-page__law-table-item title">
+                Название
+            </div>
+            <div class="documents-page__law-table-item type">
+                Тип
+            </div>
+            <div class="documents-page__law-table-item agency-title">
+                Исходящий орган
+            </div>
+            <div class="documents-page__law-table-item number">
+                Номер
+            </div>
+            <div class="documents-page__law-table-item date">
+                Дата утверждения
+            </div>
+        </div>
+        {% for document in documents %}
+            {% include '::widgets/document/' ~ context.setting('category') ~ '/_teaser.html.twig' %}
+        {% endfor %}
+    </div>
+{% endblock %}

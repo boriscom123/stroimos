@@ -1,0 +1,242 @@
+parameters:
+    autoadmin.image.media_context_map:
+        default:
+            image:
+                context: main_image
+                lock_context: [main_image, gallery_media]
+        AppBundle\Entity\Post:
+            image:
+                context: gallery_media
+                editable_formats: [page_header_700, thumb210, thumb300, thumb960x470, thumb465x548, thumb340x340, thumb271x125, thumb295x345]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: page_header_700
+            heroImage:
+                context: gallery_media
+                help: Требуется только если изображение на странице публикации должно отличаться от основного изображения
+                editable_formats: [page_header_700,  thumb465x548]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: page_header_700
+        AppBundle\Entity\EmbeddedContent\Banner:
+            templateImage:
+                context: main_image
+                editable_formats: [thumb589]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb589
+                required: true
+        AppBundle\Entity\EmbeddedContent\Faq\FaqBlock:
+            image:
+                context: main_image
+                editable_formats: [thumb589]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb589
+                required: true
+
+        AppBundle\Entity\GalleryMedia:
+            image: gallery_media
+        AppBundle\Entity\Person:
+            image:
+                context: person
+                editable_formats: [thumb70]
+                lock_context: [person]
+                image_admin_extra_key: thumb70
+            topImage: person_top
+        AppBundle\Entity\ContactPerson:
+            image:
+                context: person
+                editable_formats: [direction, direction_main]
+                lock_context: [person]
+                image_admin_extra_key: thumb589
+        AppBundle\Entity\MetroTimelineYear:
+            image:
+                context: metro_timeline
+                lock_context: metro_timeline
+        AppBundle\Entity\Video:
+            image:
+                context: main_image
+                editable_formats: [thumb300, thumb680x495, thumb300x90]
+                lock_context: [video, main_image, gallery_media]
+                image_admin_extra_key: thumb680x495
+        AppBundle\Entity\Infographics:
+            image:
+                context: main_image
+                editable_formats: [thumb630x338]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb630x338
+        AppBundle\Entity\Road:
+            image:
+                context: main_image
+                editable_formats: [thumb1440, thumb300]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb1440
+        AppBundle\Entity\Construction:
+            image:
+                context: main_image
+                editable_formats: [thumb1440, thumb300]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb1440
+        AppBundle\Entity\MetroStation:
+            image:
+                context: main_image
+                editable_formats: [thumb1440, thumb300]
+                lock_context: [main_image, gallery_media]
+                image_admin_extra_key: thumb1440
+amg_page:
+    page:
+        class: AppBundle\Entity\Page
+    block:
+        class: AppBundle\Entity\Block
+    route:
+        name: page
+        controller: AmgPageBundle:Page:page
+    layouts:
+        default:
+            title: Стандартный
+            template: :Page:default.html.twig
+            containers:
+                hidden: Без привязки
+                content: Контент
+        news_blocks_page:
+            title: С новостными блоками
+            template: :Page:news_blocks_page.html.twig
+            containers:
+                hidden: Без привязки
+                content: Контент
+        map_page:
+            title: С картой
+            template: :Page:map_page.html.twig
+            containers:
+                hidden: Без привязки
+                content: Контент
+        dk_direction:
+            title: Для страниц ДК: с блоком руководство
+            template: 'Subordinate/Page/dk_direction.html.twig'
+            containers:
+                hidden: Без привязки
+                content: Контент
+
+amg_admin:
+    # ключом является название группы в форме "НАЗВАНИЕ_ВКЛАДКИ.НАЗВАНИЕ_ГРУППЫ"
+    # порядок перечисления групп задаёт порядок их следования во вкладке
+    # порядок перечислений полей задайт порядок их следования в группе
+    fields_mapping:
+        Основное.Таймлайн метро:
+            fields: [year]
+        Основное.Персона:
+            fields: [lastName, firstName, patronymic, biography, education, experience, awards, family, notes]
+            options: { class: col-md-6 }
+        Основное.Контент:
+            fields:
+                - gallery
+                - title
+                - fullTitle
+                - companyType
+                - teaser
+                - shortPost
+                - description
+                - image
+                - topImage
+                - heroImage
+                - file
+                - position
+                - lead
+                - content
+                - mobileContent
+                - tags
+                - color
+                - templateImage
+                - constructionType
+                - number
+                - filter
+                - daily
+            options: { class: col-md-12 }
+        Основное.Источник:
+            fields: [author, editor, journalistWriter, source ]
+            options: { class: col-md-6 }
+        Основное.Характеристики:
+            fields:
+                - head
+                - headOrganization
+                - lowerOrganization
+                - lowerOrganizations
+                # MetroStation
+                - line
+                - entranceHallDescription
+                - featureDescription
+                - capacityDescription
+                # Road
+                - roadType
+            options: { class: col-md-6 }
+        Характеристики объекта строительства.:
+            fields:
+                - constructionStartYear
+                - constructionEndYear
+                - constructionStatus
+                - constructionStatusDescription
+                # Road
+                - roadParameterValues
+        Основное.Параметры:
+            fields:
+                - category
+                - rubrics
+                - organizationDirectory
+                - link
+                - publishable
+                - showInStructure
+                - feedable
+                - publishableInRss
+                - searchable
+                - relevantNewsShown
+                - publishStartDate
+                - publishEndDate
+                - priorityPosition
+                - owner
+                - owners
+                - weight
+                - type
+                - url
+                - x
+                - y
+            options: { class: col-md-6 }
+        Основное.Пакетная загрузка:
+            fields: [batch_upload, copyright, batch_category, batch_create_category]
+            options: { class: col-md-6 }
+        Основное.Медиа:
+            fields: [medias, images, infographics, video]
+        Контактная информация.:
+            fields: [legalAddress, actualAddress, organization, appointment, phone, fax, email, website]
+            options: { class: col-md-6 }
+        Вопросы и ответы.Вопросы и ответы:
+        Характеристики.Характеристики из внешних источников:
+        Характеристики.Прочие характеристики:
+        RSS.Контент для платформы "Мир тесен":
+            fields: [wordIsSmallContent]
+        Адресная информация.Адрес:
+            fields: [administrativeUnit, address]
+        Прикрепленные материалы.Файлы:
+            fields: [attachments]
+        Прикрепленные материалы.Прикрепленные материалы:
+            fields: [relatedPosts, relatedPressReleases, relatedInfographics, relatedGalleries, relatedVideos, relatedConstructions, relatedMetroStations, relatedRoads, relatedDocuments]
+        Прикрепленные материалы.Внешние ресурсы:
+            fields: [panorama]
+        SEO.Метаданные:
+            fields: [metaDescription, metaKeywords]
+        Служебное.Служебные параметры:
+            fields: [parent, slug, layout, childrenLayout]
+
+        Основное.Конференция:
+            fields: []
+            options: { class: col-md-6 }
+
+        Основное.Анонс:
+            fields: []
+            options: { class: col-md-6 }
+
+        Дополнительно.Социальные сети:
+            fields: [socialAccountUrls]
+        Дополнительно.На данный момент:
+            fields: [currently]
+        Дополнительно.Последние новости:
+            fields: [showLastNews, lastNewsTags]
+        Дополнительно.Информация:
+            fields:
+                - extraInformation

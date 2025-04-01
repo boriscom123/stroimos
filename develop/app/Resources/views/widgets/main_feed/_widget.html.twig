@@ -1,0 +1,11 @@
+{% if news and news is defined %}
+    <div class="main-feed">
+        {% for post in news %}
+            {% include '::/widgets/main_feed/_teaser.html.twig' with {'post': post} %}
+        {% endfor %}
+        <a class="related-link main-feed__related-link" href="{{ path('app_news_list') }}">
+            все новости
+            <i class="icon icon-16 icon-news"></i>
+        </a>
+    </div>
+{% endif %}

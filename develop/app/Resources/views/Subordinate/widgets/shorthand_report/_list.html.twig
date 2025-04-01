@@ -1,0 +1,22 @@
+<section class="shorthand-report-list">
+    <div class="shorthand-report-list__title">
+        Стенограммы
+    </div>
+    <div class="shorthand-report-list__list">
+        {% for post in posts %}
+            {% include 'Subordinate/widgets/shorthand_report/_teaser.html.twig' with {'post' : post} %}
+        {% endfor %}
+    </div>
+</section>
+
+{% if next_offset %}
+    {% include ':Subordinate/Block:loadmore_button.html.twig' with {
+        title: 'Ещё',
+        target: '.shorthand-report-list__list',
+        item: '.shorthand-report-list__teaser',
+        source: block_path(block, context, {template: 'subordinate_shorthand_report_ajax_list'}),
+        limit: limit,
+        offset: next_offset,
+        category: 'shorthand-reports'
+    } %}
+{% endif %}

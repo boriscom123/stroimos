@@ -1,0 +1,110 @@
+{% extends 'SonataAdminBundle:CRUD:base_show.html.twig' %}
+
+{% block show %}
+    {% set user = object %}
+
+    <div class="sonata-ba-view">
+        <h2>Сводные данные</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="sonata-ba-view-title">
+                <th>Тип</th>
+                <th>Содержание</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="sonata-ba-view-container">
+                <td>
+                    Темы
+                </td>
+                <td>
+                    {% for title, count in user_rubrics %}
+                        {% if loop.index <= 7 %}
+                            <strong>
+                        {% endif %}
+                            <nobr>{{ title }} ({{ count }})</nobr>
+                        {%- if loop.index <= 7 -%}
+                            </strong>
+                        {%- endif -%}
+                        {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr class="sonata-ba-view-container">
+                <td>
+                    Теги
+                </td>
+                <td>
+                    {% for title, count in user_tags %}
+                        {% if loop.index <= 7 %}
+                            <strong>
+                        {% endif %}
+                        <nobr>{{ title }} ({{ count }})</nobr>
+                        {%- if loop.index <= 7 -%}
+                            </strong>
+                        {%- endif -%}
+                        {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr class="sonata-ba-view-container">
+                <td>
+                    Поисковые запросы
+                </td>
+                <td>
+                    {% for title, count in object.activityProfile.queryAggreagtion %}
+                        {% if loop.index <= 3 %}
+                            <strong>
+                        {% endif %}
+                        <nobr>{{ title }} ({{ count }})</nobr>
+                        {%- if loop.index <= 3 -%}
+                            </strong>
+                        {%- endif -%}
+                        {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Последняя активность</h2>
+        {% if user.lastActivities|length %}
+            <table class="table table-bordered">
+                <thead>
+                <tr class="sonata-ba-view-title">
+                    <th>Дата</th>
+                    <th>Страница</th>
+                    <th>Темы</th>
+                    <th>Теги</th>
+                    <th>Поисковый запрос</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for activity in user.lastActivities %}
+                    <tr class="sonata-ba-view-container">
+                        <td>
+                            {{ activity.createdAt|format_datetime }}
+                        </td>
+                        <td>
+                            <a target="_blank" href="{#{{ path(activity.route, activity.routeParams) }}#}#">{{ activity.title }}</a>
+                        </td>
+                        <td>
+                            {{ activity.rubricsAggregation|join(', ') }}
+                        </td>
+                        <td>
+                            {{ activity.tagsAggregation|join(', ') }}
+                        </td>
+                        <td>
+                            {{ activity.query }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,105 @@
+.now-block {
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+  position: relative;
+  padding-left: 320px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 240px;
+    height: 41px;
+    width: 56px;
+    background: url("/images/icons/now-block.png");
+  }
+
+  p, h4 {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 24px;
+    color: @color;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 21px;
+    font-style: italic;
+    line-height: 24px;
+    color: @hover;
+  }
+}
+
+.now-block__title {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 23px;
+  color: @color;
+  margin-bottom: 10px;
+}
+
+.now-block-small {
+	overflow: hidden;
+	border-bottom: 1px solid #a6a6a6;
+	padding-bottom: 28px;
+	margin-bottom: 25px;
+	min-height: 72px;
+
+	&__content {
+		position: relative;
+		padding-left: 65px;
+
+		&:before {
+		  content: '';
+		  display: block;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  height: 45px;
+		  width: 64px;
+		  background: url(/images/icons/now-block.png);
+		  background-size: 51% 100%;
+		  background-repeat: repeat no-repeat;
+		}
+	}
+
+	p, h4 {
+	  font-family: Onest, sans-serif;
+	  font-weight: 450;
+	  font-size: 14px;
+	  line-height: 17px;
+	  color: rgba(0, 0, 0, 0.8);
+
+	  &:last-child {
+		margin-bottom: 0;
+	  }
+	}
+
+	a {
+	  font-family: Onest, sans-serif;
+	  font-weight: 400;
+	  font-style: normal;
+	  font-size: 14px;
+	  line-height: 17px;
+	  color: @hover;
+	}
+}
+
+.now-block-small__title {
+	font-family: Brygada1918, serif;
+	margin-bottom: 12px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	color: rgba(0, 0, 0, 0.8);
+}

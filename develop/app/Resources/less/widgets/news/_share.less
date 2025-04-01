@@ -1,0 +1,208 @@
+.news-wrapper__share {
+  width: @newsShareWidth;
+  float: left;
+  padding: 20px 15px 20px 0;
+  box-sizing: border-box;
+
+  /* old ya share */
+
+  .b-share {
+    margin: 0;
+    padding: 0!important;
+  }
+
+  .b-share__handle {
+    padding: 0 5px!important;
+    display: inline-block;
+    float: left;
+    //.dotted-border(black, right);
+    cursor: pointer;
+    height: auto;
+
+    &:first-child {
+      padding-left: 0!important;
+    }
+
+    &:last-child {
+      background: transparent;
+    }
+
+    &:hover {
+      .b-share-icon {
+        &.b-share-icon_facebook {
+          background-position: 0 0;
+        }
+
+        &.b-share-icon_vkontakte {
+          background-position: -26px 0;
+        }
+
+        &.b-share-icon_twitter {
+          background-position: -52px 0;
+        }
+
+        &.b-share-icon_odnoklassniki {
+          background-position: -182px 0;
+        }
+
+        &.b-share-icon_moimir {
+          background-position: -208px 0;
+        }
+
+        &.b-share-icon_lj {
+          background-position: -234px 0;
+        }
+      }
+    }
+  }
+
+  .b-share-icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    background-image: url('/images/icons/iconset_social.png');
+
+    /* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(url('/images/icons/iconset_social.png') 1x, url('/images/icons/iconset_social_x15.png') 1.5x, url('/images/icons/iconset_social_x20.png') 2x);
+    /* Standard use */
+    background-image: image-set('/images/icons/iconset_social.png' 1x, '/images/icons/iconset_social_x15.png' 1.5x, '/images/icons/iconset_social_x20.png' 2x);
+
+    &.b-share-icon_facebook {
+      background-position: 0 -26px;
+    }
+
+    &.b-share-icon_vkontakte {
+      background-position: -26px -26px;
+    }
+
+    &.b-share-icon_twitter {
+      background-position: -52px -26px;
+    }
+
+    &.b-share-icon_odnoklassniki {
+      background-position: -182px -26px;
+    }
+
+    &.b-share-icon_moimir {
+      background-position: -208px -26px;
+    }
+
+    &.b-share-icon_lj {
+      background-position: -234px -26px;
+    }
+  }
+}
+
+.news-wrapper__share-title {
+  font-family: Onest, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18.2px;
+  margin-bottom: 20px;
+  color: #1B262C;
+  text-transform: uppercase;
+}
+
+/* new ya share */
+
+.ya-share2 {
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    display: inline-block;
+    margin: 0 5px;
+    &:first-child {
+      margin-left: 0px;
+    }
+    &:last-child {
+      margin-right: 0px;
+    }
+    &_service {
+      &_telegram {
+        .ya-share2__icon {
+          background-position: -260px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -260px 0px;
+        }
+      }
+      &_facebook {
+        .ya-share2__icon {
+          background-position: 0 -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: 0 0px;
+        }
+      }
+
+      &_vkontakte {
+        .ya-share2__icon {
+          background-position: -26px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -26px 0px;
+        }
+      }
+
+      &_twitter {
+        .ya-share2__icon {
+          background-position: -52px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -52px 0px;
+        }
+      }
+
+      &_odnoklassniki {
+        .ya-share2__icon {
+          background-position: -182px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -182px 0px;
+        }
+      }
+
+      &_moimir {
+        .ya-share2__icon {
+          background-position: -208px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -208px 0px;
+        }
+      }
+
+      &_lj {
+        .ya-share2__icon {
+          background-position: -234px -26px;
+        }
+        &:hover .ya-share2__icon {
+          background-position: -234px 0px;
+        }
+      }
+    }
+  }
+  &__icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    background-image: url('/images/icons/iconset_social.png');
+
+    /* Chrome/Edge/Opera/Samsung, Safari will fallback to this as well */
+    background-image: -webkit-image-set(url('/images/icons/iconset_social.png') 1x, url('/images/icons/iconset_social_x15.png') 1.5x, url('/images/icons/iconset_social_x20.png') 2x);
+    /* Standard use */
+    background-image: image-set('/images/icons/iconset_social.png' 1x, '/images/icons/iconset_social_x15.png' 1.5x, '/images/icons/iconset_social_x20.png' 2x);
+
+    background-color: transparent;
+    background-color: #e5e4e4;
+		border-radius: 26px;
+  }
+  &__title {
+    display: none;
+  }
+}

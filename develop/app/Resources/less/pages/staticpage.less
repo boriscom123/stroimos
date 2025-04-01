@@ -1,0 +1,53 @@
+.static-page {
+
+  .container__pull-left {
+    margin-left: 0;
+  }
+
+  a:not(.pic) {
+    color: @blue;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+    transition: border-color 0.4s ease;
+
+    &:hover {
+      border-color: @blue;
+    }
+
+    img {
+      position: relative;
+      top: 10px;
+      background: white;
+    }
+  }
+
+  .pic {
+    position: relative;
+		display: inline-block;
+
+		& img {
+			border-radius: 4px;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			z-index: 2;
+			top: 20px;
+			right: 20px;
+			width: 36px;
+			height: 36px;
+			display: block;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			background-image: url(/images/construction/photo.svg);
+			opacity: 0.5;
+			transition: opacity 0.4s ease;
+		}
+
+		&:hover::before {
+			opacity: 1;
+		}
+  }
+}

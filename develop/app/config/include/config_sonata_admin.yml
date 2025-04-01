@@ -1,0 +1,78 @@
+sonata_admin:
+    title:                stroi.mos.ru
+    title_logo:           /images/admin/logo_new.png
+    options:
+        use_icheck: true
+    templates:
+        edit: AmgAdminBundle::locking_edit.html.twig
+        history: ::SonataAdmin/history.html.twig
+        show_compare: ::SonataAdmin/show_compare.html.twig
+        layout: ::SonataAdmin/standard_layout.html.twig
+        pager_links: :SonataAdmin:Pager/links.html.twig
+        inner_list_row: :SonataAdmin:CRUD/list_inner_row.html.twig
+    extensions:
+        app.admin.extension.draft:
+            admins:
+                - admin.post
+                - admin.construction
+                - amg_page.admin.page
+    security:
+        handler: sonata.admin.security.handler.role
+        information:
+            EDIT: [EDIT]
+            LIST: [LIST]
+            CREATE: [CREATE]
+            VIEW: [VIEW]
+            DELETE: [DELETE]
+            MASTER: [MASTER]
+    admin_services:
+        admin.gallery:
+            form_contractor: admin.media_collection_contractor
+        admin.newsletter:
+            form_contractor: admin.media_collection_contractor
+sonata_doctrine_orm_admin:
+    audit:
+        force: false
+    templates:
+        form:
+            - :SonataAdmin/Form:form_admin_fields.html.twig
+
+simple_things_entity_audit:
+        global_ignore_columns:
+            - created_at
+            - updated_at
+            - updated_At
+            - address
+            - address_text
+            - address_geo_polygon
+            - address_geo_point
+
+sonata_user:
+    security_acl: false
+    manager_type: orm
+    class:
+            user:   Application\Sonata\UserBundle\Entity\User
+            group:  Application\Sonata\UserBundle\Entity\Group
+    admin:
+        group:
+            class: Application\Sonata\UserBundle\Admin\GroupAdmin
+        user:
+            class: Application\Sonata\UserBundle\Admin\UserAdmin
+            controller: AppBundle:Admin\UserCRUD
+    profile:
+        form:
+            type: app_user_profile
+
+    impersonating:
+            route: sonata_admin_dashboard
+
+sonata_intl:
+    timezone:
+        locales:
+            ru:    Europe/Moscow
+        default: Europe/Moscow
+
+sonata_formatter:
+    ckeditor:
+        templates:
+            browser: ':SonataFormatter:ckeditor_browser.html.twig'

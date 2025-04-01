@@ -1,0 +1,16 @@
+{% if publication.tags is defined and publication.tags is not empty %}
+    <div class="news-wrapper__tags">
+        {% block tagsTitle %}
+            <h3 class="news-wrapper__tags-title">Теги</h3>
+        {% endblock %}
+        <ul class="news-tags__list">
+            {% block tagBlock %}
+                {% for tag in publication.tags %}
+                    <li class="news-tags__list-item">
+                        <a href="{{ entity_list_path(publication, {tag: tag.title}) }}" class="news-tags__list-item-uri">{{ tag.title }}</a>
+                    </li>
+                {% endfor %}
+            {% endblock %}
+        </ul>
+    </div>
+{% endif %}

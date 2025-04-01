@@ -1,0 +1,115 @@
+<form action="{{ path('app_document_list') }}" method="get" class="news-form">
+    <fieldset class="news-search__form-block">
+        <input type="submit" class="news-search__form-block-btn" value=""/>
+        <div class="news-search__query-wrap">
+            <input type="text" name="q" id="q" placeholder="Название или текст" value="{{ app.request.get('q') }}" class="news-search__query"/>
+        </div>
+    </fieldset>
+    <fieldset class="news-search__more">
+        <div class="search-form__submenu">
+            <a id="searchAdvance" class="news-search__more-item" href="#">Расширенный поиск</a>
+            {% if 'app_document_drafts_list' == app.request.attributes.get('_route') and (app.request.query.all != {category: 'draft', archive: 1}) %}
+                <a class="news-search__more-item" href="{{ path('app_document_list', {category: 'draft', archive: 1}) }}">Архив проектов</a>
+            {% endif %}
+            <span class="clear"></span>
+        </div>
+        <div class="search-form__submenu-wrap" style="height: 0;">
+            <div class="documents-page__document-filter documents-page__document-type active" style="display: none;">
+                <label for="category">Раздел:</label>
+                {% set category = context.setting('category') %}
+                <select name="category" id="category">
+                    <option value="all" {% if category == 'all' %} selected="selected" {% endif %}>Все разделы</option>
+                    <option value="law" {% if category == 'law' %} selected="selected" {% endif %}>Законы, указы, постановления, распоряжения</option>
+                    <option value="draft" {% if category == 'draft' %} selected="selected" {% endif %}>Проекты правовых нормативных актов</option>
+                    <option value="decision" {% if category == 'decision' %} selected="selected" {% endif %}>Решения об утверждении проектной документации</option>
+                </select>
+            </div>
+            <div class="documents-page__document-filter documents-page__document-number documents-page__law documents-page__decision {% if context.setting('category') == 'law' or context.setting('category') == 'decision' %}active{% endif %}" style="display: none;">
+                <label for="number_document">№</label>
+                <input type="text" name="number" id="number_document" value="{{ context.setting('number') }}" />
+
+                <label for="status_document">Статус</label>
+                <select name="status" id="status_document">
+                    <option value="" {% if app.request.get('status', '') == '' %} selected="selected" {% endif %}>Все</option>
+                    <option value="1" {% if app.request.get('status', '') == '1' %} selected="selected" {% endif %}>Действующий</option>
+                    <option value="0" {% if app.request.get('status', '') == '0' %} selected="selected" {% endif %}>Недействующий</option>
+                </select>
+            </div>
+            <div class="documents-page__document-filter documents-page__outgoing-authority-id documents-page__law {% if context.setting('category') == 'law' %}active{% endif %}" style="display: none;">
+                <label for="agency_document">Исходящий орган</label>
+                <select name="agency" id="agency_document">
+                    <option value="">Все</option>
+                    {% for agency in agencies %}
+                        <option value="{{ agency.id }}" {% if app.request.get('agency') == agency.id %} selected="selected" {% endif %}>{{ agency.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="documents-page__document-filter documents-page__approved-at documents-page__law documents-page__decision {% if context.setting('category') == 'law' or context.setting('category') == 'decision' %}active{% endif %}" style="display: none;">
+                Дата утверждения:
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'approve_date_start', labelBefore: 'с'} %}
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'approve_date_end', labelBefore: 'по'} %}
+            </div>
+            <div class="documents-page__document-filter documents-page__document-tree documents-page__document-category documents-page__law {% if context.setting('category') == 'law' %}active{% endif %}" style="display: none;">
+                {% set selected_rubric_ids = app.request.get('rubrics', {}) | keys %}
+                {% macro tree(links, selected_rubric_ids) %}
+                    {% for link in links %}
+                        {% set item = link.data is defined ? link.data : link %}
+                        <li class="tree_node closed" id="tree_{{ item.id }}" data-id="{{ item.id }}">
+                            <div class="tree_item_title checkbox">
+                                <input id="rubrics{{ item.id }}" type="checkbox" name="rubrics[{{ item.id }}]" {% if item.id in selected_rubric_ids %} checked="checked" {% endif %}/>
+                                <label for="rubrics{{ item.id }}">
+                                    {{ item.title }}
+                                </label>
+                            </div>
+                            {% if item.children | length %}
+                                <ul>
+                                    {{ _self.tree(item.children, selected_rubric_ids) }}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% endmacro %}
+
+                {% for rootNode in rubrics %}
+                    {% set treeview = 'treeview_' ~ rootNode.id %}
+                    <ul class="treeview" id="{{ treeview }}">
+                        <li class="document_rubric_node" id="document_rubric_{{ rootNode.id }}">
+                            <div class="tree_item_title checkbox">
+                                <input id="rubrics{{ rootNode.id }}" type="checkbox" name="rubrics[{{ rootNode.id }}]" {% if rootNode.id in selected_rubric_ids %} checked="checked" {% endif %}/>
+                                <label for="rubrics{{ rootNode.id }}">
+                                    {{ rootNode.title }}
+                                </label>
+                            </div>
+                            {% if rootNode.children|length > 1 %}<ul>{% endif %}
+                                {{ _self.tree(rootNode.children, selected_rubric_ids) }}
+                            {% if rootNode.children|length > 1 %}</ul>{% endif %}
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+            <div class="documents-page__document-filter documents-page__document-placement documents-page__draft {% if context.setting('category') == 'draft' %}active{% endif %}" style="display: none;">
+                <label for="archive_document">Статус</label>
+                <select name="archive" id="archive_document">
+                    <option value="-1" {% if app.request.get('archive', 0) == -1 %} selected="selected" {% endif %}>Все</option>
+                    <option value="1" {% if app.request.get('archive', 0) == 1 %} selected="selected" {% endif %}>Архивный</option>
+                    <option value="0" {% if app.request.get('archive', 0) == 0 %} selected="selected" {% endif %}>Актуальный</option>
+                </select>
+            </div>
+            <div class="documents-page__document-filter documents-page__document-placement documents-page__draft {% if context.setting('category') == 'draft' %}active{% endif %}" style="display: none;">
+                Дата Размещения:
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'date_of_adding_start', labelBefore: 'с'} %}
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'date_of_adding_end', labelBefore: 'по'} %}
+            </div>
+            <div class="documents-page__document-filter documents-page__document-finished documents-page__draft {% if context.setting('category') == 'draft' %}active{% endif %}" style="display: none;">
+                Дата окончания срока проведения независимой антикоррупционной экспертизы:<br />
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'expiration_date_start', labelBefore: 'с'} %}
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'expiration_date_end', labelBefore: 'по'} %}
+            </div>
+            <div class="documents-page__document-filter documents-page__document-anticorruption documents-page__draft {% if context.setting('category') == 'draft' %}active{% endif %}" style="display: none;">
+                Дата поступления текста заключения независимой антикоррупционной экспертизы:<br />
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'date_of_receipt_start', labelBefore: 'с'} %}
+                {% include '::/widgets/selectbox_date.html.twig' with {elemId: 'date_of_receipt_end', labelBefore: 'по'} %}
+            </div>
+        </div>
+    </fieldset>
+</form>

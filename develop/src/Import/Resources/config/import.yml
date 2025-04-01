@@ -1,0 +1,24 @@
+services:
+    import_source_db:
+        class: Doctrine\DBAL\Connection
+        factory_class: Doctrine\DBAL\DriverManager
+        factory_method: getConnection
+        arguments:
+            -
+                dbname: %import.database_name%
+                user: %import.database_user%
+                password: %import.database_password%
+                host: %import.database_host%
+                driver: pdo_mysql
+                charset: utf8
+
+    import_source:
+        class: Import\Source
+        arguments:
+            -
+                @import_source_db
+
+    import.structure_controller:
+        class: Import\Controller\StructureController
+        calls:
+           - [setContainer, [@service_container]]

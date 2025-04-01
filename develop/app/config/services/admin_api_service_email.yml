@@ -1,0 +1,16 @@
+services:
+  ApiBundle\ApplicationLayer\CreateAndSendServiceEmailCommand\CreateAndSendServiceEmailHandler:
+    class: ApiBundle\ApplicationLayer\CreateAndSendServiceEmailCommand\CreateAndSendServiceEmailHandler
+    arguments:
+      - 'ApiBundle\ApplicationLayer\CreateAndSendServiceEmailCommand\CreatedAndSendServiceEmailCommandDto'
+      - '@ApiBundle\ApplicationLayer\AbstractCommand\SymfonyCommandValidator'
+      - '@templating'
+      - '@mailer'
+      - '%mailer_sender_address%'
+      - '%mailer_sender_name%'
+
+  ApiBundle\PresentationLayer\HttpController\ServiceEmailSenderController:
+    class: ApiBundle\PresentationLayer\HttpController\ServiceEmailSenderController
+    arguments:
+      - '@ApiBundle\ApplicationLayer\CreateAndSendServiceEmailCommand\CreateAndSendServiceEmailHandler'
+      - '@serializer'

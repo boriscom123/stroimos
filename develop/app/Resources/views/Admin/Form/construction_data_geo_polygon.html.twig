@@ -1,0 +1,85 @@
+{% macro map_view(data_status, data, id) %}
+    {% if data is empty %}
+        {{ '(нет данных)' }}
+    {% else %}
+        {% set map_container_id = id ~ '-map-container' ~ data_status %}
+        <div id="{{ map_container_id }}" style="width: 320px; height: 240px"></div>
+
+        {% set init_func_name = id ~ 'InitMap_' ~ data_status %}
+        <script>
+            ymaps.ready({{ init_func_name }});
+
+            function {{ init_func_name }}() {
+
+                const map = new ymaps.Map('{{ map_container_id }}', {
+                    controls: ['fullscreenControl', 'zoomControl'],
+                    center: [55.76, 37.64],
+                    zoom: 15
+                });
+
+                const props = {};
+                const options = {
+                    fillColor: 'rgba(255,255,255,0.5)',
+                    fillMethod: 'tile',
+                    strokeColor: '#5b5b4f',
+                    strokeWidth: 2,
+                    opacity: 0.5
+                };
+
+                const dataGeometry = {{ data }};
+                map.geoObjects.add(new ymaps.Polygon(dataGeometry, props, options))
+                map.setBounds(map.geoObjects.getBounds(),{checkZoomRange:true, preciseZoom:true, zoomMargin:50}).then(function(){ if(map.getZoom() > 17) map.setZoom(17);});
+            }
+        </script>
+    {% endif %}
+{% endmacro %}
+
+{% block construction_data_geo_polygon_widget %}
+    {% import _self as macros %}
+
+    <div class="form-group">
+        <table class="table table-bordered">
+            <colgroup>
+                <col width="30%"/>
+                <col/>
+            </colgroup>
+
+            <tr>
+                <td><label>Базовые данные:</label></td>
+                <td>{{ macros.map_view('current', property_data.current, id) }}</td>
+            </tr>
+
+            {% if is_new_data_pending and property_data.pending != property_data.current %}
+                <tr>
+                    <td><label>Новые данные:</label></td>
+                    <td>{{ macros.map_view('pending', property_data.pending, id) }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td><label>Корректированные данные:</label></td>
+                <td>
+                    {{ form_widget(form) }}
+
+                    <div id="{{ id }}-geoPolygon-map-container" style="width:320px; height:240px"></div>
+
+                    <script src="{{ asset('js/admin/geo-polygon-editor.js') }}"></script>
+
+                    {% set init_func_name = id ~ 'InitGeoPolygonMap' %}
+                    <script>
+                        ymaps.ready({{ init_func_name }});
+
+                        function {{ init_func_name }}() {
+
+                            var $geoPolygonInput = $('#{{ id }}');
+                            var polygonEditor_{{ id }} = new PolygonEditor('{{ id }}-geoPolygon-map-container', $geoPolygonInput);
+
+                            polygonEditor_{{ id }}.init();
+                        }
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+

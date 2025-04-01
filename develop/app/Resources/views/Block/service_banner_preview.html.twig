@@ -1,0 +1,22 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    <section class="homepage-main">
+    <aside class="homepage-sidebar">
+        <div class="services">
+            <h3 class="services__title">Сервисы</h3>
+            <ul class="services__list">
+                {% set serviceBanner = object %}
+                <li class="services__teaser">
+                    <a class="services__teaser-link" href="{{ serviceBanner.settings.url }}">
+                        {{ serviceBanner.settings.title }}
+                        <i class="icon icon-services icon-{{ serviceBanner.settings.icon }}"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    </section>
+
+    {{ block('sonata_preview') }}
+{% endblock %}

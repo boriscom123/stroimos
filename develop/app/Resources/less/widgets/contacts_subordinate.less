@@ -1,0 +1,45 @@
+.contacts-page {
+  display: flex;
+  flex-direction: column;
+  &__map, &__map-image {
+    display: flex;
+  }
+  &__map-image {
+    height: 454px;
+    overflow: hidden;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+  &__content {
+    font-family: Brygada1918,serif;
+    font-size: 19px;
+    color: #323232;
+    order: -1;
+    padding-bottom: 40px;
+    &-label {
+      display: block;
+      font-family: Onest,sans-serif;
+      font-weight: 450;
+      font-size: 16px;
+      line-height: 24px;
+      color: @newTextColor;
+      margin-bottom: 10px;
+    }
+    &-huge {
+      display: block;
+      font-size: 25px;
+      line-height: 30px;
+      font-weight: 700;
+    }
+    &-extrainfo{
+      font-family: Onest,sans-serif;
+      display: block;
+      margin-top: 2em;
+      font-weight: 400;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+  }
+}

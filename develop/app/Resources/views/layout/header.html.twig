@@ -1,0 +1,87 @@
+{% if new_design %}
+<header class="main-header">
+    <div class="main-header__wrapper">
+        {% include '::/widgets/header/_logo.html.twig' %}
+        <nav class="main-header__menu">
+            {% include '::/widgets/header/_top_menu.html.twig' with {'menu': knp_menu_get('top_menu')} %}
+        </nav>
+        <a class="main-header__drop-btn" href="#"></a>
+    </div>
+    <div class="main-header__menu-drop">
+        <nav class="main-header__menu-drop-list">
+            {% include '::/widgets/header/_main_menu.html.twig' with {'menu': knp_menu_get('header_main')} %}
+        </nav>
+        {% include '::/widgets/header/_dropdown_menu.html.twig' with {'menu': knp_menu_get('header_main')} %}
+    </div>
+</header>
+<div class="header-search__wrapper">
+    <div class="header-search">
+        {% include '::/widgets/header/_search.html.twig' %}
+        <a class="header-search__link" href="#">
+            Новые стройки в районе Хамовники
+        </a>
+    </div>
+</div>
+{% else %}
+<header class="page-header container__limiter">
+    <div class="page-header__column">
+        <div class="page-header__section">
+            {% include '::/widgets/header/_logo.html.twig' %}
+            {% include '::/widgets/socials.html.twig' with {'socials': []} %}
+            <div class="clear"></div>
+        </div>
+        <div class="page-header__section">
+            {% include ':widgets/header:_search.html.twig' %}
+        </div>
+        <div class="page-header__section">
+            {% include ':widgets/header:_super.html.twig' %}
+        </div>
+    </div>
+    <div class="page-header__column">
+        {#todo: remove on user profile remove#}
+        {#<div class="page-header__auth" style="text-align: right">
+                {% if app.user %}
+                    <a class="page-header__auth-link logout" href="{{ path('sonata_user_security_logout') }}">выход</a>
+                    <a class="page-header__auth-link" href="{{ path('sonata_user_profile_show') }}">{{ app.user.getDisplayName }} {{ app.user.getDisplayName }}</a>
+                {% else %}
+                    <a class="page-header__auth-link" href="{{ path('sonata_user_security_login') }}">вход</a><a class="page-header__auth-link" href="{{ path('sonata_user_registration_register') }}">регистрация</a>
+                {% endif %}
+            </div>#}
+        {{ sonata_block_render({type: 'simple_template'}, {template: '::menu/header_menu.html.twig'}) }}
+    </div>
+</header>
+{{ sonata_block_render({type: 'simple_template'}, {template: '::menu/header_menu_dropdown.html.twig', parameters: {menu: 'header_main'}}) }}
+
+{#     <a href="https://moscow2030.mos.ru/"
+        target="_blank" class="additional_banner additional_banner_msk_2030"><img class="additional_banner__img"
+            alt="По-соседски"
+            src="/images/banner/banner_msk_2030.png"
+            srcset="/images/banner/banner_msk_2030.png,
+                    /images/banner/banner_msk_2030_x15.png 1.5x,
+                    /images/banner/banner_msk_2030_x20.png 2x" />
+    </a> #}
+
+    {# Новогодний баннер
+    {% if date('now') < date("2024-01-01")%}
+        <a href="/happy-new-year-2024"
+            target="_blank" class="additional_banner additional_banner_ny24">
+            <img class="additional_banner__img"
+                alt="Новогоднее поздравление"
+                src="/images/new-year-2024/banner_x1.png"
+                srcset="/images/new-year-2024/banner_x1.png,
+                        /images/new-year-2024/banner_x1.5.png 1.5x,
+                        /images/new-year-2024/banner_x2.png 2x" />
+        </a>
+    {% else %}
+        <a href="/happy-new-year-2024"
+            target="_blank" class="additional_banner additional_banner_ny24">
+            <img class="additional_banner__img"
+                alt="Новогоднее поздравление"
+                src="/images/new-year-2024/banner-2_x1.png"
+                srcset="/images/new-year-2024/banner_2_x1.png,
+                        /images/new-year-2024/banner_2_x1.5.png 1.5x,
+                        /images/new-year-2024/banner_2_x2.png 2x" />
+        </a>
+    {% endif %}
+ #}
+{% endif %}

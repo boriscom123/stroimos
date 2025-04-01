@@ -1,0 +1,26 @@
+{% if announcements|length > 0 %}
+    <div class="announcements announcements__wrapper container__unlimited">
+        {% for announcement in announcements %}
+            <div class="announce__wrapper container_content__unlimited" style="background-image: url({% if announcement.image %}{% path announcement.image, 'thumb1440' %}{% else %}'/images/anounce-img.png'{% endif %})">
+                <article class="announce">
+                    <aside class="announce__meta">
+                        <span class="announce__section">Анонс</span>
+                        {% if announcement.date %}
+			    <span class="announce__date">
+			        <strong>
+				    {{ announcement.date|format_date('dd') }}
+			        </strong>
+			        <em>
+				    {{ announcement.date|format_date('MMMM') }}
+                                </em>	
+			    </span>
+			{% endif %}
+                    </aside>
+                    <header class="announce__teaser">
+                        <a href="{{ entity_path(announcement.post) }}">{{ announcement.title }}</a>
+                    </header>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

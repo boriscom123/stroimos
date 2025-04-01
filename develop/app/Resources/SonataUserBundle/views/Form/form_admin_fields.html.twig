@@ -1,0 +1,91 @@
+{% block sonata_security_roles_widget %}
+<div id="{{ id }}_treecontrol">
+    <small>
+        <a href="#"><i class="fa fa-minus-square"></i> свернуть все</a>&nbsp;&nbsp;
+        <a href="#"><i class="fa fa-plus-square"></i> развернуть все</a>
+    </small>
+</div>
+{% spaceless %}
+    <div class="editable">
+        {% spaceless %}
+            <ul {{ block('widget_container_attributes_choice_widget') }} id="{{ id }}">
+                {% for group_name,group_choices in choices %}
+                    <li>
+                        {% if group_choices is iterable %}
+                            <b>{{ group_name }}</b>
+                            <ul>
+                                {% for label_name,label_choices in group_choices %}
+                                    <li>
+                                        <b>{{ label_name }}</b>
+                                        <ul>
+                                            {% for key,value in label_choices %}
+                                                {% set child = form[key] %}
+                                                <li>
+                                                    {% set form_widget_content %}
+                                                        {{ form_widget(child, {'horizontal': false, 'horizontal_input_wrapper_class': ''}) }} {# {'horizontal': false, 'horizontal_input_wrapper_class': ''} needed to avoid MopaBootstrapBundle messing with the DOM #}
+                                                    {% endset %}
+                                                    {{ form_label(child, child.vars.label|default(null), { 'in_list_checkbox' : true, 'widget' : form_widget_content } ) }}
+
+                                                    {% set userRoleAdmin = sonata_admin.admin.getConfigurationPool().getAdminByAdminCode('admin.user_role')  %}
+                                                    {% if userRoleAdmin.isGranted('EDIT') %}
+                                                        <a style="display: inline-block; margin-left: 10px" href="{{ userRoleAdmin.generateUrl('edit', {id: child.vars.value}) }}"><i class="fa fa-edit"></i></a>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            {% set child = form[group_name] %}
+                            {% set form_widget_content %}
+                                {{ form_widget(child, {'horizontal': false, 'horizontal_input_wrapper_class': ''}) }} {# {'horizontal': false, 'horizontal_input_wrapper_class': ''} needed to avoid MopaBootstrapBundle messing with the DOM #}
+                            {% endset %}
+                            {{ form_label(child, child.vars.label|default(null), { 'in_list_checkbox' : true, 'widget' : form_widget_content } ) }}
+
+                            {% set userRoleAdmin = sonata_admin.admin.getConfigurationPool().getAdminByAdminCode('admin.user_role')  %}
+                            {% if userRoleAdmin.isGranted('EDIT') %}
+                                <a style="display: inline-block; margin-left: 10px" href="{{ userRoleAdmin.generateUrl('edit', {id: child.vars.value}) }}"><i class="fa fa-edit"></i></a>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endspaceless %}
+    </div>
+
+    {% if read_only_choices|length > 0 %}
+    <div class="readonly">
+        <h4>{{ 'field.label_roles_readonly'|trans({}, "SonataUserBundle") }}</h4>
+        <ul>
+        {% for group_name,group_choices in read_only_choices %}
+            <li>
+                <b>{{ group_name }}</b>
+                <ul>
+                    {% for label_name,label_choices in group_choices %}
+                        <li>
+                            <b>{{ label_name }}</b>
+                            <ul>
+                                {% for key,value in label_choices %}
+                                    <li>{{ value }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+{% endspaceless %}
+
+    <script>
+        $(function () {
+            $('#{{ id }}').treeview({
+                collapsed: true,
+                control: "#{{ id }}_treecontrol"
+            });
+        });
+    </script>
+{% endblock sonata_security_roles_widget %}

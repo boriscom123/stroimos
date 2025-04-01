@@ -1,0 +1,16 @@
+<div class="road-list__wrapper only-header">
+    <header class="road-list__header">
+        <h3 class="road-list__title">
+            Реконструкция<br/> дорог районного значения
+            {% include '::/widgets/help.html.twig' with {headClass: true, title : '', content: ''} %}
+        </h3>
+        <a href="{{ path('app_road_regional_list') }}">Подробнее</a>
+    </header>
+    <div class="road-list road-list_no-border" data-columns="2">
+        {% for item in roads %}
+            <a href="{{ entity_path(item) }}" class="road-list__item">
+                {{ item.title }}
+            </a>
+        {% endfor %}
+    </div>
+</div>

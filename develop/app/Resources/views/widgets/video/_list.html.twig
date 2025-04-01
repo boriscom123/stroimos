@@ -1,0 +1,16 @@
+<div class="videogallery-block__wrap">
+    {% for item in video %}
+        {% include '::widgets/video/_teaser.html.twig' with { 'index': loop.index } %}
+    {% endfor %}
+</div>
+
+{% if next_offset %}
+    {% include '::/Block/loadmore_button.html.twig' with {
+    title: 'Ещё видео',
+    target: '.videogallery-block__wrap',
+    item: '.videogallery-block__item',
+    source: block_path(block, context, {template: '::/widgets/video/_ajax_list.html.twig'}),
+    offset: next_offset,
+    limit: limit
+    } %}
+{% endif %}

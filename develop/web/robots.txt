@@ -1,0 +1,21 @@
+User-agent: Yandex
+Crawl-delay: 1
+Disallow: /api/
+Disallow: /uploads/_na/
+
+User-agent: Googlebot
+Crawl-delay: 1
+Disallow: /api/
+Disallow: /uploads/_na/
+
+User-Agent: omgili
+Crawl-delay: 1
+Disallow: /api/
+Disallow: /uploads/_na/
+
+User-agent: *
+Disallow: /api/
+Disallow: /uploads/_na/
+
+Host: https://stroi.mos.ru
+Sitemap: https://stroi.mos.ru/sitemap.xml

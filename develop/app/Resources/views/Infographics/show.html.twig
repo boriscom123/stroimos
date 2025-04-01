@@ -1,0 +1,53 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'infographics', 'object': infographics } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': 'infographics',
+    subject: infographics
+    } %}
+
+<article class="news-wrapper">
+    <header class="news-header container__full">
+        <h1 class="news-title">{{ infographics.title }}</h1>
+        {% include '::/widgets/themes.html.twig' with {'publication': infographics} %}
+    </header>
+
+
+    <a class="infographics-img__popup" href="{% path infographics.infographics, 'reference' %}">
+        <img class="infographics-img" src="{% path infographics.infographics, 'reference' %}" />
+    </a>
+    {% block sonata_preview %}{% endblock %}
+    <section class="news-wrapper__content-wrap infographics__content-wrap">
+        <div class="news-wrapper__content">
+            <div class="js-mediator-article">
+                <h2 class="news-wrapper__content-lead">{{ infographics.lead }}</h2>
+                <div class="news-wrapper__content-news">
+                    {{ infographics.content | raw }}
+                    {# include '::/widgets/gallery/_block.html.twig' with {'pager' : false} #}
+                </div>
+            </div>
+            {% include '::/widgets/news/author.html.twig' with {'article' : infographics, 'type': 'инфографики'}  %}
+        </div>
+        <div class="container__full news-wrapper__under-news">
+            {% include '::/widgets/news/share.html.twig' %}
+            {% include '::/widgets/tags.html.twig' with {'publication' : infographics} %}
+        </div>
+
+        {% include '::/widgets/spotlight/_related.html.twig' with {'item': infographics} %}
+
+        {{ sonata_block_render({'type': 'more_like_this'}, {subject: infographics}) }}
+
+        {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+    </section>
+</article>
+
+{% endblock %}

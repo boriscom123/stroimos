@@ -1,0 +1,15 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Восстановление пароля'
+    } %}
+
+    <div class="resetting-form__reset-pass">
+        {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+    </div>
+{% endblock content %}

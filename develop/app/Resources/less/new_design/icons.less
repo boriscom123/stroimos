@@ -1,0 +1,228 @@
+// Lists of icons
+@icons16: star, calendar, news, label, link, marker, map;
+@icons40: photo, video, chart, label;
+@iconsSocial: facebook, vkontakte, twitter, instagram, youtube, login_mos_ru;
+
+// Utils
+@colors: dark, light, hover;
+.icon-color(@row: 0, @iconIndex, @iconSize) {
+	background-position: @iconIndex * -@iconSize -@row * @iconSize;
+}
+
+.new-icon(@iconSize) {
+	@unit: unit(@iconSize);
+	&-@{unit} {
+		width: @iconSize;
+		height: @iconSize;
+		background-image: url('/images/icons/icons_@{unit}x@{unit}.png');
+		background-position: @iconSize @iconSize;
+	}
+}
+
+.new-iconSet(@setName, @iconSize) {
+	&-@{setName} {
+		width: @iconSize;
+		height: @iconSize;
+		background-image: url('/images/icons/iconset_@{setName}.png');
+		background-position: @iconSize @iconSize;
+	}
+}
+
+.generate-iconSet(@setName, @row, @icons, @iconSize, @i: 0) when (@i < length(@icons)) {
+	@iconName: extract(@icons, @i + 1);
+	&.icon-@{setName}.icon-@{iconName} {
+		.icon-color(@row, @i, @iconSize);
+	}
+
+	.generate-iconSet(@setName, @row, @icons, @iconSize, (@i + 1));
+}
+
+.generate-icons(@row, @icons, @iconSize, @i: 0) when (@i < length(@icons)) {
+	@iconName: extract(@icons, @i + 1);
+	@unit: unit(@iconSize);
+	&.icon-@{unit}.icon-@{iconName} {
+		.icon-color(@row, @i, @iconSize);
+	}
+
+	.generate-icons(@row, @icons, @iconSize, (@i + 1));
+}
+
+// Generate icons
+.icon {
+	display: inline-block;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+
+	.new-icon(16px);
+	.generate-icons(1, @icons16, 16px);
+
+	.new-icon(40px);
+	.generate-icons(1, @icons40, 40px);
+
+	.new-iconSet(social, 26px);
+	.generate-iconSet(social, 1, @iconsSocial, 26px);
+
+	&:hover,
+	&.active{
+		.generate-iconSet(social, 0, @iconsSocial, 26px);
+	}
+}
+
+// Light theme
+[class*="__light "],
+.light,
+.icon-light {
+	.icon&,
+	& .icon {
+		.generate-icons(0, @icons16, 16px);
+		.generate-icons(0, @icons40, 40px);
+	}
+	.icon-40&,
+	& .icon-40 {
+		background-color: rgba(0, 0, 0, .32);
+	}
+}
+
+.icon-watch{
+	width: 16px;
+	height: 16px;
+	background: url('/images/icons/watch.png') no-repeat;
+}
+
+// Specific styles
+.icon-16 {
+	margin-bottom: -2px;
+	margin-left: 5px;
+	vertical-align: baseline;
+}
+
+.icon-40 {
+	border-radius: 50%;
+	margin-right: 15px;
+	background-color: #e7e7e7;
+}
+
+.icon-services {
+	width: 265px;
+	height: 160px;
+	background-size: cover;
+	background-position: 0 100%;
+}
+
+.icon-destruction {
+	height: 200px;
+	background-image: url(/images/icons/services/destruction.svg);
+	:hover > & {
+		background-image: url(/images/icons/services/destruction_hover.svg);
+	}
+}
+
+.icon-building {
+	height: 170px;
+	background-image: url(/images/icons/services/building.svg);
+	:hover > & {
+		background-image: url(/images/icons/services/building_hover.svg);
+	}
+}
+
+.icon-road {
+	background-image: url(/images/icons/services/road.svg);
+	:hover > & {
+		background-image: url(/images/icons/services/road_hover.svg);
+	}
+}
+
+.icon-oss {
+	height: 200px;
+	background-image: url(/images/icons/services/oss.svg);
+	:hover > & {
+		background-image: url(/images/icons/services/oss_hover.svg);
+	}
+}
+
+// CONSTRUCTION ICONS MIXIN
+
+.stitches-checkbox(@x: 0, @y: 0) {
+	@s: 24px;
+	background-image: url('/images/icons/spritesheet.png');
+	background-repeat: no-repeat;
+	background-position: @x @y;
+	width: @s;
+	height: @s;
+	//	top: 11px;
+	//	left: 12px;
+	margin-top: -@s/2;
+}
+
+.checkbox-icon {
+	display: inline-block;
+	//	position: absolute;
+
+	&.checkbox-admin-center {
+		.stitches-checkbox(0, 0);
+	}
+
+	&.checkbox-all {
+		.stitches-checkbox(-24px, 0);
+	}
+
+	&.checkbox-culture {
+		.stitches-checkbox(-48px, 0);
+	}
+
+	&.checkbox-house {
+		.stitches-checkbox(-72px, 0);
+	}
+
+	&.checkbox-road {
+		.stitches-checkbox(-96px, 0);
+	}
+
+	&.checkbox-garage {
+		.stitches-checkbox(0, -24px);
+	}
+
+	&.checkbox-health {
+		.stitches-checkbox(-24px, -24px);
+	}
+
+	&.checkbox-hotels {
+		.stitches-checkbox(-48px, -24px);
+	}
+
+	&.checkbox-ironroad {
+		.stitches-checkbox(-72px, -24px);
+	}
+
+	&.checkbox-sport {
+		.stitches-checkbox(-96px, -24px);
+	}
+
+	&.checkbox-industrial {
+		.stitches-checkbox(0, -48px);
+	}
+
+	&.checkbox-metro {
+		.stitches-checkbox(-24px, -48px);
+	}
+
+	&.checkbox-playschool {
+		.stitches-checkbox(-48px, -48px);
+	}
+
+	&.checkbox-school {
+		.stitches-checkbox(-72px, -48px);
+	}
+
+	&.checkbox-trade {
+		.stitches-checkbox(-96px, -48px);
+	}
+
+	&.checkbox-stay {
+		.stitches-checkbox(0, -72px);
+	}
+
+    &.checkbox-default {
+      .stitches-checkbox(-24px, -72px);
+    }
+}

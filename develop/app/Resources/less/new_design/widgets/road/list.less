@@ -1,0 +1,247 @@
+.road-list__wrapper {
+  margin-bottom: 50px;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  &.reconstruction {
+    .road-list__title {
+      max-width: none;
+    }
+
+    .road-list__info {
+      padding: 20px;
+      border-bottom: 0;
+
+      &:last-child {
+        border-bottom: 1px solid #e6e6e6;
+      }
+
+      &.wait {
+        header {
+          color: #999999;
+
+          i {
+            background-position: 0 0;
+          }
+        }
+      }
+
+      &.doing {
+        header {
+          color: #ead80c;
+
+          i {
+            background-position: -53px 0;
+          }
+        }
+      }
+
+      &.complete {
+        header {
+          color: #18d22b;
+
+          i {
+            background-position: -106px 0;
+          }
+        }
+      }
+
+      header {
+        Font-family: AvenirNext, sans-serif;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 17px;
+        height: 46px;
+        padding-left: 63px;
+        padding-top: 13px;
+        position: relative;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+
+        i {
+          display: inline-block;
+          width: 53px;
+          height: 46px;
+          float: left;
+          position: absolute;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          background: url("/images/icons/road-recostruction.png") no-repeat;
+        }
+      }
+
+      a {
+        display: inline-block;
+        font-family: AvenirNext, sans-serif;
+        font-weight: 400;
+        font-size: 21px;
+        line-height: 40px;
+        margin-right: 30px;
+        color: black;
+        text-decoration: none;
+
+        &:hover {
+          color: @hover;
+        }
+      }
+    }
+
+  }
+}
+
+.road-list__header {
+  margin-bottom: 30px;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  a {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 15px;
+    font-family: AvenirNext, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    .dotted-border(black, left);
+
+    &:hover {
+      color: @hover;
+    }
+  }
+}
+
+.road-list__title {
+  font-family: Lava, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.1;
+  max-width: 560px;
+  padding-right: 40px;
+  color: #202020;
+  display: table-cell;
+}
+
+.road-list[data-columns] {
+  &:before {
+    content: '2 .road-list__raw';
+  }
+}
+
+.road-list__raw {
+  display: table-cell;
+  width: 50%;
+  padding-right: 38px;
+  .dotted-border(black, right);
+  float: left;
+  box-sizing: border-box;
+
+  &:last-child {
+    background: transparent;
+    padding-right: 0;
+    padding-left: 37px;
+  }
+}
+
+.road-list__item {
+  display: block;
+  font-family: AvenirNext, sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 46px;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 20px;
+  .shadowed-teaser(horizontal);
+  box-shadow: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .road-list__item-more {
+    opacity: 0;
+    float: right;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: @hover;
+    font-size: 10px;
+    line-height: 53px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    span {
+      opacity: 1;
+    }
+  }
+
+  &.with-image {
+    width: (@pageWidth - 30px*2)/3;
+    font-family: AvenirNext, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    float: left;
+    margin-right: 30px;
+    padding: 0;
+    .shadowed-teaser(vertical);
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    img {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      vertical-align: bottom;
+    }
+
+    .road-list__item-title {
+      padding: 20px;
+      display: block;
+      height: 24px*2;
+      overflow: hidden;
+      padding-bottom: 0;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.road-list__info {
+  border: 1px solid #e6e6e6;
+  padding: 65px 40px;
+
+  h4 {
+    font-family: AvenirNext, sans-serif;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 28px;
+    color: #323232;
+  }
+
+  p {
+    font-family: Lava, serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 28px;
+    color: #323232;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

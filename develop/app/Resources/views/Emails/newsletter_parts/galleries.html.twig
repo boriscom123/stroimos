@@ -1,0 +1,75 @@
+{% set schemeAndHost = request.getSchemeAndHttpHost() %}
+<tr>
+    <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 20px;">
+        <!-- BEGIN PHOTO // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="photoBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 60px 0 16px 0;">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="middle" align="start" class="headerBlockTitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-family: Arial,serif; font-weight: bold; font-size: 24px; line-height: 1; padding: 0 10px 0 0; line-height: 20px; height: 20px; text-transform: uppercase;" height="20">
+                                Фото
+                            </td> 
+                            <td valign="middle" align="end" class="headerBlockArchive" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 0 0 10px; height: 20px;" height="20">
+                                <a href="{{ schemeAndHost }}/gallery?{{ url_utm }}" class="headerBlockArchiveLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #181818; font-family: Verdana,sans-serif; font-size: 10px; line-height: 1;">
+                                    <span class="headerBlockArchiveLink" style="color: #CA1120; font-family: Arial,sans-serif; font-size: 16px; line-height: 120%; text-transform: uppercase; text-decoration: underline; font-weight: 400;">
+                                        все фото на сайте
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mediaItem" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td class="mediaItemImage" valign="middle" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                <a href="{{ entity_absolute_url(galleries[0].gallery) | url_hash_utm_fix(url_utm) }}" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+                                    {% set gallery_wallpaper = '' %}
+                                    {% if content.galleryWallpaperType == constant('AppBundle\\Entity\\Newsletter::GALLERY_WALLPAPER_STATIC_IMAGE_FROM_GALLERY') %}
+                                        {% if  galleries[0].gallery.image is not empty %}
+                                            {% set gallery_wallpaper %}
+                                                {% path galleries[0].gallery.image, 'newsletter_media' %}
+                                            {% endset %}
+                                        {% endif %}
+                                    {% elseif content.galleryWallpaperType == constant('AppBundle\\Entity\\Newsletter::GALLERY_WALLPAPER_STATIC_ANIMATED_FROM_GALLERY')  %}
+                                        {% if  galleries[0].gallery.animatedWallpaper is not empty%}
+                                            {% set gallery_wallpaper %}
+                                                {{ schemeAndHost }}{% path galleries[0].gallery.animatedWallpaper, 'reference' %}
+                                            {% endset %}
+                                        {% endif %}
+                                    {% elseif content.galleryWallpaper is not empty  %}
+                                        {% set gallery_wallpaper %}
+                                            {{ schemeAndHost }}{% path content.galleryWallpaper, 'reference' %}
+                                        {% endset %}
+                                    {% endif %}
+                                    {% if gallery_wallpaper|trim is not empty %}
+                                        <img src="{{ gallery_wallpaper|trim }}" alt width="560" height="374" style="-ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;">
+                                    {% endif %}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="mediaItemContentContainer" valign="top" align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 16px 0 30px; border-bottom: 1px solid #A6A6A6;"> 
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                                    <tr>
+                                        <td class="mediaItemContent" valign="top" align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                            <a href="{{ entity_absolute_url(galleries[0].gallery) | url_hash_utm_fix(url_utm) }}" class="mediaItemContentLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #000; font-family: Georgia,serif; font-size: 18px; font-weight: bold; line-height: 1.2; text-decoration: none !important;">
+                                                <span class="mediaItemContentLink" style="color: #1B262C; font-family: Arial,serif; font-size: 18px; font-weight: bold; line-height: 110%; text-decoration: none !important;">
+                                                    {{ galleries[0].gallery.title }} 
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr> 
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- // END PHOTO -->
+    </td>
+</tr>

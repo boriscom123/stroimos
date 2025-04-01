@@ -1,0 +1,13 @@
+{% extends ':widgets/document:_list.html.twig' %}
+
+{% block header_documents %}
+    {#Последние опубликованные документы#}
+{% endblock %}
+
+{% block tableDocuments %}
+    <div class="documents-page__all-table">
+        {% for document in documents %}
+            {% include '::widgets/document/' ~ context.setting('category') ~ '/_teaser.html.twig' %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,352 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://schemas.hp.com/SM/7" xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/">
+    <types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.hp.com/SM/7" xmlns:cmn="http://schemas.hp.com/SM/7/Common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.hp.com/SM/7" version="2015-04-14 Rev 0">
+            <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="xmlmime.xsd"/>
+            <xs:import namespace="http://schemas.hp.com/SM/7/Common" schemaLocation="Common.xsd"/>
+            <xs:complexType name="HPSMInteractionsFromMosRuKeysType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ID" nillable="true" type="cmn:StringType"/>
+                </xs:sequence>
+                <xs:attribute name="query" type="xs:string" use="optional"/>
+                <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+            </xs:complexType>
+            <xs:complexType name="HPSMInteractionsFromMosRuInstanceType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ID" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Description">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="cmn:ArrayType">
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="cmn:StringType"/>
+                                    </xs:sequence>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Resolution">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="cmn:ArrayType">
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Resolution" type="cmn:StringType"/>
+                                    </xs:sequence>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ResolutionCode" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Email" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="User" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Title" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Status" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Rating" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="ProblemType" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Deadline" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="Feedback">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="cmn:ArrayType">
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Feedback" type="cmn:StringType"/>
+                                    </xs:sequence>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="TimeActualStart" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="TimeActualEnd" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="TimeRegisterd" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="UserID" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Portal" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="SSOID" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="CK" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="TimeAnswered" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="TimeRequested" nillable="true" type="cmn:DateTimeType"/>
+                    <xs:element minOccurs="0" name="AdditionalField1" nillable="true" type="cmn:StringType"/>
+                    <xs:element minOccurs="0" name="Comments">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="cmn:ArrayType">
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Comments" type="cmn:StringType"/>
+                                    </xs:sequence>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="attachments" nillable="true" type="cmn:AttachmentsType"/>
+                </xs:sequence>
+                <xs:attribute name="query" type="xs:string" use="optional"/>
+                <xs:attribute name="uniquequery" type="xs:string" use="optional"/>
+                <xs:attribute name="recordid" type="xs:string" use="optional"/>
+                <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+            </xs:complexType>
+            <xs:complexType name="HPSMInteractionsFromMosRuModelType">
+                <xs:sequence>
+                    <xs:element name="keys" type="HPSMInteractionsFromMosRuKeysType"/>
+                    <xs:element name="instance" type="HPSMInteractionsFromMosRuInstanceType"/>
+                    <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                </xs:sequence>
+                <xs:attribute name="query" type="xs:string" use="optional"/>
+            </xs:complexType>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                    </xs:sequence>
+                    <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                        <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                    </xs:sequence>
+                    <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+                    <xs:attribute name="message" type="xs:string" use="required"/>
+                    <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+                    <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+                    <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+                    <xs:attribute name="query" type="xs:string" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="more" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuKeysListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                    </xs:sequence>
+                    <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuKeysListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="keys" type="HPSMInteractionsFromMosRuKeysType"/>
+                        <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                    </xs:sequence>
+                    <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+                    <xs:attribute name="message" type="xs:string" use="required"/>
+                    <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+                    <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+                    <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+                    <xs:attribute name="query" type="xs:string" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="more" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="keys" type="HPSMInteractionsFromMosRuKeysType"/>
+                    </xs:sequence>
+                    <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                    <xs:attribute name="attachmentType" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetrieveHPSMInteractionsFromMosRuListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="instance" type="HPSMInteractionsFromMosRuInstanceType"/>
+                        <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                    </xs:sequence>
+                    <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+                    <xs:attribute name="message" type="xs:string" use="required"/>
+                    <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+                    <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+                    <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+                    <xs:attribute name="query" type="xs:string" use="optional"/>
+                    <xs:attribute name="handle" type="xs:string" use="optional"/>
+                    <xs:attribute name="count" type="xs:long" use="optional"/>
+                    <xs:attribute name="more" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="start" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateHPSMInteractionsFromMosRuRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                    </xs:sequence>
+                    <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreateHPSMInteractionsFromMosRuResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                        <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                    </xs:sequence>
+                    <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+                    <xs:attribute name="message" type="xs:string" use="required"/>
+                    <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+                    <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+                    <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+                    <xs:attribute name="query" type="xs:string" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="UpdateHPSMInteractionsFromMosRuRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                    </xs:sequence>
+                    <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+                    <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+                    <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="UpdateHPSMInteractionsFromMosRuResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="model" type="HPSMInteractionsFromMosRuModelType"/>
+                        <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+                    </xs:sequence>
+                    <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+                    <xs:attribute name="message" type="xs:string" use="required"/>
+                    <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+                    <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+                    <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+                    <xs:attribute name="query" type="xs:string" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </types>
+    <message name="RetrieveHPSMInteractionsFromMosRuRequest">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuRequest" name="RetrieveHPSMInteractionsFromMosRuRequest"/>
+    </message>
+    <message name="RetrieveHPSMInteractionsFromMosRuResponse">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuResponse" name="RetrieveHPSMInteractionsFromMosRuResponse"/>
+    </message>
+    <message name="RetrieveHPSMInteractionsFromMosRuKeysListRequest">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuKeysListRequest" name="RetrieveHPSMInteractionsFromMosRuKeysListRequest"/>
+    </message>
+    <message name="RetrieveHPSMInteractionsFromMosRuKeysListResponse">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuKeysListResponse" name="RetrieveHPSMInteractionsFromMosRuKeysListResponse"/>
+    </message>
+    <message name="RetrieveHPSMInteractionsFromMosRuListRequest">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuListRequest" name="RetrieveHPSMInteractionsFromMosRuListRequest"/>
+    </message>
+    <message name="RetrieveHPSMInteractionsFromMosRuListResponse">
+        <part element="ns:RetrieveHPSMInteractionsFromMosRuListResponse" name="RetrieveHPSMInteractionsFromMosRuListResponse"/>
+    </message>
+    <message name="CreateHPSMInteractionsFromMosRuRequest">
+        <part element="ns:CreateHPSMInteractionsFromMosRuRequest" name="CreateHPSMInteractionsFromMosRuRequest"/>
+    </message>
+    <message name="CreateHPSMInteractionsFromMosRuResponse">
+        <part element="ns:CreateHPSMInteractionsFromMosRuResponse" name="CreateHPSMInteractionsFromMosRuResponse"/>
+    </message>
+    <message name="UpdateHPSMInteractionsFromMosRuRequest">
+        <part element="ns:UpdateHPSMInteractionsFromMosRuRequest" name="UpdateHPSMInteractionsFromMosRuRequest"/>
+    </message>
+    <message name="UpdateHPSMInteractionsFromMosRuResponse">
+        <part element="ns:UpdateHPSMInteractionsFromMosRuResponse" name="UpdateHPSMInteractionsFromMosRuResponse"/>
+    </message>
+    <portType name="HPSMInteractionsFromMosRu">
+        <operation name="RetrieveHPSMInteractionsFromMosRu">
+            <documentation/>
+            <input message="ns:RetrieveHPSMInteractionsFromMosRuRequest"/>
+            <output message="ns:RetrieveHPSMInteractionsFromMosRuResponse"/>
+        </operation>
+        <operation name="RetrieveHPSMInteractionsFromMosRuKeysList">
+            <documentation/>
+            <input message="ns:RetrieveHPSMInteractionsFromMosRuKeysListRequest"/>
+            <output message="ns:RetrieveHPSMInteractionsFromMosRuKeysListResponse"/>
+        </operation>
+        <operation name="RetrieveHPSMInteractionsFromMosRuList">
+            <documentation/>
+            <input message="ns:RetrieveHPSMInteractionsFromMosRuListRequest"/>
+            <output message="ns:RetrieveHPSMInteractionsFromMosRuListResponse"/>
+        </operation>
+        <operation name="CreateHPSMInteractionsFromMosRu">
+            <documentation/>
+            <input message="ns:CreateHPSMInteractionsFromMosRuRequest"/>
+            <output message="ns:CreateHPSMInteractionsFromMosRuResponse"/>
+        </operation>
+        <operation name="UpdateHPSMInteractionsFromMosRu">
+            <documentation/>
+            <input message="ns:UpdateHPSMInteractionsFromMosRuRequest"/>
+            <output message="ns:UpdateHPSMInteractionsFromMosRuResponse"/>
+        </operation>
+    </portType>
+    <binding name="HPSMInteractionsFromMosRu" type="ns:HPSMInteractionsFromMosRu">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="RetrieveHPSMInteractionsFromMosRu">
+            <soap:operation soapAction="Retrieve" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="RetrieveHPSMInteractionsFromMosRuKeysList">
+            <soap:operation soapAction="RetrieveKeysList" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="RetrieveHPSMInteractionsFromMosRuList">
+            <soap:operation soapAction="RetrieveList" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="CreateHPSMInteractionsFromMosRu">
+            <soap:operation soapAction="Create" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="UpdateHPSMInteractionsFromMosRu">
+            <soap:operation soapAction="Update" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="HPSMInteractionsFromMosRu">
+        <port binding="ns:HPSMInteractionsFromMosRu" name="HPSMInteractionsFromMosRu">
+            <soap:address location="http://212.45.30.58:8090/1/SM/7/ws"/>
+        </port>
+    </service>
+</definitions>

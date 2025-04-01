@@ -1,0 +1,182 @@
+.structure-page__title {
+  font-family: Lava, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 38px;
+  padding: 0 120px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #202020;
+}
+
+.structure-page__person-list {
+  .clearfix;
+  margin-bottom: 50px;
+}
+
+.structure-page__person {
+  width: 305px;
+  display: inline-block;
+  .shadowed-teaser(vertical);
+  float: left;
+  margin-right: (@pageWidth - 305px*3)/2;
+  margin-bottom: 20px;
+  height: 530px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    //margin-bottom: 20px;
+  }
+
+  &:nth-child(3n+4) {
+    margin-right: 0;
+  }
+
+  &.first-person {
+    display: block;
+    width: 100%;
+    margin-bottom: 70px;
+    margin-right: 0;
+    height: 380px;
+
+    img {
+      width: 320px;
+      float: left;
+      margin-bottom: 0;
+    }
+
+    .structure-page__person-title {
+      padding: 40px 0;
+      margin: 0 50px 0 370px;
+      min-height: 0;
+      max-height: 21px * 3;
+    }
+
+    .structure-page__person-name {
+      display: block;
+      margin: 0 50px 0 370px;
+      padding: 35px 0 20px;
+    }
+
+    .structure-page__person-seat {
+      margin: 0 50px 0 370px;
+      padding: 0 0 25px;
+    }
+  }
+}
+
+.structure-page__person-uri {
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  font-family: 'AvenirNext', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 28px;
+  color: black;
+
+  &:hover {
+    color: @hover;
+  }
+}
+
+.structure-page__person-title {
+  font-family: Lava, serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 21px;
+  min-height: 21px * 3;
+  max-height: 21px * 6;
+  overflow: hidden;
+  color: #202020;
+  margin: 15px 20px;
+  text-align: center;
+}
+
+.structure-page__person-name {
+  font-family: Lava, serif;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 25px;
+  line-height: 28px;
+  text-align: center;
+  padding: 10px 0 5px;
+  margin: 0 20px;
+  box-sizing: border-box;
+  color: #202020;
+  .dotted-border(black, top);
+}
+
+.structure-page__person-lastname {
+  font-style: normal;
+  display: block;
+  text-align: center;
+  clear: right;
+  color: #202020;
+}
+
+.structure-page__person-seat {
+  font-family: AvenirNext, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  color: #606060;
+  text-align: center;
+  margin: 0 60px 10px;
+}
+
+.structure-page__contacts {
+  .clearfix;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.structure-page__user-profile {
+  text-transform: uppercase;
+}
+
+.structure-page__contacts-block {
+  height: 48px;
+  background: url('/images/message.png') no-repeat;
+  background-position: center center;
+  position: relative;
+  margin-bottom:30px;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: (@pageWidth - 150px)/2;
+    height: 2px;
+    background-color: #f2f2f2;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+    left: auto;
+  }
+}
+
+.structure-page__contacts-title {
+  font-family: Lava, serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 38px;
+  color: #202020;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.structure-page__contacts-link {
+  font-family: AvenirNext, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 28px;
+  display: inline-block;
+  text-transform: uppercase;
+}

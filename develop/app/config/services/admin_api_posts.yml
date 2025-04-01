@@ -1,0 +1,38 @@
+services:
+
+  ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityCommandValidator:
+    class: ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityCommandValidator
+    arguments:
+      - '@validator'
+
+
+  ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityHandler:
+    class: ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityHandler
+    arguments:
+      - '@ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityCommandValidator'
+      - '@ApiBundle\InfrastructureLayer\Service\PostService'
+      - '@doctrine.orm.entity_manager'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Post\PostQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Post\PostQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+
+  ApiBundle\PresentationLayer\HttpController\PostController:
+    class: ApiBundle\PresentationLayer\HttpController\PostController
+    arguments:
+      - '@ApiBundle\InfrastructureLayer\QueryFactory\Post\PostQueryFactory'
+      - '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+
+  ApiBundle\PresentationLayer\HttpController\PostChangePriorityController:
+    class: ApiBundle\PresentationLayer\HttpController\PostChangePriorityController
+    arguments:
+      - '@ApiBundle\ApplicationLayer\ChangePostPriorityCommand\ChangePostPriorityHandler'
+      - '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+
+  ApiBundle\InfrastructureLayer\Service\PostService:
+    class: ApiBundle\InfrastructureLayer\Service\PostService
+    arguments:
+      - '@doctrine.orm.entity_manager'

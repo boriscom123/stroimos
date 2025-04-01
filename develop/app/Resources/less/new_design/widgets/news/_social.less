@@ -1,0 +1,31 @@
+.news-wrapper__social-title {
+	font-family: Lava, serif;
+	font-weight: 900;
+	font-size: 17px;
+	line-height: 17px;
+	margin-bottom: 20px;
+}
+
+.news-sidebar__social {
+	&-list {
+		.reset-list-style;
+		margin-bottom: 60px;
+		overflow: hidden;
+	}
+
+	&-item {
+		list-style: none;
+		display: inline-block;
+		float: left;
+		padding: 0 10px;
+		.dotted-border(black, right);
+
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			background: transparent;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{% set possible_move = possible_node_move_directions(object) %}
+
+{% if possible_move['down'] %}
+    <a class="btn btn-sm" href="{{ admin.generateObjectUrl('move', object, {'direction': 'down', 'end': 1}) }}" title="Move bottom">⇊</a>
+    <a class="btn btn-sm" href="{{ admin.generateObjectUrl('move', object, {'direction': 'down'}) }}" title="Move down">↓</a>
+{% else %}
+    <span class="btn btn-sm" disabled>&nbsp;</span>
+    <span class="btn btn-sm" disabled>&nbsp;</span>
+{% endif %}
+
+{% if possible_move['up'] %}
+    <a class="btn btn-sm" href="{{ admin.generateObjectUrl('move', object, {'direction': 'up'}) }}" title="Move up">↑</a>
+    <a class="btn btn-sm" href="{{ admin.generateObjectUrl('move', object, {'direction': 'up', 'end': 1}) }}" title="Move top">⇈</a>
+{% else %}
+    <span class="btn btn-sm" disabled>&nbsp;</span>
+    <span class="btn btn-sm" disabled>&nbsp;</span>
+{% endif %}

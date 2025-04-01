@@ -1,0 +1,30 @@
+<article class="shorthand-report-list__teaser">
+    {% if post.image is defined and post.image is not empty %}
+        <div class="shorthand-report-list__teaser-img" style="background-image: url('{% path post.image, 'thumb300' %}');"></div>
+    {% endif %}
+    <div class="shorthand-report-list__teaser-content">
+        <time class="shorthand-report-list__teaser-date">{{ post.publishStartDate | date("d/m/Y") }}</time>
+        <a class="shorthand-report-list__teaser-title" href="{{ entity_path(post) }}">
+            {{ post.title }}
+        </a>
+        <div class="shorthand-report-list__teaser-text">{{ post.teaser }}</div>
+        {% if post.rubrics|length %}
+            <div class="shorthand-report-list__teaser-themes">
+                <i class="icon icon-16 icon-news"></i>
+                {% for rubric in post.rubrics %}
+                    <a href="{{ path('app_post_list', {categoryAlias: post.category.alias, rubric: rubric.title}) }}">{{ rubric.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if post.tags|length %}
+            <div class="shorthand-report-list__teaser-tags">
+                {% for tag in post.tags %}
+                    <a href="{{ entity_list_path(post, {tag: tag.title }) }}">
+                        #{{ tag.title |lower |replace({"," : "", "»" : "", "«" : "", " " : "_"}) }}</a>
+                    {% if not loop.last %},{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>    
+</article>

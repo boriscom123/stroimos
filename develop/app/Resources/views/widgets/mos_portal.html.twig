@@ -1,0 +1,27 @@
+{% if new_design %}
+    <div class="container__full mos-portal__wrapper">
+        <ul class="mos-portal__list">
+            {% for item in teasers %}
+                <li class="mos-portal">
+                    <a href="{{ item.uri }}" class="mos-portal__link" target="_blank">
+                        <img src="/images/icons/organs.png" >
+                        <header class="mos-portal__title">
+                            {{ item.title }}
+                        </header>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <div class="container__full mos-portal__wrapper">
+        <h3 class="mos-portal__list-title">Департаменты и комитеты <br/>Градостроительного комплекса Москвы</h3>
+        <ul class="mos-portal__list">
+            {% for item in knp_menu_get('teasers_menu') %}
+                <li class="mos-portal">
+                    <a href="{{ item.uri }}" class="mos-portal__link mos-portal__block" target="_blank">{{ item.label }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

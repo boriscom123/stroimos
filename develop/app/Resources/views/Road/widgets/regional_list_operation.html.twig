@@ -1,0 +1,16 @@
+{% if groups.operation|default %}
+  <div class="road-list__wrapper">
+      <header class="road-list__header">
+          <h3 class="road-list__title">
+              Что уже сделано?
+          </h3>
+      </header>
+      <div class="road-list" data-columns>
+          {% for item in groups.operation %}
+              <a href="{{ entity_path(item) }}" class="road-list__item">
+                  {{ item.title }}
+              </a>
+          {% endfor %}
+      </div>
+  </div>
+{% endif %}

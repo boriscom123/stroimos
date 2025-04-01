@@ -1,0 +1,6 @@
+{% if object.apiStatus != 'done' %}
+    <a href="{{ path('app_admin_appeal_retry_send', { id: object.id }) }}" class="btn btn-sm btn-warning">
+        Переотправить
+    </a>
+
+{% endif %}

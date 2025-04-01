@@ -1,0 +1,18 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'Subordinate/widgets/themes_panel.html.twig' with {
+      'rubricsContext': 'post',
+      'share': true
+    } %}
+    {{ sonata_block_render({'type': 'post_list'}, {
+        'template': 'Subordinate/widgets/news/_list.html.twig',
+        'category': category,
+        'limit': 3,
+        'title': breadcrumbs()|last.label
+    }) }}
+{% endblock %}

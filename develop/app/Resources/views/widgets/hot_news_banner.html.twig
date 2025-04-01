@@ -1,0 +1,8 @@
+{% if publishable %}
+    <aside class="hot-news__banner">
+        <div class="hot-news__banner-title">{{ header }}</div>
+        <header class="hot-news__banner-content">
+           <a href="{{ url }}"{% if target_blank %} target="_blank" {% endif %}>{{ title }}</a>
+        </header>
+    </aside>
+{% endif %}

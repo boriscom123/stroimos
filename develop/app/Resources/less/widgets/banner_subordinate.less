@@ -1,0 +1,113 @@
+.banner-subordinate__wrapper {
+	margin-bottom: 40px;
+	background: #9DD4FF;
+    position: relative;
+        .slick-next,
+        .slick-prev {
+                .reset-button-style();
+                position: absolute;
+                top: 0;
+                height: 100%;
+                width: 50px;
+                margin: 0;
+				background-color: rgba(234, 234, 234, .05);
+                transition: background-color .1s ease-in-out;
+                text-indent: -10000px;
+                z-index: 1000;
+
+                &:hover {
+			background-color: rgba(234, 234, 234, .2);
+                }
+	}
+
+	.slick-prev {
+                left: -40px;
+                .gallery-control(prev, #ffffff, 10px, 2px);
+        }
+	.slick-next {
+                right: -40px;
+                .gallery-control(next, #ffffff, 10px, 2px);
+	}
+
+	.slick-next, .slick-prev {
+		top: 50%;
+		margin-top: -13px;
+		width: 25px;
+		height: 25px;
+		background: #000;
+		border-radius: 25px;
+		&:hover {
+			background: #000;
+			opacity: 0.5;
+		}
+	}
+}
+
+.banner-subordinate {
+	display: flex !important;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: flex-start;
+	height: 300px;
+	&__content {
+		width: 50%;
+		// background: @background_special;
+		&-title {
+			display: block;
+			padding: 0 40px 0 0;
+			margin: 0 0 40px;
+			font-family: Brygada1918, serif;
+			font-weight: 700;
+			font-size: 40px;
+			line-height: 48px;
+			color: @newTextColor;
+			text-transform: capitalize;
+		}
+		&-subtitle {
+			display: block;
+			padding: 0 40px 0 0;
+			margin: 0;
+			font-family: Brygada1918, serif;
+			font-weight: 700;
+			font-size: 25px;
+			line-height: 30px;
+			color: @newTextColor;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			/*! autoprefixer: off */
+			-webkit-box-orient: vertical;
+			/*! autoprefixer: on */
+			overflow: hidden;
+		}
+	}
+
+	&__inner {
+		width: 490px;
+		margin-left: auto;
+		padding: 60px 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	&__link {
+		font-family: Onest, sans-serif;
+		font-weight: 450;
+		font-size: 19px;
+		line-height: 23px;
+		color: @newTextColor;
+	}
+
+	&__image {
+		width: 50%;
+		display: block;
+		// flex: 1;
+		background-color: #eee;
+		background-size: cover;
+	}
+	// &:hover &__content-subtitle {
+	// 	color: @hover;
+	// }
+
+}

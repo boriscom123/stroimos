@@ -1,0 +1,45 @@
+.hot-news__banner{
+	background-color: rgba(41, 131, 232, .2);
+	border: 5px solid @hover;
+	margin: 0 0 20px;
+	padding: 20px;
+	text-align: center;
+	color: #FFFFFF;
+	font-family: Onest, sans-serif;
+	visibility: visible;
+    height: 60px;
+    overflow: hidden;
+
+	a{
+		color: #FFFFFF;
+
+		&:hover{
+			color: @hover;
+		}
+	}
+}
+.hot-news__banner-title{
+	font-weight: 900;
+  letter-spacing: 0.1em;
+	font-size: 12px;
+	line-height: 1.67;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+  max-height: 20px;
+}
+.hot-news__banner-content{
+	font-weight: bold;
+	line-height: 35px;
+	font-size: 30px;
+	/* fixed width and height for dynamic font size */
+	height: 35px;
+	width: 910px;
+	.textFitted {
+		display: block !important;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	  white-space: nowrap;
+		height: 35px;
+		line-height: 35px;
+	}
+}

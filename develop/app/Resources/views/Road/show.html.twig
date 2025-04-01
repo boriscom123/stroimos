@@ -1,0 +1,86 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'road', 'object': subject, 'themes': [{'title': 'Дороги'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Дорожное строительство ',
+    'rubricsContext': '',
+    subject: subject
+    } %}
+
+    <article class="news-wrapper news-gallery">
+        <header class="news-header">
+            <h1 class="news-title">{{ subject.title }}</h1>
+        </header>
+        <ul class="object-page__info-list">
+            {% if subject.constructionStatus is not empty %}
+                <li class="object-page__info-item">
+                            <span class="object-page__info-item-title">
+                                <span class="info-item-title__legend">{{ 'form.label_construction_status'|trans }}</span>
+                                <span class="info-item-title__bordered"></span>
+                            </span>
+                    <span class="object-page__info-item-legend black">{{ subject|statusLabel }}</span>
+                </li>
+            {% endif %}
+            {% for parameter in subject.roadParameterValues %}
+                <li class="object-page__info-item">
+                            <span class="object-page__info-item-title">
+                                <span class="info-item-title__legend">{{ parameter.constructionParameter.title }}</span>
+                                <span class="info-item-title__bordered"></span>
+                            </span>
+                    <div class="object-page__info-item-legend black">
+                        {{ parameter.value|raw }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if subject.image %}
+            <div class="container__full news-image" style="background-image: url('{% path subject.image, 'thumb1440' %}')"></div>
+        {% endif %}
+
+{#         {% if subject.currently %}
+            {% include ":widgets:now_block.html.twig" with {currently: subject.currently} %}
+        {% endif %} #}
+
+        <section class="news-wrapper__content-wrap">
+            <div class="js-mediator-article">
+                <div class="news-wrapper__sidebar">
+                    {% include '::/widgets/news/share.html.twig' %}
+                    {% include '::/widgets/news/_geo_points.html.twig' with {post: subject} %}
+                </div>
+                <div class="news-wrapper__content">
+                    {% if subject.panorama %}
+                        <a href="{{ subject.panorama }}" class="object-page__rightbar-aero panorama-popup" target="_blank" style="width: 265px; float: right;">
+                            <i class="object-page__rightbar-aero-icon"></i>
+                            <span class="object-page__rightbar-aero-legend">Аэросъемка объекта</span>
+                            <span class="object-page__rightbar-aero-link">перейти</span>
+                        </a>
+                    {% endif %}
+                    <h2 class="news-wrapper__content-lead">{{ subject.teaser }}</h2>
+                    {#<div class="news-wrapper__content-news">#}
+                    {{ embed_content(subject.content, subject) }}
+                    {#</div>#}
+                    {% block sonata_preview %}{% endblock %}
+                </div>
+
+                <div class="clear"></div>
+
+                {% if subject.medias is defined and subject.medias is not empty %}
+                    {% include '::/widgets/gallery/_block.html.twig' with {'gallery': subject} %}
+                {% endif %}
+            </div>
+
+            {{ sonata_block_render({'type': 'more_like_this'}, {subject: subject}) }}
+
+            {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        </section>
+    </article>
+
+{% endblock %}

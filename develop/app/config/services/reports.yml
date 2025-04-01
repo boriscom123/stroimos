@@ -1,0 +1,283 @@
+services:
+  #   Query Factory
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicCollageQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicCollageQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicFromMediaQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicFromMediaQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsCityQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsCityQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\ArticleQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\ArticleQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePhotoQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePhotoQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\InterviewQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\InterviewQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PressReleaseQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PressReleaseQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\ShortHandQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\ShortHandQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\DocumentQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\DocumentQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoMediaQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoMediaQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\VideoQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\VideoQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsletterQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsletterQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\BannerQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\BannerQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\EmbeddedBannerQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\EmbeddedBannerQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\SpotlightItemQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\SpotlightItemQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageBuilderScienseQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageBuilderScienseQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageConstructionQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageConstructionQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageMetroQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageMetroQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageOrganisationQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageOrganisationQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePersonQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePersonQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\PageRoadQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\PageRoadQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\AnnouncementQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\AnnouncementQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\Report\FaqQueryFactory:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\Report\FaqQueryFactory
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.ConverterKendoGridStateToDoctrineCriteria'
+
+  ApiBundle\InfrastructureLayer\QueryFactory\QueryFactoryRepository:
+    class: ApiBundle\InfrastructureLayer\QueryFactory\QueryFactoryRepository
+    arguments:
+      - infographic-collage: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicCollageQueryFactory'
+        infographic-from-media: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicFromMediaQueryFactory'
+        infographic: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\InfographicQueryFactory'
+        news: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsQueryFactory'
+        news-city: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsCityQueryFactory'
+        article: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\ArticleQueryFactory'
+        page-photo-lines: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePhotoQueryFactory'
+        interview: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\InterviewQueryFactory'
+        press-release: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PressReleaseQueryFactory'
+        shorthand-report: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\ShortHandQueryFactory'
+        document: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\DocumentQueryFactory'
+        photo-media: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoMediaQueryFactory'
+        video: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\VideoQueryFactory'
+        photo: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PhotoQueryFactory'
+        banner: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\BannerQueryFactory'
+        embedded-banner: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\EmbeddedBannerQueryFactory'
+        spotlightitem-banner: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\SpotlightItemQueryFactory'
+        page-builder-sciense: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageBuilderScienseQueryFactory'
+        page-construction: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageConstructionQueryFactory'
+        page-metro: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageMetroQueryFactory'
+        page-organisation: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageOrganisationQueryFactory'
+        page-personal: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PagePersonQueryFactory'
+        page: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageQueryFactory'
+        page-road: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\PageRoadQueryFactory'
+        page-faq: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\FaqQueryFactory'
+        announcement: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\AnnouncementQueryFactory'
+        newsletter: '@ApiBundle\InfrastructureLayer\QueryFactory\Report\NewsletterQueryFactory'
+
+
+  #    DataMappers
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper
+    arguments:
+      - '@sonata.media.admin.media='
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper
+    arguments:
+      - '@app.admin_locator'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper
+    arguments:
+      - '@app.admin_locator'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\LogEntryDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\LogEntryDataMapper
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\PagePersonalDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\PagePersonalDataMapper
+    arguments:
+      - '@app.admin_locator'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\BannerDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\BannerDataMapper
+    arguments:
+      - '@router.default'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\Report\NewsletterDataMapper:
+    class: ApiBundle\InfrastructureLayer\DataMapper\Report\NewsletterDataMapper
+    arguments:
+      - '@app.admin_locator'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\DataMapper\DataMapperRepository:
+    class: ApiBundle\InfrastructureLayer\DataMapper\DataMapperRepository
+    arguments:
+      - infographic-collage: '@ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper'
+        infographic-from-media: '@ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper'
+        infographic: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        news: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        news-city: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        article: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        page-photo-lines: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        interview: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        press-release: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        shorthand-report: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        document: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        photo-media: '@ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper'
+        video: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        photo: '@ApiBundle\InfrastructureLayer\DataMapper\Report\InfographicDataMapper'
+        banner: '@ApiBundle\InfrastructureLayer\DataMapper\Report\BannerDataMapper'
+        embedded-banner: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        spotlightitem-banner: '@ApiBundle\InfrastructureLayer\DataMapper\Report\LogEntryDataMapper'
+        page-builder-sciense: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PostDataMapper'
+        page-construction: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        page-metro: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        page-organisation: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        page-personal: '@ApiBundle\InfrastructureLayer\DataMapper\Report\PagePersonalDataMapper'
+        page: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        page-road: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        page-faq: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        announcement: '@ApiBundle\InfrastructureLayer\DataMapper\Report\DocumentDataMapper'
+        newsletter: '@ApiBundle\InfrastructureLayer\DataMapper\Report\NewsletterDataMapper'
+
+  #   HttpControllers
+
+  ApiBundle\PresentationLayer\HttpController\ReportController:
+    class: ApiBundle\PresentationLayer\HttpController\ReportController
+    arguments:
+      - '@ApiBundle\InfrastructureLayer\QueryFactory\QueryFactoryRepository'
+      - '@ApiBundle\InfrastructureLayer\DataMapper\DataMapperRepository'
+
+  ApiBundle\PresentationLayer\HttpController\PostController:
+    class: ApiBundle\PresentationLayer\HttpController\PostController
+    arguments:
+      - '@ApiBundle\InfrastructureLayer\QueryFactory\Post\PostQueryFactory'
+      - '@ApiBundle\InfrastructureLayer\DataMapper\DataMapperRepository'

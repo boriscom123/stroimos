@@ -1,0 +1,137 @@
+{
+    "name": "symfony/framework-standard-edition",
+    "license": "MIT",
+    "type": "project",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "require": {
+        "php": ">=7.4",
+        "symfony/symfony": "2.7.*",
+        "doctrine/orm": "~2.5",
+        "doctrine/common": "~2.5.0",
+        "doctrine/dbal": "~2.5.0",
+        "doctrine/doctrine-bundle": "~1.5.0",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+        "incenteev/composer-parameter-handler": "~2.0",
+
+        "friendsofsymfony/user-bundle": "~1.3",
+        "sonata-project/datagrid-bundle": "2.2.*@dev",
+        "sonata-project/admin-bundle": "~2.3@dev",
+        "sonata-project/user-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.*@dev",
+        "sonata-project/media-bundle": "~2.3",
+        "sonata-project/intl-bundle": "2.2.x-dev",
+
+        "stof/doctrine-extensions-bundle": "*@dev",
+        "gedmo/doctrine-extensions": "*@dev",
+        "knplabs/doctrine-behaviors": "~1.0",
+
+        "symfony-cmf/routing-bundle": "~1.3",
+        "leafo/lessphp": "~0.5",
+
+        "jms/serializer-bundle": "~0.11",
+        "sonata-project/formatter-bundle": "~2.3",
+        "simplethings/entity-audit-bundle": "0.7.*",
+        "phpspec/php-diff": "~1.0.2",
+        "andres-montanez/magallanes": "~1.0",
+        "suin/php-rss-writer": "~1.3",
+        "sonata-project/seo-bundle": "~2.0",
+        "friendsofsymfony/elastica-bundle": "~3.1",
+        "happyr/doctrine-specification": "dev-master@dev",
+        "friendsofsymfony/comment-bundle": "~2.0.6",
+        "liip/imagine-bundle": "~1.3",
+        "pagerfanta/pagerfanta": "~1.0",
+        "presta/sitemap-bundle": "1.5.1",
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "snc/redis-bundle": "1.1.x-dev",
+        "predis/predis": "~1.0",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "html2text/html2text": "dev-master",
+        "friendsofsymfony/http-cache-bundle": "~1.0",
+        "php-ffmpeg/php-ffmpeg": "~0.6",
+        "nmure/crawler-detect-bundle": "^1.0.0",
+        "sonata-project/cache-bundle": "2.2.*",
+        "alexander_nemanov/stroi-mobile": "dev-master@dev",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "snilius/twig-sort-by-field": "^0.1.5",
+        "creof/doctrine2-spatial": "^1.2",
+        "sendpulse/rest-api": "^1.0",
+        "nelmio/cors-bundle": "^1.5",
+        "sentry/sentry": "^1.0",
+        "sentry/sentry-symfony": "^1.0",
+        "swiftmailer/swiftmailer": "5.4.6",
+        "google/recaptcha": "^1.2",
+        "ext-memcached": "*",
+      "ext-json": "*"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "fzaninotto/faker": "dev-master@dev",
+        "phpunit/phpunit": "~4.5",
+        "wsdl2phpgenerator/wsdl2phpgenerator": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "ssh://git@altssh.bitbucket.org:443/bav4ik/stroi-mobile"
+        }
+    ],
+    "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+        ],
+        "update-parameters-yml": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "DB_PORT_3306_TCP_ADDR",
+                "elasticsearch_host": "ELASTICSEARCH_PORT_9200_TCP_ADDR",
+                "mailer_host": "MAILCATCHER_PORT_25_TCP_ADDR",
+                "database_name": "GSK_DATABASE_NAME"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "2.6-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

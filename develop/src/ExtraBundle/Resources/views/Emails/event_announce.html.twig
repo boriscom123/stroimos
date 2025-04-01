@@ -1,0 +1,51 @@
+<table style="border-collapse: collapse; border: 0; padding: 0;">
+    <tr>
+        <td style="width: 10%; background: #222;">
+        </td>
+        <td style="width: 10%; background: #222; padding: 30px 0!important;">
+            <br /><br /><br />
+            <table style="border-collapse: collapse; border: 0; padding: 0;">
+                <tr>
+                    <td style="vertical-align: top; width: 93px;">
+                        <img src="http://pikbox.ru/img/10/20150603152037247logo.png" width="73" height="88" />
+                    </td>
+                    <td>
+                        <h1 style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 25px; line-height: 30px; color: white;">Комплекс градостроительной политики и&nbsp;строительства города Москвы</h1>
+                    </td>
+                </tr>
+            </table>
+            <br /><br /><br />
+        </td>
+        <td style="width: 10%; background: #222;">
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 10%; background: #222;"></td>
+        <td style="width: 80%; background: white; padding: 0 30px;">
+            <br /><br />
+            <h2 style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 25px; color: #202020;">Анонс мероприятия</h2>
+        </td>
+        <td style="width: 10%; background: #222;"></td>
+    </tr>
+    <tr>
+        <td style="width: 10%; background: #222;"></td>
+        <td style="width: 80%; background: white; padding: 0 30px; border-bottom: 1px solid #eee;">
+            <br />
+
+
+            <h3 style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 18px; line-height: 25px; color: #202020;">{{ announce.title }}</h3>
+            {#<p style="font-family: Times New Roman, serif; font-weight: normal; font-size: 18px; line-height: 22px; color: #222;">{{ item.teaser }}</p>#}
+
+            <div style="font-family: Times New Roman, serif; font-weight: normal; font-size: 18px; line-height: 22px; color: #222;">
+                {{ announce.content|raw }}
+            </div>
+
+            <p style="font-family: Times New Roman, serif; font-weight: normal; font-size: 18px; line-height: 22px; color: #222;">
+                <a href="{{ entity_path(announce.event) }}" style="font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 16px; line-height: 22px; display: inline-block; padding: 20px 0 30px; clear: both; color: #222;">{{ announce.event.title }}</a>
+                ({{ announce.event.date|format_date }} {{ announce.event.date|date('H:i') }})
+            </p>
+            <br /><br /><br />
+        </td>
+        <td style="width: 10%; background: #222;"></td>
+    </tr>
+</table>

@@ -1,0 +1,37 @@
+{# <!-- https://tech.yandex.ru/maps/doc/staticapi/1.x/dg/concepts/input_params-docpage/ --> #}
+
+{% set width = 220 %}
+{% set height = 220 %}
+
+
+<div class="geo-points">
+    {% if post.address.geoPoint or post.address.geoPolygon %}
+        <div class="map-widget" data-expandable 
+        {% if post.address.geoPoint %} data-point="{{ post.address.geoPoint.getLonLatString }}" {% endif %}
+        {% if post.address.geoPolygon %} data-polygon="{{ post.address.geoPolygonString }}" {% endif %}></div>
+    {% endif %}
+
+    {% if post.address.text %}
+        <div class="geo-points__mw-address">
+            {{ post.address.text }}
+        </div>
+    {% endif %}
+
+    {% set relatedConstructions = post.allRelatedConstruction|default(null) %}
+    {% if relatedConstructions and relatedConstructions|length > 0 %}
+        <div class="geo-points__info">
+            <header class="geo-points__header">Объекты по теме</header>
+
+            {% for item in relatedConstructions %}
+                {% set coords = item.coordinates %}
+                {% if coords and post.allRelatedConstruction|length < 4 %}
+                    <div style="background-image: url(//static-maps.yandex.ru/1.x/?l=map&size={{ width }},{{ height }}&spn=0.002,0.002&ll={{ coords }})"
+                        class="geo-points__image point" title="{{ item.addressText|default(item.title) }}"></div>
+                {% endif %}
+                <p class="geo-points__address first">
+                    <a href="{{ entity_path(item) }}">{{ item.title }}</a>
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

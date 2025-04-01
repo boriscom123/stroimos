@@ -1,0 +1,63 @@
+.city-districts-block {
+	width: 100%;
+
+	tr {
+		height: 1px;
+		td {
+			padding-bottom: 20px;
+			height: inherit;
+			vertical-align: top;
+
+			&.area-separator {
+				font-family: Onest, sans-serif;
+				color: #55A8FF;
+
+				.line{
+					width: 40px;
+					height: 100%;
+					border-right: 3px solid #55A8FF;
+				}
+			}
+
+			&.districts-container {
+
+				p {
+					margin-left: 10px;
+					&.administrative-area-abbreviation {
+						font-family: Onest, sans-serif;
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+}
+
+
+.rotated-text-wrapper {
+	overflow: hidden;
+	width: 40px;
+	padding-bottom: 20px;
+	border-right: 3px solid #FFF;
+}
+
+
+.rotated-text {
+	display: inline-block;
+	white-space: nowrap;
+	line-height: 40px;
+	font-size: 27px;
+	font-weight: bold;
+
+	transform: translate(0,100%) rotate(-90deg);
+	transform-origin: 0 0;
+}
+
+.rotated-text:after {
+	content: "";
+	float: left;
+	margin-top: 100%;
+}

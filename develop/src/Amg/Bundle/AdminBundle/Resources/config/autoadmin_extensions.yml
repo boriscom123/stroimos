@@ -1,0 +1,100 @@
+services:
+    app.admin.extension.entitled:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\EntitledExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: title}
+
+    app.admin.extension.lead:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\LeadExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Lead\LeadTrait}
+
+    app.admin.extension.teasing:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\TeasingExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Teasing\TeasingTrait}
+
+    app.admin.extension.contentful:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\ContentfulExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Contentful\ContentfulTrait}
+
+    app.admin.extension.mobile_contentful:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\MobileContentfulExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: AppBundle\Model\MobileContentfulTrait}
+
+    app.admin.extension.position:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\PositionExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: position}
+
+    app.admin.extension.feedable:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\FeedableExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Feedable\FeedableTrait}
+
+    app.admin.extension.publishable:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\PublishableExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Publishable\PublishableTrait}
+
+#    app.admin.extension.searchable:
+#        class: Amg\Bundle\AdminBundle\Admin\Extension\SearchableExtension
+#        tags:
+#            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Searchable\SearchableTrait}
+
+#    app.admin.extension.publishable_in_rss:
+#        class: Amg\Bundle\AdminBundle\Admin\Extension\PublishableInRssExtension
+#        tags:
+#            - {name: app.sonata_autoadmin, interface: Amg\DataCore\Model\PublishableInRss\PublishableInRssInterface}
+
+#    app.admin.extension.relevant_news_shown:
+#        class: Amg\Bundle\AdminBundle\Admin\Extension\RelevantNewsShownExtension
+#        tags:
+#            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\RelevantNewsShown\RelevantNewsShownTrait}
+
+    app.admin.extension.publishing_period:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\PublishingPeriodExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\PublishingPeriod\PublishingPeriodTrait}
+
+    app.admin.extension.author:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\AuthorExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: author}
+
+    app.admin.extension.source:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\ArticleSourceExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: source}
+
+    app.admin.extension.rubrics:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\RubricsExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: rubrics}
+
+    app.admin.extension.owners:
+        class: AppBundle\Admin\Extension\OwnersExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: owners}
+
+    app.admin.extension.owner:
+        class: AppBundle\Admin\Extension\OwnerExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: owner}
+
+    app.admin.extension.extra_information:
+        class: AppBundle\Admin\Extension\ExtraInformationExtension
+        tags:
+            - {name: app.sonata_autoadmin, field: extraInformation}
+
+    app.admin.extension.metadata:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\MetadataExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Metadata\MetadataTrait}
+
+    app.admin.extension.address:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\AddressExtension
+        tags:
+            - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\Addressable\AddressableTrait}

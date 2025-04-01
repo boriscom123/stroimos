@@ -1,0 +1,23 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': popular ? 'ТОП новости' : app.request.get('page').title,
+    'rubricsContext': 'post',
+    } %}
+
+    <div class="container__full day-news__top">
+        {{ sonata_block_render({'type': 'post_list'}, {
+            title: 'Последние новости',
+            category: 'news',
+            template: 'last_news',
+            limit: 8
+        }) }}
+    </div>
+	
+    {{ sonata_block_render({'type': 'post_list'}, {
+        'template': '::widgets/photo_lines/_list.html.twig',
+        'category': categoryAlias,
+        'popular': popular,
+    }) }}
+{% endblock %}

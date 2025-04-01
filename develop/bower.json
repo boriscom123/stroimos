@@ -1,0 +1,40 @@
+{
+  "name": "gsk_static",
+  "version": "0.0.0",
+  "authors": [
+    "skelskel2011 <skelskel2011@yandex.ru>",
+    "okudakaeva <oksana.kudakaeva@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "salvattore": "~1.0.7",
+    "jquery.cookie": "~1.4.1",
+    "dotdotdot": "~1.7.3",
+    "jquery.selectBoxIt.js": "git://github.com/gfranko/jquery.selectBoxIt.js.git#~3.8.1",
+    "slick-carousel": "~1.5.5",
+    "Fullscreen-API-Polyfill": "*",
+    "jquery-tree": "git://github.com/daredevel/jquery-tree.git",
+    "jquery-ui": "git://github.com/components/jqueryui.git#~1.11.4",
+    "magnific-popup": "git://github.com/dimsemenov/Magnific-Popup.git#~1.0.0",
+    "handlebars": "~4.0.2",
+    "AnythingZoomer": "git://github.com/CSS-Tricks/AnythingZoomer.git#~2.2.7",
+    "iframe-resizer": "3.5.5",
+    "textfit": "2.3.1",
+    "utatti-perfect-scrollbar": "1.4.0",
+    "momentjs": "2.19.4",
+    "bowser": "1.8.1",
+    "scrollMonitor": "1.2.2",
+    "twentytwenty": "zurb/twentytwenty",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-labels": "^1.1.0",
+    "selectize": "0.12.4"
+  }
+}

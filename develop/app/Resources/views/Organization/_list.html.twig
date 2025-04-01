@@ -1,0 +1,23 @@
+<data-map data-source="{{ block_path(block, context) }}"></data-map>
+<div class="organization-block__list">
+    <div class="organization-block__list-row">
+        <div class="organization-block__list-item head name">Наименование</div>
+        <div class="organization-block__list-item head person-name">Руководитель</div>
+        <div class="organization-block__list-item head phone">Телефон</div>
+        <div class="organization-block__list-item head site">Сайт</div>
+    </div>
+    {% for item in items %}
+        {% include '::/Organization/_teaser.html.twig' with {'item': item} %}
+    {% endfor %}
+</div>
+
+{% if next_offset %}
+    {% include '::/Block/loadmore_button.html.twig' with {
+    title: 'Ещё',
+    target: '.organization-block__list',
+    item: '.organization-block__list-row',
+    source: block_path(block, context, {template: 'ajax_list'}),
+    limit: limit,
+    offset: next_offset
+    } %}
+{% endif %}

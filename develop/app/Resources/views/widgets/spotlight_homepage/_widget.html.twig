@@ -1,0 +1,20 @@
+{% if spotlightItems|length > 0 %}
+    <div class="spotlight">
+        <header class="spotlight__header">
+            <h2 class="spotlight__title">В центре внимания</h2>
+        </header>
+        <div class="spotlight__wrapper">
+          <div class="spotlight__list">
+              {% for item in spotlightItems %}
+                  {% if item.entity or item.uri %}
+                      {% include '::/widgets/spotlight_homepage/_teaser.html.twig' %}
+                  {% endif %}
+              {% endfor %}
+          </div>
+        </div>
+        <div class="spotlight__bottom">
+          <a href="javascript:void(0)" class="related-link spotlight__expand">посмотреть все</a>
+          <a href="javascript:void(0)" class="related-link spotlight__collapse">свернуть</a>
+        </div>
+    </div>
+{% endif %}

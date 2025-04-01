@@ -1,0 +1,109 @@
+@import "../../fonts";
+@import "./vars-new-ui";
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-height: 105px;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    border: none;
+}
+
+.input-label {
+    font-size: 20px;
+    line-height: 20px;
+    text-align: left;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.input-field {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: left;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: @textColor;
+    resize: none;
+	box-sizing: border-box;
+}
+
+.input-field:invalid {
+    border: 1px solid @accent-900
+}
+
+.input-field:invalid + .input-error {
+    display: block;
+}
+
+.input-error {
+    display: none;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: left;
+    color: @accent-900;
+}
+
+.input-error_visible {
+    display: block;
+}
+
+.input-reset-button {
+    position: absolute;
+    display: none;
+    width: 24px;
+    height: 24px;
+    right: 16px;
+    top: 16px;
+    cursor: pointer;
+
+    font-size: 16px;
+    background: transparent;
+    border: none;
+	background-image: url(/images/icons/close-icon.svg);
+    background-size: cover;
+}
+
+.input-reset-button_visible {
+    display: block;
+}
+
+.input-line {
+	.input-field;
+    height: 56px;
+    padding: 8px 50px 8px 16px;
+}
+
+.input-line:active, .input-line:focus {
+	outline: none;
+	border: 1px solid @borderColor !important;
+
+	&::placeholder {
+        color: rgba(27, 38, 44, 0.2) !important;
+    }
+}
+
+.input-area {
+	.input-field;
+    height: 100px;
+    padding: 16px;
+}
+
+.input-area:active, .input-area:focus {
+	outline: none;
+	border: 1px solid @borderColor !important;
+
+	&::placeholder {
+        color: rgba(27, 38, 44, 0.2) !important;
+    }
+}

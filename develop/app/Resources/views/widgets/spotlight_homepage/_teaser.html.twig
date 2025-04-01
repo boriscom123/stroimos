@@ -1,0 +1,73 @@
+{% set entity = item.entity %}
+{% set isGallery = entity is gallery %}
+{% set isDocument = entity is document %}
+
+{% set hasBgImage = item.backgroundImage is not empty %}
+
+{% if item.image %}
+    {% set image = item.image %}
+{% elseif entity.image is defined %}
+    {% set image = entity.image %}
+{% endif %}
+{% set additionalTeaserClass = (isGallery) ? "spotlight__teaser-gallery": (hasBgImage) ? "spotlight__teaser_with-background" : "" %}
+<article class="spotlight__teaser {{ additionalTeaserClass }}"
+        {% if (isGallery) %}
+            style="background-image:url({% path image, 'full' %})"
+        {% endif %}
+        >
+    {% if entity is not empty %}
+        <a href="{{ entity_path(entity) }}" class="spotlight__teaser-link">
+            {% if not isGallery and not hasBgImage and not isDocument and image is defined and image is not empty %}
+                {% set imagePath %}{% path image, 'thumb300' %}{% endset %}
+                {% if imagePath %}
+                    <div class="spotlight__teaser-image-wrap">
+                        <img class="spotlight__teaser-image" src="{{ imagePath }}" alt="{{ entity.title }}"/>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if isGallery %}
+                <span class="spotlight__teaser-legend">
+                        <i class="icon icon-40 icon-light icon-photo"></i>
+                    {{ entity.medias|length }} фото
+                    </span>
+            {% endif %}
+            {% if item.publicationType is not empty %}
+              <div class="spotlight__teaser-category">
+                <span>{{ item.publicationType }}</span>
+              </div>
+            {% endif %}
+            <header class="spotlight__teaser-title">{{ entity.title }}</header>
+            {% if entity.publishStartDate is defined %}
+                <time class="spotlight__teaser-date">{{ entity.publishStartDate | format_date }}</time>
+            {% endif %}
+        </a>
+    {% else %}
+        <a class="spotlight__teaser-link" href="{{ item.uri }}" {% if item.openInNewTab %}target="_blank"{% endif %} >
+            {% if item.hasCarouselImages %}
+                <div class="spotlight__teaser-image-wrap carousel" style="display: none">
+                    {% for image in item.getCarouselImages  %}
+                        {% set imagePath %}{% path image, (hasBgImage) ? "thumb300x420" : "thumb300" %}{% endset %}
+                        {% if imagePath is empty %}
+                            {% set imagePath %}{% path image, "full" %}{% endset %}
+                        {% endif %}
+
+                        {% if imagePath %}
+                            <div class="carousel__item" >
+                                <img src="{{ imagePath }}">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if item.publicationType is not empty %}
+              <div class="spotlight__teaser-category spotlight__teaser-text-layer">
+                <span>{{ item.publicationType }}</span>
+              </div>
+            {% endif %}
+            <header class="spotlight__teaser-title spotlight__teaser-text-layer">{{ item.title }}</header>
+            {% if item.date %}
+                <time class="spotlight__teaser-date spotlight__teaser-text-layer">{{ item.date | format_date }}</time>
+            {% endif %}
+        </a>
+    {% endif %}
+</article>

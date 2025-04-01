@@ -1,0 +1,33 @@
+{% extends 'Subordinate/layout/base.html.twig' %}
+{% block bodyClass %}
+    subordinate-page
+{% endblock %}
+{% block body %}
+    {% include '::/layout/back_up_buttons.html.twig' %}
+    <div class="page-overlay">
+        {{ sonata_block_render({'type': 'subordinate_header'}, {subordinate: app.request.get('_subordinate_route'), template: 'Subordinate/layout/header.html.twig'}) }}
+        {% block mainSlider %}
+        {% endblock %}
+
+        <div class="page-limiter withoutBanner" id="page">
+            <div class="page-wrapper">
+                <div class="page-container">
+                    <main class="page-main">
+                        {% block content %}
+                        {% endblock %}
+                    </main>
+                    {% block recent_pages %}
+                        {#{{ sonata_block_render({'type': 'recent_page'}, {}) }}#}
+                    {% endblock %}
+                    <div class="bottom-blocks">
+                        {{ sonata_block_render({'type': 'news_of_the_day'}, {template: ':Subordinate/widgets/news:day_news_new.html.twig'}) }}
+                        {% block subscribe_form %}
+                            {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form_new.html.twig'}) }}
+                        {% endblock subscribe_form %}
+                    </div>
+                    {% include 'Subordinate/layout/footer.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

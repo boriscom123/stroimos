@@ -1,0 +1,32 @@
+{% if posts|length > 0 %}
+    <div class="day-news">
+        <header class="day-news__header">
+            <h1 class="day-news__header-title">{{ title|default('Новости дня') }}</h1>
+            {% if posts|length > 4 %}
+                <div id="dayNewsPager" class="day-news__header-pager">
+                    <a class="active" data-slide-index="0" href></a>
+                    <a data-slide-index="1" href></a>
+                </div>
+            {% endif %}
+            <a href="{{ path('app_news_list') }}" class="related-link main-feed__related-link days-news__header-link">Все новости<i class="icon icon-16 icon-news"></i></a>
+        </header>
+        <div class="day-news__list">
+            {% for post in posts %}
+                {% if loop.index % 4 == 1 %}
+                    <div class="">
+                {% endif %}
+                <article class="day-news__list-item">
+                    <time class="news-date">{{ post.publishStartDate|format_date }} <span class="news-time">{{ post.publishStartDate|date('H:i') }}</span></time>
+                    <header class="day-news__list-item-title">
+                        <a href="{{ entity_path(post) }}">
+                            {{ post.title }}
+                        </a>
+                    </header>
+                </article>
+                {% if loop.index % 4 == 0 or loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

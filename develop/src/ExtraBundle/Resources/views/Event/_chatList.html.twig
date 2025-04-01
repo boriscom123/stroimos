@@ -1,0 +1,12 @@
+{% for message in chat_messages %}
+<li class="event-content__chat-item">
+    <header class="message">
+        {% if can_moderate_chat_message %}
+            <a class="message-close" href="#" data-url="{{ path('app_event_chat_message_remove', {'id': message.id}) }}">x</a>
+        {% endif %}
+        <time class="news-date"><span class="news-time">{{ message.createdAt|format_date('H:mm') }}</span></time>
+        <strong class="message-author__name">{{ message.user.displayName }}</strong>
+    </header>
+    <p class="message-author__content">{{ message.message }}</p>
+</li>
+{% endfor %}

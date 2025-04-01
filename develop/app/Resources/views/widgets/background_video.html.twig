@@ -1,0 +1,15 @@
+<div class="background-video__container" {% if app.request.cookies.get('showTimelapse') != 'true' %}style="display: none"{% endif %}>
+  <video class="background-video" autoplay="autoplay" loop="loop" muted="muted" controls>
+      {% if 'now'|date('H') < 15 and 'now'|date('H') >= 7 %}
+        <source src="/uploads/bg_timelaps_720p/Rassvet.mp4" type="video/mp4" />
+        <source src="/uploads/bg_timelaps_720p/Rassvet.webm" type="video/webm" />
+      {% elseif 'now'|date('H') < 20 and 'now'|date('H') >= 15 %}
+        <source src="/uploads/bg_timelaps_720p/Pekin_OBSH.mp4" type="video/mp4" />
+        <source src="/uploads/bg_timelaps_720p/Pekin_OBSH.webm" type="video/webm" />
+      {% else %}
+        <source src="/uploads/bg_timelaps_720p/Gopro_Gorky park-1.mp4" type="video/mp4" />
+        <source src="/uploads/bg_timelaps_720p/Gopro_Gorky park-1.webm" type="video/webm" />
+      {% endif %}
+  </video>
+  <div class="background-video__overlay"></div>
+</div>

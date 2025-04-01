@@ -1,0 +1,149 @@
+// Constant
+// ---------------------
+@subscribeFormSize: 720px;
+@subscribeFormEmailSize: 530px;
+@subscribeFormAccentColour: #438FF0;
+@subscribeFormBorderColour: #e4e4e4;
+@subscribeFormTextColour: #585858;
+@subscribeFormTextLightColour: #bdbdbd;
+// ---------------------
+
+.subscribe-form {
+  width: @subscribeFormSize;
+  margin: 0 auto;
+  padding-bottom: 55px;
+  font-family: Brygada1918, serif;
+
+  &__wrap {
+    overflow: initial;
+    border-top: 1px solid @subscribeFormBorderColour;
+  }
+
+  &__title{
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    color: @color;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  &__label {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    color: @subscribeFormTextColour;
+  }
+
+  &__form {
+    margin-top: 35px;
+  }
+
+  &__email {
+    width: @subscribeFormEmailSize;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid @subscribeFormBorderColour;
+    font-weight: normal;
+    font-style: italic;
+    color: @subscribeFormTextColour;
+    font-size: 20px;
+    line-height: 26px;
+    box-sizing: border-box;
+    background: transparent;
+    text-align: left;
+    float: left;
+    padding-bottom: 4px;
+
+    &::placeholder{
+      color: @subscribeFormTextLightColour;
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      color: @color;
+    }
+
+    &:valid,
+    &:invalid {
+      box-shadow: none;
+    }
+  }
+
+  &__btn {
+    font-family: Onest, sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 31px;
+    margin-left: 10px;
+    padding: 0px 20px;
+    color: white;
+    width: @subscribeFormSize - @subscribeFormEmailSize - 10px;
+    letter-spacing: 2px;
+    border: 0;
+    background: @subscribeFormAccentColour;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__adm-units {
+    display: none;
+
+    &.selectize-control {
+      display: initial;
+    }
+
+    .selectize-input {
+      margin-top: 10px;
+      border: none;
+      border-bottom: 1px solid transparent;
+      box-shadow: none;
+      background: none;
+
+      &.has-items {
+        border: 1px solid @subscribeFormAccentColour;
+      }
+    }
+    &.selectize-dropdown {
+
+      .optgroup {
+        font-weight: bold;
+        padding-left: 10px;
+      }
+      .option {
+        padding-left: 20px;
+      }
+
+      .active {
+        background: @subscribeFormAccentColour;
+        color: white;
+      }
+
+      .selected {
+        &::after {
+          content: ' ✓';
+        }
+      }
+    }
+  }
+}
+
+#subscribe-form__message {
+  display: inline-block;
+  font-family: Onest, sans-serif;
+  font-size: 17px;
+  line-height: 28px;
+  color: @subscribeFormTextColour;
+  word-spacing: 0.5em;
+  padding: 2px 10px;
+  border: 1px solid @subscribeFormAccentColour;
+}

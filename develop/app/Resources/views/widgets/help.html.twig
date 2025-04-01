@@ -1,0 +1,12 @@
+{% if title is not empty or content is not empty %}
+    <abbr class="help-icon{% if headClass is defined and headClass %}header-help{% endif %}">
+        <div class="help-message">
+            <h4>
+                {{ title }}
+            </h4>
+            <p>
+                {{ content }}
+            </p>
+        </div>
+    </abbr>
+{% endif %}

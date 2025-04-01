@@ -1,0 +1,103 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block sonata_sidebar_search %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('js/vendor/jquery.treeview.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/admin/custom.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/admin-ui/styles.a800b8f0ce6e7bb8f26a.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/admin/bootstrap-toggle/css/bootstrap-toggle.min.css') }}"/>
+    <link  href="{{ asset('js/vendor/cropper/dist/cropper.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin/preview.js') }}"></script>
+    <script src="{{ asset('js/admin/fix-twice-submit.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.treeview.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.ru.js') }}"></script>
+    <script src="{{ asset('js/admin/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ asset('js/admin/togglePublished.js') }}"></script>
+    <script src="{{ asset('js/vendor/cropper/dist/cropper.min.js') }}"></script>
+    <script>
+        $().ready(function () {
+            if(typeof CKEDITOR !== 'undefined') {
+                CKEDITOR.dtd.$removeEmpty['i'] = 0;
+            }
+        });
+    </script>
+    <script src="{{ asset('js/admin/collapsible-field.js') }}"></script>
+{% endblock %}
+
+{% block sonata_head_title %}Комплекс градостроительной политики и строительства города Москвы – {{ parent() }}{% endblock %}
+
+{% block side_bar_nav %}
+    {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+        <ul class="sidebar-menu">
+            {% for group in admin_pool.dashboardgroups %}
+                {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}
+                {% for role in group.roles if not display %}
+                    {% set display = is_granted(role) %}
+                {% endfor %}
+
+                {# Do not display the group label if no item in group is available #}
+                {% set item_count = 0 %}
+                {% if display %}
+                    {% for admin in group.items if item_count == 0 %}
+                        {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                            {% set item_count = item_count+1 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if display and (item_count > 0) %}
+                    {% set active = false %}
+                    {% for admin in group.items %}
+                        {% if admin.hasroute('list') and admin.isGranted('LIST') and app.request.get('_sonata_admin') == admin.code %}
+                            {% set active = true %}
+                        {% endif %}
+                    {% endfor %}
+                    <li class="treeview{% if active %} active{% endif %}">
+                        <a href="#">
+                            {% if group.icon|default() %}{{ group.icon|raw }}{% endif %}
+                            <span>{{ group.label|trans({}, group.label_catalogue) }}</span>
+                            <i class="fa pull-right fa-angle-left"></i>
+                        </a>
+                        <ul class="treeview-menu{% if active %} active{% endif %}">
+                            {% for admin in group.items %}
+                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                    <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}><a href="{{ admin.generateUrl('list')}}"><i class="fa fa-angle-double-right"></i> {{ admin.label|trans({}, admin.translationdomain) }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if group.label == 'Главная страница' %}
+                                <li><a href="{{ path('admin_app_page_block_list', {id: 1, filter:{ type:{ value: 'hot_news_block'} } } )}}"><i class="fa fa-angle-double-right"></i> Баннеры</a></li>
+                                <li><a href="{{ path('admin_app_page_block_list', {id: 1, filter:{ type:{ value: 'service_banner'} } } )}}"><i class="fa fa-angle-double-right"></i> Сервисы</a></li>
+                            {% elseif group.label == 'Admin' %}
+                                <li><a href="{{ path('admin_report')}}"><i class="fa fa-angle-double-right"></i> Статистика</a></li>
+                                <li><a href="{{ path('admin_report_by_content')}}"><i class="fa fa-angle-double-right"></i>Отчет</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock side_bar_nav %}
+
+
+{% block side_bar_after_nav %}
+    <p class="text-center small" style="border-top: 1px solid #444444; padding-top: 10px">
+        <a href="https://ugd.mos.ru/ugd/tabInfo.action?tab=TEH&amp;app=TEH#/tree::rel=2/card::cardId=CARD$HPSM_LIST$BODY&amp;documentId= " target="tech">Мои&nbsp;обращения</a>
+        <br>
+        <a href="https://ugd.mos.ru/ugd/getCardHtml.action?cardId=COMMON$HPSM$APPLICATION_FROM" target="tech">Техническая&nbsp;поддержка</a>
+    </p>
+{% endblock %}
+
+{% block sonata_wrapper %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/admin-ui/runtime.afdff3c2fbe548c25b97.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin-ui/polyfills.c0e1537bc8740eed62f5.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin-ui/scripts.e84e36a0841a046b4d25.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin-ui/main.764a85c3dc98841b57e8.js') }}"></script>
+{% endblock %}

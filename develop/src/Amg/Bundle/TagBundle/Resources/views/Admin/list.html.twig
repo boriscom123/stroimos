@@ -1,0 +1,55 @@
+{% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+
+        .tag-merge-target .tag-merge-arrow,
+        .tag-merge-target input[type='radio'] {
+            opacity: 0.2;
+        }
+
+        tr:hover .tag-merge-arrow,
+        tr:hover input[type='radio'] {
+            opacity: 1;
+        }
+
+        .tag-merge-target input[type='radio']:checked {
+            opacity: 1;
+        }
+
+        .tag-merge-arrow {
+            vertical-align: top;
+            opacity: 0.2;
+        }
+
+        .tag-merge-arrow.active {
+            opacity: 1;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block batch_javascript %}
+    {{ parent() }}
+    //<script>
+    jQuery(document).ready(function ($) {
+        $('table select[name="action"]')
+                .change(function () {
+                    if ("merge" == $(this).val()) {
+                        $('.tag-merge-target').show();
+                    } else {
+                        $('.tag-merge-target').hide();
+                    }
+                })
+        ;
+
+        $('.tag-merge-radio').on('change', function() {
+            var $this = $(this);
+            $('.tag-merge-arrow').removeClass('active');
+            $this.parents('.tag-merge-target').find('.tag-merge-arrow').addClass('active');
+        });
+    });
+{% endblock %}

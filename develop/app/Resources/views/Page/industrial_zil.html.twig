@@ -1,0 +1,140 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="quote-block">
+        {# <div class="quote-block__title">Цитата</div> #}
+        <div class="quote-block__content">
+          <div class="quote-block__text">«Комплексное развитие территории ЗИЛа&nbsp;- крупнейший проект реорганизации промзон не&nbsp;только в&nbsp;Москве и&nbsp;в&nbsp;России, но&nbsp;и&nbsp;в&nbsp;Европе. На&nbsp;территории бывшего автозавода и&nbsp;рядом с&nbsp;ним планируется построить 6,4&nbsp;млн&nbsp;кв.&nbsp;метров недвижимости. Он сопоставим с&nbsp;мегапроектом «Москва-Сити», –</div>
+          <div class="quote-block__author">
+            <img src="/images/industrial_zil/s.jpg" class="quote-block__author-pic" alt="">
+            <div class="quote-block__author-text">
+              <div class="quote-block__author-name">Сергей Собянин</div>
+              <div class="quote-block__author-title">Мэр Москвы</div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="industrial-zil-page">
+        <div class="industrial-zil-page__cc industrial-zil-page__cc_l">
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/zhiloi-komplieks-zilart" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/zilart.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Жилой комплекс «ЗИЛАРТ»
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              В&nbsp;его составе построят: 29 жилых домов, офисы, магазины, 9 детских садов, самую большую школу в&nbsp;России.
+            </span>
+          </a>
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/samaia-bol-shaia-shkola-v-rossii" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/school.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Самая большая школа в&nbsp;России
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              «Изюминкой» школы станут современные учебные программы. Школьники смогут заняться изучением лазерных технологий, прикладной космонавтики, исследованием наноматериалов, судостроением, микробиологией или&nbsp;построением виртуальной реальности.
+            </span>
+          </a>
+        </div>
+
+        <div class="industrial-zil-page__cc industrial-zil-page__cc_c">
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/park-tiufielieva-roshcha-i-blaghoustroistvo-nabieriezhnoi" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/tufel.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Парк «Тюфелева роща»
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Его главной «фишкой» стала пергола&nbsp;- крытая прогулочная зона и смотровая площадка.
+            </span>
+          </a>
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/sportivnyi-kvartal-park-lieghiend?h=abeb8328429cca0c0858421100ab18e9" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/parklegend.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Спортивно-развлекательный квартал
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Здесь построили ледовую «ЦСКА Арену», где уже прошел чемпионат мира по&nbsp;хоккею, музей хоккея и&nbsp;комплекс водного спорта.
+            </span>
+          </a>
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/istoriia-zavoda-zil" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/history.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              История завода ЗИЛ
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Некоторые заводские корпуса сохранят и&nbsp;переделают под&nbsp;деловые центры. Автомобильное сборочное производство оставят, но&nbsp;площадь цехов станет меньше. От&nbsp;жилья их&nbsp;отделит зеленая зона.
+            </span>
+          </a>
+        </div>
+
+        <div class="industrial-zil-page__cc industrial-zil-page__cc_c">
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/doroghi-zila" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/roads.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Дороги ЗИЛа
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Для&nbsp;обеспечения транспортной и&nbsp;пешеходной доступности здесь строится порядка 35&nbsp;км новых дорог: прокладываются новые проспекты и&nbsp;улицы, строятся подъезды к&nbsp;объектам, реконструируется набережная, построен автодорожный путепровод через пути МЦК.
+            </span>
+          </a>
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/dostupnyi-obshchiestviennyi-transport" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/publictransport.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Доступный общественный транспорт
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              До&nbsp;начала застройки территории на&nbsp;ЗИЛе действовала единственная станция «Автозводская».
+            </span>
+          </a>
+          <a href="https://stroi.mos.ru/renovaciya-promzon/proekt-planirovki/riekonstruktsiia-nabieriezhnoi-marka-shaghala" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/nab_mark_shagal.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Реконструкция набережной Марка Шагала
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Здесь появятся парк, причал-амфитеатр, плавучие сады и&nbsp;многое другое.
+            </span>
+          </a>
+        </div>
+
+        <div class="industrial-zil-page__cc industrial-zil-page__cc_s">
+          <a href="https://stroi.mos.ru/renovaciya-promzon/nagatinskii-zaton/kakim-stanet-nagatinskii-zaton/park-ostrov-miechty" class="industrial-zil-page__cc-item">
+            <span class="industrial-zil-page__cc-item-img" style="background-image: url('/images/industrial_zil/projects.jpg')"></span>
+            <span class="industrial-zil-page__cc-item-title">
+              Крупные проекты на&nbsp;прилегающей к&nbsp;ЗИЛу территории
+            </span>
+            <span class="industrial-zil-page__cc-item-text">
+              Строительство крупнейшего крытого тематического парка Европы «Остров&nbsp;Мечты» и&nbsp;реконструкция стадиона «Торпедо».
+            </span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мкад'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

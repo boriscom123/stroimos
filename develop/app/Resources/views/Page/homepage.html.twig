@@ -1,0 +1,255 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block bodyClass %}homepage{% endblock %}
+
+{% block mainSlider %}
+    {% if new_design %}
+        {#<div class="page-main__slider-wrapper">#}
+            {#<ul class="page-main__slider">#}
+                {#{% set posts = postsPicks | slice(1) %}#}
+                {#{% for post in posts %}#}
+                    {#<li class="page-main__slider-item">#}
+                        {#<a class="top-news__teaser-link" href="{{ entity_path(post) }}">#}
+                            {#<img src="{% path post.heroImage|default(post.image), 'thumb960x470' %}" />#}
+                            {#<div class="page-main__slider-item-text">#}
+                                {#<p>{{ post.title }}</p>#}
+                            {#</div>#}
+                        {#</a>#}
+                    {#</li>#}
+                {#{% endfor %}#}
+            {#</ul>#}
+        {#</div>#}
+    {% endif %}
+{% endblock %}
+
+{% block recent_pages %}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+
+            $('.carousel', 'a.spotlight__teaser-link').slick({
+                autoplay: false,
+                autoplaySpeed: 1000,
+                pauseOnHover: false,
+                arrows: false,
+                fade: true,
+                waitForAnimate: false
+            }).show();
+            $('a.spotlight__teaser-link')
+                .hover(
+                    function () {
+                        var self = this;
+                        $(this).attr(
+                            'slickTimer',
+                            setTimeout(
+                                function () {
+                                    $('.carousel', self).slick('slickGoTo', 1).slick('slickPlay');
+                                },
+                                500
+                            ))
+                    },
+                    function () {
+                        if ($(this).attr('slickTimer')) {
+                            clearTimeout($(this).attr('slickTimer'))
+                            $(this).attr('slickTimer', null)
+                        }
+
+                        $('.carousel', this).slick('slickGoTo', 0);
+                        $('.carousel', this).slick('slickPause');
+                    }
+                )
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    {{ sonata_block_render({'type': 'homepage_news'}, {homepage: page, template: ':Page:homepage_news.html.twig'}) }}
+    {% include '::/widgets/spotlight_homepage/_widget.html.twig' %}
+
+{#     <div class="vote-homepage-banner">
+        <a href="https://ag-vmeste.ru/landing/milp10"
+            target="_blank" class="additional_banner_vote2024"><img class="additional_banner__img"
+                alt="По-соседски"
+                src="/images/banner/banner_million_prizes.png"
+                srcset="/images/banner/banner_million_prizes.png,
+                        /images/banner/banner_million_prizes_x15.png 1.5x,
+                        /images/banner/banner_million_prizes_x20.png 2x" />
+        </a>
+    </div> #}
+
+    {% include '::/widgets/interactive_map.html.twig' %}
+
+{#     <a href="#" class="imaged-banner">
+        <h4 class="imaged-banner__title">Реконстуркция главного <em>"детского мира"</em> страны:</h4>
+        <p class="imaged-banner__legend">Что изменилось?</p>
+    </a> #}
+
+    {% if galleryPicks is not empty %}
+    <div class="container__full homepage-gallery">
+        <header class="homepage-gallery__header">
+            <h3 class="homepage-gallery__title">Фото</h3>
+            <a href="{{ path('app_gallery_list') }}" class="homepage-gallery__note">все фото</a>
+        </header>
+
+        <div class="homepage-gallery__container">
+            {% set mainPick =  galleryPicks[0] %}
+            <a href="{{ path('app_gallery_show', { id: mainPick.gallery.id }) }}"
+               class="homepage-gallery__image"
+               {#data-image="{% path mainPick.gallery.image, 'thumb960' %}"#}
+               {#data-target="#top-gallery-{{ mainPick.gallery.id }}"#}
+                    >
+                <span class="homepage-gallery__image-background" style="background-image: url({% path mainPick.gallery.image, 'thumb960' %})"></span>
+                <span class="homepage-gallery__meta">
+                    {# <span class="homepage-gallery__meta-header">альбом</span> #}
+                    <span class="homepage-gallery__meta-title" style="-webkit-box-orient: vertical">{{ mainPick.gallery.title }}</span>
+                    <span class="homepage-gallery__meta-count">
+                        <i class="homepage-gallery__meta-icon"></i>
+                        {{ mainPick.gallery.medias | length }}&nbsp;фото
+                    </span>
+                </span>
+            </a>
+            <div class="homepage-gallery__sidebar">
+                {% for pick in galleryPicks|slice(1) %}
+                    <figure class="homepage-gallery__thumb active"
+                            {#id="top-gallery-{{ pick.gallery.id }}"#}
+                            {#data-href="{{ path('app_gallery_show', { id: pick.gallery.id }) }}"#}
+                            {#data-image="{% path pick.gallery.image, 'thumb960' %}"#}
+                            {#data-title="{{ pick.gallery.title }}"#}
+                            {#data-count="{{ pick.gallery.medias | length }}&nbsp;фото"#}
+                            >
+                        <a href="{{ path('app_gallery_show', { id: pick.gallery.id }) }}">
+                            <img src="{% path pick.gallery.image, 'thumb210' %}" alt="{{ pick.gallery.title }}"/>
+                            <span class="homepage-gallery__meta">
+                                {# <span class="homepage-gallery__meta-header">альбом</span> #}
+                                <span class="homepage-gallery__meta-title" style="-webkit-box-orient: vertical">{{ pick.gallery.title }}</span>
+                                <span class="homepage-gallery__meta-count">
+                                    <i class="homepage-gallery__meta-icon"></i>
+                                    {{ pick.gallery.medias | length }}&nbsp;фото
+                                </span>
+                            </span>
+                        </a>
+                    </figure>
+                {% endfor %}
+            </div>
+            {# <span class="homepage-gallery__fadeout" 
+                  style="background-image: url({% path mainPick.gallery.image, 'thumb960' %})"></span> #}
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if videoPicks is not empty %}
+    <div class="container__full homepage-video">
+        <header class="homepage-video__header">
+            <h3 class="homepage-video__title">Видео</h3>
+            <a href="{{ path('app_video_list') }}" class="homepage-video__note">все видео</a>
+        </header>
+        <div class="homepage-video__container">
+            {% set mainPick =  videoPicks[0] %}
+            <a href="{{ path('app_video_show', { id: mainPick.video.id }) }}" class="homepage-video__video">
+                <span class="homepage-video__image">
+                    {% if mainPick.video.image.context == 'main_image' %}
+                        {% media mainPick.video.image, 'thumb680x495' with {'width':'680px', 'height': '495px'} %}
+                    {% else %}
+                        {% media mainPick.video.image, 'thumb960x470' %}
+                    {% endif %}
+                </span>
+                {#<div class="homepage-player"#}
+                     {#style="background-image: url({% path mainPick.video.image, 'thumb960' %})"#}
+                     {#data-video-id="{{ mainPick.video.video.providerReference }}"#}
+                     {#data-provider="{{ video_type(mainPick.video.video) }}"#}
+                        {#>#}
+                    {#<div id="homepage-player"></div>#}
+                {#</div>#}
+                <span class="homepage-video__meta" id="video_meta">
+                    <span class="homepage-video__meta-row">
+                        <span class="homepage-video__meta-title">{{ mainPick.video.title }}</span>
+                        {# {% set videoLength = video_length(mainPick.video.video) %}
+                            {% if videoLength %}
+                                <span class="homepage-video__meta-duration">
+                                    <i class="icon icon-watch"></i>
+                                    {{ videoLength }}
+                                </span>
+                            {% endif %}
+                        #}
+                    </span>
+                    <span class="homepage-video__meta-row">
+                        <span class="homepage-video__meta-date">{{ mainPick.video.publishStartDate.date|format_date }}</span>
+                        {# {% set videoType = video_type(mainPick.video.video) %}
+                        {% if videoType == 'youtube' %}
+                            <span class="homepage-video__meta-provider">
+                                <i class="icon icon-social icon-youtube active"></i>
+                                {{ videoType|title }}
+                            </span>
+                        {% endif %}
+                        #}
+                    </span>
+                </span>
+            </a>
+            <div class="homepage-video__sidebar">
+                {% for videoPick in videoPicks %}
+                    <figure class="homepage-video__thumb {{ loop.first? 'hidden' }}"
+                            style="background-image: url({% path videoPick.video.image, 'thumb210' %})"
+                            {#id="#top-video-{{ videoPick.video.id }}"#}
+                            {#data-image="{% path videoPick.video.image, 'thumb960' %}"#}
+                            {#data-provider="{{ video_type(videoPick.video.video) }}"#}
+                            {#{% if video_type(videoPick.video.video) == 'youtube' %}#}
+                                {#data-video-id="{{ videoPick.video.video.providerReference }}"#}
+                            {#{% else %}#}
+                                {#data-video-id="{% path videoPick.video.video, 'reference' %}"#}
+                            {#{% endif %}#}
+                            >
+                        <a href="{{ path('app_video_show', { id: videoPick.video.id }) }}" class="homepage-video__meta">
+                            <span class="homepage-video__meta-row">
+                            <span class="homepage-video__meta-title" style="-webkit-box-orient: vertical">{{ videoPick.video.title }}</span>
+                            {% set videoLength = video_length(videoPick.video.video) %}
+                            {% if videoLength %}
+                                <span class="homepage-video__meta-duration">
+                                    <i class="icon icon-watch"></i>
+                                    {{ videoLength }}
+                                </span>
+                            {% endif %}
+                            </span>
+                            <span class="homepage-video__meta-row">
+                            <span class="homepage-video__meta-date">{{ videoPick.video.publishStartDate.date|format_date }}</span>
+                            {% set videoType = video_type(videoPick.video.video) %}
+                            {% if videoType == 'youtube' %}
+                                <span class="homepage-video__meta-provider">
+                                    <i class="icon icon-social icon-youtube active"></i>
+                                    {{ videoType|title }}
+                                </span>
+                            {% endif %}
+                            </span>
+                         </a>
+                    </figure>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {#{% for block in page.blocks('media_picks') %}
+        {{ sonata_block_render(block) }}
+    {% endfor %}#}
+
+    {#todo: disabled extra features#}
+    {#{% include '::/widgets/announce.html.twig' %}#}
+
+    {{ sonata_block_render({'type': 'announcement'}, {extra: 'homepage_announcement'}) }}
+    {{
+    sonata_block_render(
+        {'type': 'infographics_list'},
+        {
+            'template': '::/widgets/infographic_top/_widget.html.twig',
+            'limit': 5,
+            'order_by': constant('AppBundle\\Model\\Specification\\InOrderOf::PUBLISHING')
+        }
+    )
+    }}
+
+    {% include '::/widgets/mos_portal.html.twig' %}
+{% endblock %}

@@ -1,0 +1,29 @@
+form:
+    label_receives_new_comment_notifications: Получает уведомления о новых комментариях
+    label_receives_construction_notifications: Получает уведомления о добавлении или изменении информации об объектах строительства
+    label_receives_error_report_notifications: Получает сообощения пользователей об ошибках на сайте
+    label_post: Должность
+
+    label_vkontakte_uid: Vkontakte UID
+    label_login_mos_uid: login.mos.ru UID
+
+sonata_user: Пользователи
+sonata_user_submit: Сохранить
+
+User: Пользователь
+Group: Группа
+Roles: Роли
+Status: Статус
+
+list:
+    label_activity: Пользовательские интересы
+
+# security
+# Symfony\Component\Security\Core\Authentication\Provider\UserAuthenticationProvider::authenticate
+Bad credentials.: Неверные имя пользователя или пароль
+# Symfony\Component\Security\Core\User\UserChecker
+User account is locked.: Учётная запись заблокирована
+User account is disabled.: Учётная запись отключена
+User account has expired.: Время действия учётной записи истекло
+User credentials have expired.: Пароль устарел
+

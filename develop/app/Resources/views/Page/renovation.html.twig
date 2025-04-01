@@ -1,0 +1,341 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+	<link rel="canonical" href="{{ app.request.uri }}"/>
+{% endblock %}
+
+{% set checkboxes = {
+  "dhouse": "Сносимые дома",
+  "shouse": "Сохраняемые дома*",
+  "renovation": "Стартовые площадки реновации",
+  "renov-house": "Жилые дома реновации",
+ } %}
+
+{% set knownTypes = [
+	'pedestrian-bridge',
+	'renov-house',
+	'problem-construction',
+	'appartement',
+	'poezda',
+    'admin-center',
+    'all',
+    'culture',
+    'house',
+    'road',
+    'garage',
+    'health',
+    'hotels',
+    'ironroad',
+    'sport',
+    'industrial',
+    'metro',
+    'playschool',
+    'school',
+    'trade',
+    'stay',
+    'educational',
+    'novaia-moskva',
+    'religion',
+    'entertainment',
+    'tpu',
+    'other',
+    'renov-industrial',
+    'renov-house',
+    'appartement',
+    'pedestrian-bridge',
+    'cinema',
+    'park',
+    'dhouse',
+    'shouse'
+] %}
+
+{% block head_mediator %}
+	{% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+{% include '::/widgets/themes_panel_new.html.twig' with {
+    title: page.title,
+    subject: page,
+	class: 'themes-panel_no-margin'
+    } %}
+    {# {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+<div class="js-mediator-article">
+	<div class="renovation-page">
+		<div class="renovation-page__hero js-unlimited">
+			<img src="/images/renovation/kv.png">
+		</div>
+
+		<div class="renovation-page__top-section ">
+			{% include "::/Renovation/top-section.html.twig" with {
+                subject: page,
+				'title': "Программа реновации жилья",
+				'description': page.description,
+				'banners': [
+					{
+						'link': '/r1',
+						'image_src': '/images/renovation/banners/banner2.jpg',
+						'title': 'Реновация',
+						'description': 'Дома, включенные в реновацию',
+					},
+				],
+				'class': 'renovation'
+			} %}
+		</div>
+
+		<h2 class="renovation-page__map-title">Карта объектов по программе реновации</h2>
+		<div class="map-block container__unlimited">
+			<div class="map-block-popup js-map-popup">
+				<button class="map-block-popup__close js-map-popup-close" type="button"></button>
+				Масштабировать карту можно зажав <span>Shift</span> и покрутив колёсико мыши
+			</div>
+			<div class="search-form__wrap search-compact">
+				{% embed '::/widgets/search_form.html.twig' with {'formTag': 'div', 'placeholder': 'Поиск по адресу'} %}
+					{% block moreBlock %}
+                      <div class="search-form__submenu">
+                          <a id="searchAdvance" class="news-search__more-item" href="#"><span class="more_arrow__container"><i class="more_arrow__item"></i></span>Расширенный поиск</a>
+                          <div class="news-search__more-item results hidden" data-count="" id="search__more_results">Найдено результатов:</div>
+                          <div class="clear"></div>
+                      </div>
+
+
+						<div
+							class="search-form__submenu-wrap" style="height: 0" tabindex="-1">
+							<!-- <div class="search-from__submenu-wrap-close"></div> -->
+							<div class="area-block active">
+								<div>
+									<span class="area-block__title">Округ</span>
+									<select id="county-select">
+										<option value="" selected="">Все округа</option>
+										{% for county in admUnits %}
+											<option value="{{ county.id }}">
+												{{ county.title }}
+											</option>
+										{% endfor %}
+									</select>
+								</div>
+								<div>
+									<span class="area-block__title">Район</span>
+									<select
+										id="district-select" disabled>
+										{#<option value="" data-county="" selected="">Все</option>#}
+										{% for county in admUnits %}
+											<option value="" data-county="{{ county.id }}" class="hidden">Все районы</option>
+											{% for district in county.districts %}
+												<option value="{{ district.id }}" data-county="{{ county.id }}" class="hidden">
+													{{ district.title }}
+												</option>
+											{% endfor %}
+										{% endfor %}
+									</select>
+								</div>
+<!--
+<br>
+{% if app.user.cityDistrict.id is defined %}
+	<a id="select-my-district-link" href="#" data-adm-unit-id="{{ app.user.cityDistrict.id }}" class="my-district-link">Выбрать мой район</a>
+{% endif %}
+<a id="detect-my-district-link" href="#" class="my-district-link">Определить мой район</a>
+-->
+								</div>
+
+								<div class="search-form__object-types active">
+									<h3 class="object-types__title object-types__title_small">Тип объектов</h3>
+
+									<div class="object-types__list object-types__list_columns">
+										{% for type,label in checkboxes %}
+											{# {% if loop.first or loop.index % 2 == 1 %}
+												<div class="object-types__list-str">
+												{% endif %} #}
+												<div class="object-types__list-item">
+													{% embed '::widgets/checkbox.html.twig' with {id: 'type-' ~ type, label: label } %}
+														{% block labelContent %}
+															<i class="checkbox-icon checkbox-{% if type in knownTypes %}{{ type }}{% else %}default{% endif %}"></i>
+														{% endblock %}
+													{% endembed %}
+												</div>
+												{# {% if loop.last or loop.index % 2 == 0 %}
+												</div>
+											{% endif %} #}
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						{% endblock %}
+					{% endembed %}
+				</div>
+				<div data-preset="renovation" id="map-container">
+					<div class="container__full" id="map"></div>
+				</div>
+			</div>
+
+
+			<div class="renovation-page__legend">
+				<div class="renovation-page__icons">
+					<div class="legend">
+						<i class="legend__icon">
+							<img src="/images/renovation/icons/1.svg">
+						</i>
+						<div class="legend__text">
+							Сносимые дома
+						</div>
+					</div>
+					<div class="legend">
+						<i class="legend__icon">
+							<img src="/images/renovation/icons/2.svg">
+						</i>
+						<div class="legend__text">
+							Сохраняемые дома
+						</div>
+					</div>
+					<div class="legend">
+						<i class="legend__icon">
+							<img src="/images/renovation/icons/3.svg">
+						</i>
+						<div class="legend__text">
+							Стартовые площадки реновации
+						</div>
+					</div>
+					<div class="legend">
+						<i class="legend__icon">
+							<img src="/images/renovation/icons/4.svg">
+						</i>
+						<div class="legend__text">
+							Жилые дома по реновации
+						</div>
+					</div>
+					<div class="legend">
+						<i class="legend__icon">
+							<img src="/images/renovation/icons/5.svg">
+						</i>
+						<div class="legend__text">
+							Дом снесён
+						</div>
+					</div>
+				</div>
+				<div class="renovation-page__extra">
+					<p>
+						<a href="/r6" target="_blank">Сохраняемые дома</a>
+						будут расселены, а здания восстановлены и использованы для городских нужд.</p>
+					<p>Статус объектов отображается на основании документации.</p>
+				</div>
+			</div>
+
+			<div class="renovation-page__page-cards">
+				<div class="page-cards">
+					<a href="https://stroi.mos.ru/infographics/tiekhnologhiia-umnogho-snosa-zdanii" class="page-card" target="_blank">
+						<div class="page-card__image">
+							<img src="/images/renovation/card1.png">
+						</div>
+						<div class="page-card__content">
+							<div class="page-card__theme">
+								<i class="page-card__icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+										<path d="M0.999999 1L15 0.999999M15 15L15 0.999999M15 0.999999L0.999999 15" stroke="#1B262C" stroke-width="2"/>
+									</svg>
+								</i>
+								<p>
+									Технология
+								</p>
+							</div>
+							<div class="page-card__title">
+								<h3>«Умный» снос старых зданий</h3>
+							</div>
+						</div>
+					</a>
+					<a href="https://stroi.mos.ru/novaia-proghramma-rienovatsii-piatietazhiek/standarty-otdielki-kvartir-po-proghrammie-rienovatsii" class="page-card" target="_blank">
+						<div class="page-card__image">
+							<img src="/images/renovation/card2.png">
+						</div>
+						<div class="page-card__content">
+							<div class="page-card__theme">
+								<i class="page-card__icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+										<path d="M0.999999 1L15 0.999999M15 15L15 0.999999M15 0.999999L0.999999 15" stroke="#1B262C" stroke-width="2"/>
+									</svg>
+								</i>
+								<p>фототур по новостройкам</p>
+							</div>
+							<div class="page-card__title">
+								<h3>Квартиры по реновации</h3>
+							</div>
+						</div>
+					</a>
+
+					<a href="https://stroi.mos.ru/photo_lines/kakimi-budut-kvartiry-i-kvartaly-po-rienovatsii" class="page-card" target="_blank">
+						<div class="page-card__image">
+							<img src="/images/renovation/card3.png">
+						</div>
+						<div class="page-card__content">
+							<div class="page-card__theme">
+								<i class="page-card__icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+										<path d="M0.999999 1L15 0.999999M15 15L15 0.999999M15 0.999999L0.999999 15" stroke="#1B262C" stroke-width="2"/>
+									</svg>
+								</i>
+								<p>современная и безопасная территория для отдыха</p>
+							</div>
+							<div class="page-card__title">
+								<h3>Благоустройство дворов</h3>
+							</div>
+						</div>
+					</a>
+
+					<a href="/chasto-zadavaiemyie-voprosy-po-rienovatsii-stroi_mos" class="page-card" target="_blank">
+						<div class="page-card__image">
+							<img src="/images/renovation/faq-card.png">
+						</div>
+						<div class="page-card__content">
+							<div class="page-card__theme">
+								<i class="page-card__icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" fill="none">
+										<path d="M0.999999 1L15 0.999999M15 15L15 0.999999M15 0.999999L0.999999 15" stroke="#1B262C" stroke-width="2"/>
+									</svg>
+								</i>
+								<p>Часто задаваемые вопросы</p>
+							</div>
+							<div class="page-card__title">
+								<h3>Как реализуется программа реновации жилья</h3>
+							</div>
+						</div>
+					</a>
+				</div>
+
+			</div>
+
+{# 			<div class="renovation-page__faq">
+				<a href="https://stroi.mos.ru/chasto-zadavaiemyie-voprosy-po-rienovatsii-stroi_mos" class="new-faq-card">
+					<div class="new-faq-card__content">
+						<i class="new-faq-card__icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewbox="0 0 17 18" fill="none">
+								<path d="M7.9995 1.45753L15.542 9M7.9995 16.5425L15.542 9M15.542 9L0.457031 9" stroke="#141824" stroke-width="2"/>
+							</svg>
+						</i>
+						<div class="new-faq-card__title">
+							<h3>Часто задаваемые вопросы</h3>
+						</div>
+					</div>
+					<div class="new-faq-card__image">
+						<img src="/images/renovation/faq-card.png">
+					</div>
+				</a>
+			</div> #}
+
+			<div class="renovation-page__fund">
+				<a href="http://fr.mos.ru/?utm_source=stroi.mos&utm_medium=referral" class="fund-card">
+					<div class="fund-card__logo">
+						<img src="/images/renovation/renovation-logo.png"/>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="renovation-page__others">
+		{# {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'реновация стартовые площадки реновации'}) }} #}
+	</div>
+
+	{{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

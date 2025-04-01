@@ -1,0 +1,9 @@
+{# include 'Subordinate/widgets/themes_panel.html.twig' with {
+      'title': '',
+      'themes': [],
+      'subject': ''
+} #}
+<div class="top-news-container">
+  {% include 'Subordinate/widgets/top_news/_widget.html.twig' with {'news': postsPicks} %}
+  {% include 'Subordinate/widgets/top_news_more/_widget.html.twig' with {'news': last} %}
+</div>

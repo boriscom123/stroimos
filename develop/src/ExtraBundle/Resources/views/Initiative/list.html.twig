@@ -1,0 +1,23 @@
+{% extends ":layout:layout.html.twig" %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Социальные инициативы',
+    'rubricsContext': false,
+    } %}
+
+    <div class="social-initiative">
+        {% include "ExtraBundle:Initiative:_list.html.twig" %}
+    </div>
+
+    {% if next_offset %}
+        {% include '::/Block/loadmore_button.html.twig' with {
+            title: 'Ещё инициативы',
+            target: '.social-initiative',
+            item: '.social-initiative__item',
+            source: path('app_initiative_list'),
+            limit: limit,
+            offset: next_offset
+        } %}
+    {% endif %}
+{% endblock %}

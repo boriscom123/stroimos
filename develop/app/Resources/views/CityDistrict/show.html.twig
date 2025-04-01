@@ -1,0 +1,81 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': district.title,
+    'subject': district
+    } %}
+    <div class="js-mediator-article">
+      {% include '::/Post/description.html.twig' with {description: district.content} %}
+
+      <div class="object-page__info">
+        <ul class="object-page__info-list">
+            {% if district.population is not empty %}
+            <li class="object-page__info-item">
+                <span class="object-page__info-item-title">
+                    <span class="info-item-title__legend">Число жителей</span>
+                    <span class="info-item-title__bordered"></span>
+                </span>
+                <span class="object-page__info-item-legend black">{{ district.population }} чел</span>
+            </li>
+            {% endif %}
+            {% if district.square is not empty %}
+            <li class="object-page__info-item">
+                <span class="object-page__info-item-title">
+                    <span class="info-item-title__legend">Площадь</span>
+                    <span class="info-item-title__bordered"></span>
+                </span>
+                <span class="object-page__info-item-legend black">{{ district.square }} км<sup>2</sup></span>
+            </li>
+            {% endif %}
+            {% if district.parent is not empty %}
+            <li class="object-page__info-item">
+                <span class="object-page__info-item-title">
+                    <span class="info-item-title__legend">Входит в состав округа</span>
+                    <span class="info-item-title__bordered"></span>
+                </span>
+                <span class="object-page__info-item-legend black">{{ district.parent.title }}</span>
+            </li>
+            {% endif %}
+        </ul>
+        <br/>
+        </div>
+
+        <div class="district-selector" data-district-selector>
+            <div class="district-selector__selectors">
+                <a href class="district-selector__selector" data-district-selector-btn>Перейти к другому округу/району</a>
+                <div class="district-selector__dropdown" data-district-selector-dropdown>
+                    <ul class="district-selector__dropdown-district" data-district-selector-district-list></ul>
+                    <ul class="district-selector__dropdown-municipality" data-district-selector-municipality-list></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="static-page">
+        <div class="map-block container__unlimited">
+          <div data-custom='{{ map_constructions }}' data-polygon="{{ district.polygon.toJson }}" data-polygon-name="{{ district.title }}" data-polygon-name-prefix="Район" id="map-container">
+            <div class="container__full" id="map"></div>
+          </div>
+        </div>
+        <h2>Объекты строительства</h2>
+        <div class="objects-block">
+            <ul class="objects-block__info">
+                <li class="objects-block__info-item"><i class="object-info object-info-terrain"></i>Подобран земельный участок</li>
+                <li class="objects-block__info-item"><i class="object-info object-info-designed"></i>Ведется проектирование</li>
+                <li class="objects-block__info-item"><i class="object-info object-info-documentation"></i>Утверждена документация</li>
+                <li class="objects-block__info-item"><i class="object-info object-info-construction"></i>Строится</li>
+                <li class="objects-block__info-item"><i class="object-info object-info-operation"></i>Объект введен в эксплуатацию</li>
+            </ul>
+
+            <div class="objects-block__list">
+                {% for item in constructions %}
+                    {% include '::/Construction/_teaser.html.twig' with {'item': item} %}
+                {% endfor %}
+            </div>
+
+        </div>
+        {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        {% block sonata_preview %}{% endblock %}
+      </div>
+    </div>
+{% endblock %}

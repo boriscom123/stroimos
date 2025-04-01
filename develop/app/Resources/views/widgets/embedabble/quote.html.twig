@@ -1,0 +1,22 @@
+{% if item.person is defined %}
+  {% set person = item.person %}
+    {% if person.image is not empty %} 
+      <div class="quote-block">
+    {% else %}
+      <div class="quote-block quote-block_no-image">
+    {% endif %}
+        <div class="quote-block__content">
+          <div class="quote-block__text">&laquo;{{ item.text }}&raquo;, –</div>
+          <div class="quote-block__author">
+            {% if person.image is not empty %}
+              <img src="{% path person.image, 'thumb70' %}" class="quote-block__author-pic" alt="" />
+            {% endif %}
+            <div class="quote-block__author-text">
+              <div class="quote-block__author-name">{{ person.firstName }} {{ person.lastName }}</div>
+              <div class="quote-block__author-title">{{ person.shortPost | default(person.teaser) }}</div>
+            </div>
+          </div>
+        </div>
+    {# <div class="clear"></div> #}
+  </div>
+{% endif %}

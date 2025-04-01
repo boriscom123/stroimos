@@ -1,0 +1,62 @@
+.about-page {
+	margin-left: 180px;
+	margin-bottom: 50px;
+	.clearfix();
+	&__item {
+		&:hover {
+			color: @color;
+		}
+		.shadowed-teaser();
+		display: block;
+		width: 100%;
+		padding: 35px;
+		box-sizing: border-box;
+		font-family: Brygada1918,serif;
+		font-weight: 600;
+		font-size: 40px;
+		color: @color;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 1;
+		border-bottom: none !important;
+		&_height-s {
+			height: 210px;
+		}
+		&_height-m {
+			height: 310px;
+		}
+		&_height-l {
+			height: 425px;
+		}
+		&_height-xl {
+			height: 535px;
+		}
+		&_border {
+			border: 1px solid #000 !important;
+		}
+		&_bg-image {
+			color: #fff !important;
+			background-size: cover;
+			&:hover {
+				color: #fff !important;
+			}
+		}
+		&_bg-gray {
+			background: #999999;
+			&:hover {
+				background: #999999;
+			}
+		}
+	}
+	&__column {
+		width: 382px;
+	}
+	&__column-left {
+		float: left;
+	}
+	&__column-right {
+		float: right;
+	}
+}

@@ -1,0 +1,30 @@
+parameters:
+    domain_canonical_title: Комплекс градостроительной политики и строительства города Москвы
+    sonata.seo.page.default.class: AppBundle\Seo\SeoPage
+
+sonata_seo:
+    page:
+        title: %domain_canonical_title%
+        separator: ' — '
+#        metas:
+#            name:
+#                keywords:             foo bar
+#                description:          The description
+#                robots:               index, follow
+#            property:
+                # Facebook application settings
+                #'fb:app_id':          XXXXXX
+                #'fb:admins':          admin1, admin2
+
+                # Open Graph information
+                # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
+#                'og:site_name':       Sonata Project Sandbox
+#                'og:description':     A demo of the some rich bundles for your Symfony2 projects
+#        head:
+#            'xmlns':              http://www.w3.org/1999/xhtml
+#            'xmlns:og':           http://opengraphprotocol.org/schema/
+            #'xmlns:fb':           "http://www.facebook.com/2008/fbml"
+
+#    sitemap:
+#        doctrine_orm: { }
+#        services: { }

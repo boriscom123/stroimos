@@ -1,0 +1,164 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: "Снос пятиэтажек",
+    subject: page
+    } %}
+
+    {#{% set currently %}
+        <h4>В Москве осталось снести<a href='#'> {{ 'destruction_left'|transchoice(countAddr, {}, "messages", locale = "ru") }}</a></h4>
+    {% endset %}#}
+    {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% else %}
+        {% set currently %}
+            <p>В Москве осталось снести {{ 'destruction_left'|transchoice(countAddr, {}, "messages", locale = "ru") }}<p>
+        {% endset %}
+        {% include ":widgets:now_block.html.twig" with {currently: currently} %}
+    {% endif %}
+
+    {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+    <div class="mapDestruction-block">
+        <div id="mapDestruction" style="width: 100%; height: 500px; margin-bottom: 50px;"></div>
+        <div class="mapDestruction-info__wrapper">
+            <div class="mapDestruction-info__menu">
+                <a class="mapDestruction-info__menu-item active" data-id="countyList" href="#">адреса объектов</a>
+                <a class="mapDestruction-info__menu-item" data-id="list" href="#">список</a>
+                <a class="mapDestruction-info__menu-item" data-id="hide" href="#">скрыть</a>
+            </div>
+            <div class="mapDestruction-info">
+                <div id="countyList" class="mapDestruction-info__list active">
+                </div>
+                <ul id="list" class="mapDestruction-info__list">
+                </ul>
+                <div id="hide" class="mapDestruction-info__list">
+                    <div class="mapDestruction-info__list-hide-county"></div>
+                    <div class="mapDestruction-info__list-hide-address"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="static-page">
+        {{ embed_content(page.content, page) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/x-handlebars" id="list_temp">
+        {% raw %}
+            {{#each this}}
+                <li>
+                    <a class="mapDestruction-info__list-link" href="#" data-id="{{id}}" data-county="{{county}}">{{address}}</a>
+                </li>
+            {{/each}}
+        {% endraw %}
+    </script>
+
+    <script type="text/html" id="countyList-temp">
+        {% raw %}
+            {{#each this}}
+                <h1>{{ county }} <span>{{items.length}}</span></h1>
+                <div>
+                    {{#each items}}
+                        <a class="mapDestruction-info__list-link" href="#" data-id="{{id}}" data-county="{{../county}}">{{address}}</a>
+                    {{/each}}
+                </div>
+            {{/each}}
+        {% endraw %}
+    </script>
+
+    <script type="text/javascript">
+
+        var destructionBuildings = {{ addresses|raw }};
+        var destructionBuildingsCounty = {{ addresses2|raw }};
+
+        $(function() {
+
+            ymaps.ready(init);
+            var myMap;
+            var myCollection;
+
+            function init(){
+                myMap = new ymaps.Map("mapDestruction", {
+                    center: [37.64, 55.76],
+                    zoom: 10,
+                    controls: ['zoomControl', 'searchControl']
+                });
+
+                myCollection = new ymaps.GeoObjectCollection();
+
+                for(i = 0; i < destructionBuildings.length; i++) {
+                    myCollection.add(new ymaps.Placemark([destructionBuildings[i].lng, destructionBuildings[i].lat], {
+                        balloonContent: '<strong>Адрес: </strong>'+destructionBuildings[i].address+'<br /><strong>Серия: </strong>'+destructionBuildings[i].serialNum,
+                        iconContent: ""
+                    }, {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/images/icons/destruction_gray.png',
+                        iconImageSize: [30, 49],
+                        iconImageOffset: [-16, -49],
+                        hideIconOnBalloonOpen: false,
+                        id: destructionBuildings[i].id
+                    }));
+                }
+
+                myMap.geoObjects.add(myCollection);
+
+                var templateList = Handlebars.compile($('#list_temp').html());
+                $('#list').append(templateList(destructionBuildings));
+
+                var templateCounty = Handlebars.compile($('#countyList-temp').html());
+                $('#countyList').append(templateCounty(destructionBuildingsCounty))
+                        .accordion({
+                            heightStyle: "content"
+                        });
+            }
+
+            $('.mapDestruction-info__list').on('click', '.mapDestruction-info__list-link', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $elem = $('.mapDestruction-info__list-link[data-id=' + $this.attr('data-id') + ']');
+
+                $('.mapDestruction-info__list-link').removeClass('active');
+                $elem.addClass('active');
+                $('.mapDestruction-info__list-hide-county').html($elem.attr('data-county'));
+                $('.mapDestruction-info__list-hide-address').html($elem.eq(0).clone());
+
+                myCollection.each(function(item, i) {
+                    if (item.options.get('id') == $this.attr('data-id')) {
+                        item.options.set('iconImageHref', "/images/icons/destruction_blue.png");
+                        myMap.setCenter(item.geometry.getCoordinates(), 16);
+                    } else {
+                        item.options.set('iconImageHref', "/images/icons/destruction_gray.png");
+                    }
+                })
+            });
+
+            $('.mapDestruction-info__menu-item').on('click', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var id = $this.attr('data-id');
+
+                $('.mapDestruction-info__menu-item').removeClass('active');
+                $this.addClass('active');
+                $('.mapDestruction-info__list').removeClass('active');
+                $('#'+id).addClass('active');
+
+                if (id == "hide") {
+                    $('.mapDestruction-info__wrapper').css('height', 50+$('#hide').outerHeight());
+                } else {
+                    $('.mapDestruction-info__wrapper').css('height', 460);
+                }
+            });
+
+        })
+    </script>
+{% endblock %}

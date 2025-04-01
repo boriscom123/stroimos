@@ -1,0 +1,581 @@
+parameters:
+  admin.groupname.comment: Комментарии и обр. связь
+  admin.groupname.email_subscriptions: Рассылки
+  admin.groupname.constructions: Объекты строительства
+  admin.groupname.embedded_content: Встраиваемый контент
+  sonata.media.admin.media.class: Application\Sonata\MediaBundle\Admin\MediaAdmin
+  sonata.media.admin.media.controller: ApplicationSonataMediaBundle:MediaAdmin
+
+services:
+  #hide sonata media gallery admin
+  sonata.media.admin.gallery:
+    class: SplBool
+
+  admin.extension.related_posts:
+    class: AppBundle\Admin\Extension\RelatedExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\RelatedTrait}
+
+  app.admin.extension.categorized:
+    class: AppBundle\Admin\Extension\CategorizedExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: Amg\DataCore\Model\CategorizedTrait}
+
+  app.admin.extension.draft:
+    class: AppBundle\Admin\Extension\DraftExtension
+
+  app.admin.extension.media_list:
+    class: AppBundle\Admin\Extension\CkeditorMediaListExtension
+    tags:
+      - {name: sonata.admin.extension, target: sonata.media.admin.media}
+
+  app.admin.extension.person_full_name:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\PersonFullNameExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\Person\PersonFullNameTrait}
+
+  app.admin.extension.contact_info:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\ContactInformationExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\Person\ContactInformationTrait}
+
+  app.admin.extension.priority_position:
+    class: AppBundle\Model\PriorityPosition\PriorityPositionExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\PriorityPosition\PriorityPositionTrait}
+
+  app.admin.extension.image:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\ImageExtension
+    arguments: [%autoadmin.image.media_context_map%]
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\ImageTrait}
+
+  app.admin.extension.currently:
+    class: AppBundle\Admin\Extension\CurrentlyExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\CurrentlyTrait}
+
+  app.admin.extension.panorama:
+    class: AppBundle\Admin\Extension\PanoramaExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\PanoramaTrait}
+
+  app.admin.extension.attachments:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\AttachmentsExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\AttachmentsTrait}
+
+  app.admin.extension.file:
+    class: Amg\Bundle\AdminBundle\Admin\Extension\FileExtension
+    tags:
+      - {name: app.sonata_autoadmin, trait: AppBundle\Model\FileTrait}
+
+  app.admin.extension.show_last_news:
+    class: AppBundle\Admin\Extension\ShowLastNewsExtension
+    tags:
+      - {name: app.sonata_autoadmin, interface: AppBundle\Model\ShowLastNewsInterface}
+
+  app.admin.extension.api_cache_invalidation:
+    class: AppBundle\Cache\ApiCacheInvalidation
+    arguments: ['@snc_redis.api_cache']
+    tags:
+      - {name: sonata.admin.extension, target: admin.construction }
+      - {name: sonata.admin.extension, target: admin.road }
+      - {name: sonata.admin.extension, target: admin.metro_station }
+
+  admin.media_collection_contractor:
+    class: AppBundle\Admin\Form\MediaCollectionContractor
+    arguments: [ @form.factory ]
+
+  admin.post:
+    class: AppBundle\Admin\PostAdmin
+    arguments: [~, AppBundle\Entity\Post, AppBundle:Admin\PostCRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Публикации, autoadmin: true, audit: true}
+    calls:
+      - [ setTemplate, ['preview', ':Post:preview.html.twig'] ]
+      #- [ setTemplate, ['edit', ':Admin:Post/edit.html.twig'] ]
+      - [ setCategoryRepository, [@category_repository] ]
+
+  admin.embedded_content.banner:
+    class: AppBundle\Admin\EmbeddedContent\BannerAdmin
+    arguments: [~, AppBundle\Entity\EmbeddedContent\Banner, AppBundle:Admin\EmbeddableContentAdmin]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.embedded_content%, label: Баннеры, autoadmin: true, audit: false}
+    calls:
+      - [ setTemplate, ['preview', ':EmbeddedContent/Banner:preview.html.twig'] ]
+
+  admin.embedded_content.text_block:
+    class: AppBundle\Admin\EmbeddedContent\TextBlockAdmin
+    arguments: [~, AppBundle\Entity\EmbeddedContent\TextBlock\TextBlock, AppBundle:Admin\EmbeddableContentAdmin]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.embedded_content%, label: Текстовые блоки, autoadmin: true, audit: true }
+    calls:
+      - [ setTemplate, ['preview', ':EmbeddedContent/Banner:preview.html.twig'] ]
+
+  admin.embedded_content.quote:
+    class: AppBundle\Admin\EmbeddedContent\QuoteAdmin
+    arguments: [~, AppBundle\Entity\EmbeddedContent\Quote, AppBundle:Admin\EmbeddableContentAdmin]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.embedded_content%, label: Цитаты, autoadmin: true, audit: false}
+    calls:
+      - [ setTemplate, ['preview', ':EmbeddedContent/Quote:preview.html.twig'] ]
+
+  admin.embedded_content.faq:
+    class: AppBundle\Admin\EmbeddedContent\Faq\FaqBlockAdmin
+    arguments: [~, AppBundle\Entity\EmbeddedContent\Faq\FaqBlock, AppBundle:Admin\EmbeddableContentAdmin]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.embedded_content%, label: Блоки вопрос-ответ, autoadmin: true, audit: false}
+    calls:
+      - [ setTemplate, ['preview', ':EmbeddedContent/Faq:preview.html.twig'] ]
+
+  admin.administrative_unit:
+    class: AppBundle\Admin\AdministrativeUnitAdmin
+    arguments: [~, AppBundle\Entity\AdministrativeUnit, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Объекты строительства, label: Административная единица, show_in_dashboard: false, audit: false}
+
+  admin.administrative_area:
+    class: AppBundle\Admin\AdministrativeAreaAdmin
+    arguments: [~, AppBundle\Entity\AdministrativeArea, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Объекты строительства, label: Административный округ, audit: false}
+
+  admin.city_district:
+    class: AppBundle\Admin\CityDistrictAdmin
+    arguments: [~, AppBundle\Entity\CityDistrict, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Объекты строительства, label: Район, audit: false}
+
+  admin.category:
+    class: AppBundle\Admin\CategoryAdmin
+    arguments: [~, AppBundle\Entity\Category, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Категории, audit: false, autoadmin: true, show_in_dashboard: false}
+
+  admin.gallery:
+    class: AppBundle\Admin\GalleryAdmin
+    arguments: [~, AppBundle\Entity\Gallery, AppBundle:Admin\CKeditorGalleryAdmin]
+    calls:
+      - [ setTemplate, ['preview', ':Gallery:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Медиа, label: Фотогалереи, audit: false, autoadmin: true}
+
+  admin.gallery_media:
+    class: AppBundle\Admin\GalleryMediaAdmin
+    arguments: [~, AppBundle\Entity\GalleryMedia, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Медиа, label: "Элемент галереи", show_in_dashboard: false, audit: false, autoadmin: true}
+
+  admin.post_attachment:
+    class: AppBundle\Admin\PostAttachmentAdmin
+    arguments: [~, AppBundle\Entity\PostAttachment, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Медиа, label: "Прикреплённый файл", show_in_dashboard: false, audit: false, autoadmin: true}
+
+  admin.video:
+    class: AppBundle\Admin\VideoAdmin
+    arguments: [~, AppBundle\Entity\Video, 'AppBundle:Admin/BaseAdmin']
+    calls:
+      - [ setTemplate, ['preview', ':Video:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Медиа, label: Видеоклипы, audit: false, autoadmin: true}
+
+  admin.infographics:
+    class: AppBundle\Admin\InfographicsAdmin
+    arguments: [~, AppBundle\Entity\Infographics, AppBundle:Admin\CRUD]
+    calls:
+      - [ setTemplate, ['preview', ':Infographics:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Медиа, label: Инфографика, audit: true, autoadmin: true}
+
+  admin.construction:
+    class: AppBundle\Admin\ConstructionAdmin
+    arguments: [~, AppBundle\Entity\Construction, AppBundle:Admin\ConstructionCRUD, '@translator']
+    calls:
+      - [ setTemplate, ['preview', ':Construction:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Объекты строительства, label: Объект строительства, autoadmin: true}
+
+  admin.construction_type:
+    class: AppBundle\Admin\ConstructionTypeAdmin
+    arguments: [~, AppBundle\Entity\ConstructionType, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Объекты строительства, label: Разделы, audit: false}
+
+  #    admin.post_picks_history:
+  #        class: AppBundle\Admin\PostPicksHistoryAdmin
+  #        arguments: [~, AppBundle\Entity\PostPicksHistory, SonataAdminBundle:CRUD]
+  #        tags:
+  #            - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Главная страница, label: Топ новостей, autoadmin: false, audit: false}
+
+  admin.menu_nodes:
+    class: AppBundle\Admin\MenuNodesAdmin
+    arguments: [~, AppBundle\Entity\MenuNode, AmgPageBundle:Admin\Page]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Меню, label: Меню, show_in_dashboard: false}
+
+  admin.menu:
+    class: AppBundle\Admin\MenuAdmin
+    arguments: [~, AppBundle\Entity\Menu, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Меню, label: Меню}
+    calls:
+      - [ addChild, [ @admin.menu_nodes ] ]
+
+  admin.spotlight_item:
+    class: AppBundle\Admin\SpotlightItemAdmin
+    arguments: [~, AppBundle\Entity\SpotlightItem, AppBundle:Admin\SpotlightItemCRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Главная страница, label: В центре внимания}
+
+  admin.document:
+    class: AppBundle\Admin\DocumentBaseAdmin
+    arguments: [~, AppBundle\Entity\Document, 'AppBundle:Admin/BaseAdmin']
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Документ, autoadmin: true, show_in_dashboard: false }
+
+  admin.decision_document:
+    class: AppBundle\Admin\DecisionDocumentAdmin
+    arguments: [~, AppBundle\Entity\DecisionDocument, 'AppBundle:Admin/BaseAdmin']
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Решения об утверждении проектной документации, autoadmin: true}
+
+  admin.law_document:
+    class: AppBundle\Admin\LawDocumentAdmin
+    arguments: [~, AppBundle\Entity\LawDocument, 'AppBundle:Admin/BaseAdmin']
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Законы указы постановления распоряжения, autoadmin: true}
+
+  admin.draft_document:
+    class: AppBundle\Admin\DraftDocumentAdmin
+    arguments: [~, AppBundle\Entity\DraftDocument, 'AppBundle:Admin/BaseAdmin']
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Проекты правовых нормативных актов, autoadmin: true}
+
+  admin.document_has_media:
+    class: AppBundle\Admin\DocumentHasMediaAdmin
+    arguments: [~, AppBundle\Entity\DocumentHasMedia, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Файлы документов, autoadmin: true, show_in_dashboard: false}
+
+  admin.outgoing_agency:
+    class: AppBundle\Admin\OutgoingAgencyAdmin
+    arguments: [~, AppBundle\Entity\OutgoingAgency, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Исходящий орган, autoadmin: true}
+
+  admin.person:
+    class: AppBundle\Admin\PersonAdmin
+    arguments: [~, AppBundle\Entity\Person, 'AppBundle:Admin/BaseAdmin']
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Персоны, autoadmin: true}
+
+  admin.newsletter:
+    class: AppBundle\Admin\NewsletterAdmin
+    arguments:
+      - ~
+      - AppBundle\Entity\Newsletter
+      - AppBundle:Admin/NewsletterCRUD
+      - '@AppBundle\Admin\Newsletter\PostsSincePreviousNewsletterProvider'
+    calls:
+      - [setTemplate, ['edit', ':NewsletterAdmin/CRUD:edit.html.twig']]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: Формирование, audit: false}
+
+  admin.newsletter.unsubscribe_reason:
+    class: AppBundle\Admin\UnsubscribeReasonAdmin
+    arguments: [~, AppBundle\Entity\UnsubscribeReason, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: Причины отказа, audit: false}
+
+  admin.emai_subscription:
+    class: AppBundle\Admin\EmailSubscriptionAdmin
+    arguments: [~, AppBundle\Entity\EmailSubscription, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: Подписчики, audit: false}
+
+  admin.thread:
+    class: AppBundle\Admin\ThreadAdmin
+    arguments: [~, Application\FOS\CommentBundle\Entity\Thread, AppBundle:Admin/ThreadCRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.comment%, label: Комментарии}
+    calls:
+      - [addChild, [@admin.comment]]
+
+  app.admin.appeal:
+      class: AppBundle\Admin\AppealAdmin
+      arguments: [~, AppBundle\Entity\Appeal, ~]
+      tags:
+          - { name: sonata.admin, manager_type: orm, label: "Обращения", group: %admin.groupname.comment%}
+
+  admin.comment:
+    class: AppBundle\Admin\CommentAdmin
+    arguments: [~, Application\FOS\CommentBundle\Entity\Comment, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.comment%, label: Комментарии, audit: false, show_in_dashboard: false}
+
+  admin.status.comment_renderer:
+    class: AppBundle\Renderer\CommentStatusRenderer
+    tags:
+      - {name: sonata.status.renderer}
+
+  admin.form.comment_status_type:
+    class: Sonata\CoreBundle\Form\Type\StatusType
+    arguments: [Application\FOS\CommentBundle\Entity\Comment,  getStateList, sonata_comment_status]
+    tags:
+      - {name: form.type, alias: sonata_comment_status}
+
+  admin.gallery_picks:
+    class: AppBundle\Admin\GalleryPicksAdmin
+    arguments: [~, AppBundle\Entity\GalleryPicks, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Главная страница, label: Фото на главной }
+
+  admin.video_picks:
+    class: AppBundle\Admin\VideoPicksAdmin
+    arguments: [~, AppBundle\Entity\VideoPicks, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Главная страница, label: Видео на главной }
+
+  admin.draft:
+    class: AppBundle\Admin\DraftAdmin
+    arguments: [~, AppBundle\Entity\Draft, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Черновики, autoadmin: true}
+
+  admin.article_rubrics:
+    class: AppBundle\Admin\RubricsAdmin
+    arguments: [~, AppBundle\Entity\Rubric, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Рубрики}
+
+  admin.organization_directory:
+    class: AppBundle\Admin\OrganizationDirectoryAdmin
+    arguments: [~, AppBundle\Entity\OrganizationDirectory, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Справочники, autoadmin: true}
+
+  admin.contact_person:
+    class: AppBundle\Admin\ContactPersonAdmin
+    arguments: [~, AppBundle\Entity\ContactPerson, AppBundle:Admin/Browsable]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Контакты, autoadmin: true}
+
+  admin.organization:
+    class: AppBundle\Admin\OrganizationAdmin
+    arguments: [~, AppBundle\Entity\Organization, AppBundle:Admin/Browsable]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Организации, autoadmin: true}
+
+  admin.action_log:
+    class: AppBundle\Admin\ActionLogAdmin
+    arguments: [~, AppBundle\Entity\ActionLog, ~]
+    calls:
+      - [setEntityManager, [@doctrine.orm.entity_manager]]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %sonata.user.admin.groupname%, label: Учет действий, autoadmin:false, label_catalogue: SonataUserBundle}
+
+  admin.document_rubric:
+    class: AppBundle\Admin\DocumentRubricsAdmin
+    arguments: [~, AppBundle\Entity\DocumentRubric, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Документы, label: Рубрики, autoadmin: true}
+
+  admin.error_report:
+    class: AppBundle\Admin\ErrorReportAdmin
+    arguments: [~, AppBundle\Entity\ErrorReport, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.comment%, label: Отчеты об ошибках}
+
+  admin.author:
+    class: AppBundle\Admin\AuthorAdmin
+    arguments: [~, AppBundle\Entity\Author, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Авторы, autoadmin: false}
+
+  admin.article_source:
+    class: AppBundle\Admin\ArticleSourceAdmin
+    arguments: [~, AppBundle\Entity\ArticleSource, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Ведомства, autoadmin: false}
+
+  admin.user_role:
+    class: AppBundle\Admin\UserRoleAdmin
+    arguments: [~, AppBundle\Entity\UserRole, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %sonata.user.admin.groupname%, label: Описания ролей, autoadmin: false, label_catalogue: SonataUserBundle}
+    calls:
+      - [setRolesBuilder, [@sonata.user.editable_role_builder]]
+
+  admin.extension.menu_guard:
+    class: AppBundle\Admin\Extension\MenuGuardExtension
+    tags:
+      - {name: sonata.admin.extension, target: admin.page}
+      - {name: sonata.admin.extension, target: admin.post}
+      - {name: sonata.admin.extension, target: admin.construction}
+
+  admin.extension.homepage_guard:
+    class: AppBundle\Admin\Extension\HomepageGuardExtension
+    tags:
+      - {name: sonata.admin.extension, target: admin.post}
+      - {name: sonata.admin.extension, target: admin.gallery}
+      - {name: sonata.admin.extension, target: admin.video}
+
+  admin.metro_line:
+    class: AppBundle\Admin\MetroLineAdmin
+    arguments: [~, AppBundle\Entity\MetroLine, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Линии метро, audit: false, autoadmin: true}
+
+  admin.metro_station:
+    class: AppBundle\Admin\MetroStationAdmin
+    arguments: [~, AppBundle\Entity\MetroStation, ~]
+    calls:
+      - [ setTemplate, ['preview', ':Metro:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Станции метро, audit: false, autoadmin: true}
+
+  admin.metro_station_image:
+    class: AppBundle\Admin\MetroStationImageAdmin
+    arguments: [~, AppBundle\Entity\MetroStationImage, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Изображения станции метро, show_in_dashboard: false, audit: false, autoadmin: true}
+
+  admin.metro_timeline_year:
+    class: AppBundle\Admin\MetroTimelineYearAdmin
+    arguments: [~, AppBundle\Entity\MetroTimelineYear, AppBundle:Admin\MetroTimelineYearCRUD]
+    calls:
+      - [ setTemplate, ['list', 'Admin/MetroTimelineYear/list.html.twig'] ]
+      - [ setTemplate, ['edit', 'Admin/MetroTimelineYear/edit.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Таймлайн метро, autoadmin: true}
+
+  admin.road:
+    class: AppBundle\Admin\RoadAdmin
+    arguments: [~, AppBundle\Entity\Road, ~]
+    calls:
+      - [ setTemplate, ['preview', ':Road:preview.html.twig'] ]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Дороги, audit:false, autoadmin: true}
+
+  admin.destruction:
+    class: AppBundle\Admin\DestructionAdmin
+    arguments: [~, AppBundle\Entity\Destruction, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Снос пятиэтажек, audit: false, autoadmin: false}
+
+  admin.redirect:
+    class: AppBundle\Admin\RedirectAdmin
+    arguments: [~, AppBundle\Entity\Redirect, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: Admin, label: Redirects}
+
+  admin.media_category:
+    class: Application\Sonata\MediaBundle\Admin\MediaCategoryAdmin
+    arguments: [~, AppBundle\Entity\MediaCategory, AmgPageBundle:Admin\Page]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: sonata_media, label: Категории, label_catalogue: %sonata.media.admin.media.translation_domain%}
+
+  admin.post_newsletter:
+    class: AppBundle\Admin\Newsletter\PostNewsletterAdmin
+    arguments: [~, AppBundle\Entity\NewsletterItem\PostNewsletter, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: post, autoadmin: true, audit: false, show_in_dashboard: false}
+
+  admin.gallery_newsletter:
+    class: AppBundle\Admin\Newsletter\GalleryNewsletterAdmin
+    arguments: [~, AppBundle\Entity\NewsletterItem\GalleryNewsletter, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: gallery, autoadmin: true, audit: false, show_in_dashboard: false}
+
+  admin.video_newsletter:
+    class: AppBundle\Admin\Newsletter\VideoNewsletterAdmin
+    arguments: [~, AppBundle\Entity\NewsletterItem\VideoNewsletter, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: video, autoadmin: true, audit: false, show_in_dashboard: false}
+
+  admin.infographoics_newsletter:
+    class: AppBundle\Admin\Newsletter\InfographicsNewsletterAdmin
+    arguments: [~, AppBundle\Entity\NewsletterItem\InfographicsNewsletter, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: infographics, autoadmin: true, audit: false, show_in_dashboard: false}
+
+  admin.hightlight_newsletter:
+    class: AppBundle\Admin\Newsletter\HighlightNewsletterAdmin
+    arguments: [~, AppBundle\Entity\NewsletterItem\HighlightNewsletter, ~]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.email_subscriptions%, label: Блоки, autoadmin: false, audit: false, show_in_dashboard: true}
+
+  admin.announcement:
+    class: AppBundle\Admin\AnnouncementAdmin
+    arguments: [~, AppBundle\Entity\Announcement, AppBundle:Admin/AnnouncementAdminCRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Главная страница, label: Анонсы, autoadmin: true, audit: false }
+
+  admin.owner:
+    class: AppBundle\Admin\OwnerAdmin
+    arguments: [~, AppBundle\Entity\Owner, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Департаменты и комитеты, autoadmin: true, audit: false }
+
+  admin.subordinate_socials:
+    class: AppBundle\Admin\SubordinateSocialsAdmin
+    arguments: [~, AppBundle\Entity\SubordinateSocials, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Справочники, label: Соцсети ДК, autoadmin: true, audit: false }
+
+  admin.construction_filter:
+      class: AppBundle\Admin\ImportFiltersAdmin
+      arguments: [~, AppBundle\Entity\ImportFilter, ~]
+      tags:
+          - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Фильтры импорта, autoadmin: true, audit: false }
+
+  admin.construction_parameter:
+    class: AppBundle\Admin\ConstructionParameterAdmin
+    arguments: [~, AppBundle\Entity\ConstructionParameter, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Характеристики, autoadmin: true, audit: false }
+
+  admin.construction_parameter_value:
+    class: AppBundle\Admin\ConstructionParameterValueAdmin
+    arguments: [~, AppBundle\Entity\ConstructionParameterValue, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Значения характеристик, autoadmin: true, audit: false, show_in_dashboard: false }
+
+  admin.road_parameter_value:
+    class: AppBundle\Admin\ConstructionParameterValueAdmin
+    arguments: [~, AppBundle\Entity\RoadParameterValue, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.constructions%, label: Значения характеристик, autoadmin: true, audit: false, show_in_dashboard: false }
+
+  admin.questions_and_answers:
+    class: AppBundle\Admin\EmbeddedContent\Faq\QuestionAnswerAdmin
+    arguments: [~, AppBundle\Entity\EmbeddedContent\Faq\QuestionAnswer, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: %admin.groupname.embedded_content%, label: Вопросы и ответы, autoadmin: true, audit: false, show_in_dashboard: false }
+
+  admin.extra_information:
+    class: AppBundle\Admin\ExtraInformationAdmin
+    arguments: [~, AppBundle\Entity\ExtraInformation, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Тест, show_in_dashboard: false, label: Дополнительная информация, autoadmin: true, audit: false }
+
+  app.admin.extension.block_cache_invalidation:
+    class: AppBundle\Cache\BlockCacheInvalidation
+    arguments: ['@sonata.cache.memcached']
+    tags:
+      - {name: sonata.admin.extension, target: admin.announcement }
+
+  ApiBundle\ApplicationLayer\AbstractCommand\SymfonyCommandValidator:
+    class: ApiBundle\ApplicationLayer\AbstractCommand\SymfonyCommandValidator
+    arguments:
+      - '@validator'
+
+  AppBundle\Admin\Newsletter\PostsSincePreviousNewsletterProvider:
+      class: AppBundle\Admin\Newsletter\PostsSincePreviousNewsletterProvider
+      arguments: ['@doctrine.orm.entity_manager']

@@ -1,0 +1,12 @@
+<article class="top-news__teaser top-news__teaser_{{ type == 'single' ? 'single' : 'double' }}">
+    <a class="top-news__teaser-link" href="{{ entity_path(post) }}">
+        <div class="top-news__teaser-image" style="background-image: url({% path post.image, type == 'single' ? 'thumb340x340' : 'thumb271x125' %})">
+            <div class="top-news__teaser-content">
+                <time class="top-news__teaser-date">{{ post.publishStartDate |format_date }}</time>
+                <h4 class="top-news__teaser-title oasis-container">
+                    <span class="oasis-container__text">{{ post.title }}</span>
+                </h4>
+            </div>
+        </div>
+    </a>
+</article>

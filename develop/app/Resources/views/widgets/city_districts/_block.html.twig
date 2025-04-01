@@ -1,0 +1,42 @@
+<table class="city-districts-block" align="left" border="0" cellpadding="1" cellspacing="1">
+    <tbody>
+    {% set lastIndex = 0 %}
+    {% for area in areas %}
+        {% set lastIndex = loop.index %}
+        {% if (loop.index-1) is divisible by(3) %}
+            <tr>
+        {% endif %}
+            <td class="area-separator">
+                <div class="line">
+                    <div class="rotated-text-wrapper">
+                        <div class="rotated-text">
+                            {{ area.abbreviation }}
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="administrative-area districts-container area-{{ area.id }}" >
+
+                <p class="administrative-area-abbreviation">
+                    <a href="/stroitelstvo-v-okrugah-raionah/{{ area.slug }}">
+                        {{ area.abbreviation }}
+                    </a>
+                </p>
+
+                {% for district in area.districts if district.publishable %}
+                    <p class="district-title">
+                        <a href="/stroitelstvo-v-okrugah-raionah/{{ area.slug }}/{{ district.slug }}">
+                            {{ district|replace({'поселение ':''}) }}
+                        </a>
+                    </p>
+                {% endfor %}
+            </td>
+        {% if loop.index is divisible by(3) %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+    {% if lastIndex is divisible by(3) %}
+        </tr>
+    {% endif %}
+    </tbody>
+</table>

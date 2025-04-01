@@ -1,0 +1,67 @@
+<?php
+
+namespace AppBundle\Form\Type;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+//todo: remove on user profile remove
+class ProfileType extends AbstractType
+{
+    private $class;
+
+    /**
+     * @param string $class The User class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('firstname', null, array(
+                'label'    => 'form.label_firstname',
+                'required' => false
+            ))
+            ->add('lastname', null, array(
+                'label'    => 'form.label_lastname',
+                'required' => false
+            ))
+            ->add('phone', null, array(
+                'label'    => 'form.label_phone',
+                'required' => false
+            ))
+            ->add('cityDistrict', 'entity', array(
+                'class' => 'AppBundle:CityDistrict',
+                'group_by' => 'administrativeArea',
+                'label'    => 'Район',
+                'required' => false
+            ))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->class
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'app_user_profile';
+    }
+}

@@ -1,0 +1,13 @@
+<ul class="main-menu">
+    {% for item in menu %}
+        <li class="{{ item.children ? 'main-menu__folder' : '' }}"
+            {% if item.children %}
+                data-target="#menu-section_{{ loop.index0 }}"
+            {% endif %}
+                >
+            <a href="{{ item.uri }}" class="main-menu__link">{{ item.label }}</a>
+            <span class="menu-decor menu-decor_left"></span>
+            <span class="menu-decor menu-decor_right"></span>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,16 @@
+<div class="smi-block__publications">
+  <div class="smi-block__publications-content">
+    {% for publication in publications %}
+        {% if loop.index < 4 %}
+            <div class="smi-block__publications-teaser {{ loop.last ? 'smi-block__publications-teaser_last' : '' }}">
+                <time class="smi-block__publications-teaser-date">{{ publication.publishStartDate | format_date }}</time>
+                <a href="{{ entity_path(publication) }}" class="smi-block__publications-teaser-title">{{ publication.title }}</a>
+                <span class="smi-block__publications-teaser-author">
+                    {{ publication.source }}
+                </span>
+            </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+  <a href="{{ path('app_subordinate_%s_publications'|format(app.request.get('_subordinate_route'))) }}" class="smi-block__publications-link">Все публикации</a>
+</div>

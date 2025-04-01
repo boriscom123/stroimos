@@ -1,0 +1,44 @@
+.main-logo{
+	display: inline-block;
+	width: 700px;
+	min-height: 90px;
+	color: #FFFFFF;
+	margin: 0;
+
+	&__image{
+		float: left;
+	}
+	&__text {
+/*		margin-left: 97px;*/
+		min-height: 85px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center; // Изначально устанавливаем значение по центру
+
+		// Псевдоклассы для разных случаев
+		&:has(> *:not(:last-child)) {
+			justify-content: flex-end; // Если есть два и более дочерних элемента
+		}
+
+		&:has(> *:only-child) {
+			justify-content: center; // Если есть только один дочерний элемент
+		}
+	}
+	&__title{
+		font-family: Onest, sans-serif;
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 1.2;
+		color: @color;
+		margin-bottom: 0px;
+	}
+	&__subtitle{
+		font-family: Onest, sans-serif;
+		font-weight: normal;
+		font-size: 13px;
+		line-height: 1.2;
+		color: @color;
+		margin-top: 10px;
+		margin-bottom: 0px;
+	}
+}

@@ -1,0 +1,186 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="stadiums-page">
+        <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1" class="stadiums-page__card stadiums-page__card_default-big"
+          style=" background-image: url('/images/stadiums/luzhniki_stadium.jpg')">
+          <span class="stadiums-page__card-title">Стадион «Лужники»</span>
+          <span class="stadiums-page__card-text">Спецпроект: как изменился стадион «Лужники» после реконструкции</span>
+        </a>
+        <div class="stadiums-page__card-row">
+          <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1/plavatiel-nyi-tsientr-luzhniki" class="stadiums-page__card stadiums-page__card_default"
+            style=" background-image: url('/images/stadiums/luzhniki_pool.jpg')">
+            <span class="stadiums-page__card-title">Дворец водных видов спорта</span>
+            <span class="stadiums-page__card-text">Аквапарк с&nbsp;волной для&nbsp;серфинга, «ленивая&nbsp;река», бассейны и&nbsp;термы</span>
+          </a>
+          <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1/tsientr-khudozhiestviennoi-ghimnastiki-iriny-vinier-usmanovoi-v-luzhnikakh" class="stadiums-page__card stadiums-page__card_default"
+            style=" background-image: url('/images/stadiums/luzhniki_gym.jpg')">
+            <span class="stadiums-page__card-title">Дворец художественной гимнастики Ирины Винер</span>
+            <span class="stadiums-page__card-text">Крыша-лента, жостовская роспись, гжель на&nbsp;полу и&nbsp;матрешки на&nbsp;стенах</span>
+          </a>
+        </div>
+        <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1/dvoriets-iedinoborstv-v-luzhnikakh" class="stadiums-page__card stadiums-page__card_default"
+          style=" background-image: url('/images/stadiums/luzhniki_fight.jpg')">
+          <span class="stadiums-page__card-title">Дворец единоборств</span>
+          <span class="stadiums-page__card-text">Международный центр самбо, Центр бокса, бассейны и&nbsp;тренажерные залы</span>
+        </a>
+        <div class="stadiums-page__card-row">
+          <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1/tiennisnyi-klub-v-luzhnikakh-stroi_mos" class="stadiums-page__card stadiums-page__card_default"
+            style=" background-image: url('/images/stadiums/luzhniki_tennis.jpg')">
+            <span class="stadiums-page__card-title">Дворец тенниса</span>
+            <span class="stadiums-page__card-text">Корты, термальный комплекс, центр развития с тренажерным залом</span>
+          </a>
+          <a href="https://stroi.mos.ru/stadiony-moskvy/stadium-luzhniki/rekonstrukciya-stadiona-luzhniki-1/riekonstruktsiia-zala-druzhba-v-luzhnikakh" class="stadiums-page__card stadiums-page__card_default"
+            style=" background-image: url('/images/stadiums/luzhniki_druzhba.jpg')">
+            <span class="stadiums-page__card-title">Зал «Дружба»</span>
+            <span class="stadiums-page__card-text">Знаменитая &laquo;ракушка&raquo; в&nbsp;Лужниках открылась после реконструкции</span>
+          </a>
+        </div>
+        <a href="https://stroi.mos.ru/stadiony-moskvy/liedovyi-dvoriets-kristall" class="stadiums-page__card stadiums-page__card_default"
+          style=" background-image: url('/images/stadiums/luzhniki_ice.jpg')">
+          <span class="stadiums-page__card-title">Ледовый дворец &laquo;Кристалл&raquo;</span>
+          <span class="stadiums-page__card-text">В&nbsp;2023 году на&nbsp;месте старого катка открылся новый ледовый дворец, сохранивший свое историческое название</span>
+        </a>
+        
+        <a href="https://stroi.mos.ru/stadiony-moskvy/sportivnyi-komplieks-vorob-ievy-ghory" class="stadiums-page__bcard">
+          <span class="stadiums-page__bcard-image stadiums-page__bcard-image_w365" style=" background-image: url('/images/stadiums/vg.jpg')"></span>
+          <span class="stadiums-page__bcard-content">
+            <span class="stadiums-page__bcard-title">
+              Спорткомплекс Воробьевы горы
+            </span>
+          </span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/kanatnaia-dorogha-na-vorob-ievykh-ghorakh" class="stadiums-page__card stadiums-page__card_default-big stadiums-page__card_h490"
+          style=" background-image: url('/images/stadiums/rope.jpg')">
+          <span class="stadiums-page__card-title">Московская канатная дорога</span>
+          <span class="stadiums-page__card-text">В столице появился новый воздушный вид транспорта&nbsp;– канатная дорога. Она связала над&nbsp;Москвой-рекой смотровую площадку на&nbsp;Воробьевых горах со&nbsp;стадионом «Лужники»</span>
+        </a>
+
+        <a href="https://stroi.mos.ru/articles/stadion-dinamo-do-i-poslie-riekonstruktsii" class="stadiums-page__bcard">
+          <span class="stadiums-page__bcard-content">
+            <span class="stadiums-page__bcard-title">
+              Спорткомплекс &laquo;Динамо&raquo;
+            </span>
+            <span class="stadiums-page__bcard-text">
+              Реконструкция бывшего стадиона &laquo;Динамо&raquo; завершена (сейчас &laquo;ВТБ Арена&raquo;). Под одной крышей&nbsp;–&nbsp;поле для&nbsp;футбола и&nbsp;арена-трансформер для&nbsp;хоккея, баскетбола и&nbsp;концертов
+            </span>
+          </span>
+          <span class="stadiums-page__bcard-image stadiums-page__bcard-image_w405" style=" background-image: url('/images/stadiums/dynamo.jpg')"></span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadion-moskvich" class="stadiums-page__card stadiums-page__card_special"
+          style=" background-image: url('/images/stadiums/moskvich.jpg')">
+          <span class="stadiums-page__card-title">Стадион «Москвич»</span>
+          <span class="stadiums-page__card-text">Раньше назывался «АЗЛК». Сейчас арена принадлежит спортивной школе олимпийского резерва «Москвич»</span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/plany-po-rekonstrukcii-stadiona-imeni-e-a-strelcova" class="stadiums-page__bcard">
+          <span class="stadiums-page__bcard-image stadiums-page__bcard-image_w510" style=" background-image: url('/images/stadiums/torpedo.jpg')"></span>
+          <span class="stadiums-page__bcard-content">
+            <span class="stadiums-page__bcard-title">
+              Стадион «Торпедо»
+            </span>
+            <span class="stadiums-page__bcard-text">
+              Легендарный стадион «Торпедо» им.&nbsp;Эдуарда&nbsp;Стрельцова. 
+              После реконструкции станет комфортным для&nbsp;зрителей и&nbsp;спортсменов
+            </span>
+          </span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/stadion-olimp" class="stadiums-page__card stadiums-page__card_special"
+          style=" background-image: url('/images/stadiums/olymp.jpg')">
+          <span class="stadiums-page__card-title">Стадион «Олимп»</span>
+          <span class="stadiums-page__card-text">
+            Крытый футбольный манеж в&nbsp;районе Новокосино. Здесь есть активная система очистки воздуха, автоматические системы пожаротушения
+          </span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/spartak2" class="stadiums-page__bcard">
+          <span class="stadiums-page__bcard-content">
+            <span class="stadiums-page__bcard-title">
+              Стадион &laquo;Лукойл Арена&raquo;
+            </span>
+            <span class="stadiums-page__bcard-text">
+              Домашний стадион ФК&nbsp;&laquo;Спартак&raquo; (Москва). Вместимость объекта&nbsp;&ndash; свыше 45&nbsp;тыс. человек. Принимал ЧМ&nbsp;по&nbsp;футболу 2018
+            </span>
+          </span>
+          <span class="stadiums-page__bcard-image stadiums-page__bcard-image_w520" style=" background-image: url('/images/stadiums/spartak.jpg')"></span>
+        </a>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/stadion-cska" class="stadiums-page__card stadiums-page__card_special"
+          style=" background-image: url('/images/stadiums/cska.jpg')">
+          <span class="stadiums-page__card-title">Стадион &laquo;ВЭБ Арена&raquo;</span>
+          <span class="stadiums-page__card-text">
+            Профессиональный футбольный клуб ЦСКА получил свой &laquo;бастион&raquo;. Стадион полностью отвечает всем стандартам ФИФА и&nbsp;УЕФА
+          </span>
+        </a>
+
+        <div class="stadiums-page__card-row-alt">
+          <a href="https://stroi.mos.ru/stadiony-moskvy/ledovyi-dvorec-arena-legend" class="stadiums-page__card stadiums-page__card_alt"
+            style=" background-image: url('/images/stadiums/legend.jpg')">
+            <span class="stadiums-page__card-title">Спортивно-развлекательный<br/>квартал</span>
+            <span class="stadiums-page__card-text">&laquo;ЦСКА Арена&raquo;</span>
+          </a>
+          <div class="stadiums-page__card-row-alt-col">
+            <a href="https://stroi.mos.ru/news/tsientr-sinkhronnogho-plavaniia-postroili-v-byvshiei-promzonie-zil" class="stadiums-page__card stadiums-page__card_alt-side"
+              style=" background-image: url('/images/stadiums/legend_swim.jpg')">
+              <span class="stadiums-page__card-title">Центр синхронного плавания</span>
+            </a>
+            <div class="stadiums-page__card-row-alt-cell">
+              В&nbsp;2014&nbsp;году началась масштабная реорганизация крупнейшей в&nbsp;Москве промышленной зоны&nbsp;- территории бывшего завода имени Лихачева (ЗиЛ). Здесь появится новый квартал с&nbsp;жильем, рабочими местами, инфраструктурой и&nbsp;пешеходными зонами.
+            </div>
+          </div>
+        </div>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/sportivnyi-komplieks-v-niekrasovkie-stroi_mos" class="stadiums-page__card stadiums-page__card_special-alt"
+          style="background-image: url('/images/stadiums/nekras.jpg')">
+          <span class="stadiums-page__card-title">Дворец спорта<br/> в Некрасовке</span>
+        </a>
+        <div class="stadiums-page__extra">
+          <div class="stadiums-page__extra-text">
+            Район Некрасовка на&nbsp;юго-востоке столицы развивается быстрыми темпами. Активно строится жилье, поэтому здесь будут востребованы социальные и&nbsp;спортивные объекты.
+          </div>
+          <div class="stadiums-page__extra-image" style="background-image: url('/images/stadiums/nekras_extra.jpg')"></div>
+        </div>
+
+        <a href="https://stroi.mos.ru/stadiony-moskvy/grebnoi-kanal-v-krylatskom" class="stadiums-page__card stadiums-page__card_special-alt"
+          style="background-image: url('/images/stadiums/kryl.jpg')">
+          <span class="stadiums-page__card-title">Гребной канал<br/> в&nbsp;Крылатском</span>
+        </a>
+        <div class="stadiums-page__extra">
+          <div class="stadiums-page__extra-image" style="background-image: url('/images/stadiums/kryl_extra.jpg')"></div>
+          <div class="stadiums-page__extra-text">
+            Сооружен к&nbsp;66-му Чемпионату Европы по&nbsp;академической гребле. Реконструирован, здесь проходят соревнования по&nbsp;гребле на&nbsp;байдарках и&nbsp;каноэ
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мкад'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

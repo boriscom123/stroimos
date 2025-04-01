@@ -1,0 +1,5 @@
+<p class="documents-page__all-table-row">
+    <time class="documents-table-all__time">{{ document.publishStartDate|format_date }}</time>
+    <span class="documents-table-all__category">{{ document.category }}</span>
+    <a href="{{ path('app_document_show', { id: document.id}) }}" class="documents-table-all__document">{{ document.title }}</a>
+</p>

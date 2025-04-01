@@ -1,0 +1,5 @@
+amg_update_lock:
+    path: /update_lock/{id}
+    defaults: { _controller: AmgAdminBundle:Locking:updateLock }
+    requirements:
+        id: \d

@@ -1,0 +1,125 @@
+.unsubscribe-block,
+.subscribe-block {
+  overflow: hidden;
+}
+
+.unsubscribe-block__title,
+.subscribe-block__title {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 37px;
+  color: #222222;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 150px;
+}
+
+.unsubscribe-block__subtitle,
+.subscribe-block__subtitle {
+  font-family: Brygada1918, serif;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 37px;
+  color: #222222;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.subscribe-block__legend {
+  font-family: Brygada1918,serif;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 40px;
+  color: @color;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.unsubscribe-block__uri {
+  font-family: Brygada1918,serif;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 40px;
+  color: @color;
+  text-align: center;
+  margin: 62px 0 130px 0;
+
+  a {
+    color: #222;
+
+    &:hover {
+      color: @hover;
+    }
+  }
+}
+
+.image-banner  {
+	height: 109px;
+	background-image: url("/images/email/subscribtion_bg.png");
+	margin-bottom: 20px;
+}
+
+
+.subscribe-block {
+	form {
+		text-align: center;
+		margin-bottom: 100px;
+	}
+
+	.subscribe-block__btn {
+		font-family: Onest,sans-serif;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 28px;
+		color: black;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		border-bottom: 1px solid black;
+		text-transform: uppercase;
+		text-align: left;
+		margin: 30px 10px;
+	}
+}
+
+#unsubscribe-reason-form {
+	margin-left: 40px;
+	text-align: left;
+
+	.form-actions {
+		text-align: center;
+	}
+	.errors {
+		li {
+			font-size: smaller;
+			color: red;
+		}
+	}
+	.radio {
+		display: block;
+		margin-top: 10px;
+		margin-bottom: 10px;
+
+		label {
+			font-family: inherit;
+			font-size: inherit;
+		}
+	}
+
+	input[name="form[comment]"] {
+		width: 310px;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		border-bottom: 1px solid #c2c2c2;
+		font-weight: normal;
+		color: #686868;
+		font-style: italic;
+		box-sizing: border-box;
+		background: transparent;
+	}
+}

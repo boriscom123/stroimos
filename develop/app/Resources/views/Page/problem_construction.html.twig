@@ -1,0 +1,41 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+      <div class="renovation-page">
+        <h2 class="renovation-page__map-title"></h2>
+          <div class="map-block">
+              <div data-preset="problem" id="map-container">
+                  <div class="container__full" id="map" style="height: 700px"></div>
+              </div>
+          </div>
+
+        <div class="static-page">
+          {{ embed_content(page.content, page) }}
+          {% block sonata_preview %}{% endblock %}
+        </div>
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

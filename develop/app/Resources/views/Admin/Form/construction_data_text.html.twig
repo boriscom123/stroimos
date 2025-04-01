@@ -1,0 +1,27 @@
+{% block construction_data_text_widget %}
+    <div class="form-group">
+        <table class="table table-bordered" {% if is_new_data_pending and property_data.pending != property_data.current and property_data.pending is not null%}style="border-left: 5px solid #d9534f;"{% endif %}>
+            <colgroup>
+                <col width="30%"/>
+                <col/>
+            </colgroup>
+
+            <tr>
+                <td><label>Базовые данные:</label></td>
+                <td>{{ property_data.current|default('(нет данных)') }}</td>
+            </tr>
+
+            {% if is_new_data_pending and property_data.pending != property_data.current %}
+                <tr>
+                    <td><label>Новые данные:</label></td>
+                    <td>{{ property_data.pending|default('(нет данных)') }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td><label>Корректированные данные:</label></td>
+                <td>{{ form_widget(form) }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

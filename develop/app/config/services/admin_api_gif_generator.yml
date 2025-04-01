@@ -1,0 +1,28 @@
+services:
+  ApiBundle\PresentationLayer\View\AnimatedGif\ApiCreationResult:
+    class: ApiBundle\PresentationLayer\View\AnimatedGif\ApiCreationResult
+    arguments:
+      - '@sonata.media.provider.image'
+      - '@request_stack'
+
+  ApiBundle\InfrastructureLayer\Service\AnimatedGifFactory:
+    class: ApiBundle\InfrastructureLayer\Service\AnimatedGifFactory
+    arguments:
+      - '@sonata.media.provider.image'
+      - %kernel.web_dir%
+
+  ApiBundle\ApplicationLayer\CreateAnimatedGifCommand\CreateAnimatedGifHandler:
+    class: ApiBundle\ApplicationLayer\CreateAnimatedGifCommand\CreateAnimatedGifHandler
+    arguments:
+      - 'ApiBundle\ApplicationLayer\CreateAnimatedGifCommand\CreatedAnimatedGifCommandDto'
+      - '@ApiBundle\ApplicationLayer\AbstractCommand\SymfonyCommandValidator'
+      - '@doctrine.orm.entity_manager'
+      - '@ApiBundle\InfrastructureLayer\Service\AnimatedGifFactory'
+      - '@Import\Helper\MediaBuilder'
+
+  ApiBundle\PresentationLayer\HttpController\AnimatedGifGeneratorController:
+    class: ApiBundle\PresentationLayer\HttpController\AnimatedGifGeneratorController
+    arguments:
+      - '@ApiBundle\ApplicationLayer\CreateAnimatedGifCommand\CreateAnimatedGifHandler'
+      - '@ApiBundle\PresentationLayer\View\AnimatedGif\ApiCreationResult'
+

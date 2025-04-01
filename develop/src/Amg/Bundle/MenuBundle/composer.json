@@ -1,0 +1,19 @@
+{
+    "name": "amg/menu-bundle",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Nikita Starshinov",
+            "email": "nstarshinov@apostolmedia.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+
+        "knplabs/knp-menu-bundle" : "~1.1.2"
+    },
+    "autoload": {
+        "psr-0": { "Amg\\Bundle\\MenuBundle": "" }
+    },
+    "target-dir": "Amg/Bundle/MenuBundle"
+}

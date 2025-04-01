@@ -1,0 +1,365 @@
+.diametry-page {
+  margin: 0 -240px 100px;
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    box-sizing: border-box;
+    height: 788px;
+    padding: 35px 0;
+    background-image: url('/images/diametry/intro_bg.jpg');
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 45px;
+    .shadowed-teaser();
+    &-title {
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 82px;
+      line-height: 1;
+    }
+    &-subtitle, &-info {
+      font-family: Onest,sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      strong {
+        font-size: 36px;
+      }
+    }
+    &-subtitle {
+      margin-top: 25px;
+      margin-bottom: auto;
+    }
+    &-info {
+    }
+    &:hover {
+      color: #fff;
+    }
+    &:hover &-title {
+      color: @hover;
+    }
+  }
+  &__advantages {
+    text-align: center;
+    margin-bottom: 75px;
+    &-title {
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 72px;
+      line-height: 1;
+      margin-bottom: 40px
+    }
+    &-container {
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: stretch;
+      height: 904px;
+      background-image: url('/images/diametry/advantages_bg.jpg');
+      background-size: cover;
+    }
+    &-content {
+      margin: 100px auto 0;
+      display: flex;
+      flex-direction: row;
+      width: 960px;
+      box-sizing: border-box;
+      padding-top: 220px;
+      &-column {
+        &:first-child, &:last-child {
+          width: 250px;
+        }
+        &:nth-child(2) {
+          flex: 1;
+        }
+      }
+    }
+    &-item {
+      &-title {
+        margin-top: 30px;
+        font-family: Onest,sans-serif;
+        font-size: 20px;
+        line-height: 24px;
+      }
+      &:first-child {
+        margin-bottom: 60px;
+      }
+    }
+    &-time {
+      margin: 0 auto;
+      width: 435px;
+      &-title {
+        margin: 10px 0;
+        font-family: Brygada1918,serif;
+        font-weight: bold;
+        font-size: 62px;
+        line-height: 1;
+        position: relative;
+        &-extra {
+          font-family: Onest,sans-serif;
+          font-size: 24px;
+          font-weight: normal;
+          line-height: 1;
+          position: absolute;
+          bottom: 8px;
+          right: 0px;
+        }
+      }
+      &-subtitle {
+        margin: 10px 0;
+        font-family: Onest,sans-serif;
+        font-size: 24px;
+        line-height: 38px;
+      }
+      &:first-child {
+        padding-top: 40px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #fff;
+      }
+    }
+  }
+  &__map {
+    margin-bottom: 75px;
+    &-title {
+      margin-bottom: 50px;
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 72px;
+      line-height: 1;
+      text-align: center;
+    }
+    &-img.a {
+      display: block;
+      margin: 0 auto;
+      @media (max-width: 1440px) {
+        width: 950px;
+      }
+    }
+    &-img.b {
+      width: 2500px;
+      height: 3117px;
+    }
+  }
+  &__routes {
+    margin-bottom: 75px;
+    &-title {
+      margin-bottom: 50px;
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 72px;
+      line-height: 1;
+      text-align: center;
+    }
+    &-items {
+      width: 960px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    &-item {
+      flex: 0 0 35%;
+      height: 270px;
+      padding-top: 50px;
+      text-align: center;
+      &-title {
+        font-family: Brygada1918,serif;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 30px;
+        padding-left: 30px;
+      }
+      &-icon {
+        display: block;
+        text-align: center;
+        width: 191px;
+        height: 95px;
+        margin: 15px auto;
+        transition: all 0.3s ease-out;
+        &:hover {
+          transform: scale(1.2);
+          filter: drop-shadow(0 7px 5px rgba(0,0,0,0.3));
+        }
+      }
+      &-subtitle {
+        font-family: Onest,sans-serif;
+        font-size: 19px;
+        line-height: 24px;
+        padding-right: 30px;
+      }
+    }
+    &-extra {
+      margin: 0 auto;
+      width: 960px;
+      color: #a7a7a7;
+      font-family: Onest,sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      text-align: center;
+    }
+  }
+  &__tariffs {
+    display: block;
+    margin-bottom: 15px;
+    height: 788px;
+    background-image: url('/images/diametry/tariffs_bg.jpg');
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    .shadowed-teaser();
+    &-content {
+      width: 960px;
+      padding-top: 200px;
+      margin: 0 auto;
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        height: 200px;
+        border-right: 2px solid #fff;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+    }
+    &-title {
+      box-sizing: border-box;
+      margin-bottom: 50px;
+      padding-right: 30px;
+      text-align: right;
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 72px;
+      line-height: 76px;
+      text-align: right;
+    }
+    &-list {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 70px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 25%;
+      height: 100px;
+      border: 2px solid #fff;
+      font-family: Onest,sans-serif;
+      font-size: 19px;
+      line-height: 1;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    &-info {
+      font-family: Onest,sans-serif;
+      font-size: 24px;
+      line-height: 38px;
+      text-align: left;
+    }
+    &:hover {
+      color: #fff;
+    }
+    &:hover &-title {
+      color: @hover;
+    }
+    &:hover &-content:before {
+      border-color: @hover;
+    }
+  }
+  &__trains {
+    display: block;
+    margin-bottom: 15px;
+    height: 788px;
+    background-image: url('/images/diametry/trains_bg.jpg');
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    .shadowed-teaser();
+    &-content {
+      width: 960px;
+      padding-top: 250px;
+      margin: 0 auto;
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        height: 390px;
+        border-right: 2px solid #fff;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
+    }
+    &-title {
+      box-sizing: border-box;
+      margin-bottom: 90px;
+      padding-left: 30px;
+      text-align: right;
+      font-family: Brygada1918,serif;
+      font-weight: bold;
+      font-size: 72px;
+      line-height: 1;
+      text-align: left;
+    }
+    &-info {
+      font-family: Onest,sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      text-align: left;
+      margin-bottom: 50px;
+    }
+    &-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    &-item {
+      flex: 0 0 45%;
+      font-family: Onest,sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      text-align: left;
+      margin-bottom: 15px;
+      &-img {
+        float: left;
+      }
+      &-text {
+        display: flex;
+        flex-direction: column;
+        margin-left: 83px;
+        height: 68px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+      }
+    }
+    &:hover {
+      color: #fff;
+    }
+    &:hover &-title {
+      color: @hover;
+    }
+    &:hover &-content:before {
+      border-color: @hover;
+    }
+  }
+}

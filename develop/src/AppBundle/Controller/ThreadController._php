@@ -1,0 +1,78 @@
+<?php
+namespace AppBundle\Controller;
+
+use Application\FOS\CommentBundle\Entity\Comment;
+use Application\Sonata\MediaBundle\Entity\Media;
+use FOS\CommentBundle\Controller\ThreadController as BaseThreadController;
+use FOS\CommentBundle\Model\ThreadInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+/**
+ * @deprecated deprecated? Is comments used
+ */
+class ThreadController extends BaseThreadController
+{
+    public function postThreadCommentsAction(Request $request, $id)
+    {
+        $thread = $this->container->get('fos_comment.manager.thread')->findThreadById($id);
+        if (!$thread) {
+            throw new NotFoundHttpException(sprintf('Thread with identifier of "%s" does not exist', $id));
+        }
+
+        if (!$thread->isCommentable()) {
+            throw new AccessDeniedHttpException(sprintf('Thread "%s" is not commentable', $id));
+        }
+
+        $parent = $this->getValidCommentParent($thread, $request->query->get('parentId'));
+        $commentManager = $this->container->get('fos_comment.manager.comment');
+
+        /** @var Comment $comment */
+        $comment = $commentManager->createComment($thread, $parent);
+
+        $form = $this->container->get('fos_comment.form_factory.comment')->createForm();
+        $form->setData($comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            if ($comment->getBinaryContent()) {
+                $mediaManager = $this->get('sonata.media.manager.media');
+
+                $media = new Media();
+                $media->setBinaryContent($comment->getBinaryContent());
+                $mediaManager->save($media, 'initiative', 'sonata.media.provider.file');
+
+                $comment->setFile($media);
+            }
+
+            if ($commentManager->saveComment($comment) !== false) {
+                return $this->getViewHandler()->handle($this->onCreateCommentSuccess($form, $id, $parent));
+            }
+        }
+
+        return $this->getViewHandler()->handle($this->onCreateCommentError($form, $id, $parent));
+    }
+
+    private function getValidCommentParent(ThreadInterface $thread, $commentId)
+    {
+        if (null !== $commentId) {
+            $comment = $this->container->get('fos_comment.manager.comment')->findCommentById($commentId);
+            if (!$comment) {
+                throw new NotFoundHttpException(sprintf('Parent comment with identifier "%s" does not exist', $commentId));
+            }
+
+            if ($comment->getThread() !== $thread) {
+                throw new NotFoundHttpException('Parent comment is not a comment of the given thread.');
+            }
+
+            return $comment;
+        }
+    }
+
+    private function getViewHandler()
+    {
+        return $this->container->get('fos_rest.view_handler');
+    }
+}

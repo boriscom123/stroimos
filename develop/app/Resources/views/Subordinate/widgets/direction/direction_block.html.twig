@@ -1,0 +1,28 @@
+<div class="direction-page">
+  {% if head is defined %}
+      {% set image %}{% path head.image, 'direction_main' %}{% endset %}
+      <div class="direction-page__person-top">
+        <div class="direction-page__person-top-image-wrap"><img alt="{{ head.fullName }}" class="direction-page__person-top-image" src="{{ image|default(asset('images/direction-head-fallback.jpg')) }}" /></div>
+
+        <div class="direction-page__person-top-info-wrap">
+          <div class="direction-page__person-top-name">{{ head.lastName }}<br />
+            {{ head.firstName }} {{ head.patronymic }}</div>
+          <span class="direction-page__person-top-separator">&nbsp;</span> <span class="direction-page__person-top-title">{{ head.appointment }}</span></div>
+      </div>
+  {% endif %}
+  {% if contactPersons is defined and contactPersons|length > 0 %}
+    <div class="direction-page__list">
+      {% for person in contactPersons %}
+          {% set image %}{% path person.image, 'person_direction' %}{% endset %}
+          <div class="direction-page__person">
+            <div class="direction-page__person-image-wrap"><img alt="{{ person.fullName }}" class="direction-page__person-image" src="{{ image|default(asset('images/direction-fallback.jpeg')) }}" /></div>
+
+            <div class="direction-page__person-info-wrap">
+              <div class="direction-page__person-name">{{ person.lastName }}<br />
+                {{ person.firstName }} {{ person.patronymic }}</div>
+              <span class="direction-page__person-separator">&nbsp;</span> <span class="direction-page__person-title">{{ person.appointment }}</span></div>
+          </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

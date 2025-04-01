@@ -1,0 +1,97 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': post.category.alias, 'object': post } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': 'post',
+    'subject': post
+    } %}
+    <article class="news-wrapper news-gallery">
+        {# <header class="news-header">
+            <h1 class="news-title">{{ post.title }}</h1>
+            {% include '::/widgets/themes.html.twig' with {'publication': post} %}
+        </header> #}
+
+        <section class="news-wrapper__content-wrap">
+            <div class="news-wrapper__sidebar">
+                {% include '::/widgets/news/share.html.twig' %}
+                {% include '::/widgets/subscribe_telegram.html.twig' %}
+                {% include '::/widgets/news/_geo_points.html.twig' %}
+            </div>
+            <div class="news-wrapper__content">
+                <header class="news-header">
+                    <h1 class="news-title">{{ post.title }}</h1>
+                    {% include '::/widgets/themes.html.twig' with {'publication': post} %}
+                </header>
+
+                {% set _image = post.heroImage|default(post.image) %}
+
+                {% set thumbPostBase %}
+                    {% path _image, 'page_header_700' %}
+                {% endset %}
+
+                {% set thumbPostCrop %}
+                    {% path _image, 'thumb960x470' %}
+                {% endset %}
+
+                {% if thumbPostBase|replace({' ':''}) is not empty %}
+                    <div class="news-image base" style="background-image: url('{{ thumbPostBase|replace({' ':''}) }}')"></div>
+                {% elseif thumbPostCrop|replace({' ':''}) is not empty%}
+                    <div class="news-image crop" style="background-image: url('{{ thumbPostCrop|replace({' ':''}) }}')"></div>
+                {% endif %}
+
+                <div class="js-mediator-article">
+                    <h2 class="news-wrapper__content-lead">{{ post.lead }}</h2>
+                    {#<div class="news-wrapper__content-news">#}
+                    {{ embed_content(post.content, post) }}
+                    {#</div>#}
+                    {% block sonata_preview %}{% endblock %}
+                </div>
+                {% include '::/widgets/news/author.html.twig'  with {'type': 'текста', 'article': post} %}
+                {% include '::/widgets/subscribe_telegram_strong.html.twig' %}
+            </div>
+
+            <div class="container__full news-wrapper__under-news">
+                {% include '::/widgets/news/share.html.twig' %}
+                {% include '::/widgets/tags.html.twig' with {'publication': post} %}
+
+            </div>
+
+            {% if post.attachments and post.attachments is not empty %}
+                <h3 class="news-wrapper__tags-title">Прикрепленные материалы</h3>
+                <ul class="files__list">
+                    {% for file in post.attachments %}
+                        <li class="files__list-item">
+                            <a class="files__list-item-link" href="{% path file.file, 'reference' %}" target="_blank" title="{{ file.file.name }}">
+                                {% thumbnail file.file, 'thumb' %}
+                                {{ file.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if post.isCommentsOpen %}
+                {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity_reference(post)} %}
+            {% endif %}
+
+{#             <div id="unit_93856" style="display: none;"><a href="http://mirtesen.ru/" >Новости МирТесен</a></div>
+            <!-- <div id="unit_93779" style="display: none;"><a href="http://smi2.ru/" >Новости СМИ2</a></div> -->
+
+            {% include '::/widgets/spotlight/_related.html.twig' with {'item': post} %} #}
+
+            {{ sonata_block_render({'type': 'more_like_this'}, {subject: post, 'extra_cache_keys': {context: ['post_' ~ post.id]} } ) }}
+
+            {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        </section>
+    </article>
+
+{% endblock %}

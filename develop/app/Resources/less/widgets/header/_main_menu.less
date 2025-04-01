@@ -1,0 +1,45 @@
+.main-menu {
+	.reset-list-style;
+	color: #FFFFFF;
+	font-family: Onest, sans-serif;
+	font-size: 14px;
+	line-height: 2;
+
+	li {
+		display: inline-block;
+		margin: 5px 5px 10px 20px;
+	}
+}
+
+.main-menu__link {
+	.dotted-border(white, bottom);
+	color: #FFFFFF;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.main-menu__folder {
+	&:after {
+		content: '\25BE';
+		font-size: 7px;
+		display: inline-block;
+		vertical-align: baseline;
+	}
+	&:hover {
+		&:after {
+			color: @hover;
+		}
+	}
+	&.active {
+		color: @hover;
+
+		.main-menu__link{
+			color: @hover;
+		}
+
+		&:after{
+			content: '\25B4';
+			font-size: 12px;
+		}
+	}
+}

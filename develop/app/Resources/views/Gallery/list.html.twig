@@ -1,0 +1,30 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Фотогалерея',
+    'rubricsContext': 'gallery',
+    } %}
+
+    {% embed '::/widgets/search_form.html.twig' with {
+        'action': path('app_gallery_list'),
+        'value': app.request.query.get('q', '')
+    }
+    %}
+        {% block moreBlock %}
+            {#<a id="searchAdvance" class="news-search__more-item" href="#">Расширенный поиск</a>#}
+            {#<a id="searchByTag" class="news-search__more-item" href="#">Поиск по тегам</a>#}
+
+            {#<div class="search-by">#}
+                {#{% include '::widgets/checkbox.html.twig' with {id: 'by_gallery', label: 'искать по альбомам'} %}#}
+                {#{% include '::widgets/checkbox.html.twig' with {id: 'by_photo', label: 'искать по фотографиям'} %}#}
+            {#</div>#}
+        {% endblock %}
+    {% endembed %}
+
+    {{ sonata_block_render({'type': 'gallery_list'}) }}
+{% endblock %}

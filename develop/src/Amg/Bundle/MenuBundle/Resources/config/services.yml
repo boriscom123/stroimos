@@ -1,0 +1,22 @@
+parameters:
+    amg_menu.menu.factoy.class: Amg\Bundle\MenuBundle\MenuFactory
+    amg_menu.provider.class: Amg\Bundle\MenuBundle\MenuProvider
+
+services:
+    amg_menu.menu.factory:
+        class: %amg_menu.menu.factoy.class%
+        arguments: [@router, @security.context]
+
+    amg_menu.voter.request_uri_prefix:
+        class: Amg\Bundle\MenuBundle\Voter\RequestUriPrefixVoter
+        arguments: [@request_stack]
+
+    amg_menu.voter.sub_routes_voter:
+        class: Amg\Bundle\MenuBundle\Voter\SubRoutesVoter
+        arguments: [@request_stack]
+
+    amg_menu.provider:
+        class: %amg_menu.provider.class%
+        arguments: [@amg_menu.menu.factory, @request_stack]
+        tags:
+            - { name: knp_menu.provider }

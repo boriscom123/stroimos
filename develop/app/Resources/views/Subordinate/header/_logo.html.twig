@@ -1,0 +1,26 @@
+{% set subordinate = app.request.get('_subordinate_route') %}
+{% set subordinate_logo_presets = {
+    "dgp": {'title': 'Департамент градостроительной политики<br/> города Москвы', 'subtitle': ''},
+    "dgi": {'title': 'Департамент городского имущества<br/> города Москвы', 'subtitle': ''},
+    "dsti": {'title': 'Департамент строительства транспортной и инженерной инфраструктуры<br/> города Москвы', 'subtitle': ''},
+    "ds": {'title': 'Департамент гражданского строительства города Москвы', 'subtitle': ''},
+    "drnt": {'title': 'Департамент<br/> развития новых территорий', 'subtitle': ''},
+    "invest": {'title': 'Москомстройинвест', 'subtitle': 'Комитет города Москвы по обеспечению <br/>реализации инвестиционных проектов в строительстве <br/>и контролю в области долевого строительства'},
+    "mka": {'title': 'Москомархитектура', 'subtitle': 'Комитет по архитектуре <br/>и градостроительству города Москвы'},
+    "stroinadzor": {'title': 'Мосгосстройнадзор', 'subtitle': 'Комитет государственного строительного надзора<br/> города Москвы'},
+    "mke": {'title': 'Москомэкспертиза', 'subtitle': 'Комитет города Москвы <br/>по ценовой политике в строительстве <br/>и государственной экспертизе проектов'},
+    "dsti": {'title': 'Департамент строительства транспортной <br/>и инженерной инфраструктуры <br/>города Москвы', 'subtitle': ''}
+  }
+%}
+
+<div class="main-logo">
+    <a href="{{ path('app_subordinate_%s_homepage'|format(subordinate)) }}">
+{#         <img src="/images/subordinate/new-header-logo.svg" alt="stroi.mos.ru" class="main-logo__image"/> #}
+        <div class="main-logo__text main-logo__text">
+          <h1 class="main-logo__title">{{ subordinate_logo_presets[subordinate].title | raw }}</h1>
+          {% if subordinate_logo_presets[subordinate].subtitle != '' %}
+            <h2 class="main-logo__subtitle">{{ subordinate_logo_presets[subordinate].subtitle | raw }}</h2>
+          {% endif %}
+        </div>
+    </a>
+</div>

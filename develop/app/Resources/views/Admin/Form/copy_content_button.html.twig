@@ -1,0 +1,10 @@
+{% block copy_content_button_widget %}
+    <script src="{{ asset('js/admin/copier-content-button.js') }}"></script>
+    <button
+        class="btn btn-success btn-sm btn-outline sonata-ba-action"
+        role="copier-content-button"
+        data-copy-from = "{{ config['copy_from'] }}"
+        data-copy-to = "{{ config['copy_to'] }}"
+    > {{ config['button_title'] }}</button>
+{% endblock %}
+

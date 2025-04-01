@@ -1,0 +1,401 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+      <div class="covid-vaccine">
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_a">
+            <div class="covid-vaccine__intro">
+              <h2 class="covid-vaccine__intro-title">
+                Приглашаем<br>
+                добровольцев!
+              </h2>
+              <h3 class="covid-vaccine__intro-subtitle">
+                Вакцинируйтесь против COVID-19 бесплатно
+              </h3>
+              <div class="covid-vaccine__intro-text">
+                Безопасная вакцина на основе современной технологии
+              </div>
+              <div class="covid-vaccine__intro-button">
+                <a href="https://www.mos.ru/city/projects/covid-19/form/" class="covid-vaccine__button">
+                  Оставить Заявку
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <img src="/images/covid-vaccine/intro.png" alt="" class="covid-vaccine__intro-img" />
+          </div>
+        </div>
+
+        <h2 class="covid-vaccine__title" style="margin: 150px 0 90px 40px;">
+          Вакцина <span>создана в НИЦ</span> эпидемиологии<br>
+          и микробиологии им. Н.Ф. Гамалеи Минздрава России
+        </h2>
+
+        <h3 class="covid-vaccine__subtitle" style="margin: 90px 0 100px 40px;">
+          <a href="https://www.mos.ru/news/item/80025073/">
+            Ответы на основные вопросы
+          </a>
+        </h3>
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_a">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-title">
+                Безопасна для здоровья
+              </div>
+              <div class="covid-vaccine__faq-text">
+                Препарат не&nbsp;содержит самого коронавируса, –&nbsp;а&nbsp;значит, заболеть им или&nbsp;заразить окружающих невозможно.
+                Человек не&nbsp;будет являться носителем вируса
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_c">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-title">
+                Успешно прошла предрегистрационные клинические испытания
+              </div>
+              <div class="covid-vaccine__faq-text">
+                У вакцинированных появились антитела, что&nbsp;исключает опасность заражения COVID‑19. Препарат переносится организмом так&nbsp;же, как&nbsp;обычная прививка
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-text covid-vaccine__faq-text_special">
+                Участие в&nbsp;исследовании возможно только после&nbsp;медицинского обследования при&nbsp;отсутствии противопоказаний
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_c">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-title">
+                Ведется набор добровольцев
+              </div>
+              <div class="covid-vaccine__faq-text">
+                Станьте соискателем для&nbsp;участия в&nbsp;пострегистрационном клиническом исследовании вакцины
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_a">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-text">
+                  Перед вакцинацией каждый доброволец проходит скрупулезное обследование на наличие противопоказаний. Ошибки исключены!
+              </div>
+              <div class="covid-vaccine__faq-text">
+                  Вакцина состоит из&nbsp;двух компонентов, и&nbsp;потому нужны две внутримышечные инъекции. Вторая инъекция вводится через&nbsp;три недели
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_c">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-text covid-vaccine__faq-text_alt">
+                Препарат получен биотехнологическим методом на&nbsp;основе самой современной технологической платформы, созданной российскими учеными
+              </div>
+              <div class="covid-vaccine__faq-text covid-vaccine__faq-text_alt">
+                Его основа —&nbsp;это созданные в&nbsp;лаборатории специальные структуры (векторы-носители), которые содержат лишь часть гена вируса. В&nbsp;ответ на&nbsp;встречу с&nbsp;ними иммунитет вырабатывает защитные антитела
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="covid-vaccine__title" style="margin: 50px 0 70px 40px;">
+          Кто может стать участником программы пострегистрационной вакцинации?
+        </h2>
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__research">
+              <img src="/images/covid-vaccine/research.png" alt="" />
+              <div class="covid-vaccine__research-info">
+                Участники исследования будут находиться под&nbsp;медицинским наблюдением и&nbsp;вести дневник самочувствия
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <ul class="covid-vaccine__checklist">
+              <li>
+                не болевший ОРВИ (за&nbsp;две недели до&nbsp;исследования и&nbsp;в&nbsp;момент вакцинации)
+              </li>
+              <li>
+                не болевший COVID-19 (с&nbsp;отрицательным результатом анализа методом ПЦР (мазок)
+                и&nbsp;отрицательным тестом на&nbsp;антитела IgМ и&nbsp;IgG (кровь из&nbsp;вены), анализы сделают кандидатам
+                в&nbsp;рамках медицинского обследования
+              </li>
+              <li>
+                совершеннолетний гражданин Российской Федерации или&nbsp;другого государства
+                при&nbsp;условии знания русского языка (может заполнить документы и&nbsp;общаться
+                с врачами-исследователями)
+              </li>
+              <li>
+                не&nbsp;контактировавший с&nbsp;заболевшими COVID-19 в&nbsp;течение двух недель до&nbsp;исследования
+              </li>
+              <li>
+                для&nbsp;женщин необходим отрицательный тест на&nbsp;беременность
+              </li>
+              <li>
+                для&nbsp;женщин и мужчин —&nbsp;возможно участие
+                в&nbsp;случае, если в&nbsp;следующие три месяца не&nbsp;планируется зачатие
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row" style="margin-top: 75px;">
+          <div class="covid-vaccine__column_a">
+            <div class="covid-vaccine__faq">
+              <div class="covid-vaccine__faq-text">
+                Запишитесь в&nbsp;программу пострегистрационного клинического исследования вакцины против COVID-19
+              </div>
+            </div>
+          </div>
+          <div class="covid-vaccine__column_c">
+            <a href="https://www.mos.ru/city/projects/covid-19/form/" class="covid-vaccine__button">
+              Оставить Заявку
+            </a>
+          </div>
+        </div>
+
+        <h2 class="covid-vaccine__title" style="margin: 50px 0 0 40px;">
+          Ваши действия в случае участия<br>
+          в программе:
+        </h2>
+
+        <div class="covid-vaccine__row covid-vaccine__action">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__action-text">
+              <span class="covid-vaccine__action-text-num">1</span>
+              подайте заявку на участие<br>
+              (с заполнением анкеты)
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <div class="covid-vaccine__action-img">
+              <img src="/images/covid-vaccine/action-1.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row covid-vaccine__action">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__action-img">
+              <img src="/images/covid-vaccine/action-2.png" alt="" />
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+          <div class="covid-vaccine__action-text covid-vaccine__action-text_alt">
+              <span class="covid-vaccine__action-text-num">2</span>
+              получите приглашение и пройдите полное<br>
+              медицинское обследование
+            </div>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row covid-vaccine__action">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__action-text">
+              <span class="covid-vaccine__action-text-num">3</span>
+              подпишите информированное согласие<br>
+              на участие в клиническом исследовании<br>
+              и получите страховой полис
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <div class="covid-vaccine__action-img">
+              <img src="/images/covid-vaccine/action-3.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="covid-vaccine__row covid-vaccine__action">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__action-img">
+              <img src="/images/covid-vaccine/action-4.png" alt="" />
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+          <div class="covid-vaccine__action-text covid-vaccine__action-text_alt">
+              <span class="covid-vaccine__action-text-num">4</span>
+              пройдите вакцинацию, установите на свой<br>
+              телефон мобильное приложение<br>
+              для мониторинга состояния здоровья<br>
+            </div>
+          </div>
+        </div>
+
+         <div class="covid-vaccine__row covid-vaccine__action">
+          <div class="covid-vaccine__column_b">
+            <div class="covid-vaccine__action-text">
+              <span class="covid-vaccine__action-text-num">5</span>
+              проходите постоянное медицинское<br>
+              наблюдение в течение всего<br>
+              исследования (приемы врачей<br>
+              и мониторинг с помощью телемедицины)
+            </div>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <div class="covid-vaccine__action-img">
+              <img src="/images/covid-vaccine/action-5.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <h2 class="covid-vaccine__title" style="margin: 150px 0 70px 40px;">
+          Постоянный мониторинг состояния здоровья
+        </h2>
+
+        <ul class="covid-vaccine__monitoring">
+          <li class="covid-vaccine__monitoring-item">
+            <div class="covid-vaccine__monitoring-item-img">
+              <img src="/images/covid-vaccine/monitoring-1.png" alt="" />
+            </div>
+            <div class="covid-vaccine__monitoring-item-content">
+              <div class="covid-vaccine__monitoring-item-title">
+                Дневник самонаблюдения
+              </div>
+              <div class="covid-vaccine__monitoring-item-text">
+                ведется в мобильном приложении на телефоне
+              </div>
+            </div>
+          </li>
+          <li class="covid-vaccine__monitoring-item">
+            <div class="covid-vaccine__monitoring-item-img">
+              <img src="/images/covid-vaccine/monitoring-2.png" alt="" />
+            </div>
+            <div class="covid-vaccine__monitoring-item-content">
+              <div class="covid-vaccine__monitoring-item-title">
+                Телемедицина
+              </div>
+              <div class="covid-vaccine__monitoring-item-text">
+                связь с пациентом для уточнения состояния его здоровья
+              </div>
+            </div>
+          </li>
+          <li class="covid-vaccine__monitoring-item">
+            <div class="covid-vaccine__monitoring-item-img">
+              <img src="/images/covid-vaccine/monitoring-3.png" alt="" />
+            </div>
+            <div class="covid-vaccine__monitoring-item-content">
+              <div class="covid-vaccine__monitoring-item-title">
+                Электронный браслет
+              </div>
+              <div class="covid-vaccine__monitoring-item-text">
+                для измерения артериального давления и температуры тела
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <h2 class="covid-vaccine__title" style="margin: 100px 0 70px 40px;">
+          Полезные страницы
+        </h2>
+
+        <div class="covid-vaccine__row">
+          <div class="covid-vaccine__column_a">
+            <ul class="covid-vaccine__help">
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/">Коронавирус официальная информация</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/vaccine/">Бесплатная вакцинация</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/test/">Тест на коронавирус</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/isolation/">Домашний режим</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/#rec235390305">Контакты</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/documents/">Документы</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/stayhome/">Работа из дома</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/organization/">Работа организаций</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/about/">Профилактика</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/treatment/">Лечение</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/business/">Поддержка бизнеса</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/city/projects/covid-19/shtraf/">Штрафы и обжалование </a>
+              </li>
+            </ul>
+          </div>
+          <div class="covid-vaccine__column_d">
+            <ul class="covid-vaccine__help">
+              <li>
+                <a href="https://www.mos.ru/city/projects/measures/">Меры Правительства Москвы</a>
+              </li>
+              <li>
+                <a href="https://www.mos.ru/news/item/80025073/">FAQ</a>
+                <ul class="covid-vaccine__help">
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/aboutquestions/">О коронавирусе</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/homequestions/">Домашний режим</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/shtrafquestions/">Маски и перчатки, штрафы за нарушения</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/testquestions/">Тесты на коронавирус</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/treatmentquestions/">Лечение в больнице и дома</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/measuresquestions/">Меры против распространения инфекции</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/workquestions/">Работа во время пандемии</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/clinicsquestions/">Больницы, школы и другие услуги города</a>
+                  </li>
+                  <li>
+                    <a href="https://www.mos.ru/city/projects/covid-19/socialquestions/">Социальная поддержка </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div> <!-- /covid-vaccine-->
+    </div>
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

@@ -1,0 +1,25 @@
+<th{% if(is_diff|default(false)) %} class="diff"{% endif %}>{% block name %}{{ admin.trans(field_description.label, {}, field_description.translationDomain) }}{% endblock %}</th>
+<td>{% block field %}{{ value | raw }}{% endblock %}</td>
+
+{% block field_compare %}
+    {% if(value_compare is defined) %}
+        <td>
+            {% set value = value_compare %}
+            {{ block('field') }}
+            <div>
+            {% if (is_diff|default(false) and admin.hasRoute('revert_revision')) %}
+                <a href="
+                    {{
+                        admin.generateUrl('revert_revision', {
+                            id: admin.subject.id,
+                            base_rev_id: app.request.attributes.get('base_revision'),
+                            compare_rev_id: app.request.attributes.get('compare_revision'),
+                            field_name: field_description.name
+                        })
+                    }}
+                ">revert</a>
+            {% endif %}
+            </div>
+        </td>
+    {% endif %}
+{% endblock %}

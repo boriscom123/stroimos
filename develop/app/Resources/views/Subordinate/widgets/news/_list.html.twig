@@ -1,0 +1,23 @@
+<div class="gdp-smi-page">
+    <section class="shorthand-report-list">
+        <div class="shorthand-report-list__title">
+            {{ title }}
+        </div>
+        <div class="shorthand-report-list__list">
+            {% for post in posts %}
+                {% include 'Subordinate/widgets/news/_teaser.html.twig' with {'post' : post} %}
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if next_offset %}
+        {% include ':Subordinate/Block:loadmore_button.html.twig' with {
+            title: 'Загрузить ещё',
+            target: '.shorthand-report-list__list',
+            item: '.shorthand-report-list__teaser',
+            source: block_path(block, context, {template: 'subordinate_news_ajax_list'}),
+            limit: limit,
+            offset: next_offset
+        } %}
+    {% endif %}
+</div>

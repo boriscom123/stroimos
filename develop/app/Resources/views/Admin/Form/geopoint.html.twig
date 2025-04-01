@@ -1,0 +1,63 @@
+{% block geopoint_widget %}
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>WGS84 (EPSG:4326)</td>
+                <td></td>
+                <td>Web Mercator (EPSG:3857/EPSG:900913/EPSG:102113/etc.)</td>
+            </tr>
+            <tr>
+                <td><input id="{{ id }}" name="{{ full_name }}" value="{{ value }}" placeholder="долгота,широта" class="form-control" style="display:inline-block; width: 300px;"/></td>
+                <td><a href="#" id="{{ id }}_conversion_btn" class="btn btn-info"><i class="fa fa-arrow-left"></i></a></td>
+                <td><input id="{{ id }}_conversion_source" class="form-control" style="display:inline-block; width: 300px;" placeholder="долгота,широта"/></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <div id="{{ id }}-geoPoint-map-container" style="width:{{ map_width }}px; height:{{ map_height }}px"></div>
+    </div>
+
+    {# custom build of OpenLayers (@link http://openlayers.org/en/v3.6.0/doc/tutorials/custom-builds.html) #}
+    <script src="{{ asset('js/vendor/ol-custom.js') }}"></script>
+    <script src="{{ asset('js/admin/geo-address-editor.js') }}"></script>
+    <script>
+        ymaps.ready(init);
+
+        function init() {
+            var $geoPointInput = $('#{{ id }}'),
+                $convertBtn = $('#{{ id }}_conversion_btn');
+
+            {% if form.parent.text is defined %}
+                var $textInput = $('#{{ form.parent.text.vars.id }}');
+            {% else %}
+                var $textInput = $();
+            {% endif %}
+
+            var addressEditor_{{ id }} = new AddressEditor('{{ id }}-geoPoint-map-container', $geoPointInput, $textInput);
+
+            addressEditor_{{ id }}.init();
+
+            $convertBtn.on('click', function (e) {
+                e.preventDefault();
+
+                var $conversionSource = $('#{{ id }}_conversion_source'),
+                    coords,
+                    coordsConverted;
+
+                if ($conversionSource.val()) {
+                    coords = $conversionSource.val().split(',').map(function (v) { return v.trim(); });
+
+                    if (coords.length === 2) {
+                        coordsConverted = ol.proj.toLonLat(coords);
+
+                        $geoPointInput.val(coordsConverted.join(','));
+                        $geoPointInput.trigger('change');
+                        $conversionSource.val('');
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}
+

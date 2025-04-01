@@ -1,0 +1,19 @@
+{% set link = item.link|default %}
+{% if link is not empty %}
+    {% set attributes %}class="slide-banner__link"{% if item.isTargetBlank %} target="_blank"{% endif %}{% endset %}
+{% elseif item.image is not null %}
+    {% set link %}{% path item.image, 'full' %}{% endset %}
+    {% set attributes %}class="slide-banner__link slide-banner__popup"{% endset %}
+{% else %}
+    {% set link="javascript:void(0)" %}
+    {% set attributes %}class="slide-banner__link slide-banner__link-static"{% endset %}
+{% endif %}
+<div class="slide-banner">
+    <a href="{{ link }}" {{ attributes }}>
+        <div class="slide-banner__title">
+            <p>{{ item.title }}</p>
+            <i></i>
+        </div>
+        <div class="slide-banner__image" style="background-image:url('{% path item.templateImage, 'thumb589' %}')"></div>
+    </a>
+</div>

@@ -1,0 +1,140 @@
+{% set isMaskSelectable = format == 'main_image_thumb589' or format == 'gallery_media_thumb589' %}
+
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="preview">
+                    <a href="{% path object, format %}?{{ random(1, 100500) }}" target="_blank">
+                        <img src="{% path object, format %}?{{ random(1, 100500) }}" style="max-width: 100%" />
+                    </a>
+                </div>
+                <div class="cropper crop" style="display: none">
+                    <img src="{% path object, 'reference' %}" style="max-width: 100%" />
+                </div>
+            </div>
+            <div class="alert alert-danger alert-crop" style="display: none;">
+                Область кропа меньше минимально допустимых размеров. Увеличьте область кропа!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="preview btn btn-primary show-crop">Редактировать</button>
+                <div class="crop input-group" style="display: none">
+                    {% if isMaskSelectable %}
+                        <select class="form-control mask-selector" >
+                            <option value="">Без маски</option>
+                            <option value="blue">Синяя маска</option>
+                            <option value="green">Зелёная маска</option>
+                        </select>
+                    {% endif %}
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary do-crop">Применить</button>
+                        <button type="button" class="btn btn-default cancel-crop">Отмена</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var $image = $('#{{ modal_id }} .cropper img'),
+                aspectRatio = {{ params.ratio ? params.ratio : 'NaN' }},
+                minimumConstraints = {{ params.minimum_constraints|default(false)|json_encode|raw }};
+        var $doCropButton = $('#{{ modal_id }} .do-crop');
+        var $cropAlert = $('#{{ modal_id }} .alert-crop');
+
+        $('#{{ modal_id }}')
+                .on('click, mousedown', function (e) {
+                    e.stopPropagation();
+                    {% if isMaskSelectable %}
+                    var $maskSelector = $('#{{ modal_id }} .mask-selector');
+                    if($maskSelector.data('select2')) {
+                        $maskSelector.select2('destroy');
+                    }
+                    {% endif %}
+                })
+                .on('hidden.bs.modal', function () {
+                    $image.cropper('destroy');
+                    $('#{{ modal_id }} .crop').hide();
+                    $('#{{ modal_id }} .preview').show();
+                    $cropAlert.hide();
+                });
+
+        $('#{{ modal_id }} .show-crop').click(function () {
+            var $cropBox;
+
+            $('#{{ modal_id }} .preview').hide();
+            $('#{{ modal_id }} .crop').show();
+
+            $image.cropper({
+                autoCropArea: 0.9,
+                aspectRatio: aspectRatio,
+                zoomable: false,
+                minCropBoxWidth: 30,
+                minCropBoxHeight: 30,
+                built: function () {
+                    if (!aspectRatio) {
+                        $image.cropper('setAspectRatio', $image.get(0).naturalWidth / $image.get(0).naturalHeight);
+                    }
+                }
+            });
+
+            if (minimumConstraints) {
+                $image.on('crop.cropper', function (e) {
+                    var cropData = $image.cropper('getData');
+                    if (!$cropBox) {
+                        $cropBox = $('#{{ modal_id }} .cropper-crop-box');
+                    }
+
+                    if (Math.ceil(cropData.width) >= minimumConstraints[0] && Math.ceil(cropData.height) >= minimumConstraints[1]) {
+                        $cropBox.removeClass('bad-crop-box');
+                        $doCropButton.prop('disabled', false);
+                        $cropAlert.hide();
+                    } else {
+                        $cropBox.addClass('bad-crop-box');
+                        $doCropButton.prop('disabled', true);
+                        $cropAlert.show();
+                    }
+                });
+            }
+        });
+
+        $('#{{ modal_id }} .cancel-crop').click(function () {
+            $('#{{ modal_id }} .crop').hide();
+            $('#{{ modal_id }} .preview').show();
+            $image.off('crop.cropper');
+            $image.cropper('destroy');
+            $cropAlert.hide();
+        });
+
+        $doCropButton.click(function () {
+            var cropData = $image.cropper('getData'),
+                $button = $(this);
+            var mask = '';
+            {% if isMaskSelectable %}
+            mask = $('#{{ modal_id }} .mask-selector').val();
+            {% endif %}
+            $button.attr('disabled', 'disabled');
+            $.ajax({{ admin.generateObjectUrl('edit_image_format', media) |json_encode|raw }}, {
+                method: 'POST',
+                data: {
+                    format: {{ format|json_encode|raw }},
+                    crop: cropData,
+                    mask: mask
+                },
+                success: function (data) {
+                    $('#{{ modal_id }} .preview img').attr('src', data.edited_format + '?' + Math.random());
+                    $('#{{ modal_id }} .preview a').attr('href', data.edited_format + '?' + Math.random());
+
+                    $image.off('crop.cropper');
+                    $image.cropper('destroy');
+                    $('#{{ modal_id }} .crop').hide();
+                    $('#{{ modal_id }} .preview').show();
+                    $button.removeAttr('disabled');
+                }
+            });
+            $cropAlert.hide();
+        });
+    })();
+</script>

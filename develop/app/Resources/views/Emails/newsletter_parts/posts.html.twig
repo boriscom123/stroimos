@@ -1,0 +1,133 @@
+<tr>
+    <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 20px;">
+        <!-- BEGIN NEWS // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="newsBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 60px 0 0 0;">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="middle" align="start" class="headerBlockTitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-family: Arial,serif; font-weight: bold; font-size: 24px; line-height: 1; padding: 0 10px 0 0; line-height: 20px; height: 20px; text-transform: uppercase;" height="20">
+                                Новости
+                            </td>
+                            <td valign="middle" align="end" class="headerBlockArchive" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 0 0 10px; height: 20px;" height="20">
+                                <a href="https://stroi.mos.ru/news?{{ url_utm }}" class="headerBlockArchiveLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #181818; font-family: Verdana,sans-serif; font-size: 10px; line-height: 1;">
+                                    <span class="headerBlockArchiveLink" style="color: #CA1120; font-family: Arial,sans-serif; font-size: 16px; line-height: 120%; text-transform: uppercase; text-decoration: underline; font-weight: 400;">
+                                        Все новости на сайте
+                                    </span> 
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% set leftDirection = true %}
+            {% set generalPosts = [] %}
+
+            {% for post in posts %}
+                {% if post.post.cityDistricts is empty and post.post.administrativeAreas is empty %}
+                    {% set generalPosts = generalPosts|merge([post]) %}
+                {% endif %}
+            {% endfor %}
+
+            {% if generalPosts|length > 0 %}
+                {% for post in generalPosts %}
+                    {% if loop.last %}
+                        {% include ':Emails/newsletter_parts:last_post_right.html.twig' with {post: post} %}
+                    {% else %}
+                        {% include ':Emails/newsletter_parts:post.html.twig' with {post: post} %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+  
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 40px 0 0 0;"> 
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="top" align="left" class="newsItemTags" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">    
+                                {% set schemeAndHost = request.getSchemeAndHttpHost() %}
+                                {% set uniqueRubrics = [] %}
+
+                                {% for post in posts %}
+                                    {% if post.post.cityDistricts is empty and post.post.administrativeAreas is empty %}
+                                        {% for item in post.post.rubrics %}
+                                            {% if item.title not in uniqueRubrics %}
+                                                {% set uniqueRubrics = uniqueRubrics|merge([item.title]) %}
+                                                <a
+                                                    href="{{ schemeAndHost }}{{ path('app_news_list') }}?rubric={{ item.title }}"
+                                                    class="related-link related-link__light top-news__link-calendar"
+                                                    style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262CCC; font-family: Arial,serif; font-size: 16px; line-height: 100%; text-decoration: none !important; display: inline-block; padding: 4px; background-color: #E8EFF3; margin-bottom: 8px; margin-right: 6px; font-weight: 400;"
+                                                >#{{ item.title }}</a> 
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>  
+                    </table>
+                </td>
+            </tr> 
+        </table>
+        
+        {% set districtPosts = [] %}
+
+        {% for post in posts %}
+            {% if post.post.cityDistricts is not empty %} 
+                {% set districtPosts = districtPosts|merge([post]) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if districtPosts|length > 0 %}
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="newsBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 60px 0 0 0;">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="middle" align="start" class="headerBlockTitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-family: Arial,serif; font-weight: bold; font-size: 24px; line-height: 1; padding: 0 10px 0 0; line-height: 20px; height: 20px; text-transform: uppercase;" height="20">
+                                Новости округов и районов
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            {% set leftDirection = true %}
+ 
+            {% for post in districtPosts %}
+                {% if loop.last %}
+                    {% include ':Emails/newsletter_parts:last_post_left.html.twig' with {post: post} %}
+                {% else %}
+                    {% include ':Emails/newsletter_parts:post.html.twig' with {post: post} %}
+                {% endif %}
+            {% endfor %}
+   
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 40px 0 0 0;"> 
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="top" align="left" class="newsItemTags" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">    
+                                {% set schemeAndHost = request.getSchemeAndHttpHost() %}
+                                {% set uniqueDistrictRubrics = [] %}
+
+                                {% for post in posts %}
+                                    {% if (post.post.cityDistricts is not empty) or (post.post.administrativeAreas is not empty) %}
+                                        {% for item in post.post.rubrics %}
+                                            {% if item.title not in uniqueDistrictRubrics %}
+                                                {% set uniqueDistrictRubrics = uniqueDistrictRubrics|merge([item.title]) %}
+                                                <a
+                                                    href="{{ schemeAndHost }}{{ path('app_news_list') }}?rubric={{ item.title }}"
+                                                    class="related-link related-link__light top-news__link-calendar"
+                                                    style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262CCC; font-family: Arial,serif; font-size: 16px; line-height: 100%; text-decoration: none !important; display: inline-block; padding: 4px; background-color: #E8EFF3; margin-bottom: 8px; margin-right: 6px; font-weight: 400;"
+                                                >#{{ item.title }}</a> 
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>  
+                    </table>
+                </td>
+            </tr> 
+        </table>
+        {% endif %}
+
+        <!-- END NEWS // -->
+    </td>
+</tr>

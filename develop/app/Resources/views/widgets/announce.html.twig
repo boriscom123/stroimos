@@ -1,0 +1,17 @@
+{% if eventAnnounce %}
+<div class="announce__wrapper container__full" style="background-image: url('/images/anounce-img.png')">
+    <article class="announce">
+        <aside class="announce__meta">
+            <span class="announce__section">Анонс</span>
+            <time class="announce__date">
+                <strong>{{ eventAnnounce.event.date|format_date("d") }}</strong>
+                <em>{{ eventAnnounce.event.date|format_date("MMMM") }}</em>
+            </time>
+        </aside>
+        <header class="announce__teaser">
+            <a href="{{ entity_path(eventAnnounce.event) }}">{{ eventAnnounce.title }}</a>
+        </header>
+        <p>{{ eventAnnounce.event.title|raw }}</p>
+    </article>
+</div>
+{% endif %}

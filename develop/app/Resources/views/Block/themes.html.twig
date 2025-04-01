@@ -1,0 +1,11 @@
+<div class="themes-panel__menu-wrapper" tabindex="-1">
+    <nav class="themes-panel__menu themes-panel__two-columns" data-active="" data-columns>
+        {% for item in items %}
+            <div class="themes-panel__menu-item {% if item.title == currentItemTitle %}active{% endif %}">
+                <a href="{{ path(route, routeParams|merge({rubric: item.title})) }}">
+                    {{ item.title }}
+                </a>
+            </div>
+        {% endfor %}
+    </nav>
+</div>

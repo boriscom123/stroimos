@@ -1,0 +1,280 @@
+.zd {
+  &__title {
+    height: 398px;
+    background: url('/images/zd/lead-bg.jpg') center center no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Onest,sans-serif;
+    color: #fff;
+    font-size: 53px;
+    font-weight: 900;
+    margin: 0px -240px 90px;
+  }
+  &__subtitle {
+    font-family: Brygada1918,serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 1.1;
+    color: @color;
+    margin: 0 0 40px 0;
+    padding: 0 0 30px 0;
+    background-image: url('/images/dot_black_bold.png');
+  	background-position: -2px 100%;
+  	background-repeat: repeat-x;
+    a {
+      color: @color;
+      &:hover{
+        color: @hover;
+      }
+    }
+    &_sm {
+      font-size: 35px;
+    }
+    &_alt {
+      background-position: -2px 23px;
+    	background-repeat: repeat-x;
+      padding: 0px;
+      span {
+        background: #fff;
+        padding-right: 20px;
+      }
+    }
+  }
+}
+
+.zd-banner-cut {
+  display: block;
+  height: 400px;
+  margin: 0 0 90px -240px;
+  background: url('/images/zd/banner-cut-bg.jpg') #222222 center right no-repeat;
+  color: #fff;
+  &__text {
+    display: block;
+    font-family: Brygada1918,serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.4;
+    padding-left: 240px;
+    padding-top: 55px;
+    width: 350px;
+  }
+}
+a.zd-banner-cut:hover {
+    color: @hover;
+}
+
+@directions_teaser_width: 300px;
+@directions_teaser_height: 190px;
+@directions_teaser_margin: 30px;
+
+.zd-tiles {
+  list-style-type: none;
+  margin: 0 0 125px 0;
+  padding: 0;
+  .clearfix();
+  &__teaser {
+    float: left;
+    margin-right: @directions_teaser_margin;
+    margin-bottom: @directions_teaser_margin;
+    &:nth-child(3n+3) {
+      margin-right: 0px;
+    }
+    &:nth-child(n+7) {
+      margin-bottom: 0px;
+    }
+  }
+  &__link {
+    .shadowed-teaser();
+    height: @directions_teaser_height;
+    width: @directions_teaser_width;
+
+    background-image: url('/images/zd/directions-bg.jpg');
+    background-color: #222222;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Onest,sans-serif;
+    color: #fff;
+    font-size: 29px;
+    &:hover {
+      color: @hover;
+    }
+  }
+  /* first row */
+  &__teaser:nth-child(-n+3) &__link {
+    background-position-y: 0px;
+  }
+  /* second row */
+  &__teaser:nth-child(n+4):nth-child(-n+6) &__link {
+    background-position-y: -(@directions_teaser_height + @directions_teaser_margin);
+  }
+  /* last row */
+  &__teaser:nth-child(n+7) &__link {
+    background-position-y: -(@directions_teaser_height + @directions_teaser_margin)*2;
+  }
+  /* first column */
+  &__teaser:nth-child(3n+1) &__link {
+    background-position-x: 0px;
+  }
+  /* second column */
+  &__teaser:nth-child(3n+2) &__link {
+    background-position-x: -(@directions_teaser_width + @directions_teaser_margin);
+  }
+  /* last column */
+  &__teaser:nth-child(3n+3) &__link {
+    background-position-x: -(@directions_teaser_width + @directions_teaser_margin)*2;
+  }
+}
+
+.zd-links-list {
+  list-style-type: none;
+  margin: 0 0 90px 0;
+  padding: 0;
+  .clearfix();
+  &__item {
+    width: 50%;
+    float: left;
+    text-align: center;
+  }
+  &__link {
+    padding-bottom: 5px;
+    border-bottom: 1px solid @hover;
+    font-family: Onest,sans-serif;
+    color: #1d86e2;
+    font-size: 27px;
+    font-weight: 200;
+    &:hover {
+      color: #1d86e2;
+      border-color: transparent;
+    }
+  }
+}
+
+.zd-banner {
+  .shadowed-teaser();
+  display: block;
+  height: 400px;
+  margin: 0 0 90px 0;
+  background: #222222 center right no-repeat;
+  color: #fff;
+  &:hover {
+    color: #fff;
+  }
+  &__text {
+    display: block;
+    font-family: Brygada1918,serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1;
+    padding-left: 55px;
+    padding-top: 55px;
+  }
+  &_kiev {
+    background-image: url('/images/zd/banner-bg_kiev.jpg');
+  }
+  &_kursk {
+    background-image: url('/images/zd/banner-bg_kursk.jpg');
+  }
+  &_gork {
+    background-image: url('/images/zd/banner-bg_gork.jpg');
+  }
+  &_jaros {
+    background-image: url('/images/zd/banner-bg_jaros.jpg');
+  }
+  &_smolensk {
+    background-image: url('/images/zd/banner-bg_smolensk.jpg');
+  }
+}
+
+.zd-block-list {
+  margin-bottom: 50px;
+  height: 180px;
+  &__left {
+    background: @hover;
+    float: left;
+    height: 180px;
+    width: 390px;
+    position: relative;
+  }
+  &__title {
+    font-family: Brygada1918,serif;
+    color: #fff;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1;
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    width: 300px;
+  }
+  &__date {
+    font-family: Onest,sans-serif;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    .dotted-border(white, bottom);
+    padding-bottom: 3px;
+    display: inline-block;
+    position: absolute;
+    left: 50px;
+    bottom: 25px;
+  }
+  &__right {
+    margin-left: 390px;
+    box-sizing: border-box;
+    height: 180px;
+    padding: 0 30px;
+    overflow: hidden;
+    position: relative;
+    .slick-next {
+      border: none !important;
+      color: transparent !important;
+      padding: 0px !important;
+      margin: 0px !important;
+      border-radius: none !important;
+      background: url('/images/zd/icon-next.png') transparent center right no-repeat !important;
+      display: block;
+      width: 19px;
+      height: 13px;
+      position: absolute;
+      right: 25px;
+      bottom: 20px;
+      transition: transform 0.3s ease-out;
+      transform: translateY(0px);
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding-top: 32px;
+    float: left;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 180px;
+  }
+  &__item {
+    box-sizing: border-box;
+    width: 255px;
+    padding: 0px 15px;
+    border-left: 1px solid @hover;
+    font-family: Onest,sans-serif;
+    color: @color;
+    font-size: 16px;
+    line-height: 1.4;
+    a {
+      color: @color;
+      &:hover {
+        color: @hover;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div class="interactive-map">
+    <h3 class="interactive-map__title">Интерактивная карта</h3>
+    <a href="{{ path('app_construction') }}" class="interactive-map__link">
+        <div class="interactive-map__link-block">
+            Стройки Москвы{#<br/>Аэросъемка#}
+            <i class="interactive-map__link-arrow" style="margin-bottom: 0; margin-top: 200px"></i>
+            {#<i class="interactive-map__link-aero"></i>#}
+        </div>
+        <div class="interactive-map__link-img"></div>
+    </a>
+    <div class="interactive-sidebar">
+        <h4 class="interactive-sidebar__title">Государственные программы</h4>
+        <ul class="interactive-sidebar__list">
+            <li class="interactive-sidebar__list-item">
+                <a href="{{ path('page', {slug: 'zhilische'}) }}" class="interactive-sidebar__item-link">
+                    Жилище
+                    <span class="interactive-sidebar__item-link-legend">
+                        Перейти
+                    </span>
+                </a>
+            </li>
+            <li class="interactive-sidebar__list-item">
+                <a href="{{ path('page', {slug: 'gradostroitelnaya-politika'}) }}" class="interactive-sidebar__item-link">
+                    Градостроительная политика
+                    <span class="interactive-sidebar__item-link-legend">
+                        Перейти
+                    </span>
+                </a>
+            </li>
+            <li class="interactive-sidebar__list-item">
+                <a href="{{ path('page', {slug: 'adresnaya-investicionnaya-programma'}) }}" class="interactive-sidebar__item-link">
+                    Адресная инвестиционная программа
+                    <span class="interactive-sidebar__item-link-legend">
+                        Перейти
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

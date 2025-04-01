@@ -1,0 +1,35 @@
+<div class="services">
+    {% if not new_design %}
+        <h3 class="services__title">Сервисы</h3>
+    {% else %}
+        <h4 class="services-socials__title">Следите за нами</h4>
+        {% include '::/widgets/socials.html.twig' with {'socials': []} %}
+    {% endif %}
+    <ul class="services__list">
+        {% for serviceBanner in page.blocks(null, constant('AppBundle\\Entity\\Block::TYPE_SERVICE_BANNER')) %}
+            {% set settings = serviceBanner.settings %}
+            <li class="services__teaser">
+                <a class="services__teaser-link" href="{{ settings.url }}" {% if settings.target_blank %}target="_blank"{% endif %}>
+                    {{ settings.title }}
+                    <i class="icon icon-services icon-{{ settings.icon }}"></i>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{#{% include '::/widgets/city_news/_widget.html.twig' with {'news': news} %}#}
+{#<ul class="services__list">
+    <li class="services__teaser">
+        <a class="services__teaser-link" href="#">
+            <i class="services-teaser__last-updates"></i>
+            Последние обновления
+            <span>Перейти</span>
+        </a>
+    </li>
+</ul>#}
+
+{#<a href="#" class="update-btn">#}
+    {#Последние обновления#}
+    {#<small>перейти</small>#}
+{#</a>#}

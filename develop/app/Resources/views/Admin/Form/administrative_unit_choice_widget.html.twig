@@ -1,0 +1,44 @@
+{% block administrative_unit_choice_widget %}
+    {% set optionName = 'administrativeUnits' %}
+    {% spaceless %}
+        <select name="">
+            {% for unit in source_data_provider %}
+            <optgroup label="{{ unit.title }}">
+                {% for district in unit.districts %}
+                    <option value="{{ district.id }}">{{ district.title }}</option>
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+        </select>
+        <div role="administrative_unit_choice_widget">
+            <ul class="root">
+                {% for unit in source_data_provider %}
+                    <li class="checkbox">
+                        <input
+                            name="{{ optionName }}"
+                            type="checkbox"
+                            {{ unit.id in values ? 'checked' : '' }}
+                            value="{{ unit.id }}"
+                            id="unit{{ unit.id }}"
+                        />
+                        <label for="unit{{ unit.id }}">{{ unit.title }}</label>
+                        <ul>
+                            {% for district in unit.districts %}
+                                <li>
+                                    <input
+                                        name="{{ optionName }}"
+                                        type="checkbox"
+                                        {{ district.id in values ? 'checked' : '' }}
+                                        value="{{ district.id }}"
+                                        id="district{{ district.id }}"
+                                    />
+                                    <label for="district{{ district.id }}">{{ district.title }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endspaceless %}
+{% endblock %}

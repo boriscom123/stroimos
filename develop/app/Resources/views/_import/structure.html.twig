@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<style>
+    .page {
+        position: relative;
+        left: 10px;
+        border-left: 1px solid #AAA;
+        padding-left: 10px;
+        margin: 3px 0;
+    }
+
+    .not_published,
+    .not_published a {
+        color: #5e5e5e;
+    }
+
+    .root_id {
+        margin: 0 20px;
+    }
+
+    .nset {
+        float: right;
+        font-family: courier, monospace;
+        position: relative;
+        right: 30px;
+    }
+</style>
+
+<body style="position: relative">
+{% set prev = {level: false, root_id: false} %}
+
+{% for item in structure %}
+    <!--{{ prev.level }} -> {{ item.level }}-->
+    {% if prev.level >= item.level %}
+        <!--0..{{ prev.level - item.level + 1 }}-->
+        {% for i in 1..(prev.level - item.level + 1) %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if prev.root_id != item.root_id %}
+        {% if prev.root_id %}</div><!--root {{ prev.root_id }}-->{% endif %}
+        <div class="root_id">
+            <h2>root_id {{ item.root_id }}</h2>
+    {% endif %}
+
+    <div class="page{% if not item.is_published %} not_published{% endif %}" title="{{ item.name }}" data-level="{{ item.level }}">
+        {{ item.name }} <a href="http://stroi.mos.ru/{{ item.slug }}" target="_blank">/{{ item.slug }}</a>
+        <span class="nset">root: {{ item.root_id }}, level: {{ item.level }}, lft: {{ item.lft }}, rgt: {{ item.rgt }}</span>
+
+    {% set prev = item %}
+{% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+services:
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME}-nginx
+    ports:
+      - "8080:80"
+      - "443:443"
+    environment:
+      - VIRTUAL_HOST=${DOMAIN_NAME}
+      - PROJECT_NAME=stroimos
+      - DOCUMENT_ROOT=/var/www/html/main/web
+      - PHP_FPM_HOST=phpfpm
+    command: sh -c "envsubst '$DOCUMENT_ROOT $PHP_FPM_HOST' < /etc/nginx/conf.d/stroimos.conf_tmpl > /etc/nginx/conf.d/stroimos.conf  && exec nginx -g 'daemon off;'"
+    volumes:
+      - ./develop:/var/www/html/main:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/log:/var/log/nginx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    networks:
+      - stroimos_network
+    depends_on:
+      - php-fpm
+      - elasticsearch
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+      dockerfile: php74/Dockerfile
+      args:
+        - HOST_UID=${HOST_UID:-1000}
+        - HOST_GID=${HOST_GID:-1001}
+    container_name: ${PROJECT_NAME}-phpfpm
+    user: root
+    command: sh -c "php-fpm"
+    working_dir: "/var/www/html/main"
+    volumes:
+      - ./develop:/var/www/html/main
+      - ./php-fpm/opcache.ini:/usr/local/etc/php/conf.d/docker-oc-opcache.ini
+      - ./php-fpm/docker-oc-php.ini:/usr/local/etc/php/conf.d/docker-oc-php.ini
+      - ./nginx/certs:/usr/local/share/ca-certificates
+      - ./php-fpm/php_sessions:/tmp/sessions
+#      - /root/.ssh:/root/.ssh
+    environment:
+      SYMFONY__SESSION__SAVE_PATH: /tmp/sessions
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    networks:
+      - stroimos_network
+    depends_on:
+      - mysql
+      - redis
+      - memcached
+      - elasticsearch
+
+  mysql:
+    image: mysql:5.6
+    container_name: ${PROJECT_NAME}-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: stroi_mos_ru
+      MYSQL_USER: stroi_mos_ru
+      MYSQL_PASSWORD: password
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      #- ./mysql/init/entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
+      - ./mysql/data:/var/lib/mysql  # Хранение БД на подключенном хранилище
+      - ./mysql/dump:/tmp/dump # Подключение дампа
+    networks:
+      - stroimos_network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.0
+    container_name: ${PROJECT_NAME}-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - stroimos_network
+    restart: unless-stopped
+
+  memcached:
+    image: memcached:1.6
+    container_name: "stroimos-memcached"
+    ports:
+      - "11211:11211"
+    networks:
+      - stroimos_network
+    restart: unless-stopped
+#    command: [ "memcached", "-p", "11211", "-u", "memcached", "-m", "64", "-c", "1024", "-P", "/var/run/memcached/memcached.pid", "-l", "127.0.0.1", "-I", "10m" ]
+    environment:
+      - MAXCONN=1024
+      - CACHESIZE=64
+      - PORT=11211
+      - USER=memcached
+      - OPTIONS="-l 127.0.0.1 -I 10m"
+
+  elasticsearch:
+    image: elasticsearch:1.7.5
+    container_name: ${PROJECT_NAME}-elastic
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    networks:
+      - stroimos_network
+    restart: unless-stopped
+
+networks:
+  stroimos_network:
+    driver: bridge

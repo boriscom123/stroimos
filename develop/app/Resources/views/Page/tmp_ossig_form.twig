@@ -1,0 +1,21 @@
+<div class="ossig-form">
+	<form action="api/service-email" id="ossig_form">
+	<input type="text" name="name" placeholder="Имя*" minlength="1" maxlength="50" required>
+	<input type="text" name="organization" placeholder="Организация*" minlength="1" maxlength="255" required>
+	<input type="email" name="email" placeholder="E-mail*"  minlength="1" maxlength="50" required>
+	<input type="text" name="phone" placeholder="Телефон" minlength="1" maxlength="50">
+	<textarea name="message" rows="4" placeholder="Текст обращения*" minlength="1" maxlength="480" required></textarea>
+	<div class="ossig-form__footer" id="ossig_form_footer">
+		<button id="ossig_form_send" type="submit">Отправить</button>
+		<p id="ossig_form_notice" class="ossig-form__notice">
+		Отправляя форму Вы соглашаетесь с <a href="https://stroi.mos.ru/soghlashieniie-o-pol-zovanii-informatsionnymi-sistiemami-i-riesursami-ghoroda-moskvy">условиями использования информации</a>
+		</p>
+	</div>
+	<p class="ossig-form__result ossig-form__result_error" id="ossig_form_error">
+		При отправке возникла ошибка
+	</p>
+	<p class="ossig-form__result ossig-form__result_success" id="ossig_form_success">
+		Спасибо за обращение, мы скоро свяжемся с Вами
+	</p>
+	</form>
+</div>

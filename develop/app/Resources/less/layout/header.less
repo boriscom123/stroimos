@@ -1,0 +1,58 @@
+@import "../widgets/header/_logo";
+@import "../widgets/header/_top_menu";
+@import "../widgets/header/_main_menu";
+@import "../widgets/header/_search";
+@import "../widgets/header/_dropdown_menu";
+@import "../widgets/header/_super";
+
+.page-header{
+	display: table;
+	border-collapse: collapse;
+	height: @headerHeight;
+	border-bottom: 1px solid @mainPageBorderColour;
+}
+.page-header__column{
+	display: table-cell;
+	vertical-align: top;
+	width: 50%;
+	border-left: 1px solid @mainPageBorderColour;
+
+	&:first-child{
+		border-left: 0;
+	}
+
+	&:nth-of-type(1) {
+		.page-header__section {
+			&:nth-child(1) {
+				padding-top: 33px;
+				height: 140px;
+			}
+			&:nth-child(2) {
+				
+			}
+			&:nth-child(3) {
+				padding: 0;
+			}
+		}
+	}
+
+	&:nth-of-type(2) {
+		.page-header__section {
+			&:nth-child(1) {
+				padding-top: 33px;
+				height: 140px;
+			}
+			&:nth-child(2) {
+				padding-top: 24px;
+			}
+		}
+	}
+}
+.page-header__section{
+	border-top: 1px solid @mainPageBorderColour;
+	padding: 15px 0;
+
+	&:first-child{
+		border-top: 0;
+	}
+}

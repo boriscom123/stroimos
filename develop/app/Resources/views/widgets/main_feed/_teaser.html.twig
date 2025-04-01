@@ -1,0 +1,37 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+
+{% set isGallery = post.type is defined and post.type == 'gallery' %}
+{% set isNews =  not post.type is defined or post.type == 'news' %}
+{% set icons= {'gallery': 'photo', 'video': 'video', 'stat': 'chart'} %}
+
+<article class="main-feed__teaser {{ isGallery ? 'main-feed__teaser-gallery' : ''}}"
+    {% if isGallery %}
+    style="background-image:url({% path post.image, 'full' %})"
+    {% endif %}
+    >
+    <a class="main-feed__teaser-link" href="{{ entity_path(post) }}">
+        {% if not isGallery %}
+            {% if post.image is defined and post.image is not empty %}
+                <div class="main-feed__teaser-image">
+                    <img src="{% path post.image, 'thumb210' %}" alt="{{ post.title }}" width="210" height="150"/>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="main-feed__teaser-content">
+            <header class="main-feed__teaser-header">
+                <h4 class="main-feed__teaser-title">{{ post.title }}</h4>
+            </header>
+            <aside class="main-feed__teaser-meta">
+                <time class="main-feed__teaser-date">{{ post.publishStartDate | format_date }}</time>
+                {% if not isNews %}
+                    <i class="icon icon-40 {{ isGallery ? 'icon-light':'' }} icon-{{ icons[post.type] }}"></i>
+                {% endif %}
+            </aside>
+        </div>
+    </a>
+</article>

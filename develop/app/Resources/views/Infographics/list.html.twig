@@ -1,0 +1,16 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Архив инфографики',
+    'rubricsContext': 'infographics',
+    } %}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+
+    {{ sonata_block_render({'type': 'infographics_list'}, {
+        'template': '::/Infographics/_list.html.twig',
+        'rubric': app.request.get('rubric'),
+        'extraKey': app.request.queryString|md5
+    }) }}
+{% endblock %}

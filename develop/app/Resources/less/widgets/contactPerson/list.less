@@ -1,0 +1,63 @@
+@nameSeatWidth: 350px;
+@contactsWidth: 250px;
+
+.contactperson-block__title {
+  font-family: Onest, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  color: #222222;
+  margin-top: 40px;
+}
+
+.organization-block__list-item {
+
+  &-name {
+    font-style: normal;
+    display: inline-block;
+    clear: right;
+  }
+
+  &-person {
+    font-style: italic;
+    color: @hover;
+  }
+
+  &-phone {
+    display: inline-block;
+    clear: both;
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &-mail {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: @hover;
+  }
+
+  &.name-seat {
+    width: @nameSeatWidth;
+  }
+
+  &.contacts {
+    width: @contactsWidth;
+  }
+
+  &.organization {
+    width: @pageWidth - @nameSeatWidth - @contactsWidth;
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    word-wrap: break-word;
+
+    a {
+      color: @hover;
+    }
+  }
+}

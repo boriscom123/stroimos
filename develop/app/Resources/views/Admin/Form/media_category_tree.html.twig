@@ -1,0 +1,92 @@
+{% macro tree(links) %}
+    {% for link in links %}
+        {% set item = link.data is defined ? link.data : link %}
+        <li class="tree_node closed" id="tree_{{ item.id }}" data-id="{{ item.id }}">
+            <div class="tree_item_title">{{ item.title }}</div>
+            {% if item.children | length %}
+                <ul>
+                    {{ _self.tree(item.children) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% block media_category_tree_widget %}
+    {% if choices %}
+        <style>
+            .tree_item_title {
+                display: inline-block;
+                cursor: pointer;
+            }
+
+            .treeview li.selected > .tree_item_title {
+                font-weight: bold;
+            }
+        </style>
+
+        {% set rootNode = (choices|first).data %}
+        {% set treeview = 'treeview_' ~ id ~ '_' ~ rootNode.id %}
+        <ul class="treeview" id="{{ treeview }}">
+            <li class="tree_node" id="tree_{{ rootNode.id }}" data-id="{{ rootNode.id }}">
+                <div class="tree_item_title">{{ rootNode.title }}</div>
+                <ul>
+                    {{ _self.tree(rootNode.children) }}
+                </ul>
+            </li>
+        </ul>
+
+        {% set currentParent = value|default(rootNode.id) %}
+        <input type="hidden" {{ block('widget_attributes') }} value="{{ currentParent }}"/>
+
+        <script>
+            $(function () {
+                var $treeview = $({{ ('#' ~ treeview)|json_encode|raw }}),
+                        currentParent = {{ currentParent|json_encode|raw }},
+                        currentId = {{ (sonata_admin.admin|default ? app.request.get(sonata_admin.admin.getIdParameter) : null) |json_encode|raw }},
+                        valueTarget = {{ ('#' ~ id)|json_encode|raw }};
+
+                $treeview.treeview();
+
+                $('#tree_' + currentParent, $treeview)
+                        .addClass('selected')
+                        .parents('li')
+                        .each(function() {
+                            $(this).find('> div.closed-hitarea').click();
+                        });
+
+                $('.tree_item_title', $treeview).click(function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+
+                    var invalidTree = false;
+
+                    if (currentId) {
+                        var $selectedNodePath = $(this).parents('.tree_node');
+
+                        $selectedNodePath.each(function () {
+                            if ($(this).attr('data-id') == currentId) {
+                                invalidTree = true;
+                                return false;
+                            }
+                        });
+
+                        if (invalidTree) {
+                            alert('Элемент не может быть сам себе родителем');
+                            return;
+                        }
+                    }
+
+                    var $selectedNode = $(this).parent('li.tree_node');
+
+                    $('li', $treeview).removeClass('selected');
+                    $selectedNode.addClass('selected');
+
+                    $(valueTarget).val($selectedNode.attr('data-id'));
+                });
+            });
+        </script>
+    {% else %}
+        Список пуст
+    {% endif %}
+{% endblock %}

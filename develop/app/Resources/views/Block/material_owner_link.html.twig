@@ -1,0 +1,5 @@
+{% if actions is not null %}
+    {% for name, action in actions %}
+        <a class="material-owner-link" id="content-{{ name }}" href="#" data-url="{{ action.url }}" {% if not action.active %}style="display: none;"{% endif %}></a>
+    {% endfor %}
+{% endif %}

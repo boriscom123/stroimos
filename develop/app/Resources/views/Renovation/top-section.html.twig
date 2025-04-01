@@ -1,0 +1,47 @@
+{% set title = title|default %}
+{% set description = description|default %}
+{% set subject = subject|default %}
+{% set page = page|default %}
+{% set class = class|default %}
+{% set banners = banners|default %}
+
+<div class="top-section {{class}}">
+
+	<div class="top-section__content">
+		<div class="top-section__left-side">
+			<div class="top-section__description">
+				{{ description|raw }}
+			</div>
+
+			<ul class="top-section__banners">
+				{% for banner in banners %}
+					<li class="top-section__banner-item">
+						{% include "::/widgets/donwload-banner.html.twig" with {
+							"title": banner.title,
+							"description": banner.description,
+							"link": banner.link,
+							"image_src": banner.image_src
+						} %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div class="top-section__right-side">
+			{% if page.currently %}
+				{% include ":widgets:now_block_small.html.twig" with {currently: page.currently} %}
+			{% endif %}
+			{% if subject is with_last_news %}
+				<div class="day-news__top day-news__top_no-border">
+					{{ sonata_block_render({'type': 'last_posts'}, {
+                            title: 'Последние новости',
+                            category: 'news',
+                            template: ':widgets:news/day_news_small.html.twig',
+                            limit: 8,
+                            in_tags: subject.lastNewsTags
+                        }) }}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

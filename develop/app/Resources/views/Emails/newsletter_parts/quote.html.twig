@@ -1,0 +1,50 @@
+{% set person = quote.person %}
+<tr style="font-family: Tahoma,sans-serif; color: #212121;">
+    <td align="center" valign="top"
+        style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+        <!-- BEGIN QUOTEBLOCK // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="quoteBlock"
+               style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; margin-bottom: 45px; border-collapse: collapse;">
+            <tr style="font-family: Tahoma,sans-serif; color: #212121;">
+                <td id="quoteBlockSeparator" rowspan="2"
+                    style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 145px; border-right: 1px solid #e4e4e4;"
+                    width="145">
+                </td>
+                <td valign="middle" align="left" id="quoteBlockQuote"
+                    style="color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 20px 30px 60px 30px; font-family: Georgia,serif; font-style: italic; font-size: 28px; line-height: 32px;">
+                    "{{ quote.text }}",–
+                </td>
+            </tr>
+            <tr style="font-family: Tahoma,sans-serif; color: #212121;">
+                <td valign="middle" align="center" id="quoteBlockPersonContainer"
+                    style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding-left: 30px; padding-bottom: 25px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                           id="quoteBlockPerson"
+                           style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse;">
+                        <tr style="font-family: Tahoma,sans-serif; color: #212121;">
+                            <td valign="middle" align="left" id="quoteBlockPersonPic"
+                                style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 70px;"
+                                width="70">
+                                <img src="{% path person.image, 'thumb70' %}" alt=" " width="56"
+                                     height="56"
+                                     style="font-family: Tahoma,sans-serif; color: #212121; -ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;">
+                            </td>
+                            <td valign="middle" align="left" id="quoteBlockPersonInfo"
+                                style="font-family: Tahoma,sans-serif; color: #212121; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                <div id="quoteBlockPersonName"
+                                     style="color: #212121; font-size: 15px; line-height: 18px; font-family: Georgia,serif; font-style: italic;">
+                                    {{ person.firstName }} {{ person.lastName }}
+                                </div>
+                                <div id="quoteBlockPersonPosition"
+                                     style="font-family: Tahoma,sans-serif; text-transform: uppercase; color: #979797; font-size: 10px; line-height: 120%; font-weight: bold; width: 350px;">
+                                    {{ person.shortPost | default(person.teaser) }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- // END QUOTEBLOCK -->
+    </td>
+</tr>

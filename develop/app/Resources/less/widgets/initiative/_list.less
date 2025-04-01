@@ -1,0 +1,44 @@
+.social-initiative__item {
+  display: block;
+  padding: 50px 40px;
+  border-bottom: 1px solid #f1f1f1;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  a {
+    display: block;
+
+    &:hover {
+      .social-initiative__item-title {
+        color: @hover;
+      }
+    }
+  }
+
+  &-time {
+    .teaser-date(dark);
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  &-title {
+    font-family: Onest, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: @color;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  &-legend {
+    font-family: Brygada1918, serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: #515151;
+    margin: 0;
+  }
+}

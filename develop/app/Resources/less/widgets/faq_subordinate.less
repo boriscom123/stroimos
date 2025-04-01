@@ -1,0 +1,139 @@
+@faqTeaserImageWidth: 210px;
+@faqTeaserImageHeight: 150px;
+@faqTeaserAside: 255px;
+.faq-list {
+	margin-bottom: 50px;
+	&__teaser {
+		list-style: none;
+		padding: 30px 0;
+		overflow: hidden;
+		border-bottom: 2px solid #f2f2f2;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		a {
+			&:hover {
+				.faq-list__teaser-title {
+					color: @hover;
+				}
+			}
+		}
+
+		&-faq-item {
+			padding: 10px 0;
+			margin-left: @faqTeaserImageWidth + 25;
+			min-height: @faqTeaserImageHeight;
+		}
+
+	}
+}
+
+.faq-list__teaser-options + .faq-item-list__teaser-slug {
+	.faq-list__teaser-faq-item {
+		margin-right: @faqTeaserAside;
+	}
+}
+
+.no-image {
+	padding: 10px 0;
+	+ .faq-list__teaser-faq-item {
+		min-height: 0;
+		padding: 0;
+	}
+}
+
+.faq-list__teaser-meta {
+	//	position: relative;
+	//	top: 5px;
+	float: left;
+	width: @faqTeaserImageWidth;
+}
+
+.faq-list__teaser-img {
+	display: block;
+}
+
+.faq-list__teaser-title,
+.faq-list__teaser-announce {
+	//	padding-left: 230px;
+	padding-right: 30px;
+}
+
+.faq-list__teaser-title {
+	font-family: Onest, sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 1.2;
+	color: @color;
+	margin-bottom: 10px;
+}
+
+.faq-list__teaser-announce {
+	font-family: Onest, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 1.3;
+	color: @color;
+}
+
+.faq-list__teaser-date {
+	.teaser-date(@color: dark);
+  margin-top: 15px;
+}
+
+.faq-list__teaser-options {
+	width: @faqTeaserAside;
+	float: right;
+	min-height: @faqTeaserImageHeight;
+	.dotted-border(black, left);
+}
+
+.faq-list__teaser-themes,
+.faq-list__teaser-tags {
+	padding: 10px 20px 20px 50px;
+	position: relative;
+
+	.icon {
+		position: absolute;
+		top: 15px;
+		left: 15px;
+	}
+}
+
+.faq-list__teaser-themes {
+	font-family: Onest, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 21px;
+
+	a {
+		text-decoration: underline;
+		color: @color;
+		display: inline-block;
+		margin-bottom: 5px;
+
+		&:hover {
+			color: @hover;
+		}
+
+	}
+}
+
+.faq-list__teaser-tags {
+	font-family: Onest, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 21px;
+
+	a {
+		text-decoration: none;
+		color: @color;
+
+		&:hover {
+			color: @hover;
+		}
+
+	}
+}

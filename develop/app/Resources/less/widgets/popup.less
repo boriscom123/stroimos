@@ -1,0 +1,28 @@
+.popup-widget {
+  &__link {
+
+  }
+  &__popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    &-content {
+      background: #fff;
+      padding: 50px;
+    }
+    &_photo {
+      .container__pull-left {
+        margin-left: 0px;
+      }
+    }
+    &_video iframe {
+      width: 70vw;
+      height: calc(32vw);
+    }    
+  }
+}

@@ -1,0 +1,106 @@
+body.ny {
+  background: @background url('/images/snowflakes.png') center -100px;
+}
+.frozen-screen {  
+  position: fixed;
+  top: 0px;
+  left: -9999px;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  overflow: hidden;
+  cursor: pointer;
+  img {
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.8;
+  }
+  canvas {
+    opacity: 0.8;
+  }
+  &__hand {
+    pointer-events: none;
+    display: block;
+    background: url('/images/frozen_screen/hand.png') no-repeat;
+    width: 154px;
+    height: 158px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -77px;
+    margin-top: -79px;
+    z-index: 2002;
+    animation: handRub 4s ease-out infinite;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    transition-delay: 3s;
+  }
+  &__message {
+    pointer-events: none;
+    position: fixed;
+    top: 0px;
+    left: -9999px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 80%;
+    height: 100%;
+    z-index: 2001;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    transition-delay: 0.5s;
+    &_m1 {
+      background-image: url('/images/frozen_screen/m1.png');
+    }
+    &_m2 {
+      background-image: url('/images/frozen_screen/m2.png');
+    }
+    &_m3 {
+      background-image: url('/images/frozen_screen/m3.png');
+    }
+    &_m4 {
+      background-image: url('/images/frozen_screen/m4.png');
+    }
+    &_mr {
+      background-image: url('/images/frozen_screen/m_r.png');
+    }
+  }
+  &__close {
+    opacity: 0;
+    position: fixed;
+    top: 15px;
+    right: 9999px;
+    background: url('/images/frozen_screen/close.png') no-repeat;
+    display: block;
+    width: 100px;
+    height: 100px;
+    z-index: 2003;
+  }
+  &.active {
+    left: 0px;
+    opacity: 1;
+  }
+  &.active &__close {
+    right: 15px;
+  }
+  &.active &__message {
+    left: 10%;
+  }
+  &.active &__hand, &.active &__message, &.active &__close {
+    opacity: 1;
+  }
+  &.touched &__hand, &.touched &__message, {
+    transition-delay: 0s;
+    opacity: 0;
+  }
+  &.unfrozen {
+    opacity: 0;
+  }
+}
+
+@keyframes handRub {
+  from { transform: rotate(0deg) translate(-150px) rotate(0deg); }
+  to { transform: rotate(360deg) translate(-150px) rotate(-360deg); }
+}

@@ -1,0 +1,124 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'metro', 'object': metroStation, 'themes': [{'title': 'Страница метро'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Метро',
+    'rubricsContext': '',
+    subject: metroStation
+    } %}
+
+    <article class="news-wrapper metro-station__wrapper news-gallery">
+        <div class="js-mediator-article">
+            <header class="news-header" style="border-left-color: #{{ metroStation.line.color|default('345678') }};">
+                <h1 class="news-title">
+                    <i class="metro-construction__list-item-circle" style="background: #{{ metroStation.line.color|default('345678') }}"></i>
+                    <span class="metro-station__legend">Станция метро</span>
+                    {{ metroStation.title }}
+                    <span class="metro-station__line">{{ metroStation.line.title|default('Неизвестная ветка') }}</span>
+                </h1>
+            </header>
+
+            {% if metroStation.image %}
+                <div class="container__full news-image" style="background-image: url('{% path metroStation.image, 'thumb1440' %}')"></div>
+            {% endif %}
+
+{#             {% if metroStation.currently %}
+                {% include ":widgets:now_block.html.twig" with {currently: metroStation.currently} %}
+            {% endif %} #}
+        </div>
+
+        <section class="news-wrapper__content-wrap">
+            <div class="js-mediator-article">
+                <div class="news-wrapper__sidebar">
+                    {% include '::/widgets/news/share.html.twig' %}
+                    {% include '::/widgets/news/_geo_points.html.twig' with {post: metroStation} %}
+                </div>
+                <div class="news-wrapper__content">
+                    {% if metroStation.panorama %}
+                        <a href="{{ metroStation.panorama }}" class="object-page__rightbar-aero panorama-popup" target="_blank" style="width: 265px; float: right;">
+                            <i class="object-page__rightbar-aero-icon"></i>
+                            <span class="object-page__rightbar-aero-legend">Аэросъемка объекта</span>
+                            <span class="object-page__rightbar-aero-link">перейти</span>
+                        </a>
+                    {% endif %}
+                    <h2 class="news-wrapper__content-lead">{{ metroStation.teaser }}</h2>
+                    {#<div class="news-wrapper__content-news">#}
+                    {{ embed_content(metroStation.content, metroStation) }}
+                    {#</div>#}
+                    {% block sonata_preview %}{% endblock %}
+
+                    {% if metroStation.entranceHallDescription %}
+                        <div class="metro-station__more-info">
+                            <header class="metro-station__more-info-title">
+                                Количество вестибюлей
+                            </header>
+                            {{ metroStation.entranceHallDescription }}
+                        </div>
+                    {% endif %}
+                    {% if metroStation.featureDescription %}
+                    <div class="metro-station__more-info">
+                        <header class="metro-station__more-info-title">
+                            Особенность станции
+                        </header>
+                        {{ metroStation.featureDescription }}
+                    </div>
+                    {% endif %}
+                    {% if metroStation.capacityDescription %}
+                    <div class="metro-station__more-info">
+                        <header class="metro-station__more-info-title">
+                            Пассажиропоток
+                        </header>
+                        {{ metroStation.capacityDescription }}
+                    </div>
+                    {% endif %}
+                    {% if timeline.x is defined and timeline.x is not empty and timeline.y is defined and timeline.y is not empty and metroStation.x is defined and metroStation.x is not empty and metroStation.y is defined and metroStation.y is not empty %}
+                        <h2><strong>Станция {{ metroStation.title }} на схеме Московского метрополитена</strong></h2>
+                        <a href="#metro-station__map-popup" class="metro-station__map metro-station__map_small">
+                            <img class="metro-station__map-image" src="{{ src }}" alt="map" />
+                            <span class="metro-station__map-icon" style="left: {{ 100*(timeline.x + metroStation.x)/timeline.image.width }}%; top: {{ 100*(timeline.y + metroStation.y)/timeline.image.height }}%"></span>
+                        </a>
+                        <div id="metro-station__map-popup" class="metro-station__map metro-station__popup mfp-hide">
+                            <div class="metro-station__map metro-station__map_full">
+                                <img class="metro-station__map-image" src="{{ src }}" alt="map" />
+                                <span class="metro-station__map-icon" style="left: {{ 100*(timeline.x + metroStation.x)/timeline.image.width }}%; top: {{ 100*(timeline.y + metroStation.y)/timeline.image.height }}%"></span>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if metroStation.medias is defined and metroStation.medias is not empty %}
+                {% include '::/widgets/gallery/_block.html.twig' with {'gallery': metroStation} %}
+            {% endif %}
+
+            <div class="container__full news-wrapper__under-news">
+                {# include '::/widgets/tags.html.twig' with {'publication': post} %} #}
+                {# {% include '::/widgets/news/share.html.twig' %} #}
+
+                {# <div class="metro-construction__list-wrapper">
+                    {% include '::Metro/under_construction.html.twig' %}
+                </div> #}
+
+                <div class="metro-construction__station-list metro-construction__station-list_padding">
+                    {% include '::Metro/station_list.html.twig' %}
+                </div>
+
+            </div>
+
+            {#{% include '::/widgets/spotlight/_related.html.twig' with {'item': metroStation} %}#}
+
+            {{ sonata_block_render({'type': 'more_like_this'}, {subject: metroStation}) }}
+
+            {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        </section>
+    </article>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% if id is defined and id is not empty %}
+    {% set mediator_id = id %}
+{% else %}
+    {% set mediator_id = type ~ '-' ~ object.id %}
+{% endif %}
+<meta name="mediator" content="{{ mediator_id }}" />
+{% if object.publishStartDate is defined and object.publishStartDate is not empty %}
+    {% set mediator_date = object.publishStartDate %}
+{% else %}
+    {% set mediator_date = object.createdAt %}
+{% endif %}
+<meta name="mediator_published_time" content="{{ mediator_date|date('c') }}" />
+{% if themes is defined and themes is not empty %}
+    {% set mediator_themes = themes %}
+{% elseif object.rubrics is not empty %}
+    {% set mediator_themes = object.rubrics %}
+{% else %}
+    {% set mediator_themes = [] %}
+{% endif %}
+{% for item in mediator_themes %}
+    <meta name="mediator_theme" content="{{ item.title }}" />
+{% endfor %}
+{% if object.journalistWriter is defined and object.journalistWriter.title is defined and object.journalistWriter.title is not empty %}
+    <meta name="mediator_author" content="{{ object.journalistWriter.title }}" />
+{% endif %}
+

@@ -1,0 +1,12 @@
+{% if labelBefore is defined and labelBefore is not empty %}
+    <label for="{{ elemId }}">{{ labelBefore }}</label>
+{% endif %}
+<div class="datepick-wrap">
+    <input type="text" class="datepick" name="{{ elemId }}" id="{{ elemId }}t" size="15"/>
+    {% if date|default %}
+        <input type="text" class="altField" value="{{ date | format_date(null, 'ru', 'Europe/Moscow', constant('IntlDateFormatter::LONG')) }}"/>
+    {% else %}
+        <input type="text" class="altField"/>
+    {% endif %}
+</div>
+<label class="date-arrow" for="{{ elemId }}"></label>

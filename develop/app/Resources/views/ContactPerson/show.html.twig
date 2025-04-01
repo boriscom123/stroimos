@@ -1,0 +1,69 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block title %}<title>{{ contact_person }}</title>{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'contact_person', 'object': contact_person, 'themes': [{'title': 'Телефонный справочник'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Телефонный справочник',
+    'rubricsContext': '',
+    'subject': contact_person
+    } %}
+
+    <div class="js-mediator-article">
+        <h1 class="organization-main__title person-name">
+            <span class="organization-main__item-lastname">{{ contact_person.lastName }}</span>
+            {{ contact_person.firstName }}
+            {{ contact_person.patronymic }}
+        </h1>
+        <strong class="organization-main__info">Краткие сведения</strong>
+        {% if contact_person.appointment  is defined and contact_person.appointment  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Должность</p>
+                <p class="organization-main__item-legend black">{{ contact_person.appointment }}</p>
+            </div>
+        {% endif %}
+        {% if contact_person.phone  is defined and contact_person.phone  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Телефон</p>
+                <p class="organization-main__item-legend black">{{ contact_person.phone }}</p>
+            </div>
+        {% endif %}
+        {% if contact_person.email  is defined and contact_person.email  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">E-mail</p>
+                <p class="organization-main__item-legend black">
+                    <a href="mailto:{{ contact_person.email }}">{{ contact_person.email }}</a>
+                </p>
+            </div>
+        {% endif %}
+        {% if contact_person.organization is defined
+            and contact_person.organization.title is defined
+            and contact_person.organization.title is not empty
+        %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Организация</p>
+                <p class="organization-main__item-legend black organization">
+                    <a class="organization-main__item-legend-organization" href="{{ entity_path(contact_person.organization) }}">
+                        {{ contact_person.organization.title }}
+                    </a>
+                </p>
+            </div>
+        {% endif %}
+        {% if contact_person.fax  is defined and contact_person.fax  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Факс</p>
+                <p class="organization-main__item-legend black">{{ contact_person.fax }}</p>
+            </div>
+        {% endif %}
+        {% if contact_person.biography  is defined and contact_person.biography  is not empty %}
+            <div class="container__full organization-main">
+                <p class="organization-main__item-title">Биография</p>
+                <p class="organization-main__item-legend black">{{ contact_person.biography | raw }}</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

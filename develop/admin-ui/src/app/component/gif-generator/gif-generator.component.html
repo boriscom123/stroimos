@@ -1,0 +1,65 @@
+<div>
+  <input [name]="name" type="hidden" [value]="mediaId"/>
+  <div *ngIf="gifMedia !== null else creationDialog">
+    <div class="image-wrapper field-short-description">
+      <a target="_blank" [href]="gifMedia.url">
+        <img [src]="gifMedia.url" [width]="width ? width : null" [height]="height ? height : null">
+      </a>
+    </div>
+    <div class="button-wrapper">
+      <button class="btn btn-danger btn-sm btn-outline sonata-ba-action" (click)="delete()">Удалить</button>
+    </div>
+  </div>
+  <ng-template #creationDialog>
+    <div *ngIf="!isImagesPanelVisible" class="button-wrapper">
+      <button
+        role="create"
+        class="btn btn-success btn-sm btn-outline sonata-ba-action"
+        (click)="openImagesPanel()"
+      >
+        Создать
+      </button>
+    </div>
+
+
+    <div *ngIf="isImagesPanelVisible" class="images-panel">
+      <kendo-sortable
+        [kendoSortableBinding]="images"
+        [animation]="true"
+        class="sorting-panel"
+        [itemClass]="'item'"
+      >
+        <ng-template let-image="item">
+          <div
+            class="image-container"
+            [ngStyle]=""
+            [style.background-image]="'url(' + image.src + ')'">
+          </div>
+        </ng-template>
+      </kendo-sortable>
+      <div class="button-wrapper">
+        <button
+          role="save"
+          class="btn btn-success btn-sm btn-outline sonata-ba-action"
+          (click)="save()"
+        >
+          <fa-icon
+            *ngIf="pending"
+            [icon]="faSpinner"
+            [spin]="true">
+          </fa-icon>
+          Сохранить
+        </button>
+        <button
+          role="cancel"
+          class="btn btn-success btn-sm btn-outline sonata-ba-action"
+          (click)="closeImagesPanel()"
+        >
+          Отмена
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+
+</div>

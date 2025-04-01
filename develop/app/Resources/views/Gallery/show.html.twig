@@ -1,0 +1,43 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'gallery', 'object': gallery } %}
+{% endblock %}
+
+{% block bodyClass %}
+    gallery-page
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'rubricsContext': 'gallery',
+    'subject': gallery
+    } %}
+    <article class="news-wrapper gallery-wrapper">
+        <header class="news-header container__full gallery-header">
+            <h1 class="news-title gallery-title">{{ gallery.title }}</h1>
+            {% include '::/widgets/themes.html.twig' with {'publication': gallery} %}
+        </header>
+
+        <section class="news-wrapper__content-wrap">
+            <div class="js-mediator-article">
+                {% include '::/widgets/gallery/_block.html.twig' with {'pager' : true} %}
+            </div>
+            {% block sonata_preview %}{% endblock %}
+            {% if gallery.relevantNewsShown and more_like_this is defined %}
+                {% include '::/widgets/spotlight/_widget.html.twig' with {'items': more_like_this, 'class': 'other-materials container__full', 'title': 'Другие материалы по теме'} %}
+            {% endif %}
+
+            {% set posts = gallery.relatedPosts %}
+            {% if posts and posts|length > 0 %}
+                {% include '::/widgets/gallery/_related.html.twig' with {'posts': gallery.relatedPosts} %}
+            {% endif %}
+
+            {{ sonata_block_render({'type': 'more_like_this'}, {subject: gallery}) }}
+        </section>
+    </article>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="zd">
+        <h1 class="zd__title">
+          Железные дороги
+        </h1>
+{#         <h2 class="zd__subtitle">
+          Новые пересадки с МЦК на ЖД
+        </h2>
+        <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd" class="zd-banner-cut">
+          <span class="zd-banner-cut__text">
+            Интеграция МЦК<br/>
+            с радиальными<br/>
+            направлениями ЖД
+          </span>
+        </a>
+        <h2 class="zd__subtitle zd__subtitle_alt">
+          <span>Направления</span>
+        </h2>
+        <ul class="zd-tiles">
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Jar" class="zd-tiles__link">Ярославское</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Sav" class="zd-tiles__link">Савеловское</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Pav" class="zd-tiles__link">Павелецкое</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Ri" class="zd-tiles__link">Рижское</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Go" class="zd-tiles__link">Горьковское</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Kur" class="zd-tiles__link">Курское</a>
+          </li>
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Okt" class="zd-tiles__link">Октябрьская ж/д</a>
+          </li>
+          <!-- <li class="zd-tiles__teaser">
+            <a href="/zhielieznyie-doroghi-stroi_mos/smolienskoie-napravlieniie-moskovskoi-zhielieznoi-doroghi-stroi_mos" class="zd-tiles__link">Смоленское</a>
+          </li> -->
+          <li class="zd-tiles__teaser">
+            <a href="https://stroi.mos.ru/intieghratsiia-mtsk-s-radial-nymi-napravlieniiami-mzhd#Kaz" class="zd-tiles__link">Казанское</a>
+          </li>
+        </ul>
+        <h2 class="zd__subtitle">
+          <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos">МЦД (Московские центральные диаметры)</a>
+        </h2>
+        <ul class="zd-links-list">
+          <li class="zd-links-list__item">
+            <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-1" class="zd-links-list__link">Лобня&thinsp;—&thinsp;Одинцово</a>
+          </li>
+          <li class="zd-links-list__item">
+            <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-2" class="zd-links-list__link">Нахабино&thinsp;—&thinsp;Подольск</a>
+          </li>
+          <!--
+          <li class="zd-links-list__item">
+            <a href="#" class="zd-links-list__link">Щербинка-Звенигород</a>
+          </li>
+          -->
+        </ul>
+        <h2 class="zd__subtitle"><a name="reconst_jd"></a>
+          Реконструкция железных дорог
+        </h2>
+        <!-- <a href="https://stroi.mos.ru/kurskoie-napravlieniie-moskovskoi-zhielieznoi-doroghi-stroi_mos" class="zd-banner zd-banner_kursk">
+          <span class="zd-banner__text">
+            Курское направление МЖД
+          </span>
+        </a> -->
+        <a href="https://stroi.mos.ru/kiievskoie-napravlieniie-moskovskoi-zhielieznoi-doroghi" class="zd-banner zd-banner_kiev">
+          <span class="zd-banner__text">
+            Калужское направление МЖД
+          </span>
+        </a>
+        <a href="https://stroi.mos.ru/zhielieznyie-doroghi-stroi_mos/riekonstruktsiia-gor-kovskogho-napravlieniia-zhielieznoi-doroghi-stroi_mos" class="zd-banner zd-banner_gork">
+          <span class="zd-banner__text">
+            Горьковское направление МЖД
+          </span>
+        </a>
+          <a href="https://stroi.mos.ru/zhielieznyie-doroghi-stroi_mos/iaroslavskoie-napravlieniie-moskovskoi-zhielieznoi-doroghi-stroi_mos" class="zd-banner zd-banner_jaros">
+          <span class="zd-banner__text">
+            Ярославское направление МЖД
+          </span>
+        </a> #}
+        <div class="static-page">
+          {{ embed_content(page.content, page) }}
+          {% block sonata_preview %}{% endblock %}
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'железные дороги поезда жд вокзалы'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

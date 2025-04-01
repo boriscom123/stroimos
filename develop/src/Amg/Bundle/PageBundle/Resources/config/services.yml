@@ -1,0 +1,109 @@
+parameters:
+    amg_page.page.class: ~
+    amg_page.page.admin_class: Amg\Bundle\PageBundle\Admin\PageAdmin
+    amg_page.page.admin_controller: AmgPageBundle:Admin\Page
+
+    amg_page.block.class: ~
+    amg_page.block.admin_class: Amg\Bundle\PageBundle\Admin\BlockAdmin
+    amg_page.block.admin_controller: AmgPageBundle:Admin\Block
+
+    amg_page.route.name: page
+    amg_page.route.controller: ~
+
+    amg_page.router.class: Amg\Bundle\PageBundle\Router\PageRouter
+    amg_page.manager.class: Amg\Bundle\PageBundle\Model\PageManager
+    amg_page.layout.manager.class: Amg\Bundle\PageBundle\Layout\LayoutManager
+
+services:
+    amg_page.page.repository:
+        class: Amg\Bundle\PageBundle\Entity\PageRepositoryInterface
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - %amg_page.page.class%
+
+    amg_page.router:
+        class: %amg_page.router.class%
+        arguments:
+            - %amg_page.route.name%
+            - %amg_page.route.controller%
+            - @?router.request_context
+
+    amg_page.manager:
+        class: %amg_page.manager.class%
+        arguments:
+            - %amg_page.page.class%
+            - %amg_page.route.controller%
+            - @doctrine.orm.entity_manager
+            - @amg_page.layout.manager
+
+    amg_page.layout.manager:
+        class: %amg_page.layout.manager.class%
+        arguments: [[]]
+
+    amg_page.twig.page_extension:
+        class: Amg\Bundle\PageBundle\Twig\PageExtension
+        arguments:
+            - @amg_page.layout.manager
+            - @doctrine.orm.entity_manager
+            - %amg_page.page.class%
+        tags:
+            - { name: twig.extension }
+
+    amg_page.twig.page_menu_extension:
+        class: Amg\Bundle\PageBundle\Twig\PageMenuExtension
+        arguments:
+            - @knp_menu.helper
+            - @knp_menu.menu_provider
+        tags:
+            - { name: twig.extension }
+
+    amg_page.param_converter.page:
+        class: Amg\Bundle\PageBundle\ParamConverter\PageParamConverter
+        arguments:
+            - %amg_page.page.class%
+            - %amg_page.route.name%
+            - @amg_page.manager
+        tags:
+            - { name: request.param_converter, converter: page_converter }
+
+    amg_page.form.type.page:
+        class: Amg\Bundle\PageBundle\Form\Type\PageType
+        arguments: [ @doctrine ]
+        tags:
+          - { name: form.type, alias: page_tree }
+
+    amg_page.admin.page:
+        class: %amg_page.page.admin_class%
+        arguments: [~, %amg_page.page.class%, %amg_page.page.admin_controller%]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Публикации, label: Страницы, autoadmin: true, audit: true}
+        calls:
+            - [setLayoutManager, [@amg_page.layout.manager]]
+            - [ addChild, [ @amg_page.admin.block ] ]
+
+    amg_page.admin.block:
+        class: %amg_page.block.admin_class%
+        arguments: [~, %amg_page.block.class%, %amg_page.block.admin_controller%]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, label_translator_strategy: sonata.admin.label.strategy.underscore, group: Блоки, label: Блоки, show_in_dashboard: false}
+        calls:
+            - [ setBlockManager, [ @sonata.block.manager ] ]
+            - [ setLayoutManager, [@amg_page.layout.manager] ]
+
+    app.menu.matcher_voter.subroute:
+        class: Amg\Bundle\PageBundle\Menu\Matcher\Voter\SubrouteVoter
+        tags:
+            - { name: knp_menu.voter, request: true }
+
+    amg_page.menu.provider.page:
+        class: Amg\Bundle\PageBundle\Menu\Provider\PageMenuProvider
+        arguments: [@knp_menu.factory, @amg_page.page.repository]
+        tags:
+            - { name: knp_menu.provider }
+
+    amg_page.menu.provider.sitemap:
+        class: Amg\Bundle\PageBundle\Menu\Provider\SitemapMenuProvider
+        arguments: [@knp_menu.factory, @amg_page.page.repository]
+        tags:
+            - { name: knp_menu.provider }

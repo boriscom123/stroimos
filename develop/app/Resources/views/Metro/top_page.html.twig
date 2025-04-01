@@ -1,0 +1,61 @@
+{% set title = title|default %}
+{% set description = description|default %}
+{% set subject = subject|default %}
+{% set page = page|default %}
+{% set firstBannerLink = firstBannerLink|default %}
+{% set firstBannerImage = firstBannerImage|default %}
+{% set firstBannerText = firstBannerText|default %}
+{% set secondBannerLink = secondBannerLink|default %}
+{% set secondBannerImage = secondBannerImage|default %}
+{% set secondBannerTitle = secondBannerTitle|default %}
+{% set secondBannerSubtitle = secondBannerSubtitle|default %}
+{% set class = class|default %}
+
+<div class="metro {{class}}">
+    <div class="metro__content">
+        <div class="metro__left-side">
+{#             {% if title %}
+                <h1 class="metro__title">{{ title }}</h1>
+            {% endif %} #}
+            <div class="metro__description">
+                {{ description|raw }}
+            </div>
+
+            {% if firstBannerLink and firstBannerImage and firstBannerText %}
+                <a href="{{firstBannerLink}}" class="metro-banner-cutout">
+                    <span class="metro-banner-cutout__title">
+                        <span class="metro-banner-cutout__title-content">{{firstBannerText|raw}}</span>
+                    </span>
+                    <span class="metro-banner-cutout__image" style="background-image: url({{firstBannerImage}});"></span>
+                </a>
+            {% endif %}
+
+            {% if secondBannerLink and secondBannerImage and secondBannerTitle and secondBannerSubtitle %}
+                <a href="{{secondBannerLink}}" class="metro-banner-mck metro-banner-mck_bkl" target="_blank" style="background-image: url({{secondBannerImage}});">
+                    <span class="metro-banner-mck__title" style="--title-color: {{ secondBannerTitleColor|default('white') }};" >
+                        {{secondBannerTitle|raw}}
+                    </span>
+                    <span class="metro-banner-mck__subtitle" style="--subtitle-color: {{ secondBannerSubtitleColor|default('white') }};" >
+                        {{secondBannerSubtitle|raw}}
+                    </span>
+                </a>
+            {% endif %}
+        </div>
+        <div class="metro__right-side">
+            {% if page.currently %}
+                {% include ":widgets:now_block_small.html.twig" with {currently: page.currently} %}
+            {% endif %}
+            {% if subject is with_last_news %}
+                <div class="day-news__top day-news__top_no-border">
+                    {{ sonata_block_render({'type': 'last_posts'}, {
+                        title: 'Последние новости',
+                        category: 'news',
+                        template: ':widgets:news/day_news_small.html.twig',
+                        limit: 8,
+                        in_tags: subject.lastNewsTags
+                    }) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

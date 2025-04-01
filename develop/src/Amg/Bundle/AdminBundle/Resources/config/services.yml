@@ -1,0 +1,25 @@
+imports:
+    - { resource: autoadmin_extensions.yml }
+
+services:
+    amg_admin.autoadmin.fields_arranger:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\FieldsArrangerExtension
+        calls:
+            - [setContainer, [@service_container]]
+
+    amg_admin.filter.data_range:
+        class: Amg\Bundle\AdminBundle\Filter\DataRangeFilter
+        tags:
+            - { name: sonata.admin.filter.type, alias: date_range_filter }
+
+    amg_admin.lock.entity_listener:
+        class: Amg\Bundle\AdminBundle\Entity\Listener\EntityLockListener
+        calls:
+            - [setContainer, [@service_container]]
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
+    amg_admin.lock.admin_extension:
+        class: Amg\Bundle\AdminBundle\Admin\Extension\LockExtension
+        calls:
+            - [setContainer, [@service_container]]

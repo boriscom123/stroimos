@@ -1,0 +1,156 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+
+{# НЕ СУЩЕСТВУЕТ #}
+{# тип публикации #}
+{# {% if item.publicationType is defined and item.publicationType is not empty %}
+    <div class="spotlight__teaser-category spotlight__teaser-text-layer">
+    <span>{{ item.publicationType }}</span>
+    </div>
+{% endif %} #}
+
+{# лог сущности #}
+{# <div>  {{ dump(entity) }} </div> #}
+
+{# рубрика
+{% if entity.rubrics is defined %}
+{% for rubric in entity.rubrics %} {{ rubric.title }} {% endfor %}
+{% endif %} #}
+
+
+
+{% set isGallery = entity is gallery %}
+{% set isDocument = entity is document %}
+{% set isConstruction = entity is construction %}
+
+
+{# Просмотренные материалы #}
+{% if entity.isRecent is defined %}
+<article class="watched-card">
+    <a href="{{ entity_path(entity) }}" class="watched-card__link">
+        <div class="watched-card__image">
+           {% if entity.image is defined and entity.image is not null %}
+                <img src="{% path entity.image, 'thumb300' %}" />
+            {% elseif entity is gallery %}
+                <img src="/images/spotlight-cover/gallery-cover.jpg" />
+            {% elseif entity is construction %}
+                <img src="/images/spotlight-cover/construction-cover.jpg" />
+            {% elseif entity is video %}
+                <img src="/images/spotlight-cover/video-cover.jpg" />
+            {% elseif entity is metro_station %}
+                <img src="/images/spotlight-cover/metro-cover.jpg" />
+            {% else %}
+                <img src="/images/spotlight-cover/other-cover.jpg" />
+            {% endif %}
+        </div>
+        <div class="watched-card__content">
+            <div class="watched-card__type">Статья</div>
+            {% if entity.category is defined and entity_alias(entity) != 'post' %}
+                <div class="more-card__type">{{ entity.category }}</div>
+            {% endif %}
+            <div class="watched-card__title" style="-webkit-box-orient: vertical">{{ entity.title }}</div>
+        </div>
+    </a>
+</article>
+{% endif %}
+
+{# карточка галереи #}
+{# {% if isGallery %}
+<article
+    class="gallery-card">
+    <a class="gallery-card__link" href="{{ entity_path(entity) }}">
+        <div class="gallery-card__mark">
+            <div class="type-mark">
+                <i class="type-mark__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2.5C6.72386 2.5 6.5 2.72386 6.5 3C6.5 3.27614 6.72386 3.5 7 3.5H17C17.2761 3.5 17.5 3.27614 17.5 3C17.5 2.72386 17.2761 2.5 17 2.5H7ZM6 6.5C4.61929 6.5 3.5 7.61929 3.5 9V18C3.5 19.3807 4.61929 20.5 6 20.5H18C19.3807 20.5 20.5 19.3807 20.5 18V16.4711V9C20.5 7.61929 19.3807 6.5 18 6.5H6ZM19.5 14.9827L16.8366 12.839C16.2439 12.362 15.3718 12.391 14.815 12.9096L12.1673 15.195L11.6341 14.7781C11.1339 14.3858 10.4006 14.4103 9.93132 14.8421L5.12023 19.215C4.74441 18.9425 4.5 18.4998 4.5 18V9C4.5 8.17157 5.17157 7.5 6 7.5H18C18.8284 7.5 19.5 8.17157 19.5 9V14.9827ZM17.6723 19.5L12.9703 15.823L15.4763 13.6598L15.485 13.6522L15.4934 13.6443C15.684 13.4638 16.0007 13.4499 16.2096 13.6181L19.3291 16.1289C19.4424 16.22 19.5 16.3464 19.5 16.4711V18C19.5 18.8284 18.8284 19.5 18 19.5H17.6723ZM11.0175 15.5653L16.049 19.5H6.29348L10.6052 15.581L10.6081 15.5783C10.7134 15.4811 10.8991 15.4724 11.0175 15.5653ZM4.5 5C4.5 4.72386 4.72386 4.5 5 4.5H19C19.2761 4.5 19.5 4.72386 19.5 5C19.5 5.27614 19.2761 5.5 19 5.5H5C4.72386 5.5 4.5 5.27614 4.5 5ZM7.5 12C8.32843 12 9 11.3284 9 10.5C9 9.67157 8.32843 9 7.5 9C6.67157 9 6 9.67157 6 10.5C6 11.3284 6.67157 12 7.5 12Z" fill="white"/>
+                    </svg>
+                </i>
+                <div class="type-mark__count">
+                    <span>  {{ entity.medias|length }} </span> фото
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-card__titles">
+             {{ entity.title }}
+        </div> 
+
+        {% if entity.publishStartDate is defined %}
+            <time class="gallery-card__date">{{ entity.publishStartDate | format_date }}</time>
+        {% endif %}
+    </a>
+    <div class="gallery-card__image">
+        <img src="{% path entity.image, 'full' %}" />
+    </div>
+</article>
+{% endif %} #}
+
+{# <article class="more-card">
+    <a href="{{ entity_path(entity) }}" class="more-card__link">
+        <div class="more-card__image">
+            <img src="{% path entity.image, 'thumb300' %}" />
+        </div>
+        <div class="more-card__content">
+            <div class="more-card__type">Статья</div>
+            {% if entity.category is defined and entity_alias(entity) != 'post' %}
+            <div class="more-card__type">{{ entity.category }}</div>
+            {% endif %}
+            <div class="more-card__title">{{ entity.title }}</div>
+            {% if entity.publishStartDate is defined %}
+                <time class="more-card__date">{{ entity.publishStartDate | format_date }}</time>
+            {% endif %}
+        </div>
+    </a>
+</article> #}
+
+
+{# <article class="spotlight__teaser {{ isGallery ? "spotlight__teaser-gallery": "" }}"
+        {% if isGallery %}
+            style="background-image:url({% path entity.image, 'full' %})"
+        {% endif %}
+        >
+    <a href="{{ entity_path(entity) }}" class="spotlight__teaser-link">
+        {% if entity.publishStartDate is defined %}
+            <time class="spotlight__teaser-date">{{ entity.publishStartDate | format_date }}</time>
+        {% endif %}
+        <header class="spotlight__teaser-title">
+            {{ entity.title }}
+        </header>
+        {% if entity.category is defined and entity_alias(entity) != 'post' %}
+            <span class="spotlight__teaser-category">
+                {{ entity.category }}
+            </span>
+        {% endif %}
+        {% if isConstruction %}
+            <div class="spotlight__teaser-image-wrap">
+                <div class="geo-point geo-point_related {{ item.dataField('ObjectStatus') }} {{ item.dataField('MainFunctional') }}">
+                    <div class="map-widget"
+                        {% if item.dataField('MainFunctional') == 'renov-industrial' and item.dataField('LandGeometryCoordinates') is not null and item.dataField('LandGeometryCoordinates') is not empty %}
+                            data-polygon="{{ item.dataField('LandGeometryCoordinates') }}"
+                        {% else %}
+                            data-point="{{ item.dataField('PointXyGeometryCoordinates') }}"
+                        {% endif %}
+                    ></div>
+                </div>
+            </div>
+        {% elseif isGallery %}
+            <span class="spotlight__teaser-legend">
+                    <i class="icon icon-40 icon-light icon-photo"></i>
+                {{ entity.medias|length }} фото
+            </span>
+        {% elseif entity.image|default %}
+            <div class="spotlight__teaser-image-wrap">
+                <img class="spotlight__teaser-image" src="{% path entity.image, 'thumb300' %}" alt="{{ entity.title }}"/>
+            </div>
+        {% else %}
+            <div class="spotlight__teaser-image-wrap">
+                <img class="spotlight__teaser-image" src="{{ '/images/fallback.jpg'|imagine_filter('web_root_thumb300') }}" alt="{{ entity.title }}"/>
+            </div>
+        {% endif %}
+    </a>
+</article> #}

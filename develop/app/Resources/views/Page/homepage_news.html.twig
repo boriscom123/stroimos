@@ -1,0 +1,9 @@
+{% include '::/widgets/top_news/_widget.html.twig' with {'news': postsPicks} %}
+<section class="homepage-main">
+    <aside class="homepage-sidebar">
+        {% include '::/widgets/sidebars/_main_sidebar.html.twig' with {'news': lastCityNews} %}
+    </aside>
+    <div class="homepage-content">
+        {% include '::/widgets/main_feed/_widget.html.twig' with {'news': lastNews} %}
+    </div>
+</section>

@@ -1,0 +1,12 @@
+<div class="infographic-top__group">
+    {% for teaser in teasers %}
+        {% if loop.first %}
+            <div class="infographic-top__teasers-row">
+        {% endif  %}
+        {% set flag = loop.index == 2 %}
+        {% include 'widgets/infographic_top/_teaser.html.twig' with {'teaser' : teaser, 'isTop' : loop.first, 'isSmallTop' : flag} %}
+        {% if loop.index == 2 %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

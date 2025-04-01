@@ -1,0 +1,82 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+    {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %}
+
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="mkad-page">
+
+      {% set operation_interchanges = 0 %}
+      {% for item in interchanges if item.constructionStatus == 'operation' %}
+        {% set operation_interchanges = operation_interchanges + 1 %}
+      {% endfor %}
+
+        <div class="mkad-page__map">
+          <h2 class="mkad-page__map-title">
+            Карта реконструированных развязок
+          </h2>
+{#           <div class="mkad-page__map-help">
+            <div class="mkad-page__map-help-item mkad-page__map-help-item_ready">
+              Развязки, которые уже реконструированы
+            </div>
+            <div class="mkad-page__map-help-item mkad-page__map-help-item_wip">
+              Развязки, по которым ведутся работы
+            </div>
+          </div> #}
+          <div class="mkad-page__map-map"></div>
+        </div>
+        <div class="mkad-page__container mkad-page__clever">
+          <div class="mkad-page__clever-num">{{ operation_interchanges }}</div>
+          <div class="mkad-page__clever-title">
+            клеверные<br/>
+            развязки<br/>
+            реконструированы 
+          </div>
+        </div>
+
+        <a href="https://stroi.mos.ru/road/interchange" class="mkad-page__container mkad-page__interchange">
+          Реконструкция<br/>
+          развязок
+        </a>
+
+        {# <a href="https://stroi.mos.ru/road/riekonstruktsiia-uchastkov-mkad" class="mkad-page__container mkad-page__parts">
+          <span class="mkad-page__parts-title">
+            Реконструкция<br/>
+            участков<br/>
+            МКАД
+          </span>
+          <span class="mkad-page__parts-text">
+            Градостроительный комплекс Москвы подготовил проекты планировок на весь периметр МКАД. Эти градостроительные планы предусматривают строительство переходно-скоростных полос, расширение проезжей части, реконструкцию развязок на пересечении с магистральными улицами и улицами районного значения.
+          </span>
+        </a>
+
+        <a href="https://stroi.mos.ru/road/probliemnyie-siezdy-mkad" class="mkad-page__container mkad-page__problems">
+          Проблемные съезды МКАД
+        </a> #}
+
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мкад'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

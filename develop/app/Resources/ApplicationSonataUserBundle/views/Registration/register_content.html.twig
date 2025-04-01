@@ -1,0 +1,50 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'title_user_registration'|trans({}, 'SonataUserBundle'),
+    'rubricsContext': null,
+    } %}
+    <div class="panel panel-success">
+        {#<div class="panel-heading">
+            <h2 class="panel-title">{{  }}</h2>
+        </div>#}
+        <div class="panel-body">
+            <div class="page-login__login-wrap">
+                <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
+                      class="page-login__login fos_user_registration_register form-horizontal auth-page__register-form">
+
+                    {{ form_widget(form) }}
+
+                    <div class="form-actions" style="float: right;">
+                        <input class="page-login__login-btn page-login__register" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}"
+                               class="btn btn-success pull-right"/>
+                    </div>
+                    <div class="page-login__socials">
+                        Войти через:
+                        <ul class="page-login__socials-list">
+                            {% for owner in hwi_oauth_resource_owners() %}
+                                {% if owner | trans({}, 'HWIOAuthBundle') == 'login_mos_ru' %}
+                                    <li class="page-login__socials-list-item">
+                                        <a href="{{ hwi_oauth_authorization_url(owner) }}" class="icon icon-social icon-{{ owner | trans({}, 'HWIOAuthBundle') }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% for owner in hwi_oauth_resource_owners() %}
+                                {% if owner | trans({}, 'HWIOAuthBundle') != 'login_mos_ru' %}
+                                    <li class="page-login__socials-list-item">
+                                        <a href="{{ hwi_oauth_authorization_url(owner) }}" class="icon icon-social icon-{{ owner | trans({}, 'HWIOAuthBundle') }}" title="{{ owner | trans({}, 'HWIOAuthBundle') }}"></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

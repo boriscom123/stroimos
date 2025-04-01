@@ -1,0 +1,57 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': administrativeArea, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': administrativeArea.pageTitle | default(administrativeArea.title),
+    'themes': [],
+    'subject': administrativeArea
+    } %}
+
+    <div class="js-mediator-article">
+        {% include '::/Post/description.html.twig' with {description: administrativeArea.description|default} %}
+
+        <div class="district-selector" data-district-selector>
+            <div class="district-selector__selectors">
+                <a href class="district-selector__selector" data-district-selector-btn>Перейти к другому округу/району</a>
+                <div class="district-selector__dropdown" data-district-selector-dropdown>
+                    <ul class="district-selector__dropdown-district" data-district-selector-district-list></ul>
+                    <ul class="district-selector__dropdown-municipality" data-district-selector-municipality-list></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="static-page">
+            <div class="map-block container__unlimited">
+                <div data-custom='{{ map_constructions }}' data-polygon="{{ administrativeArea.polygon.toJson }}" data-polygon-name="{{ administrativeArea.title }}" data-polygon-name-prefix="Округ" id="map-container">
+                    <div class="container__full" id="map"></div>
+                </div>
+            </div>
+            <h2>Объекты строительства</h2>
+            <div class="objects-block">
+                <ul class="objects-block__info">
+                    <li class="objects-block__info-item"><i class="object-info object-info-terrain"></i>Подобран земельный участок</li>
+                    <li class="objects-block__info-item"><i class="object-info object-info-designed"></i>Ведется проектирование</li>
+                    <li class="objects-block__info-item"><i class="object-info object-info-documentation"></i>Утверждена документация</li>
+                    <li class="objects-block__info-item"><i class="object-info object-info-construction"></i>Строится</li>
+                    <li class="objects-block__info-item"><i class="object-info object-info-operation"></i>Объект введен в эксплуатацию</li>
+                </ul>
+                {{ sonata_block_render({'type': 'construction_list'}, {
+                    'template': '::/Construction/_list.html.twig',
+                    'adm_unit': administrativeArea.id,
+                    'order': { 'createdAt': {'order': 'desc'} },
+                    'limit': 10
+                }) }}
+            </div>
+            {{ embed_content(administrativeArea.content, administrativeArea) }}
+            {% block sonata_preview %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

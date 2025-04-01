@@ -1,0 +1,56 @@
+services:
+    admin.crowd_founding:
+        class: ExtraBundle\Admin\InitiativeAdmin
+        arguments: [~, ExtraBundle\Entity\Initiative, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Соц. инициативы, autoadmin: true }
+
+    admin.event:
+        class: ExtraBundle\Admin\EventAdmin
+        arguments: [~, ExtraBundle\Entity\Event, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Мероприятия, autoadmin: true }
+        calls:
+            - [ addChild, [ @admin.event.feedback ] ]
+
+    admin.event.announce:
+        class: ExtraBundle\Admin\EventAnnounceAdmin
+        arguments: [~, ExtraBundle\Entity\EventAnnounce, ExtraBundle:Admin/EventAnnounceCRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Анонсы мероприятий, autoadmin: true }
+
+    admin.event.feedback:
+        class: ExtraBundle\Admin\EventFeedbackAdmin
+        arguments: [~, ExtraBundle\Entity\EventFeedback, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Обратная связь, show_in_dashboard: false, autoadmin: true, audit: false }
+
+    admin.event.attachment:
+        class: ExtraBundle\Admin\EventAttachmentAdmin
+        arguments: [~, ExtraBundle\Entity\EventAttachment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Материалы конференций, show_in_dashboard: false, audit: false, autoadmin: true}
+
+    admin.event.vip_attachment:
+        class: ExtraBundle\Admin\EventAttachmentAdmin
+        arguments: [~, ExtraBundle\Entity\VipEventAttachment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label_translator_strategy: sonata.admin.label.strategy.underscore, group: СМИ И Жителям, label: Эксклюзивные материалы конференций, show_in_dashboard: false, audit: false, autoadmin: true}
+
+
+    extra.user_activity.listener:
+        class: ExtraBundle\UserActivity\ActivityListener
+        arguments: [ @doctrine.orm.entity_manager, @extra.user_activity.collector, @sonata.seo.page ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+
+    extra.user_activity.collector:
+        class: ExtraBundle\UserActivity\ActivityCollector
+        arguments: [ @doctrine.orm.entity_manager, @security.context ]
+
+
+    extra.form.type.event_feedback:
+        class: ExtraBundle\Form\Type\EventFeedbackType
+        tags:
+            - {name: form.type, alias: event_feedback}

@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:52:"AppBundle\\Model\\Doctrine\\AutoBidirectionalManyToMany":1:{s:12:"targetEntity";s:25:"AppBundle\\Entity\\Document";}}');

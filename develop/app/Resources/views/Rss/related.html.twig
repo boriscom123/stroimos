@@ -1,0 +1,6 @@
+<p>Читайте также:</p>
+<ul>
+    {% for item in news %}
+        <li><a href="{{ entity_absolute_url(item) }}">{{ item.title }}</a></li>
+    {% endfor %}
+</ul>

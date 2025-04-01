@@ -1,0 +1,25 @@
+.telegram-info {
+  margin: 0 auto;
+  clear: both;
+  padding: 20px 0;
+  &__content {
+    margin-left: 270px;
+    display: inline-block;
+    padding: 0 0 0 36px;
+    background: url('/images/icons/telegram-blue.png') no-repeat;
+    font-family: Onest,sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 26px;
+    color: @color;
+    a {
+      color: @color;
+      &:hover, &:hover span {
+        color: darken(#0086d3, 20%);
+      }
+    }
+    span {
+      color: #0086d3;
+    }
+  }
+}

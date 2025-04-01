@@ -1,0 +1,56 @@
+imports:
+    - { resource: config.yml }
+
+
+doctrine:
+    orm:
+        metadata_cache_driver:
+            type: memcache
+            host: %session_memcached_host%
+            port: %session_memcached_port%
+            instance_class: Memcache
+        result_cache_driver:
+            type: memcache
+            host: %session_memcached_host%
+            port: %session_memcached_port%
+            instance_class: Memcache
+        query_cache_driver:
+            type: memcache
+            host: %session_memcached_host%
+            port: %session_memcached_port%
+            instance_class: Memcache
+
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            excluded_404s:
+                - ^/
+            handler: streamed  # Указываем правильный обработчик, а не "grouped"
+
+        grouped:
+            type: group
+            members: [streamed, buffered]
+
+        streamed:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+
+        buffered:
+            type: buffer
+            handler: swift
+
+        swift:
+            type: swift_mailer
+            from_email: "%mailer_sender_address%"
+            to_email: "%stroi_admin_email%"
+            subject: "Stroi error"
+            level: debug
+
+sentry:
+    dsn: '%sentry_dsn%'
+    skip_capture:
+        - "Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException"
+        - "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException"

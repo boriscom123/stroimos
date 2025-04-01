@@ -1,0 +1,129 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+    {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %}
+
+    <div class="js-mediator-article">
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+  {#     <div class="overpasses-page">
+        <div class="overpasses-page__map">
+          <h2 class="overpasses-page__map-title">
+            Карта реконструкции путепроводов
+          </h2>
+          <table align="center" border="0" cellpadding="1" cellspacing="1" class="overpasses-page__map-legend">
+            <tbody>
+               <tr>
+                <td align="center">
+                  <div class="overpasses-page__map-legend-icon overpasses-page__map-legend-icon_designed">
+                  </div>
+                </td>
+                <td align="left" valign="bottom" class="overpasses-page__map-legend-text">
+                  Проектируются
+                </td>
+                <td align="center">
+                  <div class="overpasses-page__map-legend-icon overpasses-page__map-legend-icon_documentation">
+                  </div>
+                </td>
+                <td align="left" valign="bottom" class="overpasses-page__map-legend-text">
+                  Разрабатывается документация
+                </td>
+              </tr> 
+              <tr>
+                <td align="center">
+                  <div class="overpasses-page__map-legend-icon overpasses-page__map-legend-icon_complete">
+                  </div>
+                </td>
+                <td align="left" valign="bottom" class="overpasses-page__map-legend-text">
+                  Реконструирован
+                </td>
+                <td align="center">
+                  <div class="overpasses-page__map-legend-icon overpasses-page__map-legend-icon_construction">
+                  </div>
+                </td>
+                <td align="left" valign="bottom" class="overpasses-page__map-legend-text">
+                  Ведется проектирование или строительство
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+          <div class="map-block">
+            <div data-preset="overpasses" id="map-container">
+              <div class="container__full" id="map"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overpasses-page__plan">
+          <div class="overpasses-page__plan-content">
+            <div class="overpasses-page__plan-num">
+              18
+            </div>
+            <div class="overpasses-page__plan-title">
+              путепроводов <br/>
+              планируется <br/>
+              построить<br/>
+              до 2026 года
+            </div>
+          </div>
+        </div>
+        
+        <a href="/riekonstruktsiia-zhielieznodorozhnykh-pierieiezdov/list" class="overpasses-page__construction">
+          <span class="overpasses-page__construction-content">
+            <span class="overpasses-page__construction-title">
+              Где ведется<br/> строительство?
+            </span>
+          </span>
+        </a>
+        
+        <a href="/riekonstruktsiia-zhielieznodorozhnykh-pierieiezdov/list_complete" class="overpasses-page__finish">
+          <span class="overpasses-page__finish-content">
+            <span class="overpasses-page__finish-title">
+              Реконструкция<br/>
+              окончена
+            </span>
+            <span class="overpasses-page__finish-text">
+              Каждая такая стройка означает рост<br/>
+              пропускной способности перекрестков<br/>
+              и снижение аварийных ситуаций<br/>
+              на переездах.
+            </span>
+          </span>
+        </a>
+        
+        <a href="https://stroi.mos.ru/mkzhd/putieprovody" class="overpasses-page__mck">
+          <span class="overpasses-page__mck-content">
+            <span class="overpasses-page__mck-title">
+              Реконструированные<br/>
+              для запуска МЦК
+            </span>
+          </span>
+        </a>
+      </div> #}
+      
+      <div class="static-page">
+        {{ embed_content(page.content, page) }}
+        {% block sonata_preview %}{% endblock %}
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мкад'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

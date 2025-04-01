@@ -1,0 +1,25 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.usagePlaces %}
+        {% set admins = [] %}
+        <ul>
+        {% for entity in object.usagePlaces.values %}
+            {% if admins[entity.class] is not defined %}
+                {% set entityAdmin = admin.getConfigurationPool.getAdminByClass(entity.class) %}
+                {% set admins = admins|merge({ (entity.class) : entityAdmin}) %}
+            {% endif %}
+            <li>
+            {% if  admins[entity.class] is null %}
+                {{ entity.title }}
+            {% else %}
+                <a href="{{ admins[entity.class].generateUrl('edit', {'id':entity.id}) }}">
+                    {{ entity.title }}
+                </a>
+            {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif  %}
+{% endblock %}
+

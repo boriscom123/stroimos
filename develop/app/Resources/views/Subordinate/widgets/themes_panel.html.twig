@@ -1,0 +1,83 @@
+{% set title = title|default %}
+{% set subject = subject|default %}
+{% set rubricsContext = rubricsContext|default -%}
+{% set page_menu = subject is page and knp_menu_exists('page-section-' ~ subject.id)
+    ? knp_menu_get('page-section-' ~ subject.id)
+    : null -%}
+{% set panel_background = page_menu ? page_menu.extra('menu_background') : null %}
+
+<div class="themes-panel container__full"
+    {% if panel_background -%}
+        style="background-image: url('{{ asset(panel_background) }}'); background-repeat: no-repeat; background-size: 100% auto;"
+    {%- endif -%}
+>
+    {% if not preview_mode|default and subject is admin_editable %}
+        <a id="contentEdit" href="{{ admin_object_path(subject) }}" target="_blank">Редактировать</a>
+        {{ sonata_block_render({'type': 'material_owner_link'}, {object: subject}) }}
+    {% endif %}
+    <nav class="themes-panel__breadcrumbs">
+        {% for breadcrumb_item in breadcrumbs() %}
+           <a class="{{ loop.last ? 'no-arrow' : '' }}" href="{{ breadcrumb_item.uri }}" title="{{ breadcrumb_item.label }}">{{ breadcrumb_item.label }}</a>
+        {% endfor %}
+    </nav>
+
+    {% if page_menu %}
+        <a href="#" class="themes-panel__menu-all">Все темы</a>
+    {% elseif rubricsContext %}
+        <a href="#" class="themes-panel__menu-all">Все темы</a>
+    {% endif %}
+
+    {% if page_menu %}
+        {% include '::/Block/themes_metro.html.twig' with {items: page_menu} %}
+    {% elseif rubricsContext %}
+        {{ sonata_block_render({type: 'rubrics_list'}, {template: ':Block:themes.html.twig', rubricsContext: rubricsContext, category_alias: app.request.get('categoryAlias')}) }}
+    {% endif %}
+
+    <div class="clear"></div>
+
+    {% if title %}
+        <h1 class="themes-panel__title">{{ title }}</h1>
+    {% endif %}
+
+</div>
+
+<div class="themes-panel__fixed" tabindex="-1">
+    <div class="themes-panel__fixed-wrapper">
+        <a href="{{ path('app_homepage') }}">
+            <img src="{{ asset('images/logo_simple_red_notext.svg') }}" class="themes-panel__fixed-logo" />
+        </a>
+        <nav class="themes-fixed__menu">
+            {% for item in knp_menu_get('top_menu') %}
+                <a class="themes-fixed__menu-item" href="{{ item.uri }}">{{ item.label }}</a>
+            {% endfor %}
+        </nav>
+        {% if page_menu %}
+            <a href="#" class="themes-fixed__menu-all">Все темы</a>
+        {% elseif rubricsContext %}
+            <a href="#" class="themes-fixed__menu-all">Все темы</a>
+        {% endif %}
+        <form class="themes-fixed__search" action="{{ path('app_search') }}">
+            <input type="search" placeholder="Введите свой запрос" name="q" autocomplete="off"/>
+        </form>
+    </div>
+</div>
+<div class="themes-fixed__shadow"></div>
+
+{% if page_menu %}
+    {% include '::/Block/themes_metro_fixed.html.twig' with {items: page_menu } %}
+{% elseif rubricsContext %}
+    {{ sonata_block_render({type: 'rubrics_list'}, {template: ':Block:themes_fixed.html.twig', rubricsContext: rubricsContext, category_alias: app.request.get('categoryAlias')}) }}
+{% endif %}
+
+{% if subject is with_last_news %}
+    <div class="container__full day-news__top">
+        {{ sonata_block_render({'type': 'post_list'}, {
+            title: 'Последние новости',
+            category: 'news',
+            template: 'last_news',
+            limit: 8,
+            set_settings_from_request: false,
+            in_tags: subject.lastNewsTags
+        }) }}
+    </div>
+{% endif %}

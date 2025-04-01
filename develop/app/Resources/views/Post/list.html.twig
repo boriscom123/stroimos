@@ -1,0 +1,28 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': popular ? 'ТОП новости' : app.request.get('page').title,
+    'rubricsContext': 'post',
+    } %}
+
+    {% if false == popular %}
+    {% embed '::/widgets/search_form.html.twig' with {
+        'action': path('app_post_list', {categoryAlias: categoryAlias}),
+        'value': app.request.query.get('q', ''),
+        'id': 'search_query'
+    } %}
+        {% block moreBlock %}{% endblock %}
+    {% endembed %}
+    {% endif %}
+
+    {{ sonata_block_render({'type': 'post_list'}, {
+        'template': '::widgets/news/_list.html.twig',
+        'category': categoryAlias,
+        'popular': popular,
+    }) }}
+{% endblock %}

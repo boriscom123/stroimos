@@ -1,0 +1,92 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# link {{ entity_path(post) }} #}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+
+<article class="news-list__teaser">
+    {#<aside class="news-list__teaser-options">#}
+    {#{% if post.rubrics|length %}
+        <div class="news-list__teaser-themes">
+            <i class="icon icon-16 icon-news"></i>
+            {% for rubric in post.rubrics %}
+                <a href="{{ path('app_post_list', {categoryAlias: post.category.alias, rubric: rubric.title}) }}">{{ rubric.title }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}#}
+
+    {#{% if post.tags|length %}
+        <div class="news-list__teaser-tags">
+            <i class="icon icon-16 icon-label"></i>
+            {% for tag in post.tags %}
+                <a
+                href="{{ entity_list_path(post, {tag: tag.title }) }}">{{ tag.title }}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}#}
+    {#</aside>#}
+    {% set post = result.transformed %}
+    <a class="new-list__teaser-slug" href="{{ entity_path(post) }}">
+        <span class="news-list__teaser-meta {{ (not post.image is defined) ? 'no-image': '' }}">
+            {% if post.image is defined and post.image %}
+                <img class="news-list__teaser-img" src="{% path post.image, 'thumb210' %}" width="210px"
+                     height="150px"/>
+            {% elseif entity_alias(post) in ['decision_document', 'law_document', 'draft_document']  %}
+                <object type="image/svg+xml" data="{{ asset('images/documents.svg') }}" width="210px" height="150px">
+                    <img src="{{ asset('images/documents.svg') }}" width="210px" height="150px" style="--color_fill: #000;" />
+                </object>
+            {% elseif entity_alias(post) == 'construction' and post.dataField is defined and post.dataField('PointXyGeometryCoordinates') %}
+                <div class="objects-list__item-img">
+                    <div class="geo-point geo-point_search {{ post.dataField('ObjectStatus') }} {{ post.dataField('MainFunctional') }}">
+                        <div class="map-widget"
+                        {% if post.dataField('MainFunctional') == 'renov-industrial' and post.dataField('LandGeometryCoordinates') is not null and post.dataField('LandGeometryCoordinates') is not empty %}
+                            data-polygon="{{ post.dataField('LandGeometryCoordinates') }}"
+                        {% else %}
+                            data-point="{{ post.dataField('PointXyGeometryCoordinates') }}"
+                        {% endif %}
+                        ></div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if post.publishStartDate is defined %}
+                <time class="news-list__teaser-date">{{ post.publishStartDate | format_date }}</time>
+            {#{% elseif post.updatedAt is defined and post.updatedAt is not empty %}#}
+                {#<time class="news-list__teaser-date">{{ post.updatedAt | format_date }}</time>#}
+            {#{% elseif post.createdAt is defined and post.createdAt is not empty %}#}
+                {#<time class="news-list__teaser-date">{{ post.createdAt | format_date }}</time>#}
+            {% endif %}
+        </span>
+
+        {% set highlights = result.result.highlights %}
+        <div class="news-list__teaser-new">
+            {% set title = highlights.title is defined ? highlights.title[0] : post.title %}
+            <header class="news-list__teaser-header">
+                <h3 class="news-list__teaser-title">{{ title|raw }}</h3>
+            </header>
+
+            {% if highlights.teaser is defined %}
+                <p class="news-list__teaser-announce">{{ highlights.teaser[0]|raw }}</p>
+            {% elseif highlights.content is defined %}
+                {% for line in highlights.content %}
+                    <p class="news-list__teaser-announce">... {{ line|striptags('<em></em>')|slice(0, 300)|trim('.')|raw }} ...</p>
+                {% endfor %}
+            {% elseif post.teaser is defined %}
+                <p class="news-list__teaser-announce">{{ post.teaser }}</p>
+            {% elseif post.content is defined and post.content is not empty %}
+                <p class="news-list__teaser-announce">{{ (post.content|html2text|split(' ')|slice(0, 50)|join(' ')|trim('.') ~ '...')|raw }}</p>
+            {% endif %}
+
+            {% if post.category is defined %}
+                <p class="news-list__teaser-announce" style="font-style: italic">{{ post.category }}</p>
+            {% else %}
+                <p class="news-list__teaser-announce" style="font-style: italic">{{  ('publication.' ~ entity_alias(post))|trans|capitalize }}</p>
+            {% endif %}
+
+            {% set address = highlights.addressText is defined ? highlights.addressText[0] : post.addressText|default('') %}
+            {% if address is not empty %}
+                <p class="news-list__teaser-announce">Адрес: {{ address|raw }}</p>
+            {% endif %}
+        </div>
+    </a>
+</article>

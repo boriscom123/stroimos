@@ -1,0 +1,464 @@
+<ng-template #reportDetailsBody let-url="url" let-fieldNameWithCreationDatetime="fieldNameWithCreationDatetime">
+  <kendo-grid
+    appReportDataProvider
+    [url]="url"
+    [fieldNameWithCreationDatetime]="fieldNameWithCreationDatetime"
+    [height]="410"
+    [pageSize]="50"
+    [pageable]="true"
+    [sortable]="true"
+  >
+    <kendo-grid-column field="id" title="ID"></kendo-grid-column>
+    <kendo-grid-column field="name" title="Имя"></kendo-grid-column>
+    <kendo-grid-column field="author" title="Автор"></kendo-grid-column>
+    <kendo-grid-column field="created" title="Дата и время создания"></kendo-grid-column>
+    <kendo-grid-column field="url.edit" title="Ссылка на редактирование">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a href="{{dataItem.editUrl.hyperlink}}" target="_blank">
+          {{dataItem.editUrl.hyperlink}}
+        </a>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</ng-template>
+
+<ng-template #spotlightItemReportBody let-url="url" let-fieldNameWithCreationDatetime="fieldNameWithCreationDatetime">
+  <kendo-grid
+    appReportDataProvider
+    [url]="url"
+    [fieldNameWithCreationDatetime]="fieldNameWithCreationDatetime"
+    [height]="410"
+    [pageSize]="50"
+    [pageable]="true"
+    [sortable]="true"
+  >
+    <kendo-grid-column field="id" title="ID"></kendo-grid-column>
+    <kendo-grid-column field="title" title="Название"></kendo-grid-column>
+    <kendo-grid-column field="author" title="Автор"></kendo-grid-column>
+    <kendo-grid-column field="loggedAt" title="Дата и время создания"></kendo-grid-column>
+  </kendo-grid>
+</ng-template>
+
+<ng-template #newsletterReportBody let-url="url" let-fieldNameWithCreationDatetime="fieldNameWithCreationDatetime">
+  <kendo-grid
+    appReportDataProvider
+    [url]="url"
+    [fieldNameWithCreationDatetime]="fieldNameWithCreationDatetime"
+    [height]="410"
+    [pageSize]="50"
+    [pageable]="true"
+    [sortable]="true"
+  >
+    <kendo-grid-column field="id" title="ID"></kendo-grid-column>
+    <kendo-grid-column field="status" title="Статус"></kendo-grid-column>
+    <kendo-grid-column field="createdAt" title="Дата и время создания"></kendo-grid-column>
+    <kendo-grid-column field="url.preview" title="Предпросмотр с общегородскими новостями">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a href="{{dataItem.previewUrl.hyperlink}}" target="_blank">
+          {{dataItem.previewUrl.hyperlink}}
+        </a>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</ng-template>
+
+<report
+
+  title = "Материалы градостроительства"
+  url="{{baseUrl}}/api/reports/page-construction"
+  [detailsBody]="reportDetailsBody"
+  appReportExportDataProvider
+  [excelExporterOptions] = "{
+    title : 'Материалы градостроительства',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Фотоколлажи и графика"
+  url="{{baseUrl}}/api/reports/infographic-collage"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Фотоколлажи и графика',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Фотоматериалы инфографики"
+  url="{{baseUrl}}/api/reports/infographic-from-media"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Фотоматериалы инфографики',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Материалы инфографики"
+  url="{{baseUrl}}/api/reports/infographic"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Материалы инфографики',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Фотоматериалы"
+  url="{{baseUrl}}/api/reports/photo"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Фотоматериалы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Новости"
+  url="{{baseUrl}}/api/reports/news"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Новости',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Новости города"
+  url="{{baseUrl}}/api/reports/news-city"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Новости города',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Статьи"
+  url="{{baseUrl}}/api/reports/article"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Статьи',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Статьи-фотоленты"
+  url="{{baseUrl}}/api/reports/page-photo-lines"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Статьи-фотоленты',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Интервью"
+  url="{{baseUrl}}/api/reports/interview"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Интервью',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Пресс-релизы"
+  url="{{baseUrl}}/api/reports/press-release"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Пресс-релизы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Стенограммы по итогам мероприятий"
+  url="{{baseUrl}}/api/reports/shorthand-report"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Стенограммы по итогам мероприятий',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Видеоматериалы"
+  url="{{baseUrl}}/api/reports/video"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Видеоматериалы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Баннеры на главной"
+  url="{{baseUrl}}/api/reports/banner"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Баннеры на главной',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Встраевыемые банеры"
+  url="{{baseUrl}}/api/reports/embedded-banner"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Встраевыемые банеры',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Банеры 'В центре внимания'"
+  url="{{baseUrl}}/api/reports/spotlightitem-banner"
+  fieldNameWithCreationDatetime="loggedAt"
+  [detailsBody]="spotlightItemReportBody"
+  [excelExporterOptions] = "{
+    title : 'Банеры - В центре внимания',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'title', width: 100 },
+      { header: 'Автор', key: 'author', width: 50},
+      { header: 'Дата и время создания', key: 'loggedAt', width: 50}
+    ]
+  }"
+></report>
+
+<report
+  title = "Страницы"
+  url="{{baseUrl}}/api/reports/page"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Страницы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Строительная наука"
+  url="{{baseUrl}}/api/reports/page-builder-sciense"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Строительная наука',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Персоны"
+  url="{{baseUrl}}/api/reports/page-personal"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Персоны',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Организации"
+  url="{{baseUrl}}/api/reports/page-organisation"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Организации',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Дороги"
+  url="{{baseUrl}}/api/reports/page-road"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Дороги',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Метро"
+  url="{{baseUrl}}/api/reports/page-metro"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Метро',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Объекты строительства"
+  url="{{baseUrl}}/api/reports/page-construction"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Объекты строительства',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+<report
+  title = "Страницы - Вопросы и ответы"
+  url="{{baseUrl}}/api/reports/page-faq"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Страницы - Вопросы и ответы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Страницы - Почтовые рассылки"
+  url="{{baseUrl}}/api/reports/newsletter"
+  [detailsBody]="newsletterReportBody"
+  [excelExporterOptions] = "{
+    title : 'Страницы - Почтовые рассылки',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Статус', key: 'status', width: 100 },
+      { header: 'Дата и время создания', key: 'createdAt', width: 50},
+      { header: 'Предпросмотр с общегородскими новостями', key: 'previewUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "НПА по вопросам, относящимся к сфере 'Градполитика'"
+  url="{{baseUrl}}/api/reports/document"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'НПА - Градполитика',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>
+
+<report
+  title = "Анонсы"
+  url="{{baseUrl}}/api/reports/announcement"
+  [detailsBody]="reportDetailsBody"
+  [excelExporterOptions] = "{
+    title : 'Анонсы',
+    columns : [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Наименование', key: 'name', width: 100 },
+      { header: 'Дата и время создания', key: 'created', width: 50},
+      { header: 'Ссылка на редактирование', key: 'editUrl', width: 300}
+    ]
+  }"
+></report>

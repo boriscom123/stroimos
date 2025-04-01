@@ -1,0 +1,261 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %}
+ #}
+    <div class="js-mediator-article">
+
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="diametry-page">
+
+        <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/chto-takoie-moskovskiie-tsientral-nyie-diamietry" class="diametry-page__intro">
+          <h1 class="diametry-page__intro-title">
+            Московские<br/> Центральные<br/> Диаметры
+          </h1>
+          <div class="diametry-page__intro-subtitle">
+            Крупнейший <strong>транспортный проект</strong> Москвы и Подмосковья
+          </div>
+          <div class="diametry-page__intro-info">
+            <strong>Новый формат</strong>, объединяющий <br/>
+            пригородные электрички и московский метрополитен
+          </div>
+        </a>
+
+        <div class="diametry-page__advantages">
+          <div class="diametry-page__advantages-title">
+            Преимущества
+          </div>
+          <div class="diametry-page__advantages-container">
+            <div class="diametry-page__advantages-content">
+              <div class="diametry-page__advantages-content-column">
+                <div class="diametry-page__advantages-item">
+                  <img src="/images/diametry/advantages_item_center.png" class="diametry-page__advantages-item-img" alt="" width="122" height="122" />
+                  <div class="diametry-page__advantages-item-title">
+                    «Сквозные» проезды<br/>
+                    через центр города
+                  </div>
+                </div>
+                <div class="diametry-page__advantages-item">
+                  <img src="/images/diametry/advantages_item_time.png" class="diametry-page__advantages-item-img" alt="" width="122" height="122" />
+                  <div class="diametry-page__advantages-item-title">
+                    Режим работы метро<br/>
+                    5:30 – 1:00
+                  </div>
+                </div>
+              </div>
+              <div class="diametry-page__advantages-content-column">
+                <div class="diametry-page__advantages-time">
+                  <div class="diametry-page__advantages-time-subtitle">
+                    интервал движения поездов<br/>
+                    в часы пик
+                  </div>
+                  <div class="diametry-page__advantages-time-title">
+                    5-6 минут
+                  </div>
+                </div>
+                <div class="diametry-page__advantages-time">
+                  <div class="diametry-page__advantages-time-title">
+                    до 50% <span class="diametry-page__advantages-time-title-extra">времени</span>
+                  </div>
+                  <div class="diametry-page__advantages-time-subtitle">
+                    экономия при поездке<br/>
+                    по городу
+                  </div>
+                </div>
+              </div>
+              <div class="diametry-page__advantages-content-column">
+                <div class="diametry-page__advantages-item">
+                  <img src="/images/diametry/advantages_item_transfer.png" class="diametry-page__advantages-item-img" alt="" width="122" height="122" />
+                  <div class="diametry-page__advantages-item-title">
+                    Бесплатные пересадки<br/>
+                    на метро и МЦК
+                  </div>
+                </div>
+                <div class="diametry-page__advantages-item">
+                  <img src="/images/diametry/advantages_item_comfy.png" class="diametry-page__advantages-item-img" alt="" width="122" height="122" />
+                  <div class="diametry-page__advantages-item-title">
+                    Удобные платформы<br/>
+                    и комфортные поезда
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diametry-page__map">
+          <div class="diametry-page__map-title">Схема МЦД</div>
+          <div data-zoomer>
+              <div class="small">
+                  <img src="/images/diametry/map_small.png" class="diametry-page__map-img a" alt="" />
+              </div>
+              <div class="large">
+                  <img src="/images/diametry/map_large.png" class="diametry-page__map-img b" alt="" />
+              </div>
+          </div>
+        </div>
+
+        <div class="diametry-page__routes">
+          <div class="diametry-page__routes-title">Маршруты</div>
+          <ul class="diametry-page__routes-items">
+            <li class="diametry-page__routes-item">
+              <div class="diametry-page__routes-item-title">
+                Белорусско-<br/>
+                Савеловский
+              </div>
+              <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-1" class="diametry-page__routes-item-icon">
+                <img src="/images/diametry/routes_d1.png" alt="" />
+              </a>
+              <div class="diametry-page__routes-item-subtitle">
+                ноябрь 2019 года
+              </div>
+            </li>
+            <li class="diametry-page__routes-item">
+              <div class="diametry-page__routes-item-title">
+                  Курско-<br/>
+                  Рижский
+              </div>
+              <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-2" class="diametry-page__routes-item-icon">
+                <img src="/images/diametry/routes_d2.png" alt="" />
+              </a>
+              <div class="diametry-page__routes-item-subtitle">
+                ноябрь 2019 года
+              </div>
+            </li>
+            <li class="diametry-page__routes-item">
+              <div class="diametry-page__routes-item-title">
+                  Ленинградско-<br/>
+                  Казанский
+              </div>
+              <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-3" class="diametry-page__routes-item-icon">
+                <img src="/images/diametry/routes_d3.png" alt="" />
+              </a>
+              <div class="diametry-page__routes-item-subtitle">
+                август 2023 года
+              </div>
+            </li>
+            <li class="diametry-page__routes-item">
+              <div class="diametry-page__routes-item-title">
+                   Киевско-<br/>
+                   Горьковский
+              </div>
+              <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-4" class="diametry-page__routes-item-icon">
+                <img src="/images/diametry/routes_d4.png" alt="" />
+              </a>
+              <div class="diametry-page__routes-item-subtitle">
+                сентябрь 2023 года
+              </div>
+            </li>
+{#             <li class="diametry-page__routes-item">
+              <div class="diametry-page__routes-item-title">
+                  Ярославско-<br/>
+                  Павелецкий*
+              </div>
+              <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/moskovskiie-tsientral-nyie-diamietry-5" class="diametry-page__routes-item-icon">
+                <img src="/images/diametry/routes_d5.png" alt="" />
+              </a>
+              <div class="diametry-page__routes-item-subtitle">
+                срок неизвестен
+              </div>
+            </li> #}
+          </ul>
+        </div>
+
+        <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/stoimost-proiezda" class="diametry-page__tariffs">
+          <div class="diametry-page__tariffs-content">
+            <div class="diametry-page__tariffs-title">
+              Тарифные<br/>
+              зоны
+            </div>
+            <ul class="diametry-page__tariffs-list">
+              <li class="diametry-page__tariffs-item">
+                «Центральная»
+              </li>
+              <li class="diametry-page__tariffs-item">
+                «Пригород»
+              </li>
+              <li class="diametry-page__tariffs-item">
+                «Дальняя»
+              </li>
+            </ul>
+            <div class="diametry-page__tariffs-info">
+              Поездки на МЦД по Москве стоят столько же, сколько и в метро, на МЦК<br/>
+              и наземном транспорте. Пересаживаться с диаметров на метро и Московское<br/>
+              центральное кольцо в течение 90 минут пассажиры могут бесплатно
+            </div>
+          </div>
+        </a>
+
+        <a href="https://stroi.mos.ru/moskovskiie-tsientral-nyie-diamietry-stroi_mos/poiezda" class="diametry-page__trains">
+          <div class="diametry-page__trains-content">
+            <div class="diametry-page__trains-title">
+              Поезда
+            </div>
+            <div class="diametry-page__trains-info">
+              По МЦД-1 и МЦД-2 запустили «Иволги» – поезда нового поколения
+            </div>
+            <ul class="diametry-page__trains-list">
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_usb.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  USB-розетки для зарядки гаджетов
+                </span>
+              </li>
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_bike.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  крепления для велосипедов в вагонах
+                </span>
+              </li>
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_info.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  информационное табло
+                </span>
+              </li>
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_doors.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  широкие двери
+                </span>
+              </li>
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_wifi.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  бесплатный Wi-Fi
+                </span>
+              </li>
+              <li class="diametry-page__trains-item">
+                <img src="/images/diametry/trains_vestibule.png" class="diametry-page__trains-item-img" alt="" width="68" height="68" />
+                <span class="diametry-page__trains-item-text">
+                  отсутствие тамбуров
+                </span>
+              </li>
+            </ul>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'мцд'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

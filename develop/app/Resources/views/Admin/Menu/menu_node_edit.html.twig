@@ -1,0 +1,26 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <style>
+    </style>
+    <script>
+        $(function () {
+            var hideTypes = function (fieldClass, showType) {
+                $(fieldClass).parents('.form-group').hide();
+
+                if (showType) {
+                    console.log(showType);
+                    $(showType).parents('.form-group').show();
+                }
+            };
+
+            hideTypes('.hidden-type');
+
+            $('.type-choice').change(function() {
+                hideTypes('.type-field', '.type-' + $(this).val());
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+<tr>
+    <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 20px;"> 
+        <!-- BEGIN INFO // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="infoBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="middle" align="center" class="headerBlockContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 60px 0 16px 0;">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="headerBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="middle" align="start" class="headerBlockTitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-family: Arial,serif; font-weight: bold; font-size: 24px; line-height: 1; padding: 0 10px 0 0; line-height: 20px; height: 20px; text-transform: uppercase;" height="20">
+                               Инфографика
+                            </td>
+                            <td valign="middle" align="end" class="headerBlockArchive" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 0 0 10px; height: 20px;" height="20">
+                                <a href="https://stroi.mos.ru/infographics?{{ url_utm }}" class="headerBlockArchiveLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #181818; font-family: Verdana,sans-serif; font-size: 10px; line-height: 1;">
+                                    <span class="headerBlockArchiveLink" style="color: #CA1120; font-family: Arial,sans-serif; font-size: 16px; line-height: 120%; text-transform: uppercase; text-decoration: underline; font-weight: 400;">
+                                        все инфографики
+                                    </span>
+                                </a>  
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mediaItem" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td class="mediaItemImage" valign="middle" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                <a href="{{ entity_absolute_url(infographics[0].infographics) | url_hash_utm_fix(url_utm) }}" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+                                    <img src="{% path infographics[0].infographics.image, 'newsletter_media' %}" alt width="560" height="374" style="-ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;">
+                                </a>
+                            </td> 
+                        </tr>
+                        {# <tr>
+                            <td class="mediaItemContentContainer" valign="top" align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0px 40px 0 40px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                                    <tr>
+                                        <td class="mediaItemContent" valign="top" align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 25px; background: #f3fdff;">
+                                            <a href="{{ entity_absolute_url(infographics[0].infographics) | url_hash_utm_fix(url_utm) }}" class="mediaItemContentLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #000; font-family: Georgia,serif; font-size: 18px; font-weight: bold; line-height: 1.2; text-decoration: none !important;">
+                                                <span class="mediaItemContentLink" style="color: #000; font-family: Georgia,serif; font-size: 18px; font-weight: bold; line-height: 1.2; text-decoration: none !important;">
+                                                    {{ infographics[0].infographics.title }}
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table> 
+                            </td>
+                        </tr> #}
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- // END INFO -->
+    </td>
+</tr>

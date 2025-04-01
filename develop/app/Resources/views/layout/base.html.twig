@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" {{ sonata_seo_html_attributes() }}>
+<head {{ sonata_seo_head_attributes() }}>
+    <meta charset="UTF-8">
+    {% block title %}{{ sonata_seo_title() }}{% endblock %}
+    {% block metadatas %}{{ sonata_seo_metadatas() }}{% endblock %}
+    {% block head_extra_link %}{% endblock %}
+    {% block head_mediator %}{% endblock %}
+{#    <link rel="preconnect" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin> #}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('images/favicon/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}" sizes="any">
+    <link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ asset('images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    {% if noindex %} <meta name="robots" content="noindex"/> {% endif %}
+
+    {% block stylesheets %}
+        {% if new_design %}
+            <link href="{{ asset('css/new-design.css') }}" type="text/css" rel="stylesheet" media="screen"/>
+        {% else %}
+            <link href="{{ asset('css/gsk_static.css') }}" type="text/css" rel="stylesheet" media="screen"/>
+        {% endif %}
+    {% endblock %}
+
+    {% if sendsay_account %}
+        {% include ':layout:push_notifications.html.twig' %}
+    {% endif %}
+
+    <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?171',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1877462-b7RNP"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1877462-b7RNP" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+    {#todo: remove#}
+    {#{% stylesheets '@FOSCommentBundle/Resources/assets/css/comments.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}#}
+</head>
+<body class="{% block bodyClass %}{% endblock %}">
+{% include '::/widgets/cookie_alert.html.twig' %}
+<div data-mos-teaser='{"scroll":false,"adaptive":null,"placementParams":{"p1":"cbumz","p2":"y"}}'></div>
+{% if full_frontend %}
+    {% if not new_design %}
+        {#{% include '::/widgets/background_video.html.twig' %}#}
+    {% endif %}
+    {# {% include '::/widgets/background_video.html.twig' %} #}
+    {#{% include '::/widgets/mosru_search_script.html.twig' %}#}
+{% endif %}
+{% block body %}{% endblock %}
+{% block javascripts %}
+
+    <script src="//api-maps.yandex.ru/2.1/?coordorder=longlat&lang=ru_RU" type="text/javascript"></script>
+    {% if new_design %}
+        <script src="{{ asset('js/new_design.js') }}" type="text/javascript"></script>
+    {% else %}
+        <script src="{{ asset('js/gsk_static.js') }}" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}
+{# todo: подумать как жить с этим, а потом убить #}
+<link href="{{ asset('css/defaults.css') }}" type="text/css" rel="stylesheet" media="screen"/>
+{% include '::/layout/counters.html.twig' %}
+{% if block('head_mediator') %}
+  {% include '::/layout/mediator_script.html.twig' %}
+{% endif %}
+</body>
+</html>

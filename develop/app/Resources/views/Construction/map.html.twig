@@ -1,0 +1,184 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% set checkboxes = construction_functional_options() %}
+{% set knownTypes = [
+    'pedestrian-bridge',
+    'renov-house',
+    'problem-construction',
+    'appartement',
+    'poezda',
+    'admin-center',
+    'all',
+    'culture',
+    'house',
+    'road',
+    'garage',
+    'health',
+    'hotels',
+    'ironroad',
+    'sport',
+    'industrial',
+    'metro',
+    'playschool',
+    'school',
+    'trade',
+    'stay',
+    'educational',
+    'novaia-moskva',
+    'religion',
+    'entertainment',
+    'tpu',
+    'other',
+    'renov-industrial',
+    'renov-house',
+    'pedestrian-bridge',
+    'appartement',
+    'cinema',
+    'park'
+] %}
+{% set map_type_atlas = 'atlas' == app.request.query.get('mapType') %}{# or 'stroi.mos.ru' == app.request.host#}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Стройки Москвы',
+    } %}
+    <div style="position: relative; height: 140px; margin-top: -35px;"><span style="display: block; padding: 10px;">Интерактивная карта «Стройки Москвы» функционирует в тестовом режиме. Если вы не нашли нужный объект, пожалуйста, <strong><a href=error-report>напишите нам.</a></strong></span></div>
+    {#{{ dump(admUnits) }}#}
+
+    <div class="map-block container__unlimited">
+        <div class="map-block-popup js-map-popup">
+            <button class="map-block-popup__close js-map-popup-close" type="button"></button>
+            Масштабировать карту можно зажав <span>Shift</span> и покрутив колёсико мыши
+        </div>
+        <div class="search-form__wrap search-compact">
+            {% embed '::/widgets/search_form.html.twig' with {'formTag': 'div', 'placeholder': 'Поиск по адресу'} %}
+                {% block moreBlock %}
+                    <div class="search-form__submenu">
+                        <a id="searchAdvance" class="news-search__more-item" href="#"><span class="more_arrow__container"><i class="more_arrow__item"></i></span>Расширенный поиск</a>
+                        <div class="news-search__more-item results hidden" data-count="" id="search__more_results">Найдено результатов:</div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="search-form__submenu-wrap" style="height: 0" tabindex="-1">
+                        <!-- <div class="search-from__submenu-wrap-close"></div> -->
+                        <div class="area-block active">
+                            <div>
+                              <span class="area-block__title">Округ</span>
+                              <select id="county-select" style="width: 378px;">
+                                  <option value="" selected="">Все округа</option>
+                                  {% for county in admUnits %}
+                                      <option value="{{ county.id }}">
+                                          {{ county.title }}
+                                      </option>
+                                  {% endfor %}
+                              </select>
+                            </div>
+                            <div>
+                              <span class="area-block__title">Район</span>
+                              <select id="district-select" disabled style="width: 378px;">
+                                  {#<option value="" data-county="" selected="">Все</option>#}
+                                  {% for county in admUnits %}
+                                      <option value="" data-county="{{ county.id }}" class="hidden">Все районы</option>
+                                      {% for district in county.districts %}
+                                          <option value="{{ district.id }}" data-county="{{ county.id }}" class="hidden">
+                                              {{ district.title }}
+                                          </option>
+                                      {% endfor %}
+                                  {% endfor %}
+                              </select>
+                            </div>
+                            <!--
+                            <br>
+                            {% if app.user.cityDistrict.id is defined %}
+                                <a id="select-my-district-link" href="#" data-adm-unit-id="{{ app.user.cityDistrict.id }}" class="my-district-link">Выбрать мой район</a>
+                            {% endif %}
+                            <a id="detect-my-district-link" href="#" class="my-district-link">Определить мой район</a>
+                            -->
+                        </div>
+
+                        <div class="search-form__object-types active">
+                            <h3 class="object-types__title object-types__title_small">Тип объектов</h3>
+
+                            <div class="object-types__list object-types__list_columns">
+                                {% for type,label in checkboxes %}
+                                    {# {% if loop.first or loop.index % 2 == 1 %}
+                                        <div class="object-types__list-str">
+                                    {% endif %} #}
+                                    <div class="object-types__list-item">
+                                        {% embed '::widgets/checkbox.html.twig' with {id: 'type-' ~ type, label: label } %}
+                                            {% block labelContent %}
+                                                <i class="checkbox-icon checkbox-{% if type in knownTypes %}{{ type }}{% else %}default{% endif %}"></i>
+                                            {% endblock %}
+                                        {% endembed %}
+                                    </div>
+                                    {# {% if loop.last or loop.index % 2 == 0 %}
+                                        </div>
+                                    {% endif %} #}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="search-form__timeline area-block active">
+                            <span class="area-block__title"></span>
+                            <div id="timeline"
+                                 data-range-min="{{ finishYearsRange[0] }}"
+                                 data-range-max="{{ finishYearsRange[1] }}"
+                                 data-value-from="2019"
+                                 data-value-to="{{ finishYearsRange[1] }}"
+                            ></div>
+                            <input type="hidden" id="timeline-input" value="2019,{{ finishYearsRange[1] }}"/>
+                        </div>
+
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+        {% if map_type_atlas %}
+            <div id="mapAtlas" style="" class="container__full"></div>
+        {% else %}
+            <div id="map-container">
+              <div id="map" style="" class="container__full"></div>
+            </div>
+        {% endif %}
+    </div>
+
+    <h2>Новые объекты строительства</h2>
+
+    <div class="objects-block">
+        {# <ul class="objects-block__info">
+            <li class="objects-block__info-item"><i class="object-info object-info-terrain"></i>Подобран земельный участок</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-designed"></i>Ведется проектирование</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-documentation_underdeveloped"></i>Разрабатывается документация</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-documentation"></i>Утверждена документация</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-construction"></i>Строится</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-dooperation"></i>Подготовка к вводу в эксплуатацию</li>
+            <li class="objects-block__info-item"><i class="object-info object-info-operation"></i>Объект введен вэксплуатацию</li>
+        </ul>  #}
+
+        {#{% include '::/Construction/_list.html.twig' %}#}
+        {{ sonata_block_render({'type': 'construction_list'}, {
+            'template': '::/Construction/_list.html.twig',
+            'order': { 'createdAt': {'order': 'desc'} },
+            'limit': 10
+        }) }}
+
+        {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+        {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% if map_type_atlas %}
+        {% set atlas_version = ('1.5.2' == app.request.query.get('version')) ? '1.5.2' : '1.5.1' %}
+
+        <script>atlas_version = {{ atlas_version|json_encode|raw }};</script>
+        <script type="text/javascript" src="//apieatlas.mos.ru/js/?key=42c8980410f61bf1bcec2bec9cfd8e24&version={{ atlas_version }}"></script>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

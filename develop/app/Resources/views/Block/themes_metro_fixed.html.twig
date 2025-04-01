@@ -1,0 +1,22 @@
+<div class="themes-fixed__menu-drop-wrap" tabindex="-1">
+    <nav class="themes-fixed__menu-drop themes-fixed__menu-drop__columns" data-columns>
+        {% for item in items.children %}
+            <div class="themes-fixed__menu-drop-item {% if item.isCurrent %}active{% endif %}">
+                <a href="{{ item.uri }}">
+                    {{ item.name }}
+                </a>
+                {% if item.children is defined and item.children|length != 0 %}
+                    <ul class="themes-fixed__menu-drop-item__list">
+                        {% for childItem in item.children %}
+                            <li class="themes-fixed__menu-drop-item__list-item {% if childItem.isCurrent %}active{% endif %}">
+                                <a href="{{ childItem.uri }}">
+                                    {{ childItem.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </nav>
+</div>

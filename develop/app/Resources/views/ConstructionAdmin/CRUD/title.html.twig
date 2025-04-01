@@ -1,0 +1,12 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.isNewDataPending and object.isUpdated %}
+        <span class="label label-danger">{{ 'admin.construction.updated'|trans() }}</span>
+    {% endif %}
+    {% if object.isNew %}
+        <span class="label label-primary">{{ 'admin.construction.isnew'|trans() }}</span>
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

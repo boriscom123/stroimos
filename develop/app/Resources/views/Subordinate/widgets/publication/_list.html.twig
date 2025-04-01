@@ -1,0 +1,25 @@
+<div class="gdp-smi-page">
+    {% if publications is defined and publications is not empty %}
+        <div class="smi-list__list {% if class is defined and class %} {{ class }} {% endif %}">
+            {% for item in publications %}
+                {% include 'Subordinate/widgets/publication/_teaser.html.twig' with {'entity': item} %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if next_offset %}
+        {% include 'Subordinate/Block/loadmore_button.html.twig' with {
+        title: 'Загрузить ещё',
+        target: '.smi-list__list',
+        source: block_path(block, context, {
+            template: '_ajax_list',
+            owner: app.request.get('_subordinate_route')
+        }),
+        limit: limit,
+        item: '.smi-list__teaser',
+        offset: next_offset
+        }%}
+    {% else %}
+        {#<div class="loadmore-btn__wrap">&nbsp;</div>#}
+    {% endif %}
+</div>

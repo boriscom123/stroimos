@@ -1,0 +1,138 @@
+services:
+    app.form.type.copy_content_button:
+        class: AppBundle\Form\Type\CopyContentButton
+        tags:
+            - {name: form.type, alias: copy_content_button}
+
+    app.form.type.address:
+        class: AppBundle\Form\Type\AddressType
+        tags:
+            - {name: form.type, alias: address}
+
+    app.form.type.geopoint:
+        class: AppBundle\Form\Type\GeoPointType
+        tags:
+            - {name: form.type, alias: geopoint}
+
+    app.form.type.construction_status:
+        class: AppBundle\Form\Type\ConstructionStatusType
+        tags:
+            - {name: form.type, alias: construction_status}
+
+    app.form.type.road_type:
+        class: AppBundle\Form\Type\RoadTypeType
+        tags:
+            - {name: form.type, alias: road_type}
+
+    app.form.type.entity_reference:
+        class: AppBundle\Form\Type\EntityReferenceType
+        arguments: [@sonata.admin.manager.orm]
+        tags:
+            - {name: form.type, alias: entity_reference}
+
+    app.form.type.menu_tree:
+        class: AppBundle\Form\Type\MenuTreeType
+        arguments: [ @doctrine ]
+        tags:
+          - { name: form.type, alias: menu_tree }
+
+    app.form.type.media_category_tree:
+        class: AppBundle\Form\Type\MediaCategoryTreeType
+        arguments: [ @doctrine ]
+        tags:
+          - { name: form.type, alias: media_category_tree }
+
+    app.form.type.metro_video_tour_item:
+        class: AppBundle\Form\Type\MetroVideoTourItemType
+        calls:
+            - [setContainer, [@service_container]]
+        tags:
+          - { name: form.type, alias: metro_video_tour_item }
+
+    app.form.type.ajax_autocomplete:
+        class: AppBundle\Form\Type\AjaxAutocompleteType
+        arguments: [@service_container]
+        tags:
+            - {name: form.type, alias: ajax_autocomplete}
+
+    app.form.type.construction_data_text:
+        class: AppBundle\Form\Type\ConstructionDataTextType
+        tags:
+            - {name: form.type, alias: construction_data_text}
+
+    app.form.type.construction_data_choice:
+        class: AppBundle\Form\Type\ConstructionDataChoiceType
+        tags:
+            - {name: form.type, alias: construction_data_choice}
+
+    app.form.type.administrative_unit_choice:
+        class: AppBundle\Form\Type\AdministrativeUnitChoiceType
+        tags:
+            - {name: form.type, alias: administrative_unit_choice}
+
+    app.form.type.construction_data_geo_point:
+        class: AppBundle\Form\Type\ConstructionDataGeoPointType
+        tags:
+            - {name: form.type, alias: construction_data_geo_point}
+
+    app.form.type.construction_data_geo_polygon:
+        class: AppBundle\Form\Type\ConstructionDataGeoPolygonType
+        tags:
+            - {name: form.type, alias: construction_data_geo_polygon}
+
+    app.form.type.contact_information:
+        class: AppBundle\Form\Type\ContactInformationType
+        arguments: [@service_container]
+        tags:
+            - {name: form.type, alias: contact_information}
+
+    # see https://github.com/sonata-project/SonataAdminBundle/commit/475279fe1a6736f785c3cff7f04d3d04a82c898c
+    # remove when released by Sonata Admin
+    sonata.admin.doctrine_orm.form.type.choice_field_mask:
+         class: AppBundle\Form\Type\ChoiceFieldMaskType
+         tags:
+            - { name: form.type, alias: sonata_type_choice_field_mask }
+
+    app.form.type.media_collection:
+        class: AppBundle\Form\Type\MediaCollectionType
+        tags:
+          - { name: form.type, alias: media_collection }
+
+    app.form.type.media_list:
+        class: AppBundle\Form\Type\MediaTypeList
+        tags:
+          - { name: form.type, alias: media_list }
+
+    app.form.extension.image_type:
+        class: AppBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, aliase: file }
+
+    app.form.type.error_report:
+        class: AppBundle\Form\Type\ErrorReportType
+        tags:
+            - {name: form.type, alias: error_report}
+
+    app.form.type.hyperlink:
+        class: AppBundle\Form\Type\HyperlinkType
+        tags:
+            - { name: form.type, alias: hyperlink }
+
+    app.form.type.collection_list:
+        class: AppBundle\Form\Type\CollectionListType
+        tags:
+            - { name: form.type, alias: collection_list }
+
+    app.form.type.gif_generator:
+        class: AppBundle\Form\Type\GifGeneratorType
+        arguments:
+            - @sonata.media.twig.extension
+        tags:
+            - {name: form.type, alias: gif_generator}
+
+    app.form.type.re_captcha:
+        class: AppBundle\Form\Type\ReCaptchaType
+        arguments:
+            - @AppBundle\Form\Extension\YandexCaptcha
+        tags:
+            - {name: form.type, alias: re_captcha}

@@ -1,0 +1,6 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block actions %}
+    {{ parent() }}
+    {% include ":Admin/MetroTimelineYear:_batch_upload_action.html.twig" %}
+{% endblock %}

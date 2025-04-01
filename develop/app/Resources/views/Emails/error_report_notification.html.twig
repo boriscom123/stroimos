@@ -1,0 +1,12 @@
+<p><strong>{{ errorReport.categoryName }}</strong></p>
+{% if errorReport.user %}
+    <p>ФИО: {{ errorReport.user.firstName }} {{ errorReport.user.lastName }}</p>
+    <p>Email: {{ errorReport.user.emailCanonical }}</p>
+{% else %}
+    <p>ФИО: {{ errorReport.fullName }}</p>
+    <p>Email: {{ errorReport.email }}</p>
+{% endif %}
+
+<p>Страница, с которой был осуществлён переход: <a href="{{ errorReport.referrer }}">{{ errorReport.referrer }}</a></p>
+
+<p>Сообщение:<br> {{ errorReport.message }}</p>

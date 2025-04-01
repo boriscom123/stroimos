@@ -1,0 +1,29 @@
+{% set isTop = (isTop is defined) ? isTop : false %}
+<div class="infographic-top__teaser {{ isTop ? 'infographic-top__teaser-top' : '' }} infographic-top__teaser-{{ teaser.type }}">
+    <a href="{{ entity_path(teaser) }}" class="infographic-top__teaser-link">
+        {#todo: fix this, maybe wait for LiipImagineBundle integration#}
+        {% set thumb630x338_image %}
+            {% path teaser.image, 'thumb630x338' %}
+        {% endset %}
+        {% set infographics_top_large_image %}
+            {% path teaser.image, 'infographics_top_large' %}
+        {% endset %}
+        {% if isTop %}
+            <div class="infographic-top__teaser-image">
+                <img src="{{ thumb630x338_image|trim ?: infographics_top_large_image|trim }}" alt="{{ teaser.title }}"/>
+            </div>
+        {% else %}
+            <div class="infographic-top__teaser-image">
+                <img src="{{ thumb630x338_image|trim ?: infographics_top_large_image|trim }}" alt="{{ teaser.title }}"/>
+            </div>
+        {% endif %}
+
+        <time class="infographic-top__teaser-date">{{ teaser.publishStartDate |format_date }}</time>
+        {% if isTop or flag %}
+            <header class="infographic-top__teaser-title">{{ teaser.title }}</header>
+            <p>{{ teaser.teaser }}</p>
+        {% else %}
+            <header class="infographic-top__teaser-title">{{ teaser.title }}</header>
+        {% endif %}
+    </a>
+</div>

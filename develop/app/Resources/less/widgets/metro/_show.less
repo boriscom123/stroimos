@@ -1,0 +1,103 @@
+.metro-station__legend {
+  font-family: Onest, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 45px;
+  text-transform: uppercase;
+  display: block;
+}
+
+.metro-station__line {
+  font-family: Brygada1918, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 45px;
+  display: block;
+}
+
+.metro-station__wrapper .news-header {
+  position: relative;
+  padding-top: 50px;
+  margin-top: -50px;
+  border-left-width: 10px;
+  border-left-style: solid;
+  margin-left: 15px;
+  padding-left: 50px;
+
+  .news-title .metro-construction__list-item-circle {
+    left: -22px;
+    top: 50%;
+    margin-top: -17px;
+  }
+}
+
+.metro-station__more-info {
+  font-family: Brygada1918, serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 28px;
+  color: @color;
+  padding-bottom: 30px;
+  .dotted-border(black, bottom);
+  margin-bottom: 30px;
+
+  &:last-child {
+    background: transparent;
+  }
+}
+
+.metro-station__more-info-title {
+  font-family: Onest, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #9d9d9d;
+  margin-bottom: 5px;
+}
+
+.metro-station__wrapper .news-wrapper__sidebar .news-wrapper__share {
+    float: none;
+    padding: 0 0 60px 0;
+}
+
+.metro-station__map {
+  display: block;
+  position: relative;
+  border-bottom: none !important;
+  &_small {
+    cursor: zoom-in;
+  }
+  &_full {
+    cursor: zoom-out;
+    margin: 50px;
+  }
+  &-image {
+    max-width: 100%;
+    width: 100%;
+  }
+  &-icon {
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 32px;
+    margin-top: -32px;
+    margin-left: -12px;
+    background-image: url(/images/icons/geo_point_marker.png);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    animation: floatPoint 3s ease-in-out infinite;
+  }
+}
+
+@keyframes floatPoint {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-10px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}

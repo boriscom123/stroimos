@@ -1,0 +1,42 @@
+{% extends ':layout:layout.html.twig' %}
+
+{% block content %}
+    {% set post = initiative %}
+
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+        subject: post
+    } %}
+
+    <article class="news-wrapper">
+        <header class="news-header">
+            <h1 class="news-title">{{ post.title }}</h1>
+        </header>
+        <section class="news-wrapper__content-wrap">
+            <div class="news-wrapper__sidebar">
+                {% include '::/widgets/news/sidebar_social.html.twig' %}
+            </div>
+            <div class="news-wrapper__content">
+                <h2 class="news-wrapper__content-lead">{{ post.teaser }}</h2>
+                {#<div class="news-wrapper__content-news">#}
+                {{ embed_content(post.content, post) }}
+                {#</div>#}
+            </div>
+            <div class="container__full news-wrapper__under-news">
+                {% include '::/widgets/news/share.html.twig' %}
+                {% include '::/widgets/tags.html.twig' with {'publication': post} %}
+            </div>
+
+            {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity_reference(post)} %}
+
+            {% include '::/widgets/spotlight/_related.html.twig' with {'item': post} %}
+
+            {% if more_like_this|default %}
+                {% include '::/widgets/spotlight/_widget.html.twig' with {'items': more_like_this is defined ? more_like_this : [], 'class': 'other-materials container__full', 'title': 'Другие материалы по теме'} %}
+            {% endif %}
+
+            {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+        </section>
+    </article>
+{% endblock %}
+

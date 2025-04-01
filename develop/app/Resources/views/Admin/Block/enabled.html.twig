@@ -1,0 +1,25 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
+    {% set url = admin.generateObjectUrl('toggleEnable', object, field_description.options.route.parameters)  %}
+    {% if admin.isGranted('EDIT', object) %}
+        <label class="btn icheck-disable">
+        <input
+                class="togglePublished"
+                type="checkbox"
+                {{ object.enabled ? 'checked' : '' }}
+                data-toggle="toggle"
+                data-on="да"
+                data-off="нет"
+                data-size="mini"
+                data-onstyle="success"
+                data-offstyle="danger"
+                data-url="{{ url }}"
+        >
+        </label>
+    {% else %}
+        {% if object.enabled %}
+            <span class="label label-success">да</span>
+        {% else %}
+            <span class="label label-danger">нет</span>
+        {% endif %}
+    {% endif %}
+</td>

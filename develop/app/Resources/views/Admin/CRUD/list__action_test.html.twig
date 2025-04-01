@@ -1,0 +1,6 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('test') and object.status == 'new' %}
+    <a href="{{ admin.generateObjectUrl('test', object) }}" class="btn btn-sm btn-default edit_link" title="Тестовая рассылка">
+        <i class="glyphicon glyphicon-edit"></i>
+        Тестовая рассылка
+    </a>
+{% endif %}

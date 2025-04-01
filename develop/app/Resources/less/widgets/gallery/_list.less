@@ -1,0 +1,129 @@
+@phgalleryColumns: 3;
+@phgalleryTeaserWidth: 305px;
+@phgalleryTeaserHeight: 420px;
+@phgalleryGap: (@pageWidth - @phgalleryTeaserWidth * @phgalleryColumns) / 4;
+.photogallery-list {
+	.clearfix;
+	margin: 0 -@phgalleryGap;
+}
+
+.photogallery-list__teaser {
+	.gallery-teaser-overlay();
+	.shadowed-teaser();
+	width: @phgalleryTeaserWidth;
+	float: left;
+	margin: 0 @phgalleryGap 40px;
+	height: @phgalleryTeaserHeight;
+
+	&-link {
+		padding: 30px 20px 140px 20px;
+		display: block;
+		height: @phgalleryTeaserHeight;
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	&-date {
+		.teaser-date(light);
+		margin-bottom: 15px;
+	}
+
+	&-title {
+		.teaser-title();
+	}
+
+	&-meta {
+		font-family: Brygada1918, serif;
+		font-size: 14px;
+		line-height: 1.714;
+		font-style: italic;
+		position: absolute;
+		bottom: 30px;
+		left: 20px;
+	}
+
+	&-rubrics {
+		position: absolute;
+		left: 0;
+		bottom: 80px;
+		font-family: Onest, sans-serif;
+		font-size: 14px;
+		line-height: 21px;
+		padding: 30px 20px 0 70px;
+		box-sizing: border-box;
+		width: 100%;
+		z-index: 10;
+		min-height: 70px;
+
+		.icon {
+			position: absolute;
+			left: 20px;
+			top: 30px;
+		}
+
+		.text-more__showed & {
+			bottom: 0;
+			padding-bottom: 30px;
+			height: @phgalleryTeaserHeight;
+
+			.text-more__wrapper{
+				opacity: 1;
+			}
+		}
+
+		&-title{
+			.teaser-title();
+			line-height: 40px;
+		}
+
+	}
+
+	.text-more__wrapper {
+		opacity: .4;
+	}
+
+	&-big {
+		width: @pageWidth;
+		height: 460px;
+		text-align: center;
+
+		.photogallery-list__teaser-link {
+			height: 460px;
+			padding: 35px 200px 70px 200px;
+		}
+
+		.photogallery-list__teaser-title {
+			font-size: 34px;
+			left: 1.117;
+			margin-top: 80px;
+		}
+
+		.photogallery-list__teaser-meta {
+			position: static;
+			.icon {
+				position: absolute;
+				top: 80px;
+				left: 50%;
+				margin-left: -20px;
+			}
+
+			small {
+				font-size: 20px;
+			}
+		}
+
+		.photogallery-list__teaser-rubrics {
+			text-align: left;
+			bottom: 30px;
+		}
+	}
+
+	&:hover {
+		.photogallery-list__teaser-title {
+			color: @hover;
+		}
+		.text-more__wrapper {
+			opacity: 1;
+		}
+	}
+}

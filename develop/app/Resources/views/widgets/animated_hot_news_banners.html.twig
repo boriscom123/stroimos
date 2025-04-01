@@ -1,0 +1,18 @@
+{% if banners|length %}
+    <aside class="hot-news__banner hot-news__animated-banner">
+        {% for item in banners %}
+            {% set banner = item.settings %}
+            <div class="hot-news__banner-title hot-news__animated-banner-title{% if loop.first %} active{% endif %}"
+                    {% if not loop.first %} style="display: none;" {% endif %}>
+                {{ banner.header }}
+            </div>
+            <header class="hot-news__banner-content hot-news__animated-banner-content{% if loop.first %} active{% endif %}"
+                    {% if not loop.first %} style="opacity: 0; display: none; margin-top: 25px;" {% endif %}>
+                {% set url_utm = 'utm_source=stroi&utm_medium=banner&utm_campaign=' ~ item.id %}
+                <a href="{{ banner.url | url_hash_utm_fix(url_utm) }}"{% if banner.target_blank %} target="_blank" {% endif %}>
+                  {{ banner.title }}
+                </a>
+            </header>
+        {% endfor %}
+    </aside>
+{% endif %}

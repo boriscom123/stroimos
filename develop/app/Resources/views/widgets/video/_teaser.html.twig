@@ -1,0 +1,18 @@
+<article class="videogallery-block__item {% if index is divisible by(3) %}last{% endif %}">
+    <a class="videogallery-block__item-uri" href="{{ path('app_video_show', { id: item.id }) }}">
+        <div class="videogallery-block__item-img">
+            <img src="{% path item.image, 'thumb300' %}" />
+        </div>
+{#      temporary delete author block
+        <div class="videogallery-block__item-author">
+            {% if item.author is defined and item.author is not empty %}
+                stroi.mos.ru
+            {% elseif item.source is defined and item.source is not empty %}
+                {{ item.source }}
+            {% endif %}
+        </div>   #}      
+        <time class="videogallery-block__item-date">{{ item.publishStartDate | format_date }}</time>
+        {#<div class="videogallery-block__item-time"><i class="icon icon-watch"></i>1:00  минут</div>#}
+        <header class="videogallery-block__item-title">{{ item.title }}</header>
+    </a>
+</article>

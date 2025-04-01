@@ -1,0 +1,1 @@
+<?php return unserialize('a:2:{i:0;O:27:"Doctrine\\ORM\\Mapping\\Entity":2:{s:15:"repositoryClass";s:52:"AppBundle\\Entity\\Repository\\DocumentRubricRepository";s:8:"readOnly";b:0;}i:1;O:29:"Gedmo\\Mapping\\Annotation\\Tree":4:{s:4:"type";s:6:"nested";s:15:"activateLocking";b:0;s:14:"lockingTimeout";i:3;s:5:"value";N;}}');

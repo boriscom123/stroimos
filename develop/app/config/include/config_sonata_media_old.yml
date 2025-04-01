@@ -1,0 +1,224 @@
+parameters:
+    sonata.media.provider.image.class: Application\Sonata\MediaBundle\Provider\ImageProvider
+    sonata.media.provider.file.class: Application\Sonata\MediaBundle\Provider\FileProvider
+    sonata.media.provider.youtube.class: Application\Sonata\MediaBundle\Provider\YouTubeProvider
+
+sonata_media:
+    default_context: main_image
+    db_driver: doctrine_orm
+    providers:
+        image:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+        file:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+            allowed_extensions: ['pdf', 'txt', 'rtf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'odg', 'odp', 'ods', 'odc', 'odf', 'odb', 'csv', 'xml']
+            allowed_mime_types: ['application/pdf', 'application/x-pdf', 'application/rtf', 'text/html', 'text/rtf', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel']
+        youtube:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+    contexts:
+        main_image:
+            providers:
+                - sonata.media.provider.image
+                - sonata.media.provider.external_image
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                thumb210:           &thumb210     { width: 210,   height: 150,    quality: 95 }
+                thumb212:           &thumb212     { width: 212,   height: 128,    quality: 95 }
+                thumb271x125:       { width: 271,   height: 125, quality: 95 }
+                thumb295x345:       { width: 295,   height: 345, quality: 95 }
+                thumb300:           &thumb300     { width: 300,   height: 200,    quality: 95 }
+                thumb300x230:       { width: 300,   height: 230,    quality: 95 }
+                thumb300x420:       &thumb300x420 { width: 300,   height: 420,    quality: 95 }
+                thumb306:           { width: 306,   height: 389,    quality: 95 }
+                thumb323:           &thumb323     { width: 323,   height: 212,    quality: 95 }
+                thumb336:           &thumb336     { width: 336,   height: 280,    quality: 95 }
+                thumb385:           &thumb385     { width: 385,   height: 240,    quality: 95 }
+                thumb451:           &thumb451     { width: 451,   height: 273,    quality: 95 }
+                thumb465x548:       &thumb465x548 { width: 465,   height: 548,    quality: 95 }
+                thumb500:           { width: 500,   height: ~,      quality: 95 }
+                thumb589:           &thumb589 { width: 589,   height: 454,    quality: 95 }
+                thumb596:           { width: 596,   height: 368,    quality: 95 }
+                thumb630x338:       { width: 630, height: 338, quality: 95 }
+                thumb680x495:       { width: 680,   height: 495, quality: 95 }
+                thumb300x90:        { width: 300,   height: 90, quality: 95 }
+                thumb340x340:       { width: 340,   height: 340, quality: 95 }
+                thumb1440:          &thumb1440    { width: 1440,  height: 454,    quality: 95 }
+                thumb715x250:       &thumb715x250 { width: 715,   height: 250,      quality: 95 }
+                thumb960:           { width: 960,   height: ~,      quality: 95 }
+                thumb960x470:       &thumb960x470 { width: 960,   height: 470,      quality: 95 }
+                thumb469:           { width: 469,   height: 275,    quality: 95 }
+                full:               { width: 1900,  height: ~,      quality: 95 }
+                newsletter_highlight:   &newsletter_highlight
+                newsletter_post_l:      &newsletter_post_l
+                newsletter_post:        &newsletter_post
+                newsletter_media:       &newsletter_media
+                newsletter_video_play:  &newsletter_video_play
+
+        infographics:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumb:    { width: 140,   height: 100,    quality: 95 }
+                thumb200: { width: 200, quality: 95 }
+                full: { width: 960, quality: 95 }
+
+        file:
+            providers:
+                - sonata.media.provider.file
+                - sonata.media.provider.image
+            formats:
+                thumb: { width: 64, quality: 95 }
+
+        initiative:
+            providers:
+                - sonata.media.provider.file
+            formats:
+                thumb: { width: 64, quality: 95 }
+
+        video:
+            providers:
+                - sonata.media.provider.youtube
+                - sonata.media.provider.video
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                full: { width: 854, quality: 95 }
+
+        gallery_media:
+            providers:
+                - sonata.media.provider.image
+                - sonata.media.provider.external_image
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                thumb210:           *thumb210
+                thumb212:           *thumb212
+                thumb271x125:       { width: 271,   height: 125, quality: 95 }
+                thumb295x345:       { width: 295,   height: 345, quality: 95 }
+                thumb300:           *thumb300
+                thumb300x420:       *thumb300x420
+                thumb323:           *thumb323
+                thumb336:           *thumb336
+                thumb340x340:       { width: 340,   height: 340, quality: 95 }
+                thumb385:           *thumb385
+                thumb465x548:       *thumb465x548
+                thumb589:           *thumb589
+                thumb780:           { width: 780,   height: ~,      quality: 95 }
+                thumb1440:          *thumb1440
+                thumb715x250:       *thumb715x250
+                thumb960x470:       *thumb960x470
+                thumb680x495:       { width: 680,   height: 495, quality: 95 }
+                thumb300x90:        { width: 300,   height: 90, quality: 95 }
+                full:               { width: 1900,  height: ~,      quality: 95 }
+                newsletter_highlight:   *newsletter_highlight
+                newsletter_post_l:      *newsletter_post_l
+                newsletter_post:        *newsletter_post
+                newsletter_media:       *newsletter_media
+                newsletter_video_play:  *newsletter_video_play
+
+        person:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                thumb70:            { width: 70,    height: 70,     quality: 95 }
+                direction:          { width: 300,   height: 200,    quality: 95 }
+                direction_main:     { width: 314,   height: 375,    quality: 95 }
+                struct_list:        { width: 305,   height: 202,    quality: 95 }
+                profile_title:      { width: 250,   height: 166,    quality: 95 }
+
+        person_top:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                struct_list_top:    { width: 320,   height: 387,    quality: 95 }
+        metro_timeline:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumb:              { width: 140,   height: 100,    quality: 95 }
+                thumb960:           { width: 960,   height: ~,      quality: 95 }
+
+    cdn:
+        server:
+            path: %uploaded_media_dir%
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web%uploaded_media_dir%
+            create:     true
+
+services:
+    # force Buzz to use CURL, since default file_get_contents has troubles with YouTube's SSL
+    sonata.media.buzz.browser:
+        class: Buzz\Browser
+        arguments: [@sonata.media.buzz.connector.curl]
+
+    sonata.media.adapter.image.imagick:
+        class: Application\Sonata\MediaBundle\Imagine\ImagineImagickDecorator
+
+    sonata.media.adapter.image.gd:
+        class: Application\Sonata\MediaBundle\Imagine\ImagineImagickDecorator
+
+    sonata.media.provider.image:
+        class: %sonata.media.provider.image.class%
+        arguments:
+            - sonata.media.provider.image
+            - @sonata.media.filesystem.local
+            - @sonata.media.cdn.server
+            - @sonata.media.generator.default
+            - @sonata.media.thumbnail.format
+            - ['jpg', 'png', 'jpeg', 'gif']
+            - ['image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png', 'image/gif']
+            - @sonata.media.adapter.image.imagick
+            - @sonata.media.metadata.proxy
+        tags:
+            - { name: sonata.media.provider }
+        calls:
+            - [setTemplates, [{helper_thumbnail: SonataMediaBundle:Provider:thumbnail.html.twig, helper_view: SonataMediaBundle:Provider:view_image.html.twig}]]
+
+    sonata.media.provider.external_image:
+        class: AppBundle\Admin\MediaProvider\ExternalImageProvider
+        arguments:
+            - sonata.media.provider.external_image
+            - @sonata.media.filesystem.local
+            - @sonata.media.cdn.server
+            - @sonata.media.generator.default
+            - @sonata.media.thumbnail.format
+            - ['jpg', 'png', 'jpeg', 'gif']
+            - ['image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png', 'image/gif']
+            - @sonata.media.adapter.image.gd
+            - @sonata.media.metadata.proxy
+            - @sonata.media.buzz.browser
+        calls:
+            - [setTemplates, [{helper_thumbnail: SonataMediaBundle:Provider:thumbnail.html.twig, helper_view: SonataMediaBundle:Provider:view_image.html.twig}]]
+            - [ setResizer, [@sonata.media.resizer.simple] ]
+        tags:
+            - {name: sonata.media.provider}
+
+    sonata.media.provider.video:
+        class: AppBundle\Admin\MediaProvider\VideoProvider
+        tags:
+            - {name: sonata.media.provider}
+        arguments:
+            - sonata.media.provider.video
+            - @sonata.media.filesystem.local
+            - @sonata.media.cdn.server
+            - @sonata.media.generator.default
+            - @sonata.media.thumbnail.format
+            - ['mpeg', 'mp4']
+            - ['video/mpeg', 'video/mp4']
+            - @sonata.media.metadata.proxy
+        calls:
+            - [setTemplates, [{helper_thumbnail: SonataMediaBundle:Provider:thumbnail_video.html.twig, helper_view: SonataMediaBundle:Provider:view_video.html.twig}]]
+
+    sonata.media.filesystem.local:
+        class: Import\Gaufrette\NoRegisterFilesystem
+        arguments: [@sonata.media.adapter.filesystem.local]
+
+    sonata.media.thumbnail.liip_imagine:
+        class: Application\Sonata\MediaBundle\Thumbnail\EditableFormatWithLiipImagineThumbnail
+        arguments: [@liip_imagine.templating.helper, @sonata.media.editable_format.manager]
+
+    sonata.media.editable_format.manager:
+        class: Application\Sonata\MediaBundle\EditableFormat\EditableFormatManager
+        arguments: ['%kernel.root_dir%', '%router.request_context.scheme%://stroimos.local']

@@ -1,0 +1,11 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Документы',
+    'rubricsContext': '',
+    } %}
+
+    {{ sonata_block_render({'type': 'document_list'}, { category: category_document, template: ':widgets:document/' ~ category_document ~ '/_list.html.twig' }) }}
+
+{% endblock %}

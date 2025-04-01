@@ -1,0 +1,28 @@
+{% set isVideo = entity is video %}
+
+<article class="smi-list__teaser {{ isVideo ? "smi-list__teaser_video": "" }}">
+    <a href="{{ entity_path(entity) }}" class="smi-list__teaser-link">
+        {% if isVideo %}
+            <div class="smi-list__teaser-image" style="background-image:url({% path entity.image, 'full' %})"></div>
+        {% elseif entity.image|default %}
+            <div class="smi-list__teaser-image" style="background-image:url({% path entity.image, 'thumb300' %})"></div>
+        {% else %}
+            <div class="smi-list__teaser-image" style="background-image:url({{ '/images/fallback.jpg'|imagine_filter('web_root_thumb300') }})"></div>
+        {% endif %}
+        <div class="smi-list__teaser-content">
+            <div class="smi-list__teaser-info">
+                {% if entity.publishStartDate is defined %}
+                    <time class="smi-list__teaser-date">{{ entity.publishStartDate|format_date }}</time>
+                {% endif %}
+                {% if entity.source is defined and entity.source != null %}
+                    <span class="smi-list__teaser-author" title="{{ entity.source.title }}">
+                        {{ entity.source.title }}
+                    </span>
+                {% endif %}
+            </div>
+            <header class="smi-list__teaser-title oasis-container">
+                <span class="oasis-container__text">{{ entity.title }}</span>
+            </header>
+        </div>
+    </a>
+</article>

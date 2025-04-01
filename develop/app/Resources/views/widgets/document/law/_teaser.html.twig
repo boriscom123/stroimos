@@ -1,0 +1,17 @@
+<div class="documents-page__law-table-row">
+    <div class="documents-page__law-table-item title">
+        <a href="{{ path('app_document_show', { id: document.id}) }}">{{ document.title }}</a>
+    </div>
+    <div class="documents-page__law-table-item type">
+        {{ document.typeName }}
+    </div>
+    <div class="documents-page__law-table-item agency-title">
+        {{ document.outgoingAgency.title }}
+    </div>
+    <div class="documents-page__law-table-item number">
+        {{ document.number }}
+    </div>
+    <div class="documents-page__law-table-item date">
+        {{ document.ApproveDate|format_date }}
+    </div>
+</div>

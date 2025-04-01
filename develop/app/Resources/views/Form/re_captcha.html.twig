@@ -1,0 +1,53 @@
+{% block re_captcha_row %}
+    <script
+        src="https://captcha-api.yandex.ru/captcha.js?render=onload&onload=smartCaptchaInit"
+        defer
+    ></script>
+
+    <script>
+        function callback(token) {
+            console.log(token);
+            if (token) {
+                document
+                    .getElementById('error_report_save')
+                    .removeAttribute('disabled');
+            } else {
+                document
+                    .getElementById('error_report_save')
+                    .setAttribute('disabled', '1');
+            }
+        }
+
+        function smartCaptchaInit() {
+            if (!window.smartCaptcha) {
+                return;
+            }
+
+            window.smartCaptcha.render('captcha-container', {
+                sitekey: '{{yandex_captcha_site_key}}',
+                callback: callback,
+            });
+        }
+
+        function smartCaptchaReset() {
+            if (!window.smartCaptcha) {
+                return;
+            }
+
+            window.smartCaptcha.reset();
+        }
+
+        function smartCaptchaGetResponse() {
+            if (!window.smartCaptcha) {
+                return;
+            }
+
+            var resp = window.smartCaptcha.getResponse();
+            console.log(resp);
+            alert(resp);
+        }
+    </script>
+
+    <div id="captcha-container" style="margin-left: 68%;"></div>
+
+{% endblock %}

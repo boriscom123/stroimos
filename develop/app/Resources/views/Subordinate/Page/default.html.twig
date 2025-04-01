@@ -1,0 +1,25 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'Subordinate/widgets/themes_panel.html.twig' with {
+    'title': publication.title,
+    'themes': [],
+    'subject': publication
+    } %}
+
+{#     {% if publication.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: publication.currently} %}
+    {% endif %} #}
+
+    {% include '::/Post/description.html.twig' with {description: publication.description|default} %}
+
+    <div class="static-page">
+        {{ embed_content(publication.content, publication) }}
+        {# Статическая страница #}
+        {% block sonata_preview %}{% endblock %}
+    </div>
+{% endblock %}

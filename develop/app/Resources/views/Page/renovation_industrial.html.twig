@@ -1,0 +1,446 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+      {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+      <div class="redev-industrial-zones-page">
+        <div class="map-block container__unlimited">
+          <div data-preset="renov-industrial" id="map-container">
+            <div class="container__full" id="map"></div>
+          </div>
+        </div>
+        <h2 class="redev-industrial-zones-page__title">Перечень промзон, попадающих под реконструкцию</h2>
+
+        <!-- Якори -->
+        <ul class="anchor-widget anchor-widget-left">
+          <li><a href="#sao">САО</a></li>
+          <li><a href="#svao">СВАО</a></li>
+          <li><a href="#vao">ВАО</a></li>
+          <li><a href="#uvao">ЮВАО</a></li>
+          <li><a href="#uao">ЮАО</a></li>
+          <li><a href="#zao">ЗАО</a></li>
+          <li><a href="#szao">СЗАО</a></li>
+        </ul>
+
+        <ul class="anchor-widget anchor-widget-left" >
+          <li class="inactive">ЦАО</li>
+          <li class="inactive">ЮЗАО</li>
+          <li class="inactive">ТАО</li>
+          <li class="inactive">НАО</li>
+          <li class="inactive">ЗЕЛАО</li>
+        </ul>
+
+        <!-- Промзона ЗИЛ -->
+        <div class="redev-industrial-zones-page-block redev-industrial-zones-page-block_zil container__full">
+          <div class="redev-industrial-zones-page-block__content">
+            <p class="redev-industrial-zones-page-block__year">2013 &ndash; 2028</p>
+            <h3 class="redev-industrial-zones-page-block__title">
+              <a href="/renovaciya-promzon/proekt-planirovki" class="redev-industrial-zones-page__link redev-industrial-zones-page__link_alt" target="_blank">
+                Промзона<br/>«ЗИЛ»
+              </a>
+            </h3>
+            <div class="redev-industrial-zones-page-block__icon-block redev-industrial-zones-page-block__icon-block-wide">
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_kindergarten"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">детский сад</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_school"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">школа</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__infoblock">
+                <p class="redev-industrial-zones-page-block__subinfo">Общая площадь территории</p>
+                <p class="redev-industrial-zones-page-block__extrainfo">356,5 га</p><hr class="redev-industrial-zones-page__hline">
+                <p class="redev-industrial-zones-page-block__extrainfo">256 тыс. м<sup>2</sup></p> 
+                <p class="redev-industrial-zones-page-block__subinfo">Общая площадь застройки</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_museum"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">музей</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_tree"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">парковая зона</p>
+              </div>
+            </div>
+
+            <p></p>
+          </div>
+        </div>
+
+        <!-- Блок превьюшек 1 -->
+        <div class="redev-industrial-zones-page__cc redev-industrial-zones-page__cc_c">
+          <a href="/renovaciya-promzon/promzona-dieghunino-likhobory-stroi_mos" class="redev-industrial-zones-page__cc-item" id="sao" name="sao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-1"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Дегунино-Лихоборы»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              САО, Бескудниково, Западное Дегунино
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-brattsievo" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-2"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Братцево»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              САО, Войковский, Головинский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-korovino-stroi_mos" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-3"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Коровино»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              САО, Дмитровский, Западное-Дегунино
+            </span>
+          </a>
+          <a href="/promzona-v-timiriazievskoi-raionie" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-4"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона в Тимирязевском районе
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              САО, Тимирязевский
+            </span>
+          </a>
+          <a href="/promzona-miedviedkovo-stroi_mos" class="redev-industrial-zones-page__cc-item" id="svao" name="svao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-5" ></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Медведково»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Северное Медведково, Южное Медведково
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-ostashkovskoie-shossie" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-6" ></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Тайнинская ул., вл. 9»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Лосиноостровский
+            </span>
+          </a>
+        </div>
+
+        <!-- Промзона Нагатинский Затор -->
+        <div class="redev-industrial-zones-page-block redev-industrial-zones-page-block_zaton container__full">
+          <div class="redev-industrial-zones-page-block__content">
+            <h3 class="redev-industrial-zones-page-block__title">
+              <a href="/renovaciya-promzon/nagatinskii-zaton/kakim-stanet-nagatinskii-zaton" class="redev-industrial-zones-page__link redev-industrial-zones-page__link_alt" target="_blank">
+                Промзона<br/>«Нагатинский<br/>Затон»
+              </a>
+            </h3>
+            <p class="redev-industrial-zones-page-block__year">2013 &ndash; 2028</p>
+            <div class="redev-industrial-zones-page-block__text-columns">
+              <div class="redev-industrial-zones-page-block__text-line">
+                <span class="redev-industrial-zones-page-block__subinfo">Общая площадь территории</span>
+                <span class="redev-industrial-zones-page-block__dots"></span>
+                <span class="redev-industrial-zones-page-block__extrainfo redev-industrial-zones-page-block__endcolumn">33,4 га</span>
+              </div>
+              <div class="redev-industrial-zones-page-block__text-line">
+                <span class="redev-industrial-zones-page-block__subinfo">Общая площадь застройки</span>
+                <span class="redev-industrial-zones-page-block__dots"></span>
+                <span class="redev-industrial-zones-page-block__extrainfo redev-industrial-zones-page-block__endcolumn">24 тыс. м<sup>2</sup></span>
+              </div>
+            </div>
+            <div class="redev-industrial-zones-page-block__text-line">
+              <p class="redev-industrial-zones-page-block__subinfo">детский сад, школа, музей<span class="redev-industrial-zones-page-block__extrainfo"> 6 га </span>парковая зона</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок превьюшек 2 -->
+        <div class="redev-industrial-zones-page__cc redev-industrial-zones-page__cc_c">
+          <a href="/promzona-bieskudnikovo" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-7"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Бескудниково»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Алтуфьевский, р-н. Лианозово
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-alieksieievskiie-ulitsy" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img  redev-industrial-zones-page__cc-item-img__card-8"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Алексеевские улицы»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Алексеевский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-sviblovo" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img  redev-industrial-zones-page__cc-item-img__card-9"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Свиблово»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Бабушкинский, Свиблово
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/tierritoriia-rizhskogho-ghruzovogho-dvora" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-10"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Территория Рижского грузового двора
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Марьина роща
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-sievierianin" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-11"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Северянин»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СВАО, Свиблово, Ростокино, Ярославский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/sokolinaya-gora" class="redev-industrial-zones-page__cc-item" id="vao" name="vao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-12"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Соколиная гора»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ВАО, Соколиная гора
+            </span>
+          </a>
+        </div>
+
+        <!-- Промзона Серп и Молот -->
+        <div class="redev-industrial-zones-page-block redev-industrial-zones-page-block_serp-molot container__full">
+          <div class="redev-industrial-zones-page-block__content">
+            <h3 class="redev-industrial-zones-page-block__title">
+              <a href="/renovaciya-promzon/promzona-sierp-i-molot-stroi_mos" class="redev-industrial-zones-page__link redev-industrial-zones-page__link_alt" target="_blank">
+                Промзона<br/>«Серп&nbsp;и&nbsp;Молот»
+              </a>
+            </h3>
+            <p class="redev-industrial-zones-page-block__year">2013 &ndash; 2028</p>
+            <div class="redev-industrial-zones-page-block__text-rows">
+              <div class="redev-industrial-zones-page-block__text-infoblock">
+                <div class="redev-industrial-zones-page-block__biginfo">41</div>
+                <div>
+                  <div class="redev-industrial-zones-page-block__subinfo">Общая площадь застройки</div>
+                  <div class="redev-industrial-zones-page-block__extrainfo">тыс. м<sup>2</sup></div>
+                </div>
+              </div>
+              <div class="redev-industrial-zones-page__vline"></div>
+              <div class="redev-industrial-zones-page-block__text-infoblock">
+                <div class="redev-industrial-zones-page-block__biginfo">114</div>
+                <div>
+                  <div class="redev-industrial-zones-page-block__subinfo">Общая площадь территории</div>
+                  <div class="redev-industrial-zones-page-block__extrainfo">га</div>
+                </div>
+              </div>
+            </div>
+            <div class="redev-industrial-zones-page-block__icon-block redev-industrial-zones-page-block__icon-block-narrow">
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_kindergarten"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">детский сад</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_school"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">школа</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_museum"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">музей</p>
+              </div>
+              <div class="redev-industrial-zones-page-block__icon-element">
+                <div class="redev-industrial-zones-page-block__icon redev-industrial-zones-page-block__icon_tree"></div>
+                <p class="redev-industrial-zones-page-block__icon-sig">парковая зона</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок превьюшек 3 -->
+        <div class="redev-industrial-zones-page__cc redev-industrial-zones-page__cc_c">
+          <a href="/promzona-rudnievo-stroi_mos" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-13"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Руднёво»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ВАО, Косино-Ухтомский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-kaloshino" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-15"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Калошино»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ВАО, Метрогородок, Гольяново, Богородское
+            </span>
+          </a>
+          <a href="/promzona-graivoronovo-stroi_mos" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-17"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Грайвороново»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮВАО, Текстильщики, Рязанский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-kur-ianovo-stroi_mos" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-18"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Курьяново»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮВАО, Печатники
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-liublino" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-19"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Люблино»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮВАО, Люблино, Марьино
+            </span>
+          </a>
+          <a href="/promzona-iuzhnyi-port" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-20"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Южный порт»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮВАО, Печатники
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-1-varshavskoie-shossie-stroi_mos" class="redev-industrial-zones-page__cc-item" id="uao" name="uao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-21"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Варшавское шоссе»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮАО, Донской
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-vierkhniie-kotly" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-22"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Верхние котлы»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮАО, Нагорный
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-na-simonovskoi-nabieriezhnoi" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-23"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона на Симоновской набережной
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮАО, Даниловский
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-kashirskoie-shossie" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-24"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Каширское шоссе»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮАО, Москворечье-Сабурово
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-krasnyi-stroitiel" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-25"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Красный строитель»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЮАО, Южное Чертаново
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-ochakovo" class="redev-industrial-zones-page__cc-item" id="zao" name="zao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-26"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Очаково»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЗАО, Можайский, Очаково-Матвеевский
+            </span>
+          </a>
+          <a href="/promzona-zapadnyi-port" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-27"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Западный порт»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЗАО, Филевский парк, Дорогомилово
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-v-raionie-filievskii-park" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-28"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона в районе Филевский парк
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЗАО, Филевский парк
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-vostriakovo" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-29"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Востряково»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЗАО, Солнцево
+            </span>
+          </a>
+          <a href="/renovaciya-promzon/promzona-kuntsievo" class="redev-industrial-zones-page__cc-item">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-30"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Кунцево»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              ЗАО, Можайский, Кунцево
+            </span>
+          </a>
+          <a href="/promzona-oktiabr-skoie-polie" class="redev-industrial-zones-page__cc-item" id="szao" name="szao">
+            <span class="redev-industrial-zones-page__cc-item-img redev-industrial-zones-page__cc-item-img__card-31"></span>
+            <span class="redev-industrial-zones-page__cc-item-title">
+              Промзона «Октябрьское поле»
+            </span>
+            <span class="redev-industrial-zones-page__cc-item-text">
+              СЗАО, Щукино, Хорошево-Мнёвники
+            </span>
+          </a>
+        </div>
+        <div>
+          {{ embed_content(page.content, page) }}
+          {% block sonata_preview %}{% endblock %}
+        </div>
+      </div>
+    </div>
+    
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'реновация жильё благоустройство'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

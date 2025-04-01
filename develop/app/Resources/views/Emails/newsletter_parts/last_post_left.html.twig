@@ -1,0 +1,48 @@
+{% set  hasCityDistrict = false %}
+{% set schemeAndHost = request.getSchemeAndHttpHost() %}
+<tr>
+    <td valign="middle" align="center" class="newsItem" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding-top: 35px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="top" align="left" class="newsItemBigLeftImage" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <a href="{{ entity_absolute_url(post.post) | url_hash_utm_fix(url_utm) }}" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;"><img src="{% path post.post.image, 'newsletter_post_l' %}" alt width="260" height="180" style="-ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;"></a>
+                </td>
+                <td class="newsItemBigLeftContent" valign="baseline" align="left" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 20px 14px 20px 20px; background: #E8EFF3;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="top" align="left" class="newsItemTitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-family: Arial,serif; font-size: 18px; font-weight: bold; line-height: 110%; text-decoration: none !important;">
+                                <a href="{{ entity_absolute_url(post.post) | url_hash_utm_fix(url_utm) }}" class="newsItemTitleLink" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #1B262C; text-decoration: none !important;">
+                                    <span class="newsItemTitleLink" style="color: #1B262C; text-decoration: none !important;">{{ post.post.title }}</span></a>
+
+                            </td>
+                        </tr>
+                        {# <tr>
+                            <td valign="top" align="left" class="newsItemTags" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding-bottom: 5px;">
+                                {% for item in post.post.cityDistricts %}
+                                    {% set  hasCityDistrict = true %}
+                                    <span style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #a4a4a4; font-family: Georgia,serif; font-size: 13px; line-height: 1.2;">
+                                        &#128205; {{ item.displayTitle }}
+                                    </span>
+                                {% endfor %}
+                                {% if  not hasCityDistrict %}
+                                    {% for item in post.post.administrativeAreas %}
+                                        <span style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #a4a4a4; font-family: Georgia,serif; font-size: 13px; line-height: 1.2;">
+                                            &#128205;{{ item.displayTitle }}
+                                        </span>
+                                    {% endfor %}
+                                {% endif %}
+                                {% for item in post.post.rubrics %}
+                                    <a
+                                        href="{{ schemeAndHost }}{{ path('app_news_list') }}?rubric={{ item.title }}"
+                                        class="related-link related-link__light top-news__link-calendar"
+                                        style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #a4a4a4; font-family: Georgia,serif; font-size: 13px; line-height: 1.2;"
+                                    >#{{  item.title }}</a>
+                                {% endfor %}
+                            </td>
+                        </tr> #}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

@@ -1,0 +1,15 @@
+<blockquote class="article-quote">
+    <div class="article-quote__type">Цитата</div>
+    <div class="article-quote__block">
+        <p>{{ quote.text }}</p>
+        <ul class="article-quote__block-person">
+            <li class="block-person__item block-person__img">
+                <img src="{{ person.imgUri }}" />
+            </li>
+            <li class="block-person__item">
+                <div class="block-person__name">{{ person.fullname }}</div>
+                <div class="block-person__seat">{{ person.seat }}</div>
+            </li>
+        </ul>
+    </div>
+</blockquote>

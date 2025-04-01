@@ -1,0 +1,10 @@
+<form class="page-login__login" action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <fieldset class="page-login__login-field">
+        {% if invalid_username is defined %}
+            <p class="auth-block__error">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+        {% endif %}
+        <label for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
+        <input type="text" id="username" name="username" required="required" />
+    </fieldset>
+    <input class="page-login__login-btn" type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+</form>

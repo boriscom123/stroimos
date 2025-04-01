@@ -1,0 +1,10 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.video.providerName == 'sonata.media.provider.youtube' %}
+        <a target="_blank" href="https://youtu.be/{{object.video.providerReference}}">youtube</a>
+    {% else %}
+        <a target="_blank" href="{% path object.video, 'reference' %}">{{ object.video.name }}</a>
+    {% endif %}
+{% endblock %}
+

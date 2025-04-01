@@ -1,0 +1,113 @@
+.error-report__title {
+  font-family: Lava, serif;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 28px;
+  color: #222;
+}
+
+.error-report {
+  margin-bottom: 50px;
+  overflow: hidden;
+
+  label {
+    font-family: AvenirNext,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 50px;
+    color: #222;
+    margin-right: 20px;
+    vertical-align: top;
+    display: inline-block;
+    width: 170px;
+  }
+
+  textarea {
+    margin-top: 15px;
+    width: @pageWidth - 200px;
+    min-height: 200px;
+    border: 0 none white;
+    overflow: hidden;
+    padding: 0;
+    outline: none;
+    /*background-color: #D0D0D0;*/
+    background: url('/images/icons/textarea-dot.png') left 24px;
+    resize: none;
+    font-family: Lava, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 50px;
+    color: #757575;
+  }
+
+  input {
+    outline: none;
+    font-family: AvenirNext,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 30px;
+    margin: 10px 0;
+    color: #757575;
+    border: 0;
+    padding: 0 10px;
+    .dotted-border(blue, bottom);
+    width: 330px;
+  }
+
+  button {
+    font-family: AvenirNext,sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+    color: black;
+    padding: 0;
+    margin: 10px;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    text-transform: uppercase;
+    text-align: left;
+    float: right;
+  }
+
+  .selectboxit {
+    background-image: transparent;
+    background: transparent;
+    height: auto;
+    line-height: 50px;
+    border: 0;
+    width: auto !important;
+    display: inline-block !important;
+    padding-right: 30px !important;
+
+    //			&-container {
+    //				max-width: 330px !important;
+    //			}
+
+    &-hover {
+      background-image: transparent;
+      background: transparent;
+    }
+
+    &-text {
+      font-family: AvenirNext, sans-serif;
+      font-weight: 400;
+      font-size: 31px;
+      line-height: 45px;
+      width: 330px !important;
+      max-width: none !important;
+      height: auto;
+      .dotted-border(blue, bottom);
+      color: #757575;
+    }
+
+    &-arrow-container {
+      height: 45px;
+    }
+
+    &-list {
+      min-width: 100% !important;
+    }
+  }
+}

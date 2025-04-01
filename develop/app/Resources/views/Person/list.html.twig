@@ -1,0 +1,73 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'id': 'person-index', 'object': page, 'themes': [{'title': 'Структура'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+'title': '',
+'rubricsContext': null,
+} %}
+
+    <h1 class="structure-page__title">Структура Комплекса градостроительной <br />политики и&nbsp;строительства города Москвы</h1>
+    <div class="structure-page__person-list js-mediator-article">
+        <article class="structure-page__person first-person">
+            <a class="structure-page__person-uri" href="{{ path('app_person_show', {'id': first_person.id}) }}">
+                <img src={% path first_person.topImage, 'struct_list_top' %} />
+                <div class="structure-page__person-info"> 
+                    <header class="structure-page__person-title">
+                        {% if first_person.lowerOrganization %}
+                            {{ first_person.lowerOrganization.title }}
+                        {% endif %}
+                    </header>
+                    <div class="structure-page__divide-line"></div>
+                    <div class="structure-page__person-name ddsdfs">
+                        <span class="structure-page__person-lastname">{{ first_person.lastName }}</span> 
+                        <p>
+                            {{ first_person.firstName }}
+                            {{ first_person.patronymic }}
+                        </p> 
+                    </div>
+                    <footer class="structure-page__person-seat">{{ first_person.teaser }}</footer>
+                    {# <span class="structure-page__user-profile">профиль</span> #}
+                </div> 
+            </a>
+        </article>
+
+        <div class="structure-page__body">
+            {% for person in persons %}
+                <article class="structure-page__person">
+                    <a class="structure-page__person-uri" href="{{ path('app_person_show', {'id': person.id}) }}">
+                        <img src={% path person.image, 'struct_list' %} />
+                        <div class="structure-page__person-info"> 
+                            {% if person.lowerOrganization %} 
+                                <header class="structure-page__person-title">
+                                        {{ person.lowerOrganization.fullTitle }}
+                                </header>
+                            {% endif %}
+
+                            <div class="structure-page__divide-line"></div>
+                            <div class="structure-page__person-name">
+                                <span class="structure-page__person-lastname">{{ person.lastName }}</span> 
+                                <p>
+                                    {{ person.firstName }} 
+                                    {{ person.patronymic }}
+                                </p>
+                            </div>
+                            <footer class="structure-page__person-seat">{{ person.teaser }}</footer>
+                            {# <span class="structure-page__user-profile">профиль</span> #}
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+
+    </div>
+    {#<div class="structure-page__contacts">
+        <div class="structure-page__contacts-block"></div>
+        <h3 class="structure-page__contacts-title">Контакты</h3>
+        <a href="#" class="structure-page__contacts-link">перейти</a>
+    </div>#}
+
+{% endblock %}

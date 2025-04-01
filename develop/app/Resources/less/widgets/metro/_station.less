@@ -1,0 +1,249 @@
+.station-block {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 80px;
+
+	&__title {
+		margin-bottom: 55px;
+		font-family: Brygada1918, sans-serif;
+		font-style: normal;
+		font-weight: 700;
+		font-size: 25px;
+		line-height: 30px;
+		color: rgba(0, 0, 0, 0.8);
+		margin-top: 0;
+	}
+
+	&__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	&__content {
+		display: none;
+	}
+
+	&__line-number {
+		width: 30px;
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+
+		font-family: Onest, sans-serif;
+		font-style: normal;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 20px;
+
+		margin-right: 32px;
+	}
+
+	&__line-top {
+		display: flex;
+		align-items: center;
+
+		&_active .station-block__arrow {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__item:not(:last-child) {
+		margin-bottom: 24px;
+	}
+
+	&__line-title {
+		font-family: Onest, sans-serif;
+		font-style: normal;
+		font-weight: 450;
+		font-size: 19px;
+		line-height: 23px;
+		color: rgba(0, 0, 0, 0.8);
+		transition: color 0.4s ease;
+	}
+
+	&__arrow {
+		margin-left: 20px;
+		fill: rgba(0, 0, 0, 0.8);
+		transition: transform 0.4s ease, fill 0.4s ease;
+	}
+
+	&__info {
+		display: flex;
+		align-items: flex-start;
+		margin-top: 40px;
+		width: 825px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&__notion {
+		color: #A6A6A6;
+		margin-right: 10px;
+	}
+}
+
+.sublist-station {
+	margin: 0;
+	padding: 44px 0 20px 60px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 24px 20px;
+	list-style: none;
+
+	&__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	&__icon {
+		width: 24px;
+		height: 24px;
+		margin-right: 10px;
+
+		& svg {
+			fill: rgba(0, 0, 0, 0.8);
+			width: 100%;
+			height: 100%;
+		}
+
+		& span {
+			display: block;
+			width: 24px;
+			height: 24px;
+			box-sizing: border-box;
+			border: 2px solid white;
+			border-radius: 50%;
+		}
+	}
+
+	&__status-icon {
+		width: 20px;
+		height: 20px;
+		margin-right: 8px;
+
+		& svg {
+			fill: #1186E3;
+			width: 100%;
+			height: 100%;
+		}
+
+		& span {
+			display: block;
+			width: 20px;
+			height: 20px;
+			box-sizing: border-box;
+			border: 4px solid white;
+			border-radius: 50%;
+		}
+	}
+
+	&__status {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		padding: 2px 10px;
+		background: #FFFFFF;
+		border: 1px solid #1186E3;
+		box-shadow: 0px 3px 25px rgba(0, 0, 0, 0.15);
+		border-radius: 2px;
+		z-index: 2;
+		font-family: Onest, sans-serif;
+		font-style: normal;
+		font-weight: 450;
+		font-size: 12px;
+		line-height: 15px;
+		display: flex;
+		align-items: center;
+		color: #1186E3;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 0.4s ease, visibility 0.4s ease;
+		bottom: 110%;
+		left: 10px;
+	}
+
+	&__title {
+		font-family: Onest, sans-serif;
+		font-style: normal;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 20px;
+		color: rgba(0, 0, 0, 0.8);
+		transition: color 0.4s ease;
+	}
+}
+
+.sublist-station__item:hover .sublist-station__status {
+	visibility: visible;
+	opacity: 1;
+}
+
+.status-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: 24px;
+
+	font-family: Onest, sans-serif;
+	font-style: normal;
+	font-weight: 450;
+	font-size: 14px;
+	line-height: 32px;
+	color: #A6A6A6;
+
+	&__item {
+		display: flex;
+		align-items: center;
+	}
+
+	& svg {
+		width: 24px;
+		min-width: 24px;
+		height: 24px;
+		fill: #A6A6A6;
+		margin-right: 10px;
+	}
+
+	&__operation-icon {
+		position: relative;
+		width: 24px;
+		height: 24px;
+		min-width: 24px;
+		margin-right: 10px;
+		// border: 1px solid #a6a6a6;
+		box-sizing: border-box;
+		border-radius: 50%;
+
+		&::before {
+			content: "";
+			width: 14px;
+			height: 14px;
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			background-color: #a6a6a6;
+			border-radius: 50%;
+		}
+	}
+}
+
+@media (hover: hover) {
+	.station-block__line-top:hover .station-block__line-title {
+		color: #1186E3;
+	}
+
+	.station-block__line-top:hover .station-block__arrow {
+		fill: #1186E3;
+	}
+
+	.sublist-station__title:hover {
+		color: #1186E3;
+	}
+}

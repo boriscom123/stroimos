@@ -1,0 +1,15 @@
+{% block collection_list_widget %}
+    <ul {{ block('widget_container_attributes') }}>
+        {% set associationAdmin = form.vars.sonata_admin.field_description.associationAdmin %}
+        {% if data|length > 0 %}
+            {% for item in data %}
+                <li>
+                    <a target="_blank" href="{{ associationAdmin.generateObjectUrl('edit', item) }}">{{ item.title }}</a>&nbsp;
+                    <a target="_blank" href="{{ entity_path(item) }}"><i class="fa fa-external-link"></i></a>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>Страниц не найдено</li>
+        {% endif %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="infographics-block__wrapper">
+    <div class="infographics-block__list">
+		{% for post in posts %}
+			{% include '::/widgets/photo_lines/_teaser.html.twig' with {'item' : post} %}
+		{% endfor %}
+	</div>
+
+	{% if next_offset %}
+		{% include '::/Block/loadmore_button.html.twig' with {
+			title: 'Ещё фотоленты',
+			target: '.infographics-block__list',
+			item: '.infographics-block',
+			source: block_path(block, context, {template: 'photo_lines_ajax_list'}),
+			limit: limit,
+			offset: next_offset
+		} %}
+	{% endif %}
+</div>

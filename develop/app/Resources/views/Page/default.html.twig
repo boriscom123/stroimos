@@ -1,0 +1,30 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': publication, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': publication.title,
+    'themes': [],
+    'subject': publication
+    } %}
+
+{#     {% if publication.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: publication.currently} %}
+    {% endif %} #}
+    
+    <div class="js-mediator-article">
+        {% include '::/Post/description.html.twig' with {description: publication.description|default} %}
+
+        <div class="static-page static-page-with-gallery">
+            {{ embed_content(publication.content, publication) }}
+            {% block sonata_preview %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

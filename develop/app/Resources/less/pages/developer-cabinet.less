@@ -1,0 +1,229 @@
+@pp-color-alt: #47a1ff;
+@pp-color-border: #e4e4e4;
+
+.promo-page-wrapper {
+		padding-top: 1px;
+		.action-btn {
+			font-family: Onest,sans-serif;
+			display: block;
+			width: 350px;
+			padding: 10px;
+			margin: 60px auto;
+			line-height: 31px;
+			font-size: 17px;
+			text-align: center;
+			background-color: transparent;
+			border: 2px solid @pp-color-alt;
+			color: @pp-color-alt;
+			outline: none;
+		}
+		.action-btn:hover {
+			background-color: @pp-color-alt;
+			color: #fff;
+		}
+
+		.separator {
+			display: block;
+			border: none;
+			border-top: 1px solid @pp-color-border;
+			margin: 50px -240px;
+		}
+}
+
+.promo-page-wrapper-alt {
+	background: #e6e7e8;
+	padding: 10px 0;
+	margin-left: -240px;
+	margin-right: -240px;
+}
+
+.promo-page-wrapper-alt__container {
+	padding-left: 240px;
+	padding-right: 240px;
+}
+
+.promo-page-wrapper__title {
+	text-align: center;
+	margin: 55px 0;
+	font-family: Brygada1918, serif;
+	font-weight: 900;
+	font-size: 45px;
+	line-height: 52px;
+	clear: both;
+	h1 {
+		margin: 0;
+		display: inline;
+		font-weight: inherit;
+		font-size: inherit;
+		line-height: inherit;
+	}
+}
+
+.promo-page-wrapper a {
+	color: @color;
+}
+
+.promo-page-wrapper a:hover {
+	color: @pp-color-alt;
+}
+
+.promo-page-wrapper__content {
+	font-family: Onest,sans-serif;
+	font-size: 28px;
+	line-height: 34px;
+	margin-bottom: 35px;
+}
+
+.promo-page-list__info {
+	margin: 50px 0;
+	.promo-page-list__item {
+		float: left;
+		width: 33%;
+		box-sizing: border-box;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+		font-family: Onest,sans-serif;
+		.item__pic {
+			width: 275px;
+			height: 188px;
+			margin: 0 auto;
+			background-image: url(/images/icons/promo-page/icon-set-promo-page-info.png);
+		}
+		.item__pic.list {
+			background-position: 0px 0;
+		}
+		.item__pic.fine {
+			background-position: 275px 0;
+		}
+		.item__pic.info {
+			background-position: 550px 0;
+		}
+		.item__pic.calc {
+			background-position: 0px 188px;
+		}
+		.item__pic.shape {
+			background-position: 550px 188px;
+		}
+		.item__pic.record {
+			background-position: 275px 188px;
+		}
+		.item__text {
+			font-size: 20px;
+		}
+	}
+}
+
+.promo-page-list__features {
+	margin: 50px 0;
+	.promo-page-list__item {
+		float: left;
+		width: 33%;
+		height: 150px;
+		box-sizing: border-box;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+		font-family: Onest,sans-serif;
+		.item__pic {
+			width: 50px;
+			height: 50px;
+			margin: 0 auto;
+			background-image: url(/images/icons/promo-page/icon-set-promo-page-features.png);
+		}
+		.item__pic.docs {
+			background-position: -150px 0;
+		}
+		.item__pic.camera {
+			background-position: -100px 0;
+		}
+		.item__pic.gzk {
+			background-position: -250px 0;
+		}
+		.item__pic.acts {
+			background-position: 0px 0;
+		}
+		.item__pic.search {
+			background-position: -400px 0;
+		}
+		.item__pic.calc {
+			background-position: -50px 0;
+		}
+		.item__pic.ekc {
+			background-position: -200px 0;
+		}
+		.item__pic.psd {
+			background-position: -350px 0;
+		}
+		.item__pic.journal {
+			background-position: -300px 0;
+		}
+		.item__pic.deadline {
+			background-position: -450px 0;
+		}
+		.item__text {
+			margin-top: 10px;
+			font-size: 14px;
+		}
+	}
+	.promo-page-list__item.disabled {
+		.item__pic.docs {
+			background-position: -150px 50px;
+		}
+		.item__pic.camera {
+			background-position: -100px 50px;
+		}
+		.item__pic.gzk {
+			background-position: -250px 50px;
+		}
+		.item__pic.acts {
+			background-position: -0px 50px;
+		}
+		.item__pic.search {
+			background-position: -400px 50px;
+		}
+		.item__pic.calc {
+			background-position: -50px 50px;
+		}
+		.item__pic.ekc {
+			background-position: -200px 50px;
+		}
+		.item__pic.psd {
+			background-position: -350px 50px;
+		}
+		.item__pic.journal {
+			background-position: -300px 50px;
+		}
+		.item__pic.deadline {
+			background-position: -450px 50px;
+		}
+		.item__text {
+			color: #a7a9ac;
+		}
+	}
+}
+
+.promo-page-list__steps-pic {
+	width: 900px;
+  height: 118px;
+  margin: 0 auto;
+  background-image: url(/images/icons/promo-page/steps.png);
+  background-repeat: no-repeat;
+  background-position: 50px 0px;
+}
+
+.promo-page-list__steps {
+	margin: 50px 0;
+	.promo-page-list__item {
+		float: left;
+		width: 33%;
+		box-sizing: border-box;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+		font-family: Onest,sans-serif;
+		.item__text {
+			font-size: 30px;
+		}
+	}
+}

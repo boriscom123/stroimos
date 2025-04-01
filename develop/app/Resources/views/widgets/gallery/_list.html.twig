@@ -1,0 +1,16 @@
+<div class="photogallery-list">
+    {% for gallery in galleries %}
+        {% include '::widgets/gallery/_teaser.html.twig' %}
+    {% endfor %}
+</div>
+
+{% if next_offset %}
+    {% include '::/Block/loadmore_button.html.twig' with {
+        title: 'Ещё фото',
+        target: '.photogallery-list',
+        item: '.photogallery-list__teaser',
+        source: block_path(block, context, {template: 'ajax_list'}),
+        limit: limit,
+        offset: next_offset
+    } %}
+{% endif %}

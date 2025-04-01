@@ -1,0 +1,60 @@
+parameters:
+    invalidation_route_dependencies:
+        app_construction_show:
+            - app_construction
+        app_document_show:
+            - app_document_law_list
+            - app_document_decision_list
+            - app_document_drafts_list
+        app_road_interchange_show:
+            - app_road_list
+        app_road_trunk_show:
+            - app_road_list
+        app_news_show:
+            - app_news_list_popular
+
+services:
+    app.admin.cache_invalidation_extension:
+        class: AppBundle\Cache\InvalidationAdminExtension
+        arguments: [@app.entity_url_generator, @router.default, @fos_http_cache.cache_manager, %invalidation_route_dependencies%]
+        tags:
+            - {name: sonata.admin.extension, global: true }
+
+fos_http_cache:
+    cache_manager:
+        enabled: true
+    proxy_client:
+        symfony:
+            servers: stroi_mos_ru:80
+    cache_control:
+        defaults:
+            overwrite: true
+        rules:
+            - # Admin
+                match:
+                    path: ^/admin($|/.*)
+                headers:
+                    overwrite: false
+                    cache_control: { public: false, max-age: 0}
+
+            - # User specific frontend
+                match:
+                    attributes:
+                        _route: ^(fos_user_|sonata_user_|facebook_login|google_login|vkontakte_login|login_mos_ru_login|app_geocode|hwi_oauth_|fos_comment_|app_event_chat_list)
+                headers:
+                    overwrite: false
+                    cache_control: { public: false, max-age: 0}
+
+            - # Short term caching, low load and no invalidation
+                match:
+                    path: ^/api/.*
+                headers:
+                    overwrite: false
+                    cache_control: { public: true, max_age: 10, s_maxage: 10 }
+
+            - # Regular cache
+                match:
+                    path: ^/
+                headers:
+                    overwrite: false
+                    cache_control: { public: true, max_age: 120, s_maxage: 120 }

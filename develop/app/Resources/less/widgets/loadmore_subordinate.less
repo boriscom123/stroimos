@@ -1,0 +1,64 @@
+.loadmore-control(down, @c: #222222, @h: 15px, @w: 3px) {
+	transform: rotate(270deg);
+	@r: (ceil(@w/2));
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		left: 50%;
+		height: @h;
+		width: @w;
+		background-color: @c;
+		border-radius: @r;
+		margin-left: -(round(@h/2));
+	}
+	&:before {
+		transform-origin: 0 100%;
+		transform: rotate(45deg);
+		bottom: 50%;
+	}
+	&:after {
+		transform-origin: 0 0;
+		transform: rotate(-45deg);
+		top: 50%;
+	}
+}
+
+.loadmore-btn__wrap {
+	text-align: center;
+	padding: 60px 20px;
+}
+
+.loadmore-btn {
+	color: #b2afaf;
+	display: inline-block;
+	padding: 0 20px;
+	min-width: 80px;
+	cursor: pointer;
+}
+
+.loadmore-btn__icon {
+	.loadmore-control(down, #ffffff, 17px, 2px);
+	transform: rotate(270deg);
+	display: block;
+	width: 45px;
+	height: 45px;
+	background: #000;
+	border-radius: 45px;
+	margin: 0 auto 20px auto;
+	&:hover {
+		background: #000;
+		opacity: 0.5;
+	}
+}
+
+.loadmore-btn__label {
+	font-family: Onest, sans-serif;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 28px;
+	text-transform: uppercase;
+	font-weight: normal;
+	display: block;
+	text-align: center;
+}

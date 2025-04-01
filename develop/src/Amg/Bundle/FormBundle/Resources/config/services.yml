@@ -1,0 +1,23 @@
+services:
+    amg_form.type.date_range:
+        class: Amg\Bundle\FormBundle\Form\Type\DateRangeType
+        arguments: [ @translator ]
+        tags:
+            - {name: form.type, alias: date_range}
+
+    amg_form.type.filter_date_range:
+        class: Amg\Bundle\FormBundle\Form\Type\FilterDateRangeType
+        arguments: [ @translator ]
+        tags:
+            - {name: form.type, alias: amg_filter_date_range}
+
+    amg_form.type.elfinder:
+        class: Amg\Bundle\FormBundle\Form\Type\ElFinderType
+        tags:
+          - { name: form.type, alias: elfinder }
+
+    amg_form.type.file:
+        class: Amg\Bundle\FormBundle\Form\Type\FileType
+        tags:
+            - {name: form.type, alias: app_file}
+

@@ -1,0 +1,78 @@
+<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="faq-card" id="faq-card-{{ item.id }}">
+  <div class="faq-card__image-wrapper">
+    <div class="faq-card__image" style="background-image: url('{% path item.image, 'thumb589' %}');">
+      {# <div class="faq-card__image-show">Начать просмотр</div> #}
+    </div>
+  </div>
+  <div class="faq-card__content">
+    {# <div class="faq-card__title">ВОПРОСЫ&nbsp;&nbsp;&nbsp;#{{item.code}}</div> #}
+    <div class="faq-card__header">
+      <div class="faq-card__header-content">
+        Вопрос-ответ
+      </div>
+    </div>
+    <div class="faq-card__text">{{item.title}}</div>
+    {# <ul class="faq-card__tags">
+      {% for tag in item.tags %}
+        <li>{{ tag.title }}</li>
+      {% endfor %}
+    </ul> #}
+  </div>
+</div>
+<div class="faq-block-tmp" data-card-id="{{ item.id }}">
+  <div class="faq-block__modal">
+    <a href="javascript:void(0)" class="faq-block__modal-close"></a>
+    <div class="faq-block__modal-header">
+      {{item.title}}
+    </div>
+    <div class="faq-block__modal-content">
+      <div class="faq-block__modal-content-q">
+        <ul class="faq-block__modal-questions">
+          {% for q in item.questionsAndAnswers %}
+            <li class="faq-block__modal-question">
+              <a class="faq-block__modal-question-link {% if loop.index == 1 %}faq-block__modal-question-link_active{% endif %}"
+                href="javascript:void(0)" data-faq-q="{{ loop.index }}">
+                <span class="faq-block__modal-question-link-content">
+                  <span class="faq-block__modal-question-link-num">
+                    вопрос {{ loop.index }}
+                  </span>
+                  {{ q.question }}
+                </span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="faq-block__modal-content-a">
+        <div class="faq-block__modal-answers">
+          {% for a in item.questionsAndAnswers %}
+            <div class="faq-block__modal-answer {% if loop.index == 1 %}faq-block__modal-answer_active{% endif %}" data-faq-a="{{ loop.index }}">
+
+{#                <div class="ya-share2" data-bare data-services="facebook,vkontakte,odnoklassniki,moimir,lj"#}
+{#              data-title="{% if item.text|striptags is empty %}{{ item.title }}{% else %}{{ item.text|striptags }}{% endif %}"#}
+{#              {% for s in ['facebook','vkontakte','odnoklassniki','moimir','lj'] %}#}
+{#                data-url:{{s}}="{{ app.request.uri|split('?')[0] }}?utm_source=share&utm_medium=social_{{s}}&utm_campaign=faq-card-{{ item.id }}#q{{ loop.index }}"#}
+{#              {% endfor %}#}
+{#              data-image="{% path item.image, 'thumb960x470' %}"></div>#}
+
+                <div style="margin-bottom: 20px;text-align: right">
+                {% set socials = (socials is defined and socials) ? socials: [{label: "telegram", uri: "https://t.me/stroi_mos_ru"}, {label: "youtube", uri: "https://www.youtube.com/channel/UCywW9XldSpE3HVmWxW1RYFw"}, {label: "vkontakte", uri: "https://vk.com/public49253163"}, {label: "odnoklassniki", uri: "https://ok.ru/group/55613137158162"}] %}
+                <ul class="socials" style="float: none">
+                    {% for item in socials %}
+                        <li>
+                            <a style="border: none" href="{{ item.uri }}" class="icon icon-social icon-{{ item.label }}" title="{{ item.label }}" target="_blank"></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                </div>
+              {{ embed_content(a.answer, a) }}
+              <a href="javascript:void(0)" class="faq-block__modal-back">Назад</a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+ObjectName: Наименование объекта строительства
+ObjectArea: Округ
+ObjectDistrict: Район
+ObjectAddress: Строительный адрес
+ConstructionWorkType: Вид работ (строительство или реконструкция)
+MainFunctional: Функциональное назначение объекта
+MainFunctionalCode: Функциональное назначение объекта (Code)
+SourceOfFinance: Источник финансирования
+Square: Площадь застройки
+Floor: Этажность
+ObjectStatus: Статус объекта
+DeveloperOrgForm: Застройщик, ОПФ
+DeveloperOrgName: Застройщик, наименование организации
+GeneralContractorOrgForm: Ген.подрядчик, ОПФ
+GeneralContractorOrgName: Ген.подрядчик, наименование организации
+CustomerOrgForm: Заказчик, ОПФ
+CustomerOrgName: Заказчик, наименование организации
+PointXyGeometryCoordinates: Координаты точки Х, У для пиктограммы
+LandGeometryCoordinates: Cords
+UpdateDateTime: Дата и время обновления данных об объекте строительства в Реестре строек

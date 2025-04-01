@@ -1,0 +1,4 @@
+<data-loadmore data-limit="{{ limit }}" data-offset="{{ next_offset }}"></data-loadmore>
+{% for post in posts %}
+    {% include 'Subordinate/widgets/shorthand_report/_teaser.html.twig' with {'post' : post} %}
+{% endfor %}

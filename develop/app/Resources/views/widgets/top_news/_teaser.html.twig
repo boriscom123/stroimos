@@ -1,0 +1,14 @@
+{# image {% thumbnail post.image, 'thumb' %} #}
+{# url {{ entity_path(post) }}#}
+{# title {{ post.title }} #}
+{# rubrics {% for rubric in post.rubrics %} {{ rubric.title }} {% endfor %} #}
+{# date {{ post.publishStartDate | format_date }} #}
+{# description {{ post.teaser }} #}
+<article class="top-news__teaser">
+    <a class="top-news__teaser-link" href="{{ entity_path(post) }}">
+        <time class="top-news__teaser-date">{{ post.publishStartDate | format_date }}</time>
+        <header class="top-news__teaser-header">
+            <h4 class="top-news__teaser-title">{{ post.title }}</h4>
+        </header>
+    </a>
+</article>

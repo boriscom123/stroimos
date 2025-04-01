@@ -1,0 +1,20 @@
+<p>Обновлён объект строительства "{{ construction.title }}".</p>
+
+{% if changeSet is defined and changeSet is not empty %}
+    <p>Изменения:</p>
+    <table cellspacing="5" border="1">
+        {% for property,values in changeSet %}
+            <tr>
+                <td rowspan="2">{{ property|trans({}, 'soap') }}</td>
+                <td>было</td>
+                <td>{{ values[0] }}</td>
+            </tr>
+            <tr>
+                <td>стало</td>
+                <td>{{ values[1] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<p><a href="{{ url('admin_app_construction_edit', {id: construction.id}) }}">Перейти к редактированию</a></p>

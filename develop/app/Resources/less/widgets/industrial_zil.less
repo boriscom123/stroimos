@@ -1,0 +1,90 @@
+.industrial-zil-page {
+  &__cc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    &-item {
+      display: block;
+      box-sizing: border-box;
+      .shadowed-teaser();
+      &-img {
+        display: block;
+        background-size: cover;
+        background-position: center center;
+        margin-bottom: 25px;
+      }
+      &-title {
+        display: block;
+        font-family: Onest,sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 24px;
+        color: @color;
+        margin-bottom: 15px;
+        padding: 0 15px;
+      }
+      &-text {
+        display: block;
+        font-family: Brygada1918,serif;
+        color: #515151;
+        font-size: 15px;
+        line-height: 20px;
+        padding: 0 15px 25px;
+      }
+      &:hover &-title {
+        color: @hover;
+      }
+    }
+    &-item:last-child {
+      padding-right: 0px;
+    }
+    &-item:first-child {
+      padding-left: 0px;
+    }
+    &_l {
+
+    }
+    &_l &-item:first-child {
+      width: 65%;
+    }
+    &_l &-item:first-child &-item-img {
+      height: 390px;
+    }
+    &_l &-item:last-child {
+      width: 30%;
+
+    }
+    &_l &-item:last-child &-item-img {
+      height: 190px;
+    }
+    &_r {
+
+    }
+    &_r &-item:first-child {
+      width: 30%;
+    }
+    &_r &-item:first-child &-item-img {
+      height: 190px;
+    }
+    &_r &-item:last-child {
+      width: 65%;
+
+    }
+    &_r &-item:last-child &-item-img {
+      height: 390px;
+    }
+    &_c &-item {
+      width: 30%;
+    }
+    &_c &-item-img {
+      height: 190px;
+    }
+    &_s &-item {
+      width: 100%;
+    }
+    &_s &-item-img {
+      height: 390px;
+    }
+  }
+}

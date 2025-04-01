@@ -1,0 +1,17 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Сброc пароля',
+    'rubricsContext': null,
+    } %}
+
+    <p class="auth-block__clear-pass">
+    {{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
+    </p>
+
+{% endblock %}

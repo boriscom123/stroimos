@@ -1,0 +1,5 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin/email-submit-confirmation.js') }}"></script>
+{% endblock %}

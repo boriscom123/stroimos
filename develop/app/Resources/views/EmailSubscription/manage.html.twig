@@ -1,0 +1,61 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function() {
+            $('#form_administrativeUnits').selectize({
+                plugins: ['remove_button'],
+                placeholder: 'Введите название района или округа'
+            })
+            $('#clear-all').click(function(event) {
+                var $select = $('#form_administrativeUnits').selectize();
+                var control = $select[0].selectize;
+                control.clear();
+                return false;
+            })
+        })
+    </script>
+{% endblock %}
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+{% block content %}
+    <style>
+        .align-left {
+            text-align: left;
+        }
+    </style>
+    <div class="subscribe-block">
+        <h1 class="subscribe-block__title">Управление рассылкой</h1>
+        <div class="image-banner"></div>
+        <p>Вы можете добавить или удалить интересующие округа и районы.
+            Чтобы получать общегородские новости,
+            удалите все значения и нажмите «Сохранить настройки»</p>
+        {{ form_start(form) }}
+        {% if errors | length > 0 %}
+            <ul class="errors">
+                {% for error in errors %}
+                    {% set params = [] %}
+                    {% if error.messageParameters | length > 0 %}
+                        {% for key, param in error.messageParameters %}
+                            {% set params = params|merge({ (key): param | trans}) %}
+                        {% endfor %}
+                    {% endif  %}
+                    <li>{{ error.messageTemplate|trans(params)|trans }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="align-left">
+            {{ form_widget(form.administrativeUnits) }}
+        </div>
+        <button id="clear-all" class="subscribe-block__btn" >Очистить все</button>
+        <div class="form-actions">
+            {{ form_widget(form.children.submit, {'attr': {'class': 'subscribe-block__btn'} }) }}
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

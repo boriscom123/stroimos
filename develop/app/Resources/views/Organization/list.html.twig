@@ -1,0 +1,43 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block title %}
+    {% set letter = app.request.get('letter') %}
+    {% if letter %}
+        <title>Строительные организации на букву «{{ letter }}»</title>
+    {% else %}
+        <title>Справочник организаций строительной отрасли</title>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Организации',
+    'rubricsContext': '',
+    } %}
+
+    {% embed '::/widgets/search_form.html.twig' with {action: path('app_organization_list'), value: app.request.get('search'), name: 'search' }%}
+        {% block moreBlock %}
+            <a class="organization-block__directory-all" href="{{ path('app_organization_list') }}">все орг.</a>
+            {% for item in organizationDirectories|reverse %}
+                <a class="organization-block__directory {% if app.request.get('directory') == item.title %}active{% endif %}" style="{% if loop.first %}margin-left: 0;{% endif %}" href="{{ entity_path(item) }}">{{ item.title }}</a>
+            {% endfor %}
+        {% endblock %}
+        {% block otherBlock %}
+            <div class="organizations-block__letter-list">
+                {% set letter = app.request.get('letter') %}
+                {% for item in ruLetter %}
+                        <input type="radio" name="letter" id="radio{{ loop.index }}" value="{{ item }}" class="organizations-block__letter-list-item {% if letter == item %}active{% endif %}" />
+                        <label for="radio{{ loop.index }}" class="">
+                            <a href="{{ path('app_organization_list', {'letter' : item}) }}" class="organizations-block__letter-list-item-let">
+                                {{ item }}
+                            </a>
+                        </label>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+    {{ sonata_block_render({'type': 'organization_list'}, {
+        'template': '::/Organization/_list.html.twig',
+    }) }}
+{% endblock %}

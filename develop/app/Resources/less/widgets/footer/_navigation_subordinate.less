@@ -1,0 +1,31 @@
+.footer-nav{
+	overflow: hidden;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #fff;
+	.column{
+		width: 33%;
+		float: left;
+	}
+}
+.footer-nav__section{
+	margin-bottom: 25px;
+}
+.footer-nav__section-title{
+	font-family: Brygada1918, serif;
+	font-size: 17px;
+	font-weight: bold;
+	margin: 0 0 8px 0;
+}
+.footer-nav__section-menu{
+	.reset-list-style;
+	font-size: 12px;
+	line-height: 13px;
+	li {
+		margin-bottom: 8px;
+	}
+}
+.footer-nav[data-columns]{
+	&:before {
+		content: '3 .column';
+	}
+}

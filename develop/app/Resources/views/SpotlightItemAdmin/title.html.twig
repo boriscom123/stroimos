@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.uri %}
+        <a class="sonata-link-identifier" href="{{ object.uri }}" target="_blank">{{ object.title }}</a>
+    {% elseif object.entity %}
+        {% set publication = object.entity %}
+        {% set publicationClass = entity_class(publication) %}
+        {% set publicationAdmin = admin.getConfigurationPool.getAdminByClass(publicationClass) %}
+        {% set url = publicationAdmin.generateObjectUrl('edit', publication) %}
+
+        <a class="sonata-link-identifier" href="{{ url }}"><i class="glyphicon glyphicon-edit"></i> {{ publication.title }}</a>
+    {% endif %}
+{% endblock %}
+

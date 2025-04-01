@@ -1,0 +1,32 @@
+<{{ formTag | default('form') }} class="news-search" action="{{ action | default('') }}">
+{% set rubric = app.request.get('rubric') %}
+{% if rubric is defined and rubric is not empty %}
+    <input type="hidden" name="rubric" value="{{ rubric }}"/>
+{% endif %}
+
+{% block searchString %}
+<fieldset class="news-search__form-block">
+    <input type="submit" class="news-search__form-block-btn" value=""/>
+    <div class="news-search__query-wrap">
+        <input class="news-search__query" type="search"
+               placeholder="{{ placeholder | default('Введите свой запрос') }}"
+               value="{{ value|default('') }}"
+               autocomplete="off"
+               id="{{ id | default('search-query') }}"
+               name="{{ name | default('q') }}"
+               {% if suggestURL is defined and suggestURL %}
+               data-suggest-url="{{ suggestURL }}"
+               {% endif %}
+               />
+    </div>
+</fieldset>
+{% endblock %}
+<fieldset class="news-search__more">
+    {% block moreBlock %}
+        <a id="searchAdvance" class="news-search__more-item" href="#">Расширенный поиск</a>
+        <a id="searchByTag" class="news-search__more-item" href="#">Поиск по тегам</a>
+    {% endblock %}
+</fieldset>
+    {% block otherBlock %}
+    {% endblock %}
+</{{ formTag | default('form') }}>

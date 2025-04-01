@@ -1,0 +1,36 @@
+<div class="edit-property-component priority" (click)="$event.stopPropagation()">
+  <div
+    class="property-value"
+    *ngIf="!isEditMode.value else formTemplate"
+  >
+    {{priorityOptions[post.priority | number].label}}
+  </div>
+
+  <ng-template #formTemplate>
+    <div class="property-form">
+      <ng-select #selectPriority
+                 class="priority"
+                 [items]="priorityOptions"
+                 bindValue="value"
+                 [clearable]="false"
+                 placeholder="Выбирите приоритет"
+                 [(ngModel)]="selectedPriority">
+      </ng-select>
+    </div>
+  </ng-template>
+  <div *ngIf="!post.is(stateEnum.pushingChanges) && !isError" class="button-container" (click)="clickButton()">
+    <fa-icon class="form-activation-button" [ngClass]="{'locked':post.is(stateEnum.locked)}"
+             [icon]="isEditMode.value?faTimes:faPen"
+    ></fa-icon>
+  </div>
+
+  <div *ngIf="post.is(stateEnum.pushingChanges) && !isError" class="button-container">
+    <fa-icon class="form-activation-button" [icon]="faSpinner" [spin]="true"></fa-icon>
+  </div>
+
+  <div *ngIf="isError" class="button-container error">
+    <fa-icon class="form-activation-button" [icon]="faExclamationTriangle"></fa-icon>
+  </div>
+</div>
+
+

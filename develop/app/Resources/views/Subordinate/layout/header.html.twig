@@ -1,0 +1,54 @@
+{% set menuName = 'subordinate_%s_header_main'|format(app.request.get('_subordinate_route')) %}
+{% set subMenuName = 'subordinate_%s_header_sub'|format(app.request.get('_subordinate_route')) %}
+{% set subordinate = app.request.get('_subordinate_route') %}
+<div class="page-header-container_subordinate">
+  <header class="page-header">
+    <div class="page-header__search-row">
+        <div class="page-header__wrapper">
+            <a href="/" class="page-header__top-logo" target="_blank">
+                <img class="page-header__top-logo-image" src="/images/logo_simple.svg" alt="логотип градостроительного комплекса Москвы">
+{#                 <span class="page-header__top-logo-text">Комплекс градостроительной политики и строительства города Москвы</span> #}
+            </a>
+            {% include 'Subordinate/header/_search.html.twig' %}
+        </div>
+    </div>
+    <div class="page-header__top-row">
+        <div class="page-header__wrapper">
+            {% include 'Subordinate/header/_logo.html.twig' %}
+            {% include 'Subordinate/widgets/socials.html.twig' %}
+        </div>
+    </div>
+    <div class="page-header__menu-top-row">
+        <div class="page-header__wrapper">
+            {{ sonata_block_render(
+                {type: 'simple_template'},
+                {template: '::Subordinate/menu/header_menu.html.twig', parameters: {menu: menuName}}
+            )}}
+            {{ sonata_block_render(
+                {type: 'simple_template'},
+                {template: '::Subordinate/header/header_menu_dropdown.html.twig', parameters: {menu: menuName}}
+            )}}
+        </div>
+    </div>
+    <div class="page-header__menu-bottom-row">
+        <div class="page-header__wrapper">
+            {# <ul class="page-header__submenu">
+                {% for item in knp_menu_get(subMenuName).children %}
+                    <li class="page-header__submenu-item">
+                        <a href="{{ item.uri }}">{{ item.label }}</a>
+                    </li>
+                {% endfor %}
+            </ul> #}
+
+            {{ sonata_block_render(
+                {type: 'simple_template'},
+                {template: '::Subordinate/menu/header_menu.html.twig', parameters: {menu: subMenuName}}
+            )}}
+            {{ sonata_block_render(
+                {type: 'simple_template'},
+                {template: '::Subordinate/header/header_menu_dropdown.html.twig', parameters: {menu: subMenuName}}
+            )}}
+        </div>
+    </div>
+  </header>
+</div>

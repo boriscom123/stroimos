@@ -1,0 +1,7 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-text" objectId="{{ admin.id(object) }}">
+    {% set route = field_description.options.route.name|default(null) %}
+    <a class="sonata-link-identifier btn btn-sm btn-primary" href="{{ admin.generateObjectUrl(route, object, field_description.options.route.parameters) }}">
+        <i class="glyphicon glyphicon-edit"></i>
+        {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+    </a>
+</td>

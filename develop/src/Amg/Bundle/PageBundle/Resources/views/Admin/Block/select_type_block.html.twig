@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle:CRUD:action.html.twig' %}
+
+{% block title %}Создание блока{% endblock %}
+
+{% block content %}
+    <h2>Выбор типа блока</h2>
+    <ul>
+        {% for code, service in services %}
+            <li><a href="{{ admin.generateUrl('create', {'type': code}) }}">{{ ('block_type.' ~ service.name)|trans }}</a></li>
+        {% else %}
+            <li>Выбор не возможен</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

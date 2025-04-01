@@ -1,0 +1,131 @@
+{% set status = {
+    'construction': 'Строится',
+    'documentation': 'Утверждена документация',
+    'documentation_underdeveloped': 'Разрабатывается документация',
+    'operation': 'Объект введен в эксплуатацию',
+    'designed': 'Ведется проектирование',
+    'terrain': 'Подобран земельный участок'
+} %}
+
+{% set stationIcon = {
+    'construction': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 7.5C1.5 6.67157 2.17157 6 3 6H21C21.8284 6 22.5 6.67157 22.5 7.5V14.25C22.5 15.0784 21.8284 15.75 21 15.75H3C2.17157 15.75 1.5 15.0784 1.5 14.25V7.5ZM21 7.5H3V14.25H21V7.5Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.34467 6.21967C7.63756 5.92678 8.11244 5.92678 8.40533 6.21967L16.6553 14.4697C16.9482 14.7626 16.9482 15.2374 16.6553 15.5303C16.3624 15.8232 15.8876 15.8232 15.5947 15.5303L7.34467 7.28033C7.05178 6.98744 7.05178 6.51256 7.34467 6.21967Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0947 6.21967C14.3876 5.92678 14.8624 5.92678 15.1553 6.21967L22.2803 13.3447C22.5732 13.6376 22.5732 14.1124 22.2803 14.4053C21.9874 14.6982 21.5126 14.6982 21.2197 14.4053L14.0947 7.28033C13.8018 6.98744 13.8018 6.51256 14.0947 6.21967Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.71967 7.34467C2.01256 7.05178 2.48744 7.05178 2.78033 7.34467L9.90533 14.4697C10.1982 14.7626 10.1982 15.2374 9.90533 15.5303C9.61244 15.8232 9.13756 15.8232 8.84467 15.5303L1.71967 8.40533C1.42678 8.11244 1.42678 7.63756 1.71967 7.34467Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M18 14.25C18.4142 14.25 18.75 14.5858 18.75 15V18.75C18.75 19.1642 18.4142 19.5 18 19.5C17.5858 19.5 17.25 19.1642 17.25 18.75V15C17.25 14.5858 17.5858 14.25 18 14.25Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M6 14.25C6.41421 14.25 6.75 14.5858 6.75 15V18.75C6.75 19.1642 6.41421 19.5 6 19.5C5.58579 19.5 5.25 19.1642 5.25 18.75V15C5.25 14.5858 5.58579 14.25 6 14.25Z"/>
+    </svg>',
+    'documentation': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25 14.25C8.25 13.8358 8.58579 13.5 9 13.5H15C15.4142 13.5 15.75 13.8358 15.75 14.25C15.75 14.6642 15.4142 15 15 15H9C8.58579 15 8.25 14.6642 8.25 14.25Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.25 11.25C8.25 10.8358 8.58579 10.5 9 10.5H15C15.4142 10.5 15.75 10.8358 15.75 11.25C15.75 11.6642 15.4142 12 15 12H9C8.58579 12 8.25 11.6642 8.25 11.25Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.18934 3.43934C4.47064 3.15804 4.85217 3 5.25 3H9C9.41421 3 9.75 3.33579 9.75 3.75C9.75 4.16421 9.41421 4.5 9 4.5L5.25 4.5L5.25 20.25H18.75V4.5H15C14.5858 4.5 14.25 4.16421 14.25 3.75C14.25 3.33579 14.5858 3 15 3H18.75C19.1478 3 19.5294 3.15804 19.8107 3.43934C20.092 3.72065 20.25 4.10218 20.25 4.5V20.25C20.25 20.6478 20.092 21.0294 19.8107 21.3107C19.5294 21.592 19.1478 21.75 18.75 21.75H5.25C4.85218 21.75 4.47065 21.592 4.18934 21.3107C3.90804 21.0294 3.75 20.6478 3.75 20.25V4.5C3.75 4.10217 3.90804 3.72064 4.18934 3.43934Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C11.2044 3 10.4413 3.31607 9.87868 3.87868C9.31607 4.44129 9 5.20435 9 6H15C15 5.20435 14.6839 4.44129 14.1213 3.87868C13.5587 3.31607 12.7956 3 12 3ZM8.81802 2.81802C9.66193 1.97411 10.8065 1.5 12 1.5C13.1935 1.5 14.3381 1.97411 15.182 2.81802C16.0259 3.66193 16.5 4.80653 16.5 6V6.75C16.5 7.16421 16.1642 7.5 15.75 7.5H8.25C7.83579 7.5 7.5 7.16421 7.5 6.75V6C7.5 4.80653 7.97411 3.66193 8.81802 2.81802Z"/>
+    </svg>',
+    'documentation_underdeveloped': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4697 2.46967C17.7626 2.17678 18.2374 2.17678 18.5303 2.46967L21.5303 5.46967C21.8232 5.76256 21.8232 6.23744 21.5303 6.53033L12.5303 15.5303C12.3897 15.671 12.1989 15.75 12 15.75H9C8.58579 15.75 8.25 15.4142 8.25 15V12C8.25 11.8011 8.32902 11.6103 8.46967 11.4697L17.4697 2.46967ZM9.75 12.3107V14.25H11.6893L19.9393 6L18 4.06066L9.75 12.3107Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2197 4.71967C15.5126 4.42678 15.9874 4.42678 16.2803 4.71967L19.2803 7.71967C19.5732 8.01256 19.5732 8.48744 19.2803 8.78033C18.9874 9.07322 18.5126 9.07322 18.2197 8.78033L15.2197 5.78033C14.9268 5.48744 14.9268 5.01256 15.2197 4.71967Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.43934 3.43934C3.72064 3.15804 4.10217 3 4.5 3H12.75C13.1642 3 13.5 3.33579 13.5 3.75C13.5 4.16421 13.1642 4.5 12.75 4.5L4.5 4.5L4.5 19.5H19.5V11.25C19.5 10.8358 19.8358 10.5 20.25 10.5C20.6642 10.5 21 10.8358 21 11.25V19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72065 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V4.5C3 4.10217 3.15804 3.72064 3.43934 3.43934Z"/>
+    </svg>',
+    'operation': '',
+    'designed': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.75 20.25C9.75 19.8358 10.0858 19.5 10.5 19.5H13.5C13.9142 19.5 14.25 19.8358 14.25 20.25C14.25 20.6642 13.9142 21 13.5 21H10.5C10.0858 21 9.75 20.6642 9.75 20.25Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 9.75C4.16421 9.75 4.5 10.0858 4.5 10.5V13.5C4.5 13.9142 4.16421 14.25 3.75 14.25C3.33579 14.25 3 13.9142 3 13.5V10.5C3 10.0858 3.33579 9.75 3.75 9.75Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 16.5C4.16421 16.5 4.5 16.8358 4.5 17.25V19.5H6.75C7.16421 19.5 7.5 19.8358 7.5 20.25C7.5 20.6642 7.16421 21 6.75 21H4.5C4.10218 21 3.72065 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V17.25C3 16.8358 3.33579 16.5 3.75 16.5Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.43934 3.43934C3.72064 3.15804 4.10217 3 4.5 3H19.5C19.8978 3 20.2794 3.15804 20.5607 3.43934C20.842 3.72065 21 4.10218 21 4.5V19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H17.25C16.8358 21 16.5 20.6642 16.5 20.25C16.5 19.8358 16.8358 19.5 17.25 19.5H19.5V4.5L4.5 4.5L4.5 6.75C4.5 7.16421 4.16421 7.5 3.75 7.5C3.33579 7.5 3 7.16421 3 6.75V4.5C3 4.10217 3.15804 3.72064 3.43934 3.43934Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.43525 3.43525C3.72814 3.14235 4.20301 3.14235 4.49591 3.43525L20.5647 19.504C20.8575 19.7969 20.8575 20.2718 20.5647 20.5647C20.2718 20.8575 19.7969 20.8575 19.504 20.5647L3.43525 4.49591C3.14235 4.20301 3.14235 3.72814 3.43525 3.43525Z"/>
+    </svg>',
+    'terrain': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 21.75C4.5 21.3358 4.83579 21 5.25 21H18.75C19.1642 21 19.5 21.3358 19.5 21.75C19.5 22.1642 19.1642 22.5 18.75 22.5H5.25C4.83579 22.5 4.5 22.1642 4.5 21.75Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.5C10.7574 7.5 9.75 8.50736 9.75 9.75C9.75 10.9926 10.7574 12 12 12C13.2426 12 14.25 10.9926 14.25 9.75C14.25 8.50736 13.2426 7.5 12 7.5ZM8.25 9.75C8.25 7.67893 9.92893 6 12 6C14.0711 6 15.75 7.67893 15.75 9.75C15.75 11.8211 14.0711 13.5 12 13.5C9.92893 13.5 8.25 11.8211 8.25 9.75Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C10.2098 3 8.4929 3.71116 7.22703 4.97703C5.96116 6.2429 5.25 7.95979 5.25 9.75C5.25 12.855 6.98389 15.6822 8.81595 17.7891C9.72283 18.832 10.6316 19.6729 11.3139 20.2528C11.5837 20.4821 11.8172 20.6699 12 20.8125C12.1828 20.6699 12.4163 20.4821 12.6861 20.2528C13.3684 19.6729 14.2772 18.832 15.184 17.7891C17.0161 15.6822 18.75 12.855 18.75 9.75C18.75 7.95979 18.0388 6.2429 16.773 4.97703C15.5071 3.71116 13.7902 3 12 3ZM12 21.75C11.5699 22.3644 11.5697 22.3643 11.5695 22.3641L11.5688 22.3637L11.5671 22.3624L11.5615 22.3585L11.5425 22.345C11.5263 22.3334 11.5031 22.3167 11.4736 22.2952C11.4144 22.252 11.3294 22.189 11.2223 22.1071C11.0081 21.9434 10.7049 21.7038 10.3424 21.3957C9.61838 20.7803 8.65217 19.8867 7.68405 18.7734C5.76611 16.5678 3.75 13.395 3.75 9.75C3.75 7.56196 4.61919 5.46354 6.16637 3.91637C7.71354 2.36919 9.81196 1.5 12 1.5C14.188 1.5 16.2865 2.36919 17.8336 3.91637C19.3808 5.46354 20.25 7.56196 20.25 9.75C20.25 13.395 18.2339 16.5678 16.316 18.7734C15.3478 19.8867 14.3816 20.7803 13.6576 21.3957C13.2951 21.7038 12.9919 21.9434 12.7777 22.1071C12.6706 22.189 12.5856 22.252 12.5264 22.2952C12.4969 22.3167 12.4737 22.3334 12.4575 22.345L12.4385 22.3585L12.4329 22.3624L12.4312 22.3637L12.4305 22.3641C12.4303 22.3643 12.4301 22.3644 12 21.75ZM12 21.75L12.4301 22.3644C12.1719 22.5452 11.8281 22.5452 11.5699 22.3644L12 21.75Z"/>
+    </svg>'
+}%}
+
+<div class="station-block">
+    <h2 class="station-block__title">Строительство новых станций московского метро</h2>
+    <ul class="station-block__list">
+        {% for key, item in stationsUnderConstruction %}
+        <li class="station-block__item">
+            <div class="station-block__line">
+                <a href="#" class="station-block__line-top" data-id="{{item[0].line.id}}">
+                    {% if item[0].line.color == 'd8d8d8' %}
+                        <span class="station-block__line-number"
+                        style="background-color: #E3E4E7; border: 1px dashed #333333; color: #ffffff">
+                        {{item[0].line.number|default('0')}}
+                    </span>
+                    {% else %}
+                        <span class="station-block__line-number"
+                        style="background-color: #{{item[0].line.color}}; border: 1px dashed #{{item[0].line.color}}; color: #ffffff">
+                        {{item[0].line.number|default('0')}}
+                    </span>
+                    {% endif %}
+                    <span class="station-block__line-title">{{key}}</span>
+                    <svg class="station-block__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.96967 8.46967C4.26256 8.17678 4.73744 8.17678 5.03033 8.46967L12 15.4393L18.9697 8.46967C19.2626 8.17678 19.7374 8.17678 20.0303 8.46967C20.3232 8.76256 20.3232 9.23744 20.0303 9.53033L12.5303 17.0303C12.2374 17.3232 11.7626 17.3232 11.4697 17.0303L3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967Z"/>
+                    </svg>
+                 </a>
+                <div class="station-block__content">
+                    <ul class="station-block__sublist sublist-station">
+                    {% for station in item %}
+                          <li class="sublist-station__item">
+                            <span class="sublist-station__icon">
+                                {% if station.constructionStatus.value == 'operation' %}
+                                    {% if station.line.color == 'd8d8d8' %}
+                                        <span style="background-color: #E3E4E7"></span>
+                                    {% else %}
+                                        <span style="background-color: #{{station.line.color}}"></span>
+                                    {% endif %}
+                                {% else %}
+                                    {{stationIcon[station.constructionStatus.value]|raw}}
+                                {% endif %}
+                            </span>
+                            <div class="sublist-station__status">
+                                <span class="sublist-station__status-icon">
+                                    {% if station.constructionStatus.value == 'operation' %}
+                                        <span style="background-color: #{{station.line.color|default('E3E4E7')}}"></span>
+                                    {% else %}
+                                        {{stationIcon[station.constructionStatus.value]|raw}}
+                                    {% endif %}
+                                </span>
+                                {{status[station.constructionStatus.value]}}
+                            </div>
+                            <a href="{{ entity_path(station) }}" class="sublist-station__title">{{station.title}}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="station-block__info">
+        <span class="station-block__notion">*</span>
+        <ul class="station-block__status-list status-list">
+            <li class="status-list__item">
+                {{stationIcon['terrain']|raw}}
+                <span>{{status['terrain']}}</span>
+            </li>
+            <li class="status-list__item">
+                {{stationIcon['designed']|raw}}
+                <span>{{status['designed']}}</span>
+            </li>
+            <li class="status-list__item">
+                {{stationIcon['documentation_underdeveloped']|raw}}
+                <span>{{status['documentation_underdeveloped']}}</span>
+            </li>
+            <li class="status-list__item">
+                {{stationIcon['documentation']|raw}}
+                <span>{{status['documentation']}}</span>
+            </li>
+            <li class="status-list__item">
+                {{stationIcon['construction']|raw}}
+                <span>{{status['construction']}}</span>
+            </li>
+            <li class="status-list__item">
+                <span class="status-list__operation-icon"></span>
+                <span>{{status['operation']}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

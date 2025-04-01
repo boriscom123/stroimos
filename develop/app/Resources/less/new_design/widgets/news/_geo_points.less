@@ -1,0 +1,63 @@
+.geo-points{
+	margin-bottom: 50px;
+	overflow: hidden;
+}
+.geo-points__image{
+	display: block;
+	width: 220px;
+	height: 220px;
+	margin:0 auto 35px;
+	border-radius: 50%;
+	box-shadow: 0 0 1px rgba(0,0,0,.3);
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+
+	&.point{
+		&:before{
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 30px;
+			height: 50px;
+			margin-top: -50px;
+			margin-left: -15px;
+			background-image: url(/images/icons/geo_point_marker.png);
+			background-position: 0 0;
+			background-repeat: no-repeat;
+		}
+	}
+}
+.geo-points__info{
+	padding: 10px 0;
+	border-top: 1px solid #e4e4e4;
+}
+.geo-points__header{
+	font-family: AvenirNext, sans-serif;
+	margin: 0 0 10px;
+	font-size: 15px;
+	line-height: 1.2;
+	color: #9d9d9d;
+}
+.geo-points__address{
+	font-family: AvenirNext, sans-serif;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 1.2;
+	margin: 0 0 10px;
+	padding: 5px 25px;
+	.dotted-border(black, bottom);
+
+	&.first{
+		background: none;
+	}
+
+	.icon{
+		margin: 0 0 0 -25px;
+		vertical-align: top;
+		display: block;
+		float: left;
+	}
+}

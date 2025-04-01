@@ -1,0 +1,16 @@
+<div class="search-form__filters" id="searchFormFilters">
+    {% for group, types in searchTypes %}
+        {% if loop.index == 1 or loop.index == 2 %}
+            <div class="filters__columns">
+        {% endif %}
+        {% for type, type_parameters in types %}
+            <div>
+                {% include '::widgets/checkbox.html.twig' with {'id': 'sfo__type__'~type,'name':'t[]', 'value': type, 'checked': type_parameters.checked, label: ('publication.' ~ type)|trans} %}
+            </div>
+        {% endfor %}
+        {% if loop.index == 1 or loop.index == 4 %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+</div>

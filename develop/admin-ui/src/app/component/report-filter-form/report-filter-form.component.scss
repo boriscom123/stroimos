@@ -1,0 +1,55 @@
+@import "~@progress/kendo-theme-default/scss/all";
+
+.k-form kendo-daterange label.k-form-field {
+    margin-right: 10px;
+    display: inline-block !important;
+}
+
+.label {
+  display: block;
+  font-size: 100%;
+  text-align: left;
+  font-weight: bold;
+  text-indent: 8px;
+  color: #656565;
+}
+
+legend {
+  font-size: 15px;
+  border-bottom: none;
+}
+
+table.report-list {
+
+  thead {
+    font-weight: bold;
+    text-indent: 8px;
+    color: #656565;
+  }
+
+  tbody tr {
+    line-height: 32px;
+
+    td {
+
+      &.checkbox-container {
+        text-align: center;
+        vertical-align: middle;
+        input {
+          display: initial;
+        }
+      }
+
+      label {
+        font-weight: initial;
+        margin: 0px;
+      }
+    }
+  }
+}
+
+kendo-daterange-popup .k-form-field {
+  margin: 3px;
+  text-align: right;
+}
+

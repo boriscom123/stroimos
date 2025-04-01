@@ -1,0 +1,82 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'id': 'road-interchange', 'object': page, 'themes': [{'title': 'Дороги'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+        {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+        {#{% if page.currently %}
+            {% include ":widgets:current_info.html.twig" with {currently: page.currently} %}
+        {% endif %}#}
+
+        {% set road_interchange_banner = page.getBlocks(null, 'road_interchange_banner')|first %}
+        {% if road_interchange_banner %}
+            {% include ":widgets:block_edit.html.twig" with {block: road_interchange_banner} %}
+            {{ sonata_block_render(road_interchange_banner) }}
+        {% endif %}
+
+        {% set has_under_construction = false %}
+        {% set has_reconstructed = false %}
+
+        {% for item in interchanges %}
+            {% if item.constructionStatus != 'operation' %}
+                {% set has_under_construction = true %}
+            {% elseif item.constructionStatus == 'operation' %}
+                {% set has_reconstructed = true %}
+            {% endif %}
+        {% endfor %}
+
+        {% if has_under_construction or has_reconstructed %}
+            <div class="road-list-alt__wrapper">
+                {% if has_under_construction %}
+                    <h3 class="road-list-alt__title">Ведутся работы</h3>
+                    <div class="road-list-alt__items">
+                        {% for item in interchanges %}
+                            {% if item.constructionStatus != 'operation' %}
+                                <a href="{{ entity_path(item) }}" class="road-list-alt__item" style="background-image: url('{% path item.image, 'thumb306' %}')">
+                                    <span class="road-list-alt__item-title">{{ item.title|replace({'с ': 'c&nbsp;'})|raw }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <p>
+                    «Клеверные» развязки на МКАД имели свойство самозапираться: когда блокировался один въезд, практически сразу же «вставали» остальные. За последние годы в Москве реконструировали {renovating_obsolete_interchanges} клеверного типа. На их месте появились современные направленные съезды – эстакады и тоннели, которые более эффективно справляются с плотным трафиком, не допуская пересечения транспортных потоков. После реконструкции пропускная способность развязки увеличивается до 30%.
+                </p>
+
+                {% if has_reconstructed %}
+                    <h3 class="road-list-alt__title">Реконструированные развязки</h3>
+                    <div class="road-list-alt__items">
+                        {% for item in interchanges %}
+                            {% if item.constructionStatus == 'operation' %}
+                                <a href="{{ entity_path(item) }}" class="road-list-alt__item" style="background-image: url('{% path item.image, 'thumb306' %}')">
+                                    <span class="road-list-alt__item-title">{{ item.title|replace({'с ': 'c&nbsp;'})|raw }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{
+  "name": "gsk_static",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@git.devhost.amg:gsk/gsk.git"
+  },
+  "description": "GSK static",
+  "readme": "README.md",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "bower": "^1.8.8",
+    "grunt": "^0.4.5",
+    "grunt-bower-install-simple": "^1.1.2",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "less-plugin-autoprefix": "^1.4.1",
+    "load-grunt-tasks": "^3.1.0",
+    "grunt-dev-update": "~1.4.0",
+    "grunt-inline-css": "^1.0.0"
+  }
+}

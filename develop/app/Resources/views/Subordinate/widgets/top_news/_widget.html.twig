@@ -1,0 +1,21 @@
+{% if news and news is defined %}
+    {% set topPost = news[0] %}
+    {% set posts = news | slice(1) %}
+
+    <div class="top-news">
+        <h2 class="top-news__title">
+            {# Новости {{ owner.formName }}а #}
+            Новости
+        </h2>
+        <div class="top-news__columns">
+            <div class="top-news__column">
+                {% include 'Subordinate/widgets/top_news/_teaser.html.twig' with {'post' : topPost, 'type': 'single'} %}
+            </div>
+            <div class="top-news__column">
+                {% for post in posts %}
+                    {% include 'Subordinate/widgets/top_news/_teaser.html.twig' with {'post' : post, 'type': 'double'} %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,105 @@
+/* various fixes and workarounds of Sonata Admin theme issues - consider removing after theme update */
+body {
+    overflow-x: unset !important;
+}
+div.select2-container {
+    width: 100%;
+}
+
+form .form-group .field-container {
+    overflow: hidden;
+}
+
+.sonata-ba-field-error-messages {
+    color: #a94442;
+}
+
+.bad-crop-box .cropper-line,
+.bad-crop-box .cropper-point {
+    background-color: #F00;
+}
+
+body .navbar-top-links.breadcrumb li span {
+    white-space: nowrap;
+    max-width: 200px;
+    display: inline-block;
+}
+
+.tree_item_title {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.treeview li.selected > .tree_item_title {
+    font-weight: bold;
+}
+
+textarea.cke_source {
+    white-space: pre-wrap !important;
+}
+
+html body.news-wrapper__content {
+    width: 345px !important;
+    min-width: 345px !important;
+}
+
+div[id$="_mobileContent"].cke {}
+
+div[id$="_mobileContent"].cke .cke_contents {
+    text-align: center;
+    -moz-box-shadow: 0 1px 0 #fff inset;
+    -webkit-box-shadow: 0 1px 0 #fff inset;
+    box-shadow: 0 1px 0 #fff inset;
+    background: #cfd1cf;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ebebeb),to(#cfd1cf));
+    background-image: -moz-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -webkit-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -o-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: -ms-linear-gradient(top,#ebebeb,#cfd1cf);
+    background-image: linear-gradient(top,#ebebeb,#cfd1cf);
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#ebebeb',endColorstr='#cfd1cf');
+}
+
+div[id$="_mobileContent"].cke .cke_contents iframe {
+    width: 345px !important;
+}
+
+td.sonata-ba-list-field.sonata-ba-list-field-priority-position {
+    min-width: 100px;
+    padding: 0px;
+}
+
+td.sonata-ba-list-field.sonata-ba-list-field-priority-position .ng-select .ng-clear-wrapper{
+    width: initial;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+label.icheck-disable {
+    padding: 0;
+}
+
+@keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.previewThumb span {
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    margin-left: 15%;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: -2px 2px 10px -1px #333;
+    border-radius: 5px;
+    z-index: 99999;
+}
+.previewThumb:hover span {
+    visibility: visible;
+    animation: ani 1.5s forwards;
+}

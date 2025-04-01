@@ -1,0 +1,10 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    <input class="tag-merge-item" type="checkbox" name="idx[]" value="{{ admin.id(object) }}">
+
+    <span class="tag-merge-target" style="display: none;">
+        <label class="tag-merge-arrow" for="admin-tag{{ admin.id(object) }}">&rarr;</label>
+        <input class="tag-merge-radio" id="admin-tag{{ admin.id(object) }}" type="radio" name="targetId" value="{{ admin.id(object) }}" />
+    </span>
+{% endblock %}

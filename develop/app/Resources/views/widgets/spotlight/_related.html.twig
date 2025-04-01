@@ -1,0 +1,18 @@
+{% if item is construction %}
+    {% set types_to_merge = ['news','gallery','infographics','video','document'] %}
+    {% set merged_items = [] %}
+    {% for type, items in item.related %}
+        {% if type in types_to_merge %}
+            {% for to_merge_item in items %}
+                {% set merged_items = merged_items|merge([to_merge_item]) %}
+            {% endfor %}
+        {% else %}
+            {% include '::/widgets/spotlight/_widget.html.twig' with {'items': items, 'class': 'other-materials container__full', 'title': 'related.' ~ type } %}
+        {% endif %}
+    {% endfor %}
+    {% include '::/widgets/spotlight/_widget.html.twig' with {'items': merged_items, 'class': 'other-materials container__full', 'title': 'related.common' } %}
+{% else %}
+    {% for type, items in item.related %}
+        {% include '::/widgets/spotlight/_widget.html.twig' with {'items': items, 'class': 'other-materials container__full', 'title': 'related.' ~ type } %}
+    {% endfor %}
+{% endif %}

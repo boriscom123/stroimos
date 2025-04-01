@@ -1,0 +1,15 @@
+<div class="smi-block">
+  <div class="smi-block__top">
+    <a href="{{ path('app_subordinate_%s_publications'|format(app.request.get('_subordinate_route'))) }}" class="smi-block__title">СМИ о {{ owner.formName }}е</a>
+    {# <div class="smi-block__nav">
+      <a href="{{ path('app_subordinate_%s_publications'|format(app.request.get('_subordinate_route'))) }}" class="smi-block__nav-item">Публикации</a>
+      <a href="{{ path('app_subordinate_%s_shorthand-reports'|format(app.request.get('_subordinate_route'))) }}" class="smi-block__nav-item">Стенограммы</a>
+    </div> #}
+  </div>
+  <div class="smi-block__content">
+    {% if interview[0] is defined %}
+        {% include 'Subordinate/widgets/interviews/_widget.html.twig' with {'interview': interview[0]} %}
+    {% endif %}
+    {% include 'Subordinate/widgets/publication/_homepage.html.twig' with {'publications': publications} %}
+  </div>
+</div>

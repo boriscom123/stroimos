@@ -1,0 +1,19 @@
+<div class="banner-subordinate__wrapper container__unlimited">
+    {% for banner in banners %}
+        {% set settings = banner.settings %}
+        <a href="{{ settings.url }}" {% if settings.target_blank %} target="_blank" {% endif %} class="banner-subordinate">
+            <span class="banner-subordinate__content">
+                <span class="banner-subordinate__inner">
+                    <span class="banner-subordinate__content-title">
+                    {{ settings.header }}
+                    </span>
+                    <span class="banner-subordinate__content-subtitle">
+                    {{ settings.title }}
+                    </span>
+                </span>
+            </span>
+            <span class="banner-subordinate__image" style="background-image: url('{% path settings.banner_backgroud_image, 'thumb715x250' %}');">
+            </span>
+        </a>
+    {% endfor %}
+</div>

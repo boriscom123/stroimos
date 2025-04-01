@@ -1,0 +1,124 @@
+.infographics-block {
+	margin-bottom: 40px;
+}
+
+.infographics-block__link {
+	display: inline-block;
+	position: relative;
+
+	&:hover {
+
+		.infographics-block__share {
+			opacity: 1;
+		}
+
+		.infographics-block__img-wrap {
+			&:before {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+			.infographics-block__img-show {
+				opacity: 1;
+				transform: translateY(-7px);
+			}
+		}
+
+		.infographics-block__img {
+			background-color: #fff;
+			transform: translateY(-7px);
+			box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+		}
+
+		.infographics-block__header {
+			color: @hover;
+		}
+
+		.infographics-block__text {
+			color: @color;
+		}
+	}
+}
+
+.infographics-block__img-wrap {
+	width: 500px;
+	box-sizing: border-box;
+	.dotted-border(whitegray, right);
+	float: left;
+	position: relative;
+
+	&:before {
+		content: '';
+		width: calc(~'100% - 31px');
+		height: 100%;
+		background: rgba(0, 0, 0, 0.45) url('/images/icons/eye.png') no-repeat;
+		background-position: center center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+
+	.infographics-block__img-show {
+		width: calc(~'100% - 31px');
+		position: absolute;
+		top: 50%;
+		margin-top: 40px;
+		left: 0;
+		z-index: 2;
+		font-family: Onest, sans-serif;
+		font-weight: 700;
+		font-size: 10px;
+		line-height: 28px;
+		text-transform: uppercase;
+		color: white;
+		text-align: center;
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+	}
+}
+
+.infographics-block__img {
+	width: 469px;
+	display: block;
+	z-index: 1;
+	box-shadow: 0 0px 1px rgba(0, 0, 0, .25);
+	transition: all 0.2s ease-in-out;
+	box-sizing: border-box;
+}
+
+.infographics-block__content {
+	padding: 30px;
+	margin-left: 500px;
+}
+
+.infographics-block__header {
+	.teaser-title();
+	margin-bottom: 16px;
+	color: @color;
+}
+
+.infographics-block__text {
+	font-family: Brygada1918, serif;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	color: @color;
+    height: 7 * 20px;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+
+.infographics-block__share {
+	//width: @newsShareWidth;
+	float: right;
+	padding: 20px 0 15px;
+	box-sizing: border-box;
+	padding-left: 20px;
+	position: absolute;
+	right: 0;
+	bottom: 30px;
+	opacity: 0;
+	transition: all 0.2s ease-in-out;
+}

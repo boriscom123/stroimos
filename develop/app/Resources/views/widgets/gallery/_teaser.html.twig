@@ -1,0 +1,39 @@
+{#{% set isBig = (loop.index == 1 or loop.index == 8) %}#}
+{% set isBig = false %}
+<article
+        class="photogallery-list__teaser {{ isBig ? 'photogallery-list__teaser-big' }} text-more__container"
+        {% if isBig %}
+            style="background-image: url({% path gallery.image, 'full' %})"
+        {% else %}
+            style="background-image: url({% path gallery.image, 'thumb500' %})"
+        {% endif %}
+        >
+    <a href="{{ path('app_gallery_show', { id: gallery.id }) }}" class="photogallery-list__teaser-link">
+        <time class="photogallery-list__teaser-date">{{ gallery.publishStartDate | format_date }}</time>
+        <header>
+            <h1 class="photogallery-list__teaser-title">{{ gallery.title }}</h1>
+        </header>
+        <aside class="photogallery-list__teaser-meta">
+            <i class="icon icon-40 icon-light icon-photo"></i>
+            <small>{{ gallery.medias | length }}</small>
+            фото
+        </aside>
+    </a>
+
+    {% if gallery.rubrics|length %}
+        <div class="photogallery-list__teaser-rubrics text-more__overlay">
+            <i class="icon icon-40 icon-light icon-label"></i>
+
+            <span class="photogallery-list__teaser-rubrics-title text-more__title hidden">Рубрики</span>
+
+            <div class="text-more__wrapper" data-length="{{ gallery.rubrics|length }}">
+                {% for rubric in gallery.rubrics %}
+                    <a href="{{ path('app_gallery_list', {rubric: rubric.title}) }}">{{ rubric.title }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %}
+
+
+                <span class="text-more__button">еще</span>
+            </div>
+        </div>
+    {% endif %}
+</article>

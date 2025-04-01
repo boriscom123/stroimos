@@ -1,0 +1,63 @@
+.organizations-block__letter-list {
+  display: table;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.organizations-block__letter-list-item-let {
+  display: block;
+  text-align: center;
+  z-index: 4;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -20px;
+    z-index: 1;
+  }
+
+  &:hover {
+    &:before {
+      display: block;
+      z-index: -1;
+    }
+  }
+}
+
+.organizations-block__letter-list-item {
+  display: none;
+
+  + label {
+    display: table-cell;
+    position: relative;
+    font-family: AvenirNext, sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 50px;
+    color: #6a6a6a;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}
+
+.organizations-block__letter-list-item.active + label,
+.organizations-block__letter-list-item:checked + label {
+  color: @hover;
+
+  &:before {
+    display: block;
+    z-index: 4;
+  }
+}

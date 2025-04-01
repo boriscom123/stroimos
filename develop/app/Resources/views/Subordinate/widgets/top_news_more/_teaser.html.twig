@@ -1,0 +1,8 @@
+<article class="more-news__teaser {{ is_last ? 'more-news__teaser_last' : '' }}">
+    <a class="more-news__teaser-link" href="{{ entity_path(post) }}">
+        <time class="more-news__teaser-date">{{ post.publishStartDate | format_date }}</time>
+        <header class="more-news__teaser-header">
+            <h4 class="more-news__teaser-title">{{ post.title }}</h4>
+        </header>
+    </a>
+</article>

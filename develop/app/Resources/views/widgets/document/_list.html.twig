@@ -1,0 +1,41 @@
+<div class="documents-page__wrap">
+    {% include ':widgets/document:form.html.twig' %}
+</div>
+<div class="document-list">
+    <h2>
+        {%  block header_documents %}
+        {% endblock %}
+    </h2>
+
+    {% block tableDocuments %}
+            {% for document in documents %}
+                {% include '::widgets/document/' ~ context.setting('category') ~ '/_teaser.html.twig' %}
+            {% endfor %}
+    {% endblock %}
+</div>
+
+{% if next_offset %}
+    {% include '::/Block/loadmore_button.html.twig' with {
+        title: 'Ещё результаты',
+        target: '.documents-page__'~ context.setting('category') ~'-table',
+        source: block_path(block, context, {
+            template: '_ajax_list',
+            category: app.request.get('category', context.setting('category')),
+            number: app.request.get('number'),
+            status: app.request.get('status', ''),
+            archive: app.request.get('archive', 0),
+            approve_date_start: app.request.get('approve_date_start'),
+            approve_date_end: app.request.get('approve_date_end'),
+            agency: app.request.get('agency'),
+            rubrics: app.request.get('rubrics'),
+            date_of_adding_start: app.request.get('date_of_adding_start'),
+            date_of_adding_end: app.request.get('date_of_adding_end'),
+            tags: app.request.get('tags'),
+        }),
+        limit: limit,
+        item: '.documents-page__'~ context.setting('category') ~'-table-row',
+        offset: next_offset
+    }%}
+{% else %}
+    <div class="loadmore-btn__wrap">&nbsp;</div>
+{% endif %}

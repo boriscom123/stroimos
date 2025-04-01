@@ -1,0 +1,13 @@
+{% set mediaPath %}
+    {% path item.infographics, 'full' %}
+{% endset %}
+<p>
+    <a  class="pic"
+        href="{{ mediaPath }}">
+        <img
+            alt=""
+            class="infographics-img"
+            src="{{ mediaPath }}"
+        >
+    </a>
+</p>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru" {{ sonata_seo_html_attributes() }}>
+<head {{ sonata_seo_head_attributes() }}>
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body class="{% block bodyClass %}{% endblock %}">
+{% block content%}{% endblock %}
+{% block javascripts %}
+    <script src="//api-maps.yandex.ru/2.1/?coordorder=longlat&lang=ru_RU" type="text/javascript"></script>
+    <script src="{{ asset('js/gsk_static.js') }}" type="text/javascript"></script>
+{% endblock %}
+</body>
+</html>

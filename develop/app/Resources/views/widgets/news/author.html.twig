@@ -1,0 +1,18 @@
+{% if (article.author is defined and article.author is not empty) or (article.source is defined and article.source is not empty) %}
+    <div class="news-wrapper__author" data-author="{% if article.author is defined and article.author is not empty %}Автор{% else %}Источник{% endif %} {% if type is defined and type is not empty %}{{ type }}{% endif %}">
+        <p>
+            {{ article.author }}
+            {% if article.source is defined and article.source is not empty %}
+                {% if article.source.url is defined and article.source.url is not empty %}
+                    <a href="{{ article.source.url }}" class="news-wrapper__author-edition">
+                        {{ article.source }}
+                    </a>
+                {% else %}
+                    <span class="news-wrapper__author-edition">
+                        {{ article.source }}
+                    </span>
+                {% endif %}
+            {% endif %}
+        </p>
+    </div>
+{% endif %}

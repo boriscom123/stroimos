@@ -1,0 +1,47 @@
+.page-header__auth {
+  padding-right: 10px;
+  float: right;
+  border-left: 1px solid #585757;
+}
+.page-header__auth-link,
+.page-header__auth {
+  margin: 0;
+  color: #fff;
+  font-family: Onest,sans-serif;
+  font-size: 10px;
+  line-height: 34px;
+  text-transform: uppercase;
+}
+
+.page-header__auth-link {
+  width: 82px;
+  height: 34px;
+  color: white;
+  display: block;
+  clear: both;
+  text-align: left;
+  position: relative;
+  text-indent: 10px;
+  overflow: hidden;
+
+  &:first-child {
+	&:after {
+		content: '';
+		position: absolute;
+		width: calc(~'100% - 10px');
+		height: 1px;
+		background: #585757;
+		bottom: 0;
+		left: 10px;
+	}
+  }
+
+  //&.logout {
+  //  float: left;
+  //  margin-left: 20px;
+  //}
+
+  &:hover {
+    color: @hover;
+  }
+}

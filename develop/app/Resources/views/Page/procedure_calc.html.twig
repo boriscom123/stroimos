@@ -1,0 +1,90 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block title %}<title>Калькулятор процедур - Комплекс градостроительной политики и строительства города Москвы</title>{% endblock %}
+
+{% block metadatas %}
+    <meta name="title" content="Калькулятор процедур - Комплекс градостроительной политики и строительства города Москвы">
+    <meta name="description" content="Калькулятор процедур» - универсальный сервис доступа к сведениям и документации о строительных объектах.">
+    <meta name="keywords" content="Кабинет застройщика, Калькулятор процедур, Градостроительного комплекса Москвы">
+    <meta property="og:title" content="Калькулятор процедур - Комплекс градостроительной политики и строительства города Москвы">
+    <meta property="og:image" content="https://stroi.mos.ru/images/favicon/largetile.png">
+    <meta property="og:url" content="https://stroi.mos.ru/kalkulyator-procedur">
+    <meta property="og:description" content="«Калькулятор процедур - сервис для застройщиков, где можно узнать сроки и этапы прохождения строительных процедур для конкретного проекта.">
+    <meta property="og:type" content="website">
+{% endblock %}
+
+{% block content %}
+  <div class="promo-page-wrapper">
+
+    <div class="promo-page-wrapper__title">
+      Электронный сервис<br/>
+      <h1>«Калькулятор процедур»</h1><br/>
+      <a href="http://ugd.mos.ru" target="_blank">ugd.mos.ru</a>
+    </div>
+
+    <a href="https://stroimprosto-msk.ru/calc/" target="_blank" class="action-btn">Открыть Калькулятор процедур</a>
+
+    <div class="promo-page-wrapper__content">
+      «Калькулятор процедур» - это сервис для застройщиков, где можно узнать сроки и этапы прохождения строительных процедур для конкретного проекта.
+    </div>
+
+    <hr class="separator" />
+
+    <h2 class="promo-page-wrapper__title">
+      Калькулятор процедур – это
+    </h2>
+
+    <div class="promo-page-list__info">
+      <div class="promo-page-list__item">
+        <div class="item__pic calc"></div>
+        <div class="item__text">расчет сроков<br/> реализации<br/> строительного проекта </div>
+      </div>
+      <div class="promo-page-list__item">
+        <div class="item__pic shape"></div>
+        <div class="item__text">формирование полного<br/> перечня процедур в сфере<br/> строительства, необходимых<br/> для реализации<br/> строительного проекта</div>
+      </div>
+      <div class="promo-page-list__item">
+        <div class="item__pic record"></div>
+        <div class="item__text">учет всех<br/> градостроительных<br/> условий и ограничений</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+
+    <div class="promo-page-wrapper-alt">
+      <div class="promo-page-wrapper-alt__container">
+
+        <h2 class="promo-page-wrapper__title">
+          Возможности<br/> Калькулятора процедур
+        </h2>
+
+        <div class="promo-page-list__features">
+          <div class="promo-page-list__item">
+            <div class="item__pic acts"></div>
+            <div class="item__text">Ссылки на нормативные<br/> правовые акты</div>
+          </div>
+          <div class="promo-page-list__item">
+            <div class="item__pic deadline"></div>
+            <div class="item__text">Сроки и этапы прохождения<br/> строительных процедур<br/> для конкретного проекта</div>
+          </div>
+          <div class="promo-page-list__item">
+            <div class="item__pic search"></div>
+            <div class="item__text">Указано ответственное<br/> за реализацию процедуры<br/> ведомство</div>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="promo-page-wrapper__title">
+      Доступ к Калькулятору процедур
+    </h2>
+
+    <a href="https://stroimprosto-msk.ru/calc/" target="_blank" class="action-btn">Открыть Калькулятор процедур</a>
+  </div>
+{% endblock %}

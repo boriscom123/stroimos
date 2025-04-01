@@ -1,0 +1,60 @@
+<div class="metro-container metro-container_left">
+    <h3 class="metro-construction-title">
+        Развитие <br/>
+        метро Москвы
+    </h3>
+</div>
+
+{% set linePic = 1 %}
+{% for lineName, stations in stationsUnderConstruction %}
+    {% set lineType = 'b' %}
+    {% for station in stations %}
+        {% if station.line.number == '0' %}
+            {% set lineType = 'c' %}
+        {% endif %}
+    {% endfor %}
+    {% if lineName == 'Бирюлёвская линия' %}
+        {% set linePic = 6 %}
+    {% elseif lineName == 'Люблинско-Дмитровская линия' %}
+        {% set linePic = 2 %}
+    {% elseif lineName == 'Арбатско-Покровская линия' %}
+        {% set linePic = 3 %}
+    {% elseif lineName == 'Большая кольцевая линия' %}
+        {% set linePic = 4 %}
+    {% elseif lineName == 'Сокольническая линия' %}
+        {% set linePic = 5 %}
+    {% elseif lineName == 'Троицкая линия' %}
+        {% set linePic = 1 %}
+    {% elseif lineName == 'Некрасовская линия' %}
+        {% set linePic = 7 %}
+    {% elseif lineName == 'Рублёво-Архангельская линия' %}
+        {% set linePic = 8 %}
+    {% else %}
+        {% set linePic = 0 %}
+    {% endif %}
+
+    <div class="metro-construction metro-construction_{{ lineType }}{{ (lineType == 'b' or lineType == 'c') ? " metro-construction_b#{linePic}" : '' }}">
+        {% set firstStation = stations|first %}
+        {% if firstStation %}
+            {% include '::Metro/ribbon.html.twig' with {type: lineType, color: "##{firstStation.line.color}"} %}
+        {% endif %}
+        <div class="metro-construction__content">
+            <h4 class="metro-construction__subtitle">
+                {{ lineName }}
+            </h4>
+            <div class="metro-construction__list">
+                {% for item in stations %}
+                    <a href="{{ entity_path(item) }}" class="metro-construction__list-item">
+                        <i class="metro-construction__list-item-circle" style="background: #{{ item.line.color }};"></i>
+                        <span class="metro-construction__list-item-title">
+                            {{ item.title }}
+                        </span>
+                        {% if 'operation' == item.constructionStatus %}
+                            <span class="metro-construction__list-item-info">открыта</span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,4 @@
+<data-loadmore data-limit="{{ limit }}" data-offset="{{ next_offset }}"></data-loadmore>
+{% for item in items %}
+    {% include '::/Construction/_teaser.html.twig' with {'item': item} %}
+{% endfor %}

@@ -1,0 +1,67 @@
+<form class="filter-form k-form">
+  <fieldset>
+    <legend>Параметры отчета</legend>
+    <div class="k-form-field">
+      <span class="label">Период создания</span>
+      <kendo-daterange>
+        <label class="k-form-field">
+          <span class="label">c</span>
+          <kendo-dateinput kendoDateRangeStartInput [(value)]="created.start" [format]="'dd.MM.y'"></kendo-dateinput>
+        </label>
+        <label class="k-form-field">
+          <span class="label">по (включительно)</span>
+          <kendo-dateinput kendoDateRangeEndInput [(value)]="created.end" [format]="'dd.MM.y'"></kendo-dateinput>
+        </label>
+        <kendo-daterange-popup [appendTo]="'component'" #popupDateRange>
+          <ng-template kendoDateRangePopupTemplate>
+            <kendo-multiviewcalendar kendoDateRangeSelection (selectionRangeChange)="onCreatedPeriodChange($event)">
+            </kendo-multiviewcalendar>
+          </ng-template>
+        </kendo-daterange-popup>
+      </kendo-daterange>
+    </div>
+
+  </fieldset>
+  <fieldset>
+    <legend>Отчеты для выгрузки</legend>
+    <table class="table report-list">
+      <thead>
+      <tr>
+        <th class="col">
+          Наименование отчета
+        </th>
+        <th class="col">
+          Включить в выгрузку
+        </th>
+        <td class="col">
+          Показать подробности
+        </td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of reportRepository.items | keyvalue">
+        <td class="report-title-container">
+          <label>{{item.value.title}}</label>
+        </td>
+        <td class="checkbox-container">
+          <input type="checkbox" [checked]="item.value.download"
+                 (change)="toggleDownload($event, item.value)">
+        </td>
+        <td class="checkbox-container">
+          <input type="checkbox" [checked]="item.value.showDetails"
+                 (change)="toggleShowDetails($event, item.value)">
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="downloadTask && downloadTask.isStarted else startDownloadPanel">
+      Loading... {{downloadTask.current}} of {{downloadTask.total}}
+      <button class="k-button k-primary" (click)="cancelDownload()">Отменить</button>
+    </div>
+    <ng-template #startDownloadPanel>
+      <button class="k-button k-primary" (click)="startDownload()">Скачать</button>
+    </ng-template>
+  </fieldset>
+</form>

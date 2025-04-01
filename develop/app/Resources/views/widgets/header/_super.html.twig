@@ -1,0 +1,16 @@
+<div class="header-super">
+{#     {% set socials = (socials is defined and socials) ? socials: [{label: "twitter", uri: "https://twitter.com/bochkarev_and"}] %}
+    
+    <ul class="socials">
+        {% for item in socials %}
+            <li>
+                <a href="{{ item.uri }}" class="icon icon-social icon-{{ item.label }}" title="{{ item.label }}" target="_blank"></a>
+            </li>
+        {% endfor %}
+    </ul>
+     #}
+    <a href="https://stroi.mos.ru/structure/person/252" class="header-super__person">
+        <span class="header-super__person-name">Ефимов В.В.</span>
+        <span class="header-super__person-title">Заместитель Мэра Москвы по вопросам градостроительной политики и строительства</span>
+    </a>
+</div>

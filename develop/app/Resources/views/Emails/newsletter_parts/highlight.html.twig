@@ -1,0 +1,57 @@
+{% set schemeAndHost = request.getSchemeAndHttpHost() %}
+
+<tr>
+    <td align="center" valign="top" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0 20px;">
+        <!-- BEGIN HIGHLIGHT // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="highlightBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important; margin-top: 10px;">
+            <tr>
+                <td valign="top" align="left" class="highlightBlockContentContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #CA1120;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important; min-height: 180px; height: 100%;">
+                        <tr>
+                            <td valign="middle" align="left" class="highlightBlockContent" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 16px 14px 4px 16px; height: 60px;">
+                                <img src="{{ absolute_url(asset('images/email/2024/highlight_img.png')) }}" alt="В центре внимания" width="60" height="60" style="-ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="bottom" align="left" class="highlightBlockContent" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 20px 14px 20px 16px;">
+                                <a href="{{ highlight.link | url_hash_utm_fix(url_utm) }}" class="highlightBlockSubtitle" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; color: #ffffff; font-size: 18px; font-family: Arial,serif; font-weight: bold; line-height: 110%; text-decoration: none !important;">
+                                    <span class="highlightBlockSubtitle" style="color: #ffffff; font-size: 18px; font-family: Arial,serif; font-weight: bold; line-height: 110%; text-decoration: none !important;">{{ highlight.teaser }}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="highlightBlockImageContainer" valign="middle" align="center" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; height: 180px;" height="180">
+                    {% set spotlightItemWallpaper %}
+                        {% path content.spotlightItemWallpaper, 'reference' %}
+                    {% endset %} 
+                    {% set spotlightImage %}
+                        {% path highlight.image, 'newsletter_highlight' %}
+                    {% endset %}
+
+                    <a href="{{ highlight.link | url_hash_utm_fix(url_utm) }}" target="_blank" style="background-image: url('{{ spotlightItemWallpaper|trim ? schemeAndHost~spotlightItemWallpaper|trim : spotlightImage|trim }}'); background-size: cover; width: 100%; display: block; height: 100%; min-width: 240px;">
+                        {# <img src="{{ spotlightItemWallpaper|trim ? schemeAndHost~spotlightItemWallpaper|trim : spotlightImage|trim }}" alt width="240" height="180" style="-ms-interpolation-mode: bicubic; display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;"> #}
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="highlightBlock" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+            <tr>
+                <td valign="top" align="left" class="highlightBlockContentContainer" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #E8EFF3;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 14px; font-weight: lighter; border-collapse: collapse !important;">
+                        <tr>
+                            <td valign="middle" align="left" class="highlightBlockText" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 20px 16px 40px;">
+                                <a href="{{ highlight.link | url_hash_utm_fix(url_utm) }}" target="_blank" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; font-size: 16px; font-family: Arial,serif; line-height: 140%; text-decoration: none !important;">
+                                    <span style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #1B262C; font-size: 16px; font-family: Arial,sans-serif; line-height: 140%; text-decoration: none !important; font-weight: 400;">
+                                        {{ highlight.content }}
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- END HIGHLIGHT // -->
+    </td>
+</tr>

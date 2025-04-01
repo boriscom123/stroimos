@@ -1,0 +1,35 @@
+.list-columns {
+  margin: 0 0 20px;
+  padding: 0px;
+  list-style-type: none;
+  list-style-position: inside;
+  .column-count(3);
+  .column-gap(10px);
+  &_columns_1 {
+    .column-count(1);
+  }
+  &_columns_2 {
+    .column-count(2);
+  }
+  &_columns_3 {
+    .column-count(3);
+  }
+  &_columns_4 {
+    .column-count(4);
+  }
+  > li {
+    text-indent: -10px;
+    border-left: 2px solid #48a1ff;
+    padding: 10px 0 10px 28px;
+    margin: 0;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    &:before {
+      display: block;
+      float: left;
+      width: 10px;
+      content: '-';
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{% extends ':SonataAdmin:standard_layout.html.twig' %}
+
+{% block show %}
+    <report-filter-form></report-filter-form>
+    <report-list></report-list>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.SONATA_CONFIG.USE_ICHECK = false;
+    </script>
+{% endblock %}

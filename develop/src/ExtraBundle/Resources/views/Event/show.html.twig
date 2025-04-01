@@ -1,0 +1,138 @@
+{% extends "::/layout/layout.html.twig" %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Мероприятия',
+    'rubricsContext': '',
+    subject: event
+    } %}
+
+    <article class="news-wrapper">
+        <header class="news-header">
+            <h1 class="news-title">{{ event.title }}</h1>
+            <div class="news-themes">
+                <time class="news-date">{{ event.date|format_date }} <span class="news-time">{{ event.date|date('H:i') }}</span></time>
+            </div>
+        </header>
+        <section class="news-wrapper__content-wrap">
+            <div class="news-wrapper__sidebar">
+                {% include '::/widgets/news/sidebar_social.html.twig' %}
+
+                {% set width = 280 %}
+                {% set height = 280 %}
+                <div class="geo-points">
+                    {% if event.address.geoPoint %}
+                        <div style="background-image: url(//static-maps.yandex.ru/1.x/?l=map&size={{ width }},{{ height }}&spn=0.002,0.002&ll={{ event.address.geoPoint.getLonLatString }})"
+                             class="geo-points__image point" title="{{ event.address.text }}"></div>
+                    {% endif %}
+
+                    {% if event.address.geoPolygon %}
+                        <div style="background-image: url(//static-maps.yandex.ru/1.x/?l=map&size={{ width }},{{ height }}&pl=c:8822DDC0,f:8822DDC0,w:1,{{ event.address.geoPolygonString }})"
+                             class="geo-points__image polygon" title="{{ event.address.text }}">
+                        </div>
+                    {% endif %}
+                    {% if event.address.text %}
+                        <div class="geo-points__info">
+                            <header class="geo-points__header">
+                                Адрес
+                            </header>
+                            <p class="geo-points__address first">
+                                <i class="icon icon-16 icon-marker"></i>
+                                {{ event.address.text }}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if can_register_on_event or can_un_register_from_event %}
+                <form id="accreditation" action="{{ path('app_event_register', {id: event.id}) }}" method="POST">
+                    {% if can_register_on_event %}
+                        <button class="">Записаться</button>
+                    {% elseif(can_un_register_from_event) %}
+                        <button class="">Отписаться</button>
+                    {% endif %}
+                </form>
+                {% endif %}
+            </div>
+            <div class="news-wrapper__content">
+                {{ event.content|raw }}
+            </div>
+            <div class="event-content container__full" style="clear: both">
+                {% if 0 == event.state %}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+
+                    <div class="error-report">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                {% elseif 1 == event.state %}
+                    {% if event.videoPlayerCode %}
+                        <div class="event-content__video">
+                            {{ event.videoPlayerCode|raw }}
+
+                            <h3 class="event-content__video-title">Трансляция</h3>
+                            <p class="event-content__video-legend">{{ event.title }}</p>
+                            {# dump(event) #}
+                            {% include '::/widgets/news/share.html.twig' %}
+                        </div>
+                    {% endif %}
+                    <div class="event-content__chat">
+                        <ul class="event-content__chat-list">
+
+                        </ul>
+
+                        <form class="event-content__chat-form" action="{{ path('app_event_chat_message', {id: event.id}) }}" data-refresh-chat="{{ path('app_event_chat_list', {id: event.id}) }}" method="post">
+                            {% if can_create_chat_message %}
+                                <textarea class="event-content__chat-form-text" name="message"></textarea>
+                                <button class="event-content__chat-form-btn">Отправить</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                {% else %}
+                    <p class="events__is-end">Мероприятие окончено</p>
+                {% endif %}
+            </div>
+            {#<div class="container__full news-wrapper__under-news {% if (event.vipAttachments and event.vipAttachments is empty) and (event.attachments and event.attachments is empty) %}last{% endif %}">
+
+            </div>#}
+
+            {% if is_granted('ROLE_JOURNALIST') %}
+                {% if event.attachments and event.attachments is not empty %}
+                    <h3 class="news-wrapper__tags-title">Материалы</h3>
+                    <ul class="files__list">
+                        {% for file in event.attachments %}
+                            <li class="files__list-item">
+                                <a class="files__list-item-link" href="{% path file.file, 'reference' %}" target="_blank" title="{{ file.file.name }}">
+                                    {% thumbnail file.file, 'thumb' %}
+                                    {{ file.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+
+            {% if is_granted('ROLE_VIP_JOURNALIST') %}
+                {% if event.vipAttachments and event.vipAttachments is not empty %}
+                    <h3 class="news-wrapper__tags-title">Эксклюзивные материалы</h3>
+                    <ul class="files__list">
+                        {% for file in event.vipAttachments %}
+                            <li class="files__list-item">
+                                <a class="files__list-item-link" href="{% path file.file, 'reference' %}" target="_blank" title="{{ file.file.name }}">
+                                    {% thumbnail file.file, 'thumb' %}
+                                    {{ file.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </section>
+    </article>
+
+{% endblock %}

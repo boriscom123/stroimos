@@ -1,0 +1,160 @@
+@import "../widgets/header/_logo";
+@import "../widgets/header/_top_menu";
+@import "../widgets/header/_main_menu";
+@import "../widgets/header/_search";
+@import "../widgets/header/_dropdown_menu";
+@import "../widgets/header/page-main__slider";
+
+.page-header{
+	display: table;
+	border-collapse: collapse;
+	height: @headerHeight;
+	border-bottom: 1px solid #585757;
+}
+.page-header__column{
+	display: table-cell;
+	vertical-align: top;
+	width: 50%;
+	border-left: 1px solid #585757;
+
+	&:first-child{
+		border-left: 0;
+	}
+}
+.page-header__section{
+	border-top: 1px solid #585757;
+	padding: 15px 0;
+
+	&:first-child{
+		border-top: 0;
+	}
+}
+
+
+.main-header {
+  position: relative;
+  background: #6699ff;
+}
+
+.main-header__wrapper {
+  width: @pageWidth;
+  margin: 0 auto;
+  position: relative;
+}
+
+.main-logo {
+	margin: 0!important;
+  height: 130px;
+  box-sizing: border-box;
+}
+
+.main-header__menu {
+  padding: 45px 0;
+  background: #6699ff;
+  height: 130px;
+  box-sizing: border-box;
+  margin-right: 34px;
+}
+
+.top-menu {
+	padding-left: 390px;
+
+  li {
+	border-bottom: 1px solid #8cb0f9;
+  }
+}
+
+.header-search__wrapper {
+  background: @background;
+  overflow: hidden;
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.search-form {
+  float: right;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.search-form__icon {
+  padding: 0;
+  border: 0;
+  top: 0;
+  right: 0;
+  left: auto;
+}
+
+.header-search {
+  width: @pageWidth;
+  margin: 0 auto;
+}
+
+.header-search__link {
+  color: white;
+  font-family: AvenirNext, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1;
+  float: left;
+  padding-left: 20px;
+  display: inline-block;
+}
+
+.main-header__drop-btn {
+  width: 34px;
+  height: 34px;
+  display: inline-block;
+  background: url("/images/icons/drop_down_menu.png") no-repeat;
+  position: absolute;
+  top: 0;
+  margin-top: (130px - 34px)/2;
+  right: 0;
+
+  &.active {
+    transform: rotate3d(0,0,1,180deg);
+  }
+}
+
+.main-header__menu-drop {
+  text-align: center;
+  transition: all .3s ease-out;
+  max-height: 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  padding: 0 20px;
+  background: #164c9a;
+  z-index: 20;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &.active {
+    max-height: 1000px;
+    padding: 20px;
+  }
+
+  .main-menu__link {
+    background: transparent;
+    text-transform: uppercase;
+  }
+
+  .main-menu__folder {
+
+
+    &:after {
+      content: initial;
+    }
+  }
+}
+
+.dropdown-menu__menu {
+  li {
+    text-align: left;
+
+    a {
+      text-align: left;
+    }
+  }
+}

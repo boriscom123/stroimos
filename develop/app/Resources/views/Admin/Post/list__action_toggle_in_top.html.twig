@@ -1,0 +1,12 @@
+{% if admin.isGranted('EDIT', object) %}
+    {% if object.inTop %}
+        {% set btnLabel %}
+            <i class="fa fa-star-o"></i> Убрать из топа
+        {% endset %}
+    {% else %}
+        {% set btnLabel %}
+            <i class="fa fa-star"></i> Вывести в топ
+        {% endset %}
+    {% endif %}
+    <a class="btn btn-sm btn-default edit_link" href="{{ admin.generateObjectUrl('toggleInTop', object) }}">{{  btnLabel }}</a>
+{% endif %}

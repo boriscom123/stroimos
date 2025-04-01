@@ -1,0 +1,60 @@
+<article class="objects-block__list-item">
+    <a class="object-list__item-uri {{ item.constructionStatus }}" href="{{ entity_path(item) }}">
+        {% if item.image %}
+            <img class="objects-list__item-img" src="{% path item.image, 'thumb300' %}" />
+        {% elseif item.constructionFunctional|default  %}
+            <div class="objects-list__item-img">
+                <div class="geo-point geo-point_teaser {{ item.constructionStatus }} {{ item.constructionFunctional }}">
+                    <div class="map-widget" data-point="{{ item.coordinates }}"></div>
+                </div>
+            </div>
+        {% else %}
+            {% if item.dataField is defined and item.dataField('PointXyGeometryCoordinates') %}
+                <div class="objects-list__item-img">
+                    <div class="geo-point geo-point_teaser {{ item.dataField('ObjectStatus') }} {{ item.dataField('MainFunctional')  }}">
+                        <div class="map-widget"
+                        {% if item.dataField('MainFunctional') == 'renov-industrial' and item.dataField('LandGeometryCoordinates') is not null and item.dataField('LandGeometryCoordinates') is not empty %}
+                            data-polygon="{{ item.dataField('LandGeometryCoordinates') }}"
+                        {% else %}
+                            data-point="{{ item.dataField('PointXyGeometryCoordinates') }}"
+                        {% endif %}
+                        ></div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="objects-list__item-info">
+            <header class="objects-list__item-title" style="-webkit-box-orient: vertical">{{ item.title }}</header>
+            {# <section> #}
+                <p class="objects-list__item-addr" style="-webkit-box-orient: vertical">{{ item.addressText }}</p>
+                {# <p class="objects-list__item-teaser">{{ item.teaser }}</p> #}
+                {# {% if item.dataField is defined %}
+                    <div class="objects-list__item-info-object">
+                        {% if item.dataField('SourceOfFinance') %}
+                            <p class="item-info-object__title">Источник финансирования</p>
+                            <p>{{ item.dataField('SourceOfFinance') }}</p>
+                        {% endif %}
+
+                        {% if item.dataField('DeveloperOrgName') %}
+                            <p class="item-info-object__title">Застройщик</p>
+                            <p>{{ item.dataField('DeveloperOrgName') }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %} #}
+                {# </section> #}
+                </div>
+                <div class="objects-list__rightside">
+                    <div class="objects-list__item-time">
+                        <span class="objects-list__item-time-title">Срок ввода</span>
+                        {{ item.constructionEndYear }}
+                    </div>
+                    {% if item.distance is defined and item.distance %}
+                    <div class="objects-list__item-time">
+                        <span class="objects-list__item-time-title">Расстояние</span>
+                        {{ item.distance|distance_format }}
+                    </div>
+                    {% endif %}
+                </div>
+    </a>
+</article>

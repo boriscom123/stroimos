@@ -1,0 +1,96 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'id': 'road-index', 'object': page, 'themes': [{'title': 'Дороги'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel_metro.html.twig' with {
+        'title': 'Дороги',
+        'rubricsContext': '',
+        'subject': page
+    } %}
+
+{#     {% include "::/Metro/top_page.html.twig" with {
+        'title': "Дороги",
+        'description': page.description|default,
+        'subject': page,
+        'page': page,
+        'firstBannerLink': '/razvitiie-transportnoi-sistiemy-moskvy-i-moskovskoi-oblasti-v-2021-ghodu',
+        'firstBannerImage': '/images/road/road-banner-1.jpg',
+        'firstBannerText': 'Развитие транспортной системы в 2023 году',
+        'secondBannerLink': '/moskovskii-skorostnoi-diamietr',
+        'secondBannerImage': '/images/road/road-banner-2.jpg',
+        'secondBannerTitle': 'МСД',
+        'secondBannerSubtitle': 'Мегапроект<br/>Градостроительного комплекса Москвы',
+        'class': 'road'
+    } %} #}
+
+    {% include "::/Metro/top_page.html.twig" with {
+        'title': "Дороги",
+        'description': page.description|default,
+        'subject': page,
+        'page': page,
+        'firstBannerLink': null,
+        'firstBannerImage': null,
+        'firstBannerText': null,
+        'secondBannerLink': '/moskovskii-skorostnoi-diamietr',
+        'secondBannerImage': '/images/road/road-banner-2.jpg',
+        'secondBannerTitle': 'МСД',
+        'secondBannerSubtitle': 'Мегапроект<br/>Градостроительного комплекса Москвы',
+        'class': 'road'
+    } %}
+
+    {# if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif #}
+
+    <div class="road-grid">
+        <div class="road-grid__row road-grid__row_1">
+            <a href="/road/road/19" class="road-grid__banner road-grid__banner_1-1">
+                <h3>Южная <br>рокада</h3>
+            </a>
+             <a href="/road/road/17" class="road-grid__banner road-grid__banner_1-2">
+                <h3>Северо-Западная <br>хорда</h3>
+            </a>
+        </div>
+        <div class="road-grid__row road-grid__row_2">
+            <a href="/road/regional" class="road-grid__banner road-grid__banner_2-1">
+                <h3>Дороги районного значения</h3>
+            </a>
+            <a href="/road/riekonstruktsiia-mkad" class="road-grid__banner road-grid__banner_2-2">
+                <h3>МКАД</h3>
+                <p>Самая широкополосная магистраль Москвы, где нет перекрестков со светофорами
+                  и&nbsp;наземных пешеходных переходов</p>
+            </a>
+        </div>
+        <div class="road-grid__row road-grid__row_3">
+            <a href="/new-moscow/razvitie-dorozhnoi-seti" class="road-grid__banner road-grid__banner_3-1">
+                <h3>Дороги Новой Москвы</h3>
+                <p>С 2011 года в ТиНАО реконструировали две основные магистрали, создаются новые поперечные связки</p>
+            </a>
+            <a href="/road/trunk" class="road-grid__banner road-grid__banner_3-2">
+                <h3>Вылетные магистрали</h3>
+                <p>Дороги, которые ведут из центра города за его пределы – «навылет»</p>
+            </a>
+        </div>
+        <div class="road-grid__row road-grid__row_4">
+            <a href="/mosty-chieriez-moskvu-rieku-stroi_mos" class="road-grid__banner road-grid__banner_4-1">
+                <h3>Мосты</h3>
+            </a>
+             <a href="/road/riekonstruktsiia-nabieriezhnykh-moskvy-rieki" class="road-grid__banner road-grid__banner_4-2">
+                <h3>Набережные</h3>
+            </a>
+            <a href="/riekonstruktsiia-zhielieznodorozhnykh-pierieiezdov" class="road-grid__banner road-grid__banner_4-3">
+                <h3>Путепроводы <br>на ж/д переездах</h3>
+            </a>
+        </div>
+    </div>
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'дороги развязки дорожное магистрали'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}

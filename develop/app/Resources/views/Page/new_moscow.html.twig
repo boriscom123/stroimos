@@ -1,0 +1,237 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'page', 'object': page, 'themes': [{'title': 'Страница'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel_metro.html.twig' with {
+      title: page.title,
+      subject: page
+    } %}
+
+    {% include "::/Metro/top_page.html.twig" with {
+        'title': page.title,
+        'description': page.description|default,
+        'subject': page,
+        'page': page,
+        'firstBannerLink': '/new_moscow_plans_and_results',
+        'firstBannerImage': '/images/new-moscow/banner-1.jpg',
+        'firstBannerText': 'Новая Москва: планы и итоги развития с 2012 г.',
+        'secondBannerTitle': '12 лет',
+        'secondBannerSubtitle': 'Новой Москве',
+        'secondBannerLink': '/articles/novoi-moskvie-12-liet-chto-izmienilos-za-eto-vriemia',
+        'secondBannerImage': '/images/new-moscow/banner-2.jpg',
+        'secondBannerTitleColor': '#E63036',
+        'secondBannerSubtitleColor': '#E63036'
+    } %}
+
+    {# {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %}
+
+    {% include '::/Post/description.html.twig' with {description: page.description|default} %} #}
+
+    <div class="js-mediator-article">
+        {# <div class="static-page">
+            {{ embed_content(page.content, page) }}
+        </div> #}
+{#         <a href="/new-moscow/mieghaproiekty-novoi-moskvy" class="nm-block-common nm-block-megaprojects">
+            <span class="nm-block-common__title">
+                <span class="nm-block-common__title-content">
+                    Мегапроекты
+                </span>
+            </span>
+            <span class="nm-block-megaprojects__extra"></span>
+        </a> #}
+        {# <div class="nm-block-roads">
+            <h2 class="nm-block-roads__title">
+                <a href="https://stroi.mos.ru/new-moscow/razvitie-dorozhnoi-seti" class="nm-block-roads__title-content">Строительство<br/> дорог</a>
+            </h2>
+            <div class="nm-block-roads__content">
+                <ul class="nm-block-roads__menu">
+                    <li class="nm-block-roads__menu-item">
+                        <a href="https://stroi.mos.ru/road/trunk/33" class="nm-block-roads__menu-item-link">
+                            Калужское шоссе
+                        </a>
+                    </li>
+                    <li class="nm-block-roads__menu-item">
+                        <a href="https://stroi.mos.ru/road/trunk/34" class="nm-block-roads__menu-item-link">
+                            Солнцево - Бутово - Варшавское шоссе
+                        </a>
+                    </li>
+                    <li class="nm-block-roads__menu-item">
+                        <a href="https://stroi.mos.ru/road/trunk/53" class="nm-block-roads__menu-item-link">
+                            ЦКАД
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="https://stroi.mos.ru/new-moscow/razvitie-metropolitena-1" class="nm-block-metro1">
+            <span class="nm-block-metro1__title">
+                <span class="nm-block-metro1__title-content">
+                    Метро<br/> в Новой<br/> Москве
+                </span>
+            </span>
+        </a>
+        <a href="https://stroi.mos.ru/new-moscow/razvitie-metropolitena-1" class="nm-block-metro2">
+            <span class="nm-block-metro2__title">
+                <span class="nm-block-metro2__title-content">
+                    Все строящиеся<br/> станции метро<br/> ТиНАО
+                </span>
+            </span>
+        </a>
+        <div class="nm-block-metro3">
+            <div class="nm-block-metro3__column">
+                <h3 class="nm-block-metro3__title">Открыто</h3>
+                <ul class="nm-block-metro3__list">
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/42" class="nm-block-metro3__list-item-link">Румянцево</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/43" class="nm-block-metro3__list-item-link">Саларьево</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/75" class="nm-block-metro3__list-item-link">Филатов луг</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/76" class="nm-block-metro3__list-item-link">Прокшино</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/77" class="nm-block-metro3__list-item-link">Ольховая</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#b50c00"></i>
+                        <a href="https://stroi.mos.ru/metro/station/78" class="nm-block-metro3__list-item-link">Коммунарка</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#ebda1e"></i>
+                        <a href="https://stroi.mos.ru/metro/station/11" class="nm-block-metro3__list-item-link">Говорово</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-item-circle" style="background:#ebda1e"></i>
+                        <a href="https://stroi.mos.ru/metro/station/41" class="nm-block-metro3__list-item-link">Рассказовка</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nm-block-metro3__column">
+                <h3 class="nm-block-metro3__title">Планируется</h3>
+                <ul class="nm-block-metro3__list">
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-line" style="background:#d8d8d8"></i>
+                        <a href="/metro/novaia-liniia-mietro-ot-ulitsy-novatorov-tpk-do-ghoroda-troitsk" class="nm-block-metro3__list-item-link">Троицкая линия до Троицка</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-line" style="background:#ebda1e"></i>
+                        <a href="/metro/prodlieniie-kalininsko-solntsievskoi-linii-mietro-do-aeroporta-vnukovo-stroi_mos" class="nm-block-metro3__list-item-link">Солнцевская линия<br>до аэропорта Внуково</a>
+                    </li>
+                    <li class="nm-block-metro3__list-item">
+                        <i class="nm-block-metro3__list-line" style="background:#cf2028"></i>
+                        <a href="/metro/station/96" class="nm-block-metro3__list-item-link">Сокольническая линия<br>до&nbsp;станции &laquo;Потапово&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="https://stroi.mos.ru/new-moscow/stroitelstvo-zhilya" class="nm-block-house nm-block-common">
+            <span class="nm-block-common__title">
+                <span class="nm-block-common__title-content">
+                    Жилье
+                </span>
+            </span>
+            <span class="nm-block-house__extra"></span>
+        </a>
+        <a href="https://stroi.mos.ru/new-moscow/12-tochek-rosta-novoi-moskvy" class="nm-block-work nm-block-common">
+            <span class="nm-block-common__title">
+                <span class="nm-block-common__title-content">
+                    Новые<br/>
+                    рабочие<br/>
+                    места
+                </span>
+            </span>
+        </a>
+        <a href="https://stroi.mos.ru/new-moscow/stroitelstvo-novyh-socialnyh-obektov" class="nm-block-social nm-block-common">
+            <span class="nm-block-common__title nm-block-common__title_alt">
+                <span class="nm-block-common__title-content">
+                    Социальные<br/>
+                    объекты
+                </span>
+            </span>
+        </a>
+        <a href="https://stroi.mos.ru/new-moscow/obustroistvo-parkov" class="nm-block-park nm-block-common">
+            <span class="nm-block-common__title nm-block-common__title_alt">
+                <span class="nm-block-common__title-content">
+                    Парки
+                </span>
+            </span>
+        </a>
+        <a href="https://stroi.mos.ru/new-moscow/blagoustroistvo-snt" class="nm-block-snt nm-block-common">
+            <span class="nm-block-snt__content">
+                <span class="nm-block-common__title nm-block-common__title_alt">
+                    <span class="nm-block-common__title-content">
+                        Инженерные
+                        <br/>коммуникации
+                        <br/>для СНТ
+                    </span>
+                </span>
+            </span>
+        </a>
+       <a href="https://stroi.mos.ru/new-moscow/itogi-raboty-za-god" class="nm-block-completed nm-block-common">
+            <span class="nm-block-common__title">
+                <span class="nm-block-common__title-content">
+                    Что
+                    <br/>уже
+                    <br/>сделано?
+                </span>
+            </span>
+            <span class="nm-block-completed__extra"></span>
+        </a>
+        {% block sonata_preview %}{% endblock %}
+    </div> #}
+
+    <div class="new-moscow container__unlimited">
+        <div class="new-moscow__inner">
+            <div class="new-moscow__top">
+            <a href="/new-moscow/stroitelstvo-zhilya" class="new-moscow__banner new-moscow__banner_house">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_house">Жильё</h3>
+                <p class="new-moscow__banner-subtitle">Новые округа развиваются по принципу сбалансированной застройки, когда жилье возводится параллельно с инфраструктурой</p>
+            </a>
+            </div>
+            <div class="new-moscow__middle">
+            <a href="/new-moscow/razvitie-metropolitena-1" class="new-moscow__banner new-moscow__banner_metro">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_metro">Метро</h3>
+                <p class="new-moscow__banner-subtitle">В ТиНАО продлили Сокольническую и Солнцевскую линии. В перспективе – строительство Троицкой ветки</p>
+            </a>
+            <a href="/new-moscow/razvitie-dorozhnoi-seti" class="new-moscow__banner new-moscow__banner_road">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_road">Дороги</h3>
+                <p class="new-moscow__banner-subtitle new-moscow__banner-subtitle_road">С 2011 года в ТиНАО реконструировали две основные магистрали, создаются новые поперечные связки</p>
+            </a>
+            </div>
+            <div class="new-moscow__bottom">
+            <a href="/new-moscow/obustroistvo-parkov" class="new-moscow__banner new-moscow__banner_park">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_park">Парки</h3>
+            </a>
+{#             <a href="/new-moscow/okrugha-i-posielieniia-tinao" class="new-moscow__banner new-moscow__banner_tinao">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_tinao">Округа и&nbsp;поселения ТиНАО</h3>
+            </a> #}
+            <a href="/new-moscow/stroitelstvo-novyh-socialnyh-obektov" class="new-moscow__banner new-moscow__banner_social">
+                <h3 class="new-moscow__banner-title new-moscow__banner-title_social">Социальные объекты</h3>
+                <p class="new-moscow__banner-subtitle">Строительство объектов социальной инфраструктуры &mdash; тренд развития новых территорий</p>
+            </a>
+            </div>
+        </div>
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'железные дороги поезда жд вокзалы'}) }}
+
+    {# { sonata_block_render({'type': 'news_of_the_day'}) } #}
+{% endblock %}

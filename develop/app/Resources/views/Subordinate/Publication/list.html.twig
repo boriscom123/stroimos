@@ -1,0 +1,13 @@
+{% extends 'Subordinate/layout/layout.html.twig' %}
+
+{% block content %}
+    {% include 'Subordinate/widgets/themes_panel.html.twig' with {} %}
+    <div class="smi-list">
+        <h3 class="smi-list__header">{{ page.title }}</h3>
+        {{ sonata_block_render({'type': 'subordinate_publications_list'}, {
+            template: 'Subordinate/widgets/publication/_list.html.twig',
+            owner: app.request.get('_subordinate_route')
+        }) }}
+    {# { sonata_block_render({'type': 'news_of_the_day'}, {template: ':Subordinate/widgets/news:day_news.html.twig'}) } #}
+{% endblock %}
+

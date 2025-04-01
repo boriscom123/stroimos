@@ -1,0 +1,35 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block subscribe_form %}
+    {{ sonata_block_render({'type': 'email_subscription_form_block'}, {'template':'::/widgets/subscribe_form.html.twig'}) }}
+{% endblock subscribe_form %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Профиль пользователя',
+    'rubricsContext': null,
+    } %}
+
+    <div class="sonata-user-show row row-fluid">
+        <div class="span10 col-lg-10">
+            <div class="auth-block__form-error">
+                {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+                 {{ form_errors(form) }}
+            </div>
+
+            {% form_theme form _self %}
+            <div class="panel panel-info auth-block__form">
+                <div class="panel-body">
+                    <form id="sonata_user_profile_form" action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
+                        {{ form_widget(form) }}
+                        <a href="#" class="detect-district" data-target="#sonata_user_profile_form_cityDistrict">Определить мой район</a>
+                        <div class="form-actions">
+                            <button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>
+                            <a class="user-profile__form-link" href="{{ path('sonata_user_change_password') }}">{{ 'sonata_change_password_link'|trans({}, 'SonataUserBundle') }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

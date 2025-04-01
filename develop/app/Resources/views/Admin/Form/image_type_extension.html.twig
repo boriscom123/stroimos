@@ -1,0 +1,16 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        {% if
+            form.vars.sonata_admin_enabled is defined and
+            form.vars.sonata_admin_enabled and
+            form.vars.sonata_admin.admin.code == 'sonata.media.admin.media'
+        %}
+        {%  endif %}
+
+        {{ block('form_widget') }}
+
+    {% endspaceless %}
+{% endblock %}

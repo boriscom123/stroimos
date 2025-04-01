@@ -1,0 +1,14 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Карта сайта',
+    } %}
+    <div class="sitemap-block">
+        {{ knp_menu_render('sitemap') }}
+    </div>
+{% endblock %}

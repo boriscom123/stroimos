@@ -1,0 +1,368 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'construction', 'object': construction, 'themes': [{'title': 'Объект строительства'}] } %}
+{% endblock %}
+
+{% set checkboxes = construction_functional_options() %}
+{% set knownTypes = [
+'pedestrian-bridge',
+'renov-house',
+'problem-construction',
+'appartement',
+'poezda',
+'admin-center',
+'all',
+'culture',
+'house',
+'road',
+'garage',
+'health',
+'hotels',
+'ironroad',
+'sport',
+'industrial',
+'metro',
+'playschool',
+'school',
+'trade',
+'stay',
+'educational',
+'novaia-moskva',
+'religion',
+'entertainment',
+'tpu',
+'other',
+'renov-industrial',
+'cinema',
+'park'
+] %}
+
+{% block content %}
+    <div class="object-page__theme-panel">
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'subject': construction
+    } %}
+    </div>
+    {#% include '::/widgets/search_form.html.twig' with {'placeholder': 'Поиск по адресу'} %#}
+    <div class="object-page__info-wrap container__full">
+        <div class="js-mediator-article">
+        {% if (construction.image) is not empty %}
+            <div class="object-page__info-img container__full {{ construction.dataField('ObjectStatus') }}"
+                style="background: url('{% path construction.image, 'thumb1440' %}') no-repeat; background-position: center center; background-size: cover;">
+        {% elseif 'renovation' == construction.dataField('MainFunctional') %}
+            <div class="object-page__info-img container__full {{ construction.dataField('ObjectStatus') }}"
+                style="background-image: url('/images/construction/start.jpg');background-repeat: no-repeat; background-position: center center; background-size: cover;">
+        {% else %}
+            <div class="object-page__info-img container__full {{ construction.dataField('ObjectStatus') }}"
+                style="background-image: url('/images/construction/default.jpg');background-repeat: no-repeat; background-position: center center; background-size: cover;">
+        {% endif %}
+                <div class="object-page__position">
+                    <div class="object-page__position-wrap">
+                        {# <h1 class="object-page__position-title">
+                            <strong class="object-page__position-name">
+                                {{ construction.dataField('ObjectName') }}
+                            </strong>
+                        </h1> #}
+                        <span class="object-page__position-status {{ construction.dataField('ObjectStatus') }}">
+                            {{ construction|statusLabel }}
+                        </span>
+                        <div class="object-page__position-address">
+                            <span>{{ construction.dataField('objectAddress') }}</span>
+                            {% if construction.dataField('ObjectArea') is not empty %}
+                                <span>({{ construction.dataField('ObjectArea') }}, {{ construction.dataField('ObjectDistrict') }})</span>
+                            {% else %}
+                                <span>({{ construction.dataField('ObjectDistrict') }})</span>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    </div>
+                    {% if construction.dataField('PointXyGeometryCoordinates') %}
+                    <div class="object-page__position-rightbar">
+                        <div
+                            class="geo-point geo-construct geo-point_show {{ construction.dataField('ObjectStatus') }} {{ construction.dataField('MainFunctional') }}">
+                            <div class="map-widget" {% if construction.dataField('LandGeometryCoordinates') is not null and
+                                construction.dataField('LandGeometryCoordinates') is not empty %}
+                                data-polygon="{{ construction.dataField('LandGeometryCoordinates') }}" {% endif %} {% if
+                                construction.dataField('PointXyGeometryCoordinates') is not null and
+                                construction.dataField('PointXyGeometryCoordinates') is not empty %}
+                                data-icon ="{{ construction.dataField('MainFunctional') }}"
+                                data-point="{{ construction.dataField('PointXyGeometryCoordinates') }}" {% endif %}>
+                            </div>
+                        </div>
+                        <a href="{{ path('app_construction') }}" class="object-page__position-backlink">
+                            <img src="/images/construction/arrow.svg" alt="">
+                            Вернуться на карту
+                        </a>
+                    </div>
+                    {% endif %}
+                    </div>
+            {% if construction.panorama %}
+            <div class="object-page__rightbar">
+                <a href="{{ construction.panorama }}" class="object-page__rightbar-aero panorama-popup" target="_blank">
+                    <i class="object-page__rightbar-aero-icon"></i>
+                    <span class="object-page__rightbar-aero-legend">Аэросъемка объекта</span>
+                    <span class="object-page__rightbar-aero-link">перейти</span>
+                </a>
+                {#<div class="object-page__rightbar-watch">
+                    <i class="object-page__rightbar-watch-icon"></i>
+                    <span class="object-page__rightbar-watch-legend">Аэросъемка объекта</span>
+                </div>#}
+            </div>
+            {% endif %}
+            <div class="object-page__info {% if construction.panorama %}object-page__info_has-rightbar{% endif %}">
+                <h3 class="object-page__info-title">Описание объекта</h3>
+                <span class="object-page__title">{{construction.title}}</span>
+                <ul class="object-page__info-list">
+                    {% if construction|mainFunctionalLabel is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Функциональное назначение</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction|mainFunctionalLabel }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.dataField('ConstructionWorkType') is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Вид работ</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction.dataField('ConstructionWorkType') }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.dataField('SourceOfFinance') is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Источник финансирования</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction.dataField('SourceOfFinance') }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.projectSeries is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Серия проекта</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction.projectSeries }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.projectDesigner is not empty %}
+                        <li class="object-page__info-item">
+                            <span class="object-page__info-item-title">
+                                <span class="info-item-title__legend">Автор проекта</span>
+                                {# <span class="info-item-title__bordered"></span> #}
+                            </span>
+                            <span class="object-page__info-item-legend">{{ construction.projectDesigner }}</span>
+                        </li>
+                    {% endif %}
+                    {% if construction.endYear is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Срок ввода</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction.endYear }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.areaOfTheTerritory is not empty %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Общая площадь, кв.м.</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">{{ construction.areaOfTheTerritory }}</span>
+                    </li>
+                    {% endif %}
+                    {% if construction.dataField('Floor') is not empty %}
+                        <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Этажность</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                            <span class="object-page__info-item-legend">{{ construction.dataField('Floor') }}</span>
+                        </li>
+                    {% endif %}
+
+                    {% if (construction.organization and construction.organization.publishable and construction.organization.fullTitle is not empty) or (construction.dataField('DeveloperOrgName') is not empty) %}
+                    <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Застройщик</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                        <span class="object-page__info-item-legend">
+                            {% if construction.organization and construction.organization.publishable %}
+                                <a href="{{ entity_path(construction.organization) }}">{{ construction.organization.fullTitle }}</a>
+                            {% else %}
+                                {% if construction.dataField('DeveloperOrgForm') is defined and construction.dataField('DeveloperOrgForm') is not empty %}
+                                    {{ construction.dataField('DeveloperOrgForm') }}
+                                {% endif %}
+                                «{{ construction.dataField('DeveloperOrgName') }}»
+                            {% endif %}
+                        </span>
+                    </li>
+                    {% endif %}
+
+                    {% if construction.dataField('GeneralContractorOrgName') is not empty %}
+                        <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Генеральный подрядчик</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                            <span class="object-page__info-item-legend">{{ construction.dataField('GeneralContractorOrgName') }}</span>
+                        </li>
+                    {% endif %}
+
+                    {% if construction.dataField('CustomerOrgName') is not empty %}
+                        <li class="object-page__info-item">
+                        <span class="object-page__info-item-title">
+                            <span class="info-item-title__legend">Заказчик</span>
+                            {# <span class="info-item-title__bordered"></span> #}
+                        </span>
+                            <span class="object-page__info-item-legend">{{ construction.dataField('CustomerOrgName') }}</span>
+                        </li>
+                    {% endif %}
+
+                    {% for parameter in parameters %}
+                        <li class="object-page__info-item">
+                            <span class="object-page__info-item-title">
+                                <span class="info-item-title__legend">{{ parameter.constructionParameter.title }}</span>
+                                {# <span class="info-item-title__bordered"></span> #}
+                            </span>
+                            <div class="object-page__info-item-legend">
+                            {{ parameter.value|raw }}
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                    {#
+                    <table>
+                    <tr>
+                        <td>
+                        <img src="/images/icons/construction/metro.png"/ alt=""/>
+                        </td>
+                        <td>
+                        Название метро<br/>
+                        19,7 тыс. чел. в час пик (существующий)<br/>
+                        35,3 тыс. чел. в час пик (ожидаемый)
+                        </td>
+                    </tr>
+                    </table>
+                    <br/>
+                    <table>
+                    <tr>
+                        <td>
+                        <img src="/images/icons/construction/mck.png"/ alt=""/>
+                        </td>
+                        <td>
+                        Название станции МЦК<br/>
+                        19,7 тыс. чел. в час пик (существующий)<br/>
+                        35,3 тыс. чел. в час пик (ожидаемый)
+                        </td>
+                    </tr>
+                    </table>
+                    <br/>
+                    <table>
+                    <tr>
+                        <td>
+                        <img src="/images/icons/construction/bus.png"/ alt=""/>
+                        </td>
+                        <td>
+                        Маршруты автобусов<br/>
+                        19,7 тыс. чел. в час пик (существующий)<br/>
+                        35,3 тыс. чел. в час пик (ожидаемый)
+                        </td>
+                    </tr>
+                    </table>
+                    #}
+                </ul>
+                {% if construction.content is not empty %}
+                <div class="object-page__info-content">
+                    {{ embed_content(construction.content, construction) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% block sonata_preview %}{% endblock %}
+      </div>
+<div class="container__full">
+    <div class="object-types__header">
+        <h2 class="object-types__title">Строящиеся рядом объекты</h2>
+        <div id="constructions-near_total" class="objects-near_total">Всего {{ total }} {{
+            'construction_objects_total'|transchoice(total, {}, "messages", locale = "ru") }} в радиусе 5км</div>
+    </div>
+
+
+        <div class="search-form__object-types active">
+
+            <form id="nearObject" action="">
+            <data-map data-source="{{ path('app_construction_show', { 'id': construction.id }) }}" id="data-map"></data-map>
+            <div class="object-types__list">
+                {% for type,label in checkboxes %}
+                    {# {% if loop.first or loop.index % 4 == 1 %}
+                        <div class="object-types__list-str">
+                    {% endif %} #}
+                        {% if aggregation[type] is defined %}
+                            {% set disabled = '' %}
+                        {% else %}
+                            {% set disabled = ' disabled' %}
+                        {% endif %}
+                            <div class="object-types__list-item{{ disabled }}">
+                                {% embed '::widgets/checkbox.html.twig' with {id: 'type-' ~ type, label: label, disabled: disabled } %}
+                                    {% block labelContent %}
+                                        <i class="checkbox-icon checkbox-{% if type in knownTypes %}{{ type }}{% else %}default{% endif %}"></i>
+                                    {% endblock %}
+                                {% endembed %}
+                            </div>
+                    {# {% if loop.last or loop.index % 4 == 0 %}
+                        </div>
+                    {% endif %} #}
+                {% endfor %}
+            </div>
+            </form>
+        </div>
+        <div id="near_objects_container" style="margin-top: 100px">
+        {{ sonata_block_render({'type': 'construction_list'}, {
+            'template': '::/Construction/_list.html.twig',
+            'construction': construction
+        }) }}
+        </div>
+        {#<div id="objects-block-wrapper">
+            <div class="objects-block__list">
+                {% for item in near_objects %}
+                    {% include '::/Construction/_teaser.html.twig' with {'item': item} %}
+                {% endfor %}
+            </div>
+        </div>
+        </ul>#}
+    </div>
+    {% include '::/widgets/spotlight/_related.html.twig' with {'item': construction} %}
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+{% endblock %}
+
+{#{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('input[type=checkbox]', '.object-types__list').change(function(){
+            var $form = $($(this).parents('form'));
+            var $container = $("#near_objects");
+            $.getJSON($form.attr('action'), $form.serializeArray(), function(data){
+                var html = '';
+                $.each(data, function(key, value){
+                    console.log(value);
+                    html += '<li><a href="'+ value['url'] +'">' + value['name'] + '</a></li>';
+                });
+                $container.html(html);
+            });
+        });
+    </script>
+{% endblock %}#}

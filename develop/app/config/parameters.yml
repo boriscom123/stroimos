@@ -1,0 +1,98 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     mysql
+    database_port:     ~
+    database_name:     stroi_mos_ru
+    database_user:     stroi_mos_ru
+    database_password: password
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_port:       25
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_encryption: ~
+    mailer_delivery_address: ~
+    mailer_sender_address: info-stroi@mos.ru
+    mailer_sender_name: stroi.mos.ru
+    mailer_spool_path: %kernel.cache_dir%/swiftmailer/spool
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsSoSecretNowNoNeedToChangeIt
+
+    # http://symfony.com/doc/2.3/cookbook/console/sending_emails.html#configuring-the-request-context-globally
+    router.request_context.host: ~
+    router.request_context.scheme: http
+
+    elasticsearch_host: elasticsearch
+    elasticsearch_port: 9200
+    elasticsearch_index_name: stroi_mos_ru
+
+    bus_ugd_mos_ru.username: apostol
+    bus_ugd_mos_ru.password: ~
+    bus_ugd_mos_ru.location: ~
+
+    e_moscow_hpsm.username: ~
+    e_moscow_hpsm.password: ~
+
+    # enable distracting frontend features (background video, external toolbar, etc.)
+    full_frontend: true
+
+    #todo: remove on user remove
+    vkontakte.client_id:        4979755
+    vkontakte.client_secret:    adqNUSeGRJZg5Gxw7pW1
+    facebook.client_id:         724760997567562
+    facebook.client_secret:     7c01a6d3726c4dda81e2abaa3686dffc
+    google.client_id:           628316188406-1q5hkl7bojscc6muph4ksbputdjdc4gi.apps.googleusercontent.com
+    google.client_secret:       MlGpggMSbXJWzTYS7aO--zv9
+    login_mos_ru.client_id:     stroi.mos.ru
+    login_mos_ru.client_secret: 7e47a6f1-8e27-4a89-8ddb-8b9a20192dea
+
+    import.database_host:     mysql
+    import.database_name:     stroi_mos_ru
+    import.database_user:     stroi_mos_ru
+    import.database_password: password
+    import.file_cache_path: /tmp/
+
+    redis_host: 127.0.0.1
+    redis_db: 7
+    redis_password: ''
+    redis_dsn: 'redis://%redis_password%@%redis_host%/%redis_db%'
+    redis_dsn_construction: 'redis://%redis_password%@%redis_host%/1'
+
+    uploaded_media_dir: /uploads/media
+    activity_collection_enable: false
+
+    session_memcached_host:     memcached
+    session_memcached_port:     11211
+    session_memcached_prefix:   sess
+    session_memcached_expire:   3600
+
+    stroi_admin_email: stroi@demo-room.ru
+
+    sendpulse_id: null
+    sendpulse_secret: null
+    sendpulse_website_id: null
+
+    sendsay_account: null
+    sendsay_key: null
+    sendsay_group: null
+
+    trusted_proxies: ~
+
+    newsletter_production: false
+    newsletter_debug_users_list: []
+    subordinate_cache: true
+    mobile_version_redirect: true
+    sentry_dsn: ~
+    kernel.web_dir: %kernel.root_dir%/../web/
+    google_recaptcha_site_key: 6LfciQ0eAAAAACmU275GNEwq3sRqZfawqjY1rtCs
+    google_recaptcha_secret_key: 6LfciQ0eAAAAAJXgAPo8ZQ8g42FFDLd2G7epas4x
+
+    yandex_captcha_site_key: null
+    yandex_captcha_secret_key: null
+
+    bus_ugd_smart.base_url: null
+    bus_ugd_smart.login: null
+    bus_ugd_smart.password: null

@@ -1,0 +1,191 @@
+{% extends 'SonataAdminBundle::empty_layout.html.twig' %}
+
+{% set funcType = app.request.get('CKEditorFuncType') %}
+{% set ckParameters = {'CKEditor': app.request.get('CKEditor'), 'CKEditorFuncNum': app.request.get('CKEditorFuncNum'), 'CKEditorFuncType': funcType} %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function () {
+            $('.select').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                window.opener.CKEDITOR.tools.callFunction({{ app.request.get('CKEditorFuncNum')|escape('js') }}, {
+                    {% if funcType == 'image' %}
+                    id: $(this).data("id"),
+                    image: $(this).data("image"),
+                    title: $(this).data("title"),
+                    {% else %}
+                    url: $(this).data('url'),
+                    text: $(e.target).text()
+                    {% endif %}
+                });
+
+                window.close();
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block list_table %}
+    {% set batchactions = admin.batchactions %}
+    {% if admin.datagrid.results|length > 0 %}
+        <table class="table table-bordered table-striped">
+            {% block table_header %}
+                <thead>
+                <tr class="sonata-ba-list-field-header">
+                    {% for field_description in admin.list.elements %}
+                        {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
+                            {# Disable batch and action #}
+                        {% else %}
+                            {% set sortable = false %}
+                            {% if field_description.options.sortable is defined and field_description.options.sortable %}
+                                {% set sortable             = true %}
+                                {% set sort_parameters      = admin.modelmanager.sortparameters(field_description, admin.datagrid)|merge(ckParameters) %}
+                                {% set current              = admin.datagrid.values._sort_by == field_description %}
+                                {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
+                                {% set sort_by              = current ? admin.datagrid.values._sort_order : field_description.options._sort_order %}
+                            {% endif %}
+
+                            {% spaceless %}
+                                <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
+                                    {% if sortable %}<a href="{{ admin.generateUrl('browse', sort_parameters) }}">{% endif %}
+                                        {{ admin.trans(field_description.label, {}, field_description.translationDomain) }}
+                                        {% if sortable %}</a>{% endif %}
+                                </th>
+                            {% endspaceless %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+            {% endblock %}
+
+            {% block table_body %}
+                <tbody>
+                {% if funcType == 'image' %}
+                    {% for object in admin.datagrid.results %}
+                        <tr
+                                class="select"
+                                data-id="{{ object.id }}"
+                                {% if object.templateImage|default %}
+                                    data-image="{% path object.templateImage, 'thumb589' %}"
+                                {% elseif object.person|default  %}
+                                    data-image="{% path object.person.image, 'person_struct_list' %}"
+                                {% else %}
+                                    data-image="{% path object.image, 'thumb1440' %}"
+                                {% endif %}
+                                data-title="{{ object.title }}"
+                        >
+                            {% include admin.getTemplate('inner_list_row') %}
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for object in admin.datagrid.results %}
+                        <tr class="select" data-url="{{ entity_path(object) }}">
+                            {% include admin.getTemplate('inner_list_row') %}
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            {% endblock %}
+
+            {% block table_footer %}
+                <tfoot>
+                <tr>
+                    <th colspan="{{ admin.list.elements|length - 2 }}">
+                        <div class="form-inline">
+                            <div class="pull-right">
+                                {% block pager_results %}
+                                    {% block num_pages %}
+                                        {{ admin.datagrid.pager.page }} / {{ admin.datagrid.pager.lastpage }}
+                                        &nbsp;-&nbsp;
+                                    {% endblock %}
+
+                                    {% block num_results %}
+                                        {% transchoice admin.datagrid.pager.nbresults with {'%count%': admin.datagrid.pager.nbresults} from 'SonataAdminBundle' %}list_results_count{% endtranschoice %}
+                                        &nbsp;-&nbsp;
+                                    {% endblock %}
+
+                                    {% block max_per_page %}
+                                        <label class="control-label" for="{{ admin.uniqid }}_per_page">{% trans from 'SonataAdminBundle' %}label_per_page{% endtrans %}</label>
+                                        <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
+                                            {% for per_page in admin.getperpageoptions %}
+                                                <option {% if per_page == admin.datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('browse', {'filter': admin.datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
+                                                    {{ per_page }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+
+                {% block pager_links %}
+                    {% if admin.datagrid.pager.haveToPaginate() %}
+                        {% include admin.getTemplate('pager_links') with {action: 'browse', ckParameters: ckParameters}%}
+                    {% endif %}
+                {% endblock %}
+                </tfoot>
+            {% endblock %}
+        </table>
+    {% else %}
+        <p class="notice">
+            {{ 'no_result'|trans({}, 'SonataAdminBundle') }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block list_filters %}
+    {% if admin.datagrid.filters %}
+        {% form_theme form admin.getTemplate('filter') %}
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title filter_legend {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">{{ 'label_filters'|trans({}, 'SonataAdminBundle') }}</h4>
+            </div>
+
+            <div class="box-body">
+                <form class="sonata-filter-form {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('browse') }}" method="GET" role="form">
+                    {{ form_errors(form) }}
+                    <div class="filter_container {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">
+                        {% for filter in admin.datagrid.filters %}
+                            <div class="form-group">
+                                {% if filter.label is not sameas(false) %}
+                                    <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+                                {% endif %}
+                                {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                <div>
+                                    {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                </div>
+
+                                <div>
+                                    {{ form_widget(form.children[filter.formName].children['value']) }}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <input type="hidden" name="filter[_page]" id="filter__page" value="1">
+
+                        {% set foo = form.children['_page'].setRendered() %}
+                        {{ form_rest(form) }}
+
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> {{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}</button>
+
+                        <a class="btn btn-default" href="{{ admin.generateUrl('browse', {filters: 'reset'}|merge(ckParameters)) }}">{{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}</a>
+                    </div>
+
+                    {% for paramKey, paramValue in admin.persistentParameters|merge(ckParameters) %}
+                        <input type="hidden" name="{{ paramKey }}" value="{{ paramValue }}">
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}
+

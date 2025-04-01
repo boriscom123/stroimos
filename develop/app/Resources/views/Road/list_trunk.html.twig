@@ -1,0 +1,79 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'id': 'road-trunk', 'object': page, 'themes': [{'title': 'Дороги'}] } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    title: page.title,
+    subject: page
+    } %}
+
+{#     {% if page.currently %}
+        {% include ":widgets:now_block.html.twig" with {currently: page.currently} %}
+    {% endif %} #}
+
+    <div class="js-mediator-article">
+
+        {% include '::/Post/description.html.twig' with {description: page.description|default} %}
+
+{#         <div class="road-list__wrapper reconstruction">
+            <header class="road-list__header">
+                <h3 class="road-list__title">
+                    Где ведется строительство?
+                    {% include '::/widgets/help.html.twig' with {headClass: true, title : '', content: ''} %}
+                </h3>
+            </header>
+        </div>
+
+
+        {% if trunk_groups.construction|default %}
+        <div class="roadinfographics-block__list">
+            {% for item in trunk_groups.construction %}
+            <article class="roadinfographics-block">
+                <a href="{{ entity_path(item) }}" class="roadinfographics-block__link">
+                    <div class="roadinfographics-block__img-wrap">
+                        {% set image %}{% path item.image, 'thumb596' %}{% endset %}
+                        {% if image is empty %}
+                            {% set image %}'/images/road-themes__img.png'{% endset %}
+                        {% endif %}
+                        <div class="roadinfographics-block__img-bg" style="background-image: url({{ image }})"></div>
+                        <span class="roadinfographics-block__img-show">Начать просмотр</span>
+                    </div>
+                    <section class="roadinfographics-block__content">
+                        <header class="roadinfographics-block__header">
+                            {{ item.title }}
+                        </header>
+                        <p class="roadinfographics-block__text">
+                            {{ item.teaser }}
+                        </p>
+                        <span class="roadinfographics-block__more">Далее</span>
+                    </section>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %} #}
+
+        <div class="static-page">
+          {{ embed_content(page.content, page) }}
+          {% block sonata_preview %}{% endblock %}
+        </div>
+
+{#         {% include ":Road/widgets:trunk_list_operation.html.twig" with {
+            subjects: trunk_groups,
+            help: {headClass: true, title : 'Тайтл подсказки', content: 'Контент подсказки! Контент подсказки! Контент подсказки! Контент подсказки!'}
+        } %} #}
+
+    </div>
+
+    {{ sonata_block_render({'type': 'more_like_this'}, {search_string: 'дороги развязки дорожное магистрали'}) }}
+
+    {{ sonata_block_render({'type': 'news_of_the_day'}) }}
+
+{% endblock %}

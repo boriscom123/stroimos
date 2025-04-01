@@ -1,0 +1,4 @@
+structure:
+    pattern: /structure
+    defaults:
+        _controller: import.structure_controller:structureAction

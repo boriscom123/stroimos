@@ -1,0 +1,42 @@
+<span class="inner-field-short-description">
+    {% if object and admin.hasRoute('edit') and admin.isGranted('EDIT') %}
+        <a href="{{ admin.generateObjectUrl('edit', object, link_parameters) }}" target="new">
+            {% if object.providerName is defined and  object.providerName == 'sonata.media.provider.video' or object.providerName == 'sonata.media.provider.youtube' %}
+                {% media object, 'reference' %}
+            {% else %}
+                <img src="{% path object, 'thumb' %}" style="max-width: 250px" />
+            {% endif %}
+        </a>
+        {% if link_parameters.editable_formats|default %}
+            <ul class="list-group" style="float: right; margin-left: 10px">
+                {% for editable_format, editable_format_params in admin.getEditableFormats(object, link_parameters.editable_formats) %}
+                    {% set modal_id = link_parameters.editable_formats_field ~ '_' ~ editable_format %}
+                    <li class="list-group-item">
+                        <a href="#" data-toggle="modal" data-target="#{{ modal_id }}">
+                            <i class="fa fa-crop"></i> {{ ('editable_format.' ~ editable_format_params.short_name)|trans }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        {% if object.providerName is defined and  object.providerName == 'sonata.media.provider.video' or object.providerName == 'sonata.media.provider.youtube' %}
+            {% media object, 'reference' %}
+        {% else %}
+            <img src="{% path object, 'thumb' %}" style="max-width: 250px" />
+        {% endif %}
+    {% endif %}
+</span>
+
+{% if link_parameters.editable_formats|default %}
+    {% for editable_format, editable_format_params in admin.getEditableFormats(object, link_parameters.editable_formats) %}
+        {% set modal_id = link_parameters.editable_formats_field ~ '_' ~ editable_format %}
+        {% include "ApplicationSonataMediaBundle::editable_format.html.twig" with {
+            admin: admin,
+            modal_id: modal_id,
+            format: editable_format,
+            params: editable_format_params,
+            media: object
+        } %}
+    {% endfor %}
+{% endif %}

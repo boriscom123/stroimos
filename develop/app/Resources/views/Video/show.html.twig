@@ -1,0 +1,87 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block head_extra_link %}
+    <link rel="canonical" href="{{ app.request.uri }}" />
+{% endblock %}
+
+{% block head_mediator %}
+    {% include '::/widgets/mediator.html.twig' with { 'type': 'video', 'object': video } %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': '',
+    'rubricsContext': 'video',
+    'subject': video
+    } %}
+
+<article class="news-wrapper">
+    <header class="news-header container__full">
+        <h1 class="news-title">{{ video.title }}</h1>
+        {% embed '::/widgets/themes.html.twig' with {'publication': video} %}
+            {% block themesblock %}
+                <div class="videopage-video__info">
+                    {% set video_length = video_length(video.video) %}
+                    {% if video_length %}
+                        <div class="videogallery-block__item-time"><i class="icon icon-watch"></i> 13 минут</div>
+                    {% endif %}
+
+                    {% set video_type = video_type(video.video) %}
+                    {% if video_type %}
+                        <div class="videopage-video__info-kind"><i class="icon icon-social icon-youtube active"></i> {{ video_type|title }}</div>
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </header>
+
+    <div class="videopage-block js-mediator-article">
+        {# TODO improve video embed #}
+        {% if video.video.providerName == 'sonata.media.provider.youtube' %}
+            <iframe width="853" height="480" style="border:0;" src="https://www.youtube.com/embed/{{video.video.providerReference}}?rel=0"></iframe>
+        {% else %}
+            {% media video.video, 'full' %}
+        {% endif %}
+        {% block sonata_preview %}{% endblock %}
+    </div>
+
+    {% if (video.author is defined and video.author is not empty) or (video.source is defined and video.source is not empty) %}
+        <div class="news-wrapper__author" data-author="Источник">
+            <p>
+                {% if video.author is defined and video.author is not empty %}
+                    <span class="news-wrapper__author-edition">stroi.mos.ru</span>
+                {% elseif video.source is defined and video.source is not empty %}
+                    {% if video.source is defined and video.source is not empty %}
+                        {% if video.source.url is defined and video.source.url is not empty %}
+                            <a href="{{ video.source.url }}" class="news-wrapper__author-edition">
+                                {{ video.source }}
+                            </a>
+                        {% else %}
+                            <span class="news-wrapper__author-edition">
+                                {{ video.source }}
+                            </span>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+
+    <section class="news-wrapper__content-wrap">
+        <div class="container__full news-wrapper__under-news">
+            {% include '::/widgets/news/share.html.twig' %}
+            {% include '::/widgets/tags.html.twig' with {'publication' : video} %}
+        </div>
+
+        {% include '::/widgets/spotlight/_related.html.twig' with {'item': video} %}
+
+        {{ sonata_block_render({'type': 'more_like_this'}, {subject: video}) }}
+
+        {% if video.isCommentsOpen %}
+            {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity_reference(video)} %}
+        {% endif %}
+    </section>
+</article>
+
+
+{% endblock %}

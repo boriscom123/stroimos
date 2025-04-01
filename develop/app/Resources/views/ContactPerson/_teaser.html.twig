@@ -1,0 +1,39 @@
+<div class="organization-block__list-row">
+    <div class="organization-block__list-item name-seat">
+        <a class="organization-block__list-item-person" href="{{ entity_path(item) }}">
+            {% if item.lastName is defined and item.lastName is not empty %}
+                {{ item.lastName }}
+            {% endif %}
+            <span class="organization-block__list-item-name">
+                {% if item.firstName is defined and item.firstName is not empty %}
+                    {{ item.firstName }}
+                {% endif %}
+                {% if item.patronymic is defined and item.patronymic is not empty %}
+                    {{ item.patronymic }}
+                {% endif %}
+            </span>
+        </a>
+        {% if item.appointment is defined and item.appointment is not empty %}
+            {{ item.appointment }}
+        {% endif %}
+    </div>
+    <div class="organization-block__list-item contacts">
+        <span class="organization-block__list-item-phone">
+            {% if item.phone is defined and item.phone is not empty %}
+                {{ item.phone }}
+            {% endif %}
+        </span>
+        {% if item.email is defined and item.email is not empty %}
+            <a href="mailto:{{ item.email }}" class="organization-block__list-item-mail">
+                {{ item.email }}
+            </a>
+        {% endif %}
+    </div>
+    <div class="organization-block__list-item organization">
+        {% if item.organization is defined and item.organization is not empty %}
+            <a href="{{ entity_path(item.organization) }}">
+                    {{ item.organization.title }}
+            </a>
+        {% endif %}
+    </div>
+</div>

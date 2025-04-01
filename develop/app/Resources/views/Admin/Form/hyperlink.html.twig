@@ -1,0 +1,6 @@
+{% block hyperlink_widget %}
+    {% if value is not empty %}
+        <a target="_blank" href="{{ value }}">{{ text|default(value) }}</a>
+    {% endif %}
+{% endblock %}
+

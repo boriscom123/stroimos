@@ -1,0 +1,162 @@
+.mapDestruction-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.mapDestruction-info__wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  width: 330px;
+  height: 460px;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.mapDestruction-info__menu {
+  display: table;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ebebeb;
+  background: white;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.mapDestruction-info__menu-item {
+  display: table-cell;
+  padding: 0 18px;
+  font-family: AvenirNext, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 50px;
+  border-right: 1px solid #ebebeb;
+  color: #949494;
+
+  &.active {
+    color: @hover;
+  }
+
+  &:last-child {
+    border-right: 0;
+  }
+}
+
+.mapDestruction-info {
+  width: 100%;
+  height: 410px;
+  overflow: auto;
+  background: #f7f7f7;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#list {
+  width: calc(~'100% - 20px');
+  top: 50px;
+  padding: 10px 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+.mapDestruction-info__list-link {
+  font-family: AvenirNext, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 4px 0;
+  text-decoration: none;
+  display: block;
+
+  &.active {
+    font-weight: 700;
+    color: @hover;
+  }
+}
+
+#countyList {
+  top: 50px;
+  left: 0;
+  right: 0;
+}
+
+#hide {
+  bottom: auto;
+  overflow: hidden;
+  top: 50px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: white;
+}
+
+.mapDestruction-info__list {
+  position: absolute;
+  top: 70px;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  display: none;
+  z-index: 1;
+  bottom: 0;
+
+  &.active {
+    display: block;
+    z-index: 3;
+  }
+
+  .ui-accordion-header {
+    border: 0;
+    background: white;
+    border-radius: 0;
+    font-family: 'AvenirNext', sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 50px;
+    box-sizing: border-box;
+    color: #222222;
+
+    &.ui-accordion-header-active {
+      color: @hover;
+    }
+
+    &.ui-accordion-icons {
+      padding: 0 20px;
+    }
+
+    span {
+      float: right;
+    }
+  }
+
+  .ui-accordion-header-icon {
+    display: none;
+  }
+
+  .ui-accordion-content {
+    //height: auto!important;
+    border: 0;
+    border-radius: 0;
+    background: #f7f7f7;
+    padding: 20px;
+  }
+}
+
+.mapDestruction-info__list-hide-county {
+  font-family: AvenirNext, sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 50px;
+  color: @hover;
+  background: white;
+}
+
+.mapDestruction-info__list-hide-address {
+  padding: 10px 0;
+  background: white;
+}

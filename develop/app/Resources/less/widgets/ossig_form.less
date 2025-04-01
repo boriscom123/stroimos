@@ -1,0 +1,75 @@
+.ossig-form {
+  input, textarea {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-bottom: 1px solid #c2c2c2;
+    font-family: Brygada1918, serif;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 19px;
+    box-sizing: border-box;
+    background: transparent;
+    padding-bottom: 4px;
+    color: #585858;
+  }
+  input::placeholder {
+    font-style: italic;
+    color: #686868;
+  }
+  textarea::placeholder {
+    font-style: italic;
+    color: #686868;
+  }
+  button {
+    font-family: Onest, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    text-transform: uppercase;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: @hover;
+      border-color: @hover;
+    }
+  }
+  &__notice {
+    font-family: Onest, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: #686868;
+    margin: 0;
+  }
+  &__result {
+    display: none;
+    margin-top: 10px;
+    font-family: Onest, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: #686868;
+    &_success {
+      color: @hover;
+    }
+    &_error {
+      color: red;
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      margin-right: 50px;
+      align-self: flex-start;
+    }
+  }
+}

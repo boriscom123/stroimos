@@ -1,0 +1,336 @@
+@subscribeFormSize: 720px;
+@subscribeFormEmailSize: 530px;
+@subscribeFormAccentColour: #438FF0;
+@subscribeFormBorderColour: #e4e4e4;
+@subscribeFormTextColour: #585858;
+@subscribeFormTextLightColour: #bdbdbd;
+
+@subscribeFormNewBackground: #9DD4FF;
+@newTextColor: rgba(0, 0, 0, 0.8);
+@newButtonColor: #1186E3;
+@background_special: #f3fdff;
+
+.subscribe-form {
+  margin: 0 auto;
+  padding: 30px;
+//   width: 650px;
+  font-family: Onest,sans-serif;
+
+  &__color {
+	background-color: @subscribeFormNewBackground;
+	overflow: visible;
+	width: 100%;
+  }
+
+  &__inner {
+	  width: 969px;
+	  margin: 0 auto;
+	//   margin-left: -9px;
+  }
+
+  &__wrap {
+    display: flex;
+    background-color: @background_special;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    margin-bottom: 35px;
+    overflow: visible;
+  }
+
+  &__label {
+	width: 650px;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #1a1a1a;
+  }
+
+  &__title {
+	font-family: Brygada1918,serif;
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 30px;
+    margin: 0 0 15px 0;
+    color: @color;
+  }
+
+  &__btn {
+	font-family: Onest, sans-serif;
+    font-size: 14px;
+    line-height: 28px;
+    color: #1a1a1a;
+    padding: 0 20px;
+    margin: 0 0 0 15px;
+    border: 0;
+    background: transparent;
+    border: 1px solid #d7d6d6;
+    text-transform: uppercase;
+    text-align: center;
+
+    &:hover {
+      background: #d7d6d6;
+      color: #fff;
+    }
+  }
+
+  &__adm-units {
+    display: none;
+
+    &.selectize-control {
+      display: initial;
+    }
+
+    .selectize-input {
+      margin-top: 10px;
+      border: none;
+      border-bottom: 1px solid transparent;
+      box-shadow: none;
+      background: none;
+
+      &.has-items {
+        border: 1px solid @subscribeFormAccentColour;
+      }
+    }
+    &.selectize-dropdown {
+
+      .optgroup {
+        font-weight: bold;
+        padding-left: 10px;
+      }
+      .option {
+        padding-left: 20px;
+      }
+
+      .active {
+        background: @subscribeFormAccentColour;
+        color: white;
+      }
+
+      .selected {
+        &::after {
+          content: ' ✓';
+        }
+      }
+    }
+  }
+
+  &__email {
+	width: 266px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid #d7d6d6;
+    font-family: Onest, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #b2afaf;
+    font-size: 16px;
+    line-height: 29px;
+    box-sizing: border-box;
+    background: transparent;
+    float: left;
+
+    &:active,
+    &:focus,
+    &:valid {
+      text-align: left;
+      color: #585858;
+    }
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      text-transform: capitalize;
+    }
+
+    &::-moz-placeholder { /* Firefox 19+ */
+      text-transform: capitalize;
+    }
+
+    &:-ms-input-placeholder { /* IE 10+ */
+      text-transform: capitalize;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      text-transform: capitalize;
+    }
+  }
+}
+
+.subscribe-form__form {
+  padding: 0;
+}
+
+
+#subscribe-form__message {
+  width: 650px;
+  font-family: Onest,sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: #1a1a1a;
+}
+
+// новый шаблон
+.subscribe-form-new {
+	margin-bottom: 0;
+	background-color: transparent;
+
+	& .subscribe-form {
+		padding: 37px 0;
+		width: 100%;
+	}
+
+	& .subscribe-form__label {
+		font-family: Onest, sans-serif;
+		width: 100%;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 24px;
+		margin-bottom: 17px;
+		color: @newTextColor;
+		margin-left: 8px;
+	}
+
+	& .subscribe-form__title {
+		font-family: Brygada1918,serif;
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 48px;
+		margin: 0 0 17px 0;
+		color: @newTextColor;
+		margin-left: 8px;
+	}
+
+	& .subscribe-form__btn {
+		font-family: Onest, sans-serif;
+		font-weight: 450;
+		font-size: 19px;
+		line-height: 24px;
+		color: white;
+		padding: 13px 60px;
+		margin: 0 0 0 15px;
+		border: none;
+		text-transform: capitalize;
+		text-align: center;
+		height: 50px;
+		background: @newButtonColor;
+		border-radius: 5px;
+	}
+
+	& .subscribe-form__email {
+		width: 474px;
+		padding: 0 30px;
+		margin: 0;
+		border: 0;
+		border-radius: 5px;
+		font-family: Onest, sans-serif;
+		font-weight: 450;
+		font-style: normal;
+		color: @newTextColor;
+		font-size: 16px;
+		line-height: 24px;
+		box-sizing: border-box;
+		background-color: white;
+		float: left;
+		height: 50px;
+		margin-left: 8px;
+
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: @newTextColor;
+		  }
+
+		  &::-moz-placeholder { /* Firefox 19+ */
+			color: @newTextColor;
+		  }
+
+		  &:-ms-input-placeholder { /* IE 10+ */
+			color: @newTextColor;
+		  }
+
+		  &:-moz-placeholder { /* Firefox 18- */
+			color: @newTextColor;
+		  }
+
+	}
+}
+
+.subscribe-form-new .selectize-control.multi .selectize-input.has-items {
+	padding: 6px 8px 6px 8px;
+}
+
+.subscribe-form-new .subscribe-form__adm-units .selectize-input.has-items {
+	border: none;
+}
+
+.subscribe-form-new .selectize-dropdown {
+	left: 8px !important;
+    width: calc(100% - 8px) !important;
+}
+
+.subscribe-form-new .dropdown-active::before {
+	display: none;
+}
+
+.subscribe-form-new .selectize-control.multi .selectize-input>div {
+	background-color: @newButtonColor;
+	border-radius: 5px;
+	color: #ffffff;
+	font-family: Onest, sans-serif;
+	font-weight: 450;
+	font-size: 16px;
+	line-height: 24px;
+	padding: 3px 30px 3px 5px !important;
+}
+.subscribe-form-new .subscribe-form__adm-units .selectize-input {
+	min-height: 45px;
+}
+.subscribe-form-new .selectize-control.plugin-remove_button [data-value] .remove {
+	border-left: none;
+	width: 30px;
+	color: transparent;
+	background-image: url('/images/subordinate/close-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+}
+
+.subscribe-form-new  #adminUnitsSelector-selectized {
+	color: @newTextColor;
+	font-family: Onest,sans-serif;
+	font-weight: 450;
+	font-size: 16px;
+	line-height: 24px;
+	cursor: pointer;
+
+	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+		color: @newTextColor;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 24px;
+	  }
+
+	  &::-moz-placeholder { /* Firefox 19+ */
+		color: @newTextColor;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 24px;
+	  }
+
+	  &:-ms-input-placeholder { /* IE 10+ */
+		color: @newTextColor;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 24px;
+	  }
+
+	  &:-moz-placeholder { /* Firefox 18- */
+		color: @newTextColor;
+		font-weight: 450;
+		font-size: 16px;
+		line-height: 24px;
+	  }
+}

@@ -1,0 +1,22 @@
+<div class="themes-panel__menu-wrapper" tabindex="-1">
+    <nav class="themes-panel__menu themes-panel__two-columns" data-active="" data-columns>
+        {% for item in items.children %}
+            <div class="themes-panel__menu-item {% if item.isCurrent == true %}active{% endif %}">
+                <a href="{{ item.uri }}">
+                    {{ item.name }}
+                </a>
+                {% if item.children is defined and item.children|length != 0 %}
+                    <ul class="themes-panel__menu-item__list">
+                        {% for childItem in item.children %}
+                            <li class="themes-panel__menu-item__list-item {% if childItem.isCurrent %}active{% endif %}">
+                                <a href="{{ childItem.uri }}">
+                                    {{ childItem.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </nav>
+</div>

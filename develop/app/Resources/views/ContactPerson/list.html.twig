@@ -1,0 +1,40 @@
+{% extends '::/layout/layout.html.twig' %}
+
+{% block title %}
+    {% set letter = app.request.get('letter') %}
+    {% if letter %}
+        <title>Телефонный справочник персон на букву «{{ letter }}»</title>
+    {% else %}
+        <title>Телефонный справочник строительной отрасли</title>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include '::/widgets/themes_panel.html.twig' with {
+    'title': 'Телефонный справочник',
+    'rubricsContext': '',
+    } %}
+
+{#    {% embed '::/widgets/search_form.html.twig' with {action: path('app_contact_person_list'), value: app.request.get('search'), name: 'search' }%}#}
+{#        {% block moreBlock %}#}
+{#            <h3 class="contactperson-block__title">Список персоналий</h3>#}
+{#        {% endblock %}#}
+{#        {% block otherBlock %}#}
+{#            <div class="organizations-block__letter-list">#}
+{#                {% set letter = app.request.get('letter') %}#}
+{#                {% for item in ruLetter %}#}
+{#                    <input type="radio" name="letter" id="radio{{ loop.index }}" value="{{ item }}" class="organizations-block__letter-list-item {% if letter == item %}active{% endif %}" />#}
+{#                    <label for="radio{{ loop.index }}" class="">#}
+{#                        <a href="{{ path('app_contact_person_list', {'letter' : item}) }}" class="organizations-block__letter-list-item-let">#}
+{#                            {{ item }}#}
+{#                        </a>#}
+{#                    </label>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        {% endblock %}#}
+{#    {% endembed %}#}
+
+    {{ sonata_block_render({'type': 'contact_person_list'}, {
+        'template': '::/ContactPerson/_list.html.twig',
+    }) }}
+{% endblock %}
